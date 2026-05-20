@@ -1,21 +1,28 @@
 {
   "name": "famulor-skill",
   "displayName": "Famulor.io Skill",
-  "description": "Skill set for building and managing assistants, campaigns, messaging, and automation on famulor.io",
-  "version": "1.0.0",
+  "version": "1.1.0",
+  "description": "Build and manage Famulor AI phone assistants, campaigns, leads, knowledge bases, and WhatsApp/SMS workflows via the Famulor API.",
   "author": {
-    "name": "bekservice"
+    "name": "bekservice",
+    "email": "info@bekservice.de",
+    "url": "https://www.bekservice.de"
   },
   "homepage": "https://github.com/bekservice/Famulor-Skill",
   "repository": "https://github.com/bekservice/Famulor-Skill",
   "license": "MIT",
   "keywords": [
-    "skills",
     "famulor",
-    "automation",
-    "assistants",
-    "voice-bot",
+    "voice-agent",
+    "phone-bot",
+    "ai-assistant",
+    "campaign",
+    "outbound",
+    "inbound",
     "whatsapp",
-    "sms"
-  ]
+    "sms",
+    "knowledge-base",
+    "automation"
+  ],
+  "skills": "../skills"
 }
