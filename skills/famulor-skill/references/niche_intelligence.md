@@ -283,7 +283,7 @@ These values are set unless the customer expresses a different preference:
 | Field                     | Default                     | Note                                          |
 |---------------------------|-----------------------------|-----------------------------------------------|
 | mode                      | `pipeline`                  | Best value for money                          |
-| llm_model_id              | `2` (GPT-4.1-mini)         | Fast, cheap, good enough for 90% of cases     |
+| llm_model_id              | `2` (GPT-4.1-mini)         | Safe default. Speed-critical: Gemini 2.5 Flash Lite (12); complex reasoning: GPT-4o (7). Check `get_models()` for newest (GPT-5.x, Claude 4.x) |
 | timezone                  | `Europe/Berlin`             | DACH default                                  |
 | allow_interruptions       | `true`                      | More natural conversation behavior            |
 | fillers                   | `true`                      | "One moment...", "Let me check..."            |

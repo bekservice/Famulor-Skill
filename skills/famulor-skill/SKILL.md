@@ -184,6 +184,8 @@ Once the customer has confirmed the prompt, assemble the complete payload and cr
 }
 ```
 
+**Model recommendation:** `llm_model_id: 2` (GPT-4.1-mini) is a safe, cheap default. Per the official best-practices docs: use Gemini 2.5 Flash Lite (id 12) when speed is critical, GPT-4o (id 7) for complex reasoning. Newer models (GPT-5.x, Claude 4.x, Gemini 3.x) are available too — always check `get_models()` for the current list and mention the recommended option to the customer.
+
 **Mode-specific rules (IMPORTANT):**
 - `pipeline`: `llm_model_id` is required (from `get_models()`, type=llm)
 - `multimodal`/`dualplex`: `multimodal_model_id` is required (from `get_models(type=...)`), optionally `chat_llm_fallback_id` (fallback LLM for tool calls) and `turn_detection_threshold` (0–1)
@@ -326,6 +328,26 @@ After creation:
    - Start a test call (free)
    - Set up a webhook
    - Extend the knowledge base
+
+---
+
+## Beyond Onboarding: Full API Coverage
+
+`scripts/famulor_client.py` covers the complete Famulor API — useful for follow-up requests after onboarding. Available areas (run `python3 scripts/famulor_client.py` for the full method list):
+
+- **Calls**: `make_call(assistant_id, phone_number, variables)` (E.164!), `list_calls`, `get_call`, `delete_call`
+- **Campaigns**: `list_campaigns`, `create_campaign`, `update_campaign_status(id, "start"|"stop")`, `delete_campaign`
+- **Leads**: `list_leads`, `create_lead` (variable names must match the assistant's variables), `update_lead`, `delete_lead`
+- **Mid-call tools** (custom API integrations): `list/get/create/update/delete_mid_call_tool` — attach via `tool_ids` on the assistant
+- **Knowledge base documents**: `list_documents`, `get_document` (poll async processing status), `update_document`, `delete_document`, `update/delete_knowledgebase`
+- **Phone numbers**: `list_phone_numbers`, `search_phone_numbers(country_code)`, `purchase_phone_number`, `update_phone_number` (nickname), `release_phone_number`
+- **SIP trunks**: `list/get/create/update/delete_sip_trunk`
+- **SMS**: `send_sms(to, message)`
+- **WhatsApp**: `get_whatsapp_senders`, `get_whatsapp_templates(sender_id)`, `get_whatsapp_session_status` (24h window!), `send_whatsapp_template`, `send_whatsapp_freeform`
+- **Chatbot conversations**: `list_conversations`, `get_conversation`, `create_conversation` (UUID, `test` free / `widget` paid), `send_message`, `enable/disable_conversation_ai` (human takeover)
+- **AI replies**: `generate_ai_reply`
+- **Folders & labels**: `list/create/update/delete_folder` and `_label` — assign via `folder_id`/`label_ids` on the assistant
+- **Account**: `get_me` (balance, plan)
 
 ---
 
