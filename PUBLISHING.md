@@ -18,7 +18,7 @@ Publish (from the repo root):
 clawhub skill publish ./skills/famulor-skill \
   --slug famulor-skill \
   --name "Famulor Skill" \
-  --version 1.2.0 \
+  --version 1.2.1 \
   --changelog "OpenClaw support, MCP setup instructions, npx install" \
   --tags latest
 ```

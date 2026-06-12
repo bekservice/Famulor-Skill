@@ -1,7 +1,21 @@
 ---
 name: famulor-skill
 description: "Complete customer onboarding for the Famulor AI phone platform. Creates AI phone assistants from A to Z: detect the niche, gather configuration, write the system prompt, set up the knowledge base, deploy the assistant. ALWAYS use this skill when someone wants to create a new assistant, onboard a customer, mentions 'onboarding' or 'new client', or wants to set up an AI phone solution for a business. Also trigger on: 'create a bot', 'set up an assistant', 'configure a phone bot', 'answering machine', 'inbound bot', 'outbound bot' (German: 'Bot erstellen', 'Assistent anlegen', 'Telefonbot einrichten', 'Anrufbeantworter')."
-metadata: { "openclaw": { "requires": { "bins": ["python3"], "env": ["FAMULOR_API_KEY"] }, "primaryEnv": "FAMULOR_API_KEY", "emoji": "📞" } }
+version: 1.2.1
+metadata:
+  openclaw:
+    requires:
+      env:
+        - FAMULOR_API_KEY
+      bins:
+        - python3
+    primaryEnv: FAMULOR_API_KEY
+    envVars:
+      - name: FAMULOR_API_KEY
+        required: true
+        description: Famulor API key used for all authenticated API requests (create at https://app.famulor.de → API Keys).
+    emoji: "📞"
+    homepage: https://github.com/bekservice/Famulor-Skill
 ---
 
 # Famulor Skill
