@@ -1,7 +1,7 @@
 {
   "name": "famulor-skill",
   "displayName": "Famulor.io Skill",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Build and manage Famulor AI phone assistants, campaigns, leads, knowledge bases, and WhatsApp/SMS workflows via the Famulor API.",
   "author": {
     "name": "bekservice",

@@ -72,22 +72,37 @@ class FamulorClient:
         return self._request("POST", "/user/assistant", data=payload)
 
     def update_assistant(self, assistant_id, payload: dict):
-        return self._request("PATCH", f"/user/assistants/{assistant_id}", data=payload)
+        """Update assistant. PUT /user/assistant/{id} (singular).
+        WARNING: `tools` in the payload REPLACES all existing built-in tools."""
+        return self._request("PUT", f"/user/assistant/{assistant_id}", data=payload)
+
+    def delete_assistant(self, assistant_id):
+        return self._request("DELETE", f"/user/assistant/{assistant_id}")
 
     def list_assistants(self, per_page=100, page=1):
-        return self._request("GET", "/user/assistants", params={"per_page": per_page, "page": page})
+        return self._request("GET", "/user/assistants/get", params={"per_page": per_page, "page": page})
+
+    def get_outbound_assistants(self):
+        return self._request("GET", "/user/assistants/outbound")
 
     # ── Lookup ──────────────────────────────────────────────────────────
 
     def get_languages(self):
         return self._request("GET", "/user/assistants/languages")
 
-    def get_voices(self, mode=None):
-        params = {"mode": mode} if mode else {}
+    def get_voices(self, mode=None, language_id=None):
+        """mode: pipeline | multimodal | dualplex; language_id: from get_languages()"""
+        params = {}
+        if mode:
+            params["mode"] = mode
+        if language_id:
+            params["language_id"] = language_id
         return self._request("GET", "/user/assistants/voices", params=params)
 
-    def get_models(self):
-        return self._request("GET", "/user/assistants/models")
+    def get_models(self, type=None):
+        """type: llm (pipeline, default) | multimodal | dualplex"""
+        params = {"type": type} if type else {}
+        return self._request("GET", "/user/assistants/models", params=params)
 
     def get_phone_numbers(self):
         return self._request("GET", "/user/assistants/phone-numbers")
@@ -136,20 +151,36 @@ class FamulorClient:
         return self._request("GET", "/user/phone-numbers")
 
     # ── Webhooks ────────────────────────────────────────────────────────
+    # All webhook endpoints take the assistant_id in the body (not in the URL).
 
-    def enable_webhook(self, assistant_uuid, webhook_url):
-        return self._request("POST", f"/user/assistants/{assistant_uuid}/webhook",
-                             data={"webhook_url": webhook_url})
+    def enable_inbound_webhook(self, assistant_id, webhook_url):
+        return self._request("POST", "/user/assistants/enable-inbound-webhook",
+                             data={"assistant_id": assistant_id, "webhook_url": webhook_url})
 
-    def enable_conversation_ended_webhook(self, assistant_uuid, webhook_url):
-        return self._request("POST", f"/user/assistants/{assistant_uuid}/conversation-ended-webhook",
-                             data={"webhook_url": webhook_url})
+    def disable_inbound_webhook(self, assistant_id):
+        return self._request("POST", "/user/assistants/disable-inbound-webhook",
+                             data={"assistant_id": assistant_id})
+
+    def enable_conversation_ended_webhook(self, assistant_id, webhook_url):
+        return self._request("POST", "/user/assistants/enable-conversation-ended-webhook",
+                             data={"assistant_id": assistant_id, "webhook_url": webhook_url})
+
+    def disable_conversation_ended_webhook(self, assistant_id):
+        return self._request("POST", "/user/assistants/disable-conversation-ended-webhook",
+                             data={"assistant_id": assistant_id})
+
+    def disable_webhook(self, assistant_id):
+        """Disable the post-call webhook of an assistant."""
+        return self._request("POST", "/user/assistants/disable-webhook",
+                             data={"assistant_id": assistant_id})
 
     # ── Test ────────────────────────────────────────────────────────────
 
-    def create_test_conversation(self, assistant_id):
+    def create_test_conversation(self, assistant_uuid):
+        """assistant_uuid: the assistant's UUID (string), not the numeric ID.
+        Type 'test' is free (development), 'widget' is paid."""
         return self._request("POST", "/conversations",
-                             data={"assistant_id": assistant_id, "type": "test"})
+                             data={"assistant_id": assistant_uuid, "type": "test"})
 
     def send_test_message(self, conversation_id, message):
         return self._request("POST", f"/conversations/{conversation_id}/messages",

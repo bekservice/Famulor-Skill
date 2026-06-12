@@ -44,6 +44,7 @@ The agent should activate this skill on prompts like:
 ├── .cursor-plugin/plugin.json       # Cursor manifest (mirror)
 ├── .codex/INSTALL.md                # Codex install instructions
 ├── .opencode/INSTALL.md             # OpenCode install instructions
+├── .openclaw/INSTALL.md             # OpenClaw install instructions
 ├── gemini-extension.json            # Gemini CLI manifest
 ├── GEMINI.md                        # Gemini context entry point
 ├── skills/
@@ -63,6 +64,44 @@ The agent should activate this skill on prompts like:
 The skill itself lives at `skills/famulor-skill/`, matching the Open Plugins component layout (`skills/{skill-name}/SKILL.md`).
 
 ## Installation
+
+### Universal: skills CLI (recommended)
+
+Works with Claude Code, Cursor, Codex, OpenClaw, Hermes Agent and 12+ other agents:
+
+```bash
+npx skills add bekservice/Famulor-Skill
+```
+
+Global install for a specific agent, non-interactive:
+
+```bash
+npx skills add bekservice/Famulor-Skill -g -y
+```
+
+### OpenClaw
+
+Install from ClawHub:
+
+```bash
+openclaw skills install famulor-skill
+```
+
+Or from GitHub:
+
+```bash
+openclaw skills install git:bekservice/Famulor-Skill@main
+```
+
+Details: [.openclaw/INSTALL.md](.openclaw/INSTALL.md). Skill page on ClawHub: `https://clawhub.ai/skills/famulor-skill`.
+
+### Hermes Agent
+
+```bash
+hermes skills install skills-sh/bekservice/Famulor-Skill/famulor-skill
+```
+
+Or via the universal skills CLI above (`npx skills add bekservice/Famulor-Skill`).
 
 ### Claude Code
 
