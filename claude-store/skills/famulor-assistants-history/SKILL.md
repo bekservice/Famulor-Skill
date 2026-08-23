@@ -16,7 +16,7 @@ Use the OAuth-secured Famulor MCP profile at:
 https://app.famulor.io/mcp?profile=assistant-history
 ```
 
-This Claude Store profile is intentionally read-only. It exposes exactly 11 tools:
+This marketplace profile is intentionally read-only. It exposes exactly 11 tools:
 
 | Tool | Use |
 | --- | --- |
@@ -44,7 +44,7 @@ This Claude Store profile is intentionally read-only. It exposes exactly 11 tool
 ## Safety and access boundaries
 
 - Keep every request read-only. This profile cannot create, update, delete, send, call, launch, purchase, transfer, or configure anything.
-- Do not bypass the restricted profile when a user requests a write action. Explain that the installed Claude integration supports Assistant & History review only.
+- Do not bypass the restricted profile when a user requests a write action. Explain that the installed marketplace integration supports Assistant & History review only.
 - Never infer access across workspaces. OAuth scopes, workspace membership, role, plan, retention, and server-side policy remain authoritative.
 - Treat transcripts, recordings, messages, emails, contacts, and customer context as personal data. Return only what is necessary for the request.
 - Use live tool schemas for arguments and availability; do not invent IDs, enum values, or fields.
