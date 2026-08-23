@@ -1,43 +1,11 @@
-# Installing Famulor Skill for OpenCode
+# Install Famulor for OpenCode
 
-## Prerequisites
+Install the skill with the universal Agent Skills installer:
 
-- [OpenCode.ai](https://opencode.ai) installed
-
-## Installation
-
-Add Famulor Skill to the `plugin` array in your `opencode.json`:
-
-```json
-{
-  "plugin": ["famulor-skill@git+https://github.com/bekservice/Famulor-Skill.git"]
-}
+```bash
+npx skills add bekservice/Famulor-Skill
 ```
 
-Restart OpenCode. The plugin will auto-install and register the skill files.
+Configure `https://app.famulor.io/mcp` as a remote Streamable HTTP MCP server using OAuth in the current OpenCode MCP settings. Restart the session, then verify with a read-only request such as listing Famulor assistants.
 
-## Verify
-
-Ask OpenCode for a Famulor task, for example:
-
-```text
-Create an inbound support assistant for Famulor.
-```
-
-## Updating
-
-Famulor Skill updates automatically on restart.
-
-To pin a specific version:
-
-```json
-{
-  "plugin": ["famulor-skill@git+https://github.com/bekservice/Famulor-Skill.git#v1.0.0"]
-}
-```
-
-## Troubleshooting
-
-1. Check plugin config in `opencode.json`.
-2. Restart OpenCode.
-3. Confirm the repository URL is reachable.
+The skill does not require a local Python wrapper or an undocumented REST endpoint.

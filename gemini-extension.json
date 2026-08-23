@@ -1,6 +1,6 @@
 {
-  "name": "famulor-skill",
-  "version": "1.2.1",
-  "description": "Build and manage Famulor AI phone assistants, campaigns, leads, knowledge bases, and WhatsApp/SMS workflows via the Famulor API.",
+  "name": "famulor",
+  "version": "2.0.0",
+  "description": "Operate all customer-facing Famulor capabilities through OAuth-secured MCP tools and progressive agent guidance.",
   "contextFileName": "GEMINI.md"
 }

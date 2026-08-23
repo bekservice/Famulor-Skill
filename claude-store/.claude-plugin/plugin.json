@@ -1,26 +1,24 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
-  "name": "famulor",
-  "displayName": "Famulor",
+  "name": "famulor-assistants-history",
+  "displayName": "Famulor Assistants & History",
   "version": "2.0.0",
-  "description": "Operate Famulor assistants, calls, history, campaigns, messaging, telephony, knowledge, dashboards, automations, and workspace settings through OAuth-secured MCP tools.",
+  "description": "Review Famulor assistants and read omnichannel call, messaging, and email history through an OAuth-secured, read-only 11-tool MCP profile.",
   "author": {
     "name": "BEK Service GmbH",
     "email": "info@bekservice.de",
     "url": "https://www.famulor.io"
   },
   "homepage": "https://www.famulor.io",
-  "repository": "https://github.com/bekservice/Famulor-Skill",
+  "repository": "https://github.com/bekservice/Famulor-Skill/tree/main/claude-store",
   "license": "MIT",
   "keywords": [
     "famulor",
     "mcp",
-    "voice-agent",
     "assistants",
-    "calls",
-    "campaigns",
-    "messaging",
-    "automation"
+    "history",
+    "omnichannel",
+    "read-only"
   ],
   "skills": "./skills/",
   "mcpServers": "./.mcp.json"
