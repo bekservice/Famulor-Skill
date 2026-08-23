@@ -3,7 +3,7 @@
   "name": "famulor",
   "displayName": "Famulor",
   "version": "2.0.0",
-  "description": "Operate Famulor assistants, calls, history, campaigns, messaging, telephony, knowledge, dashboards, automations, and workspace settings through OAuth-secured MCP tools.",
+  "description": "Review Famulor assistants and read omnichannel call, messaging, and email history through an OAuth-secured, read-only 11-tool MCP profile.",
   "author": {
     "name": "BEK Service GmbH",
     "email": "info@bekservice.de",
@@ -15,13 +15,11 @@
   "keywords": [
     "famulor",
     "mcp",
-    "voice-agent",
     "assistants",
-    "calls",
-    "campaigns",
-    "messaging",
-    "automation"
+    "history",
+    "omnichannel",
+    "read-only"
   ],
-  "skills": "./skills/",
+  "skills": "./claude-skills/",
   "mcpServers": "./.mcp.json"
 }

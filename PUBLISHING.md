@@ -11,6 +11,7 @@ This repository is the Famulor agent plugin and skill package. The hosted MCP se
    ```bash
    claude plugin validate . --strict
    python3 /path/to/skill-creator/scripts/quick_validate.py skills/famulor-skill
+   python3 /path/to/skill-creator/scripts/quick_validate.py claude-skills/famulor-assistants-history
    ```
 
 4. Validate every JSON file and verify all relative component paths stay inside the plugin root.
@@ -27,7 +28,11 @@ This repository is the Famulor agent plugin and skill package. The hosted MCP se
 
 ## Claude community plugin directory
 
-The repository includes `.claude-plugin/plugin.json`, `.mcp.json`, and `skills/` at the plugin root. Submit the public repository or a zip through:
+The Claude package is intentionally narrower than the developer distribution. `.claude-plugin/plugin.json` loads `claude-skills/famulor-assistants-history/`, while `.mcp.json` connects to `https://app.famulor.io/mcp?profile=assistant-history`.
+
+The profile exposes exactly 11 read-only tools: `list_assistants`, `get_assistant`, `list_assistant_versions`, `get_assistant_version`, `list_prompt_templates`, `get_languages`, `get_models`, `get_voices`, `list_history`, `get_call`, and `get_email_history_item`. It supports assistant review plus omnichannel call, email, Instagram, Messenger, and other connected messaging history when those records exist. Messaging history can be an overview or preview; do not advertise complete chat transcripts unless returned by the server. It has no mutation, outbound communication, campaign, telephony-purchase, billing, or administrative tools.
+
+Submit the public repository or a zip through:
 
 - `https://platform.claude.com/plugins/submit` for individual authors
 - `https://claude.ai/admin-settings/directory/submissions/plugins/new` for Team/Enterprise organization owners or directory managers
@@ -42,7 +47,7 @@ Official marketplace submissions use `https://cursor.com/marketplace/publish`. R
 
 ## Agent Plugins and universal skill installers
 
-The root `plugin.json` and `mcp.json` target Agent Plugins v1. `npx skills add bekservice/Famulor-Skill` discovers the skill from the public repository. `skills.sh` indexes compatible public repositories without a separate package upload.
+The root `plugin.json`, root `mcp.json`, and `skills/famulor-skill/` target Agent Plugins v1 and retain the complete 282-tool developer surface. `npx skills add bekservice/Famulor-Skill` discovers the full skill from the public repository. `skills.sh` indexes compatible public repositories without a separate package upload.
 
 ## ClawHub
 
