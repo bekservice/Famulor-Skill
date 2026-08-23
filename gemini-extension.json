@@ -1,6 +1,6 @@
 {
   "name": "famulor",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Operate all customer-facing Famulor capabilities through OAuth-secured MCP tools and progressive agent guidance.",
   "contextFileName": "GEMINI.md"
 }

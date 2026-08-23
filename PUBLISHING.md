@@ -60,8 +60,8 @@ After authentication, publish the skill folder with the release version and a pr
 clawhub skill publish ./skills/famulor-skill \
   --slug famulor-skill \
   --name "Famulor" \
-  --version 2.0.0 \
-  --changelog "Full 282-tool MCP coverage, progressive references, and tenant-safe workflows" \
+  --version 2.0.1 \
+  --changelog "Clarify skills-only MCP setup and require a secure token handoff before minting" \
   --tags latest
 ```
 
