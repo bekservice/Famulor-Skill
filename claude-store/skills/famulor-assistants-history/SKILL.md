@@ -8,7 +8,7 @@ metadata:
   homepage: https://www.famulor.io
 ---
 
-# Famulor Assistants & History
+# Famulor Assistants & Omnichannel History
 
 Use the OAuth-secured Famulor MCP profile at:
 

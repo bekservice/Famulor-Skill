@@ -10,8 +10,8 @@ The repository has two deliberate distributions. The portable Agent Plugin and d
 - `skills/famulor-skill/references/toolsets/`: all 282 current tools split across 13 progressively loaded references
 - `skills/famulor-skill/references/assistant-design.md`: assistant onboarding and prompt-design guidance without fixed model or voice IDs
 - `plugin.json` and `mcp.json`: portable Agent Plugins v1 package
-- `claude-skills/famulor-assistants-history/SKILL.md`: Claude-specific read-only Assistant & History workflow
-- `.claude-plugin/plugin.json` and `.mcp.json`: native Claude plugin metadata and restricted OAuth MCP connection
+- `.claude-plugin/plugin.json` and `.mcp.json`: full native Claude developer plugin, kept for backward compatibility
+- `claude-store/`: isolated Claude Store package with one read-only Assistant & History skill and a restricted OAuth MCP connection
 - `.cursor-plugin/plugin.json`: native Cursor plugin metadata
 - `.plugin/plugin.json`: Open Plugins compatibility
 - `famulor.skill`: standalone packaged Agent Skill archive
@@ -38,7 +38,7 @@ npx skills add bekservice/Famulor-Skill
 
 This installs the skill instructions. If the client does not also discover the repository's MCP configuration, add `https://app.famulor.io/mcp` as a remote Streamable HTTP server and complete OAuth.
 
-### Claude Code
+### Claude Code — full developer plugin
 
 Test directly from a clone:
 
@@ -47,7 +47,17 @@ git clone https://github.com/bekservice/Famulor-Skill.git
 claude --plugin-dir ./Famulor-Skill
 ```
 
-Claude Code loads the restricted skill and `.mcp.json`. Open `/mcp` to complete OAuth when prompted. The Claude plugin connects only to:
+Claude Code loads the full portable developer skill and root `.mcp.json`. Open `/mcp` to complete OAuth when prompted.
+
+### Claude Store — Assistants & History only
+
+The submission package lives at the repository path `claude-store/`. Test it independently:
+
+```bash
+claude --plugin-dir ./Famulor-Skill/claude-store
+```
+
+This isolated package connects only to:
 
 ```text
 https://app.famulor.io/mcp?profile=assistant-history
@@ -55,7 +65,7 @@ https://app.famulor.io/mcp?profile=assistant-history
 
 It exposes exactly these 11 read-only tools: `list_assistants`, `get_assistant`, `list_assistant_versions`, `get_assistant_version`, `list_prompt_templates`, `get_languages`, `get_models`, `get_voices`, `list_history`, `get_call`, and `get_email_history_item`.
 
-`list_history` provides an omnichannel overview across calls, email, and connected messaging channels such as Instagram or Messenger when present. Messaging results may be previews rather than complete transcripts. The Claude plugin cannot modify assistants, send messages, place calls, run campaigns, purchase numbers, manage billing, or perform any other write action.
+`list_history` provides an omnichannel overview across calls, email, and connected messaging channels such as Instagram or Messenger when present. Messaging results may be previews rather than complete transcripts. The Claude Store package cannot modify assistants, send messages, place calls, run campaigns, purchase numbers, manage billing, or perform any other write action.
 
 ### Cursor
 
@@ -96,8 +106,9 @@ The 282-tool catalog is a dated navigation snapshot. The live MCP `tools/list` r
 
 ```bash
 claude plugin validate . --strict
+claude plugin validate ./claude-store --strict
 python3 /path/to/skill-creator/scripts/quick_validate.py skills/famulor-skill
-python3 /path/to/skill-creator/scripts/quick_validate.py claude-skills/famulor-assistants-history
+python3 /path/to/skill-creator/scripts/quick_validate.py claude-store/skills/famulor-assistants-history
 ```
 
 Also validate every JSON file, confirm the packaged archive matches `skills/famulor-skill/`, and check that the live endpoint returns OAuth metadata rather than a server error.

@@ -10,8 +10,9 @@ This repository is the Famulor agent plugin and skill package. The hosted MCP se
 
    ```bash
    claude plugin validate . --strict
+   claude plugin validate ./claude-store --strict
    python3 /path/to/skill-creator/scripts/quick_validate.py skills/famulor-skill
-   python3 /path/to/skill-creator/scripts/quick_validate.py claude-skills/famulor-assistants-history
+   python3 /path/to/skill-creator/scripts/quick_validate.py claude-store/skills/famulor-assistants-history
    ```
 
 4. Validate every JSON file and verify all relative component paths stay inside the plugin root.
@@ -28,16 +29,18 @@ This repository is the Famulor agent plugin and skill package. The hosted MCP se
 
 ## Claude community plugin directory
 
-The Claude package is intentionally narrower than the developer distribution. `.claude-plugin/plugin.json` loads `claude-skills/famulor-assistants-history/`, while `.mcp.json` connects to `https://app.famulor.io/mcp?profile=assistant-history`.
+The Claude Store package is intentionally isolated under `claude-store/` so the full root developer skill is not included in the store capability inventory. Its `.claude-plugin/plugin.json` loads only `claude-store/skills/famulor-assistants-history/`, while its `.mcp.json` connects to `https://app.famulor.io/mcp?profile=assistant-history`.
 
 The profile exposes exactly 11 read-only tools: `list_assistants`, `get_assistant`, `list_assistant_versions`, `get_assistant_version`, `list_prompt_templates`, `get_languages`, `get_models`, `get_voices`, `list_history`, `get_call`, and `get_email_history_item`. It supports assistant review plus omnichannel call, email, Instagram, Messenger, and other connected messaging history when those records exist. Messaging history can be an overview or preview; do not advertise complete chat transcripts unless returned by the server. It has no mutation, outbound communication, campaign, telephony-purchase, billing, or administrative tools.
 
-Submit the public repository or a zip through:
+Submit the public repository with `claude-store` as the plugin path, or submit a zip whose root is the contents of `claude-store/`, through:
 
 - `https://platform.claude.com/plugins/submit` for individual authors
 - `https://claude.ai/admin-settings/directory/submissions/plugins/new` for Team/Enterprise organization owners or directory managers
 
 Anthropic runs the same `claude plugin validate` check plus safety screening. This plugin directory is separate from the Claude MCP Connector Directory.
+
+Before submission, confirm `claude --plugin-dir ./claude-store plugin details famulor-assistants-history@inline` reports exactly one skill and one MCP server. Do not submit the repository root to the Store: root `.claude-plugin/plugin.json`, root `.mcp.json`, and `skills/famulor-skill/` intentionally remain the full developer plugin for backward compatibility.
 
 ## Cursor
 

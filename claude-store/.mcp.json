@@ -2,7 +2,7 @@
   "mcpServers": {
     "famulor": {
       "type": "http",
-      "url": "https://app.famulor.io/mcp"
+      "url": "https://app.famulor.io/mcp?profile=assistant-history"
     }
   }
 }
