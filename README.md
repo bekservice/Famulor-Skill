@@ -2,7 +2,7 @@
 
 A portable agent skill plus hosted Famulor MCP connections for Claude Code, Cursor, Codex, Gemini CLI, OpenCode, OpenClaw, and other Agent Skills-compatible clients.
 
-The repository has two deliberate distributions. The portable Agent Plugin and developer skill cover the complete 282-tool customer-facing MCP surface. The Claude community-store plugin is restricted to an Assistant & History profile with exactly 11 read-only tools.
+The repository has two deliberate distributions. The portable Agent Plugin and developer skill cover the complete 282-tool customer-facing MCP surface. The Claude community-store and Gemini Gallery packages are restricted to an Assistant & History profile with exactly 11 read-only tools.
 
 ## What is included
 
@@ -12,11 +12,12 @@ The repository has two deliberate distributions. The portable Agent Plugin and d
 - `plugin.json` and `mcp.json`: portable Agent Plugins v1 package
 - `.claude-plugin/plugin.json` and `.mcp.json`: full native Claude developer plugin, kept for backward compatibility
 - `claude-store/`: isolated Claude Store package with one read-only Assistant & History skill and a restricted OAuth MCP connection
+- `gemini-extension.json` and `GEMINI.md`: read-only Gemini Gallery package using the same Assistant & History profile
 - `.cursor-plugin/plugin.json`: native Cursor plugin metadata
 - `.plugin/plugin.json`: Open Plugins compatibility
 - `famulor.skill`: standalone packaged Agent Skill archive
 
-The portable Agent Plugin, Cursor, Codex, Gemini CLI, OpenCode, and OpenClaw use the full hosted endpoint:
+The portable Agent Plugin, Cursor, Codex, OpenCode, and OpenClaw use the full hosted endpoint:
 
 ```text
 https://app.famulor.io/mcp
@@ -87,9 +88,13 @@ codex mcp add famulor --url https://app.famulor.io/mcp
 codex mcp login famulor
 ```
 
-### Gemini CLI, OpenCode, and OpenClaw
+### Gemini CLI Gallery
 
-Use the universal installer above. Client-specific notes are in `GEMINI.md`, `.opencode/INSTALL.md`, and `.openclaw/INSTALL.md`.
+The root `gemini-extension.json` is the gallery package. It connects only to the read-only Assistant & History profile and loads the matching guidance from `GEMINI.md`.
+
+### OpenCode, OpenClaw, and manual Gemini developer setup
+
+Use the universal installer above for the full developer skill. Client-specific notes are in `.opencode/INSTALL.md` and `.openclaw/INSTALL.md`. For manual Gemini developer use, add the full hosted endpoint explicitly instead of installing the Gallery extension.
 
 ## How the skill behaves
 

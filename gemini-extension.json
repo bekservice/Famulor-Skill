@@ -1,6 +1,11 @@
 {
   "name": "famulor",
-  "version": "2.0.1",
-  "description": "Operate all customer-facing Famulor capabilities through OAuth-secured MCP tools and progressive agent guidance.",
-  "contextFileName": "GEMINI.md"
+  "version": "2.0.2",
+  "description": "Review Famulor assistants and omnichannel conversation history through an OAuth-secured, read-only MCP profile.",
+  "contextFileName": "GEMINI.md",
+  "mcpServers": {
+    "famulor": {
+      "httpUrl": "https://app.famulor.io/mcp?profile=assistant-history"
+    }
+  }
 }
