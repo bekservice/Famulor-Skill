@@ -2,7 +2,7 @@
   "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
   "name": "famulor",
   "displayName": "Famulor",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Operate Famulor assistants, calls, history, campaigns, messaging, telephony, knowledge, dashboards, automations, and workspace settings through OAuth-secured MCP tools.",
   "author": {
     "name": "BEK Service GmbH",
