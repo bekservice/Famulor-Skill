@@ -1,226 +1,110 @@
-# Famulor.io Skill
+# Famulor Agent Plugin
 
-[Open Plugins](https://open-plugins.com)–compliant skill that lets AI coding agents build and manage assistants, campaigns, knowledge bases, and messaging workflows on the [Famulor](https://www.famulor.io) platform — through real API calls, not just explanations.
+A portable agent skill plus the hosted Famulor MCP connection for Claude Code, Cursor, Codex, Gemini CLI, OpenCode, OpenClaw, and other Agent Skills-compatible clients.
 
-## What This Skill Does
+The plugin operates real workspace resources through OAuth-secured MCP tools. It covers the complete customer-facing Famulor surface: assistants, omnichannel history, calls, campaigns, messaging, telephony, knowledge, dashboards, automations, billing, settings, authorized reseller administration, migrations, and durable tasks.
 
-Connects an agent directly to the Famulor platform so it can execute tasks:
+## What is included
 
-- Create and configure AI phone assistants (inbound, outbound, chat, WhatsApp)
-- Set up outbound campaigns and manage leads
-- Connect knowledge bases and documents (RAG)
-- Create mid-call tools (HTTP tools) for live integrations
-- Run WhatsApp and SMS workflows
-- Iterate prompts, voices, and webhooks based on test calls
+- `skills/famulor-skill/SKILL.md`: short operating workflow, authorization rules, and toolset router
+- `skills/famulor-skill/references/toolsets/`: all 282 current tools split across 13 progressively loaded references
+- `skills/famulor-skill/references/assistant-design.md`: assistant onboarding and prompt-design guidance without fixed model or voice IDs
+- `plugin.json` and `mcp.json`: portable Agent Plugins v1 package
+- `.claude-plugin/plugin.json` and `.mcp.json`: native Claude Code plugin metadata and OAuth MCP connection
+- `.cursor-plugin/plugin.json`: native Cursor plugin metadata
+- `.plugin/plugin.json`: Open Plugins compatibility
+- `famulor.skill`: standalone packaged Agent Skill archive
 
-## When To Use This Skill
+The default MCP connection is the full hosted endpoint:
 
-The agent should activate this skill on prompts like:
-
-- "Famulor", "famulor.io", "assistant setup", "phone bot", "voice agent"
-- "Onboarding", "neuer Kunde", "Bot erstellen", "Telefonbot einrichten"
-- Campaigns, leads, outbound calling
-- WhatsApp bots, WhatsApp templates, SMS sending
-- Knowledge bases, RAG documents, webhooks
-- Famulor API integrations
-
-## Requirements
-
-- Python 3.10+
-- A valid Famulor API key:
-
-  ```bash
-  export FAMULOR_API_KEY="your-api-key"
-  ```
-
-  Create your API key at [https://app.famulor.de](https://app.famulor.de) → API Keys.
-
-## Repository Layout (Open Plugins spec)
-
-```
-.
-├── .plugin/plugin.json              # Canonical Open Plugins manifest
-├── .claude-plugin/plugin.json       # Claude Code manifest (mirror)
-├── .cursor-plugin/plugin.json       # Cursor manifest (mirror)
-├── .codex/INSTALL.md                # Codex install instructions
-├── .opencode/INSTALL.md             # OpenCode install instructions
-├── .openclaw/INSTALL.md             # OpenClaw install instructions
-├── gemini-extension.json            # Gemini CLI manifest
-├── GEMINI.md                        # Gemini context entry point
-├── skills/
-│   └── famulor-skill/
-│       ├── SKILL.md                 # Main agent instructions
-│       ├── references/
-│       │   └── nischen_intelligenz.md   # Niche/branche knowledge
-│       ├── scripts/
-│       │   └── famulor_client.py    # Python API client
-│       └── templates/
-│           └── example_template.txt
-├── famulor.skill                    # Packaged skill archive (zip)
-├── README.md
-└── LICENSE
+```text
+https://app.famulor.io/mcp
 ```
 
-The skill itself lives at `skills/famulor-skill/`, matching the Open Plugins component layout (`skills/{skill-name}/SKILL.md`).
+The server applies the authenticated workspace, approved scopes, role, plan, consent, and retention rules to every request. For smaller discovery results, append one or more toolsets, for example:
 
-## Installation
+```text
+https://app.famulor.io/mcp?toolsets=assistants,calls
+```
 
-### Universal: skills CLI (recommended)
+## Install
 
-Works with Claude Code, Cursor, Codex, OpenClaw, Hermes Agent and 12+ other agents:
+### Universal Agent Skills installer
 
 ```bash
 npx skills add bekservice/Famulor-Skill
 ```
 
-Global install for a specific agent, non-interactive:
-
-```bash
-npx skills add bekservice/Famulor-Skill -g -y
-```
-
-### OpenClaw
-
-Install from ClawHub:
-
-```bash
-openclaw skills install famulor-skill
-```
-
-Or from GitHub:
-
-```bash
-openclaw skills install git:bekservice/Famulor-Skill@main
-```
-
-Details: [.openclaw/INSTALL.md](.openclaw/INSTALL.md). Skill page on ClawHub: `https://clawhub.ai/skills/famulor-skill`.
-
-### Hermes Agent
-
-```bash
-hermes skills install skills-sh/bekservice/Famulor-Skill/famulor-skill
-```
-
-Or via the universal skills CLI above (`npx skills add bekservice/Famulor-Skill`).
+This installs the skill instructions. If the client does not also discover the repository's MCP configuration, add `https://app.famulor.io/mcp` as a remote Streamable HTTP server and complete OAuth.
 
 ### Claude Code
 
-Plugin auto-detection picks up `.claude-plugin/plugin.json` and the skill under `skills/famulor-skill/`. Drop the repo into your plugins directory (or install via your marketplace UI), then restart the session.
+Test directly from a clone:
+
+```bash
+git clone https://github.com/bekservice/Famulor-Skill.git
+claude --plugin-dir ./Famulor-Skill
+```
+
+Claude Code loads the skill and `.mcp.json`. Open `/mcp` to complete OAuth when prompted. The repository is also prepared for Claude's community plugin directory.
 
 ### Cursor
 
-In Cursor Agent chat:
+Install the repository as a plugin:
 
 ```text
 /add-plugin https://github.com/bekservice/Famulor-Skill
 ```
 
-If your workspace setup does not support direct URL plugin install, import `famulor.skill` manually and restart the chat session.
+For local testing, symlink or copy the repository to `~/.cursor/plugins/local/famulor`, reload Cursor, and authenticate the `famulor` MCP server. Cursor discovers `skills/` and `mcp.json` from the plugin root.
 
 ### Codex
 
-Tell Codex:
-
-```text
-Fetch and follow instructions from https://raw.githubusercontent.com/bekservice/Famulor-Skill/refs/heads/main/.codex/INSTALL.md
-```
-
-### OpenCode
-
-Tell OpenCode:
-
-```text
-Fetch and follow instructions from https://raw.githubusercontent.com/bekservice/Famulor-Skill/refs/heads/main/.opencode/INSTALL.md
-```
-
-### Gemini CLI
+See [.codex/INSTALL.md](.codex/INSTALL.md), or use:
 
 ```bash
-gemini extensions install https://github.com/bekservice/Famulor-Skill
+npx skills add bekservice/Famulor-Skill
+codex mcp add famulor --url https://app.famulor.io/mcp
+codex mcp login famulor
 ```
 
-Update:
+### Gemini CLI, OpenCode, and OpenClaw
+
+Use the universal installer above. Client-specific notes are in `GEMINI.md`, `.opencode/INSTALL.md`, and `.openclaw/INSTALL.md`.
+
+## How the skill behaves
+
+- Uses live MCP schemas instead of stale REST examples or fixed IDs
+- Loads only the reference for the relevant toolset
+- Reads current state before mutation and verifies results afterward
+- Keeps read-only requests read-only
+- Requires explicit targets for calls, messages, campaign starts, payments, number changes, credit transfers, migrations, and destructive actions
+- Preserves workspace isolation, consent, suppression, roles, scopes, plan gates, and personal-data boundaries
+
+The 282-tool catalog is a dated navigation snapshot. The live MCP `tools/list` response remains authoritative for arguments, availability, annotations, and gating.
+
+## Validate locally
 
 ```bash
-gemini extensions update famulor-skill
+claude plugin validate . --strict
+python3 /path/to/skill-creator/scripts/quick_validate.py skills/famulor-skill
 ```
 
-### Universal Manual Installation (Fallback)
+Also validate every JSON file, confirm the packaged archive matches `skills/famulor-skill/`, and check that the live endpoint returns OAuth metadata rather than a server error.
 
-1. Download `famulor.skill` from this repository (it extracts to `famulor-skill/`).
-2. Place the extracted folder in your agent's skills directory.
-3. Restart the agent session.
-4. Set `FAMULOR_API_KEY`.
-5. Ask the agent to do a Famulor task.
+## Security
 
-## Local Developer Quickstart
+- Do not commit API keys or OAuth tokens.
+- Prefer OAuth for interactive clients.
+- Treat transcript, recording, message, email, contact, and customer-memory data as personal data.
+- Review tool annotations and returned impact before external or destructive actions.
 
-```bash
-git clone https://github.com/bekservice/Famulor-Skill.git
-cd Famulor-Skill
-export FAMULOR_API_KEY="your-api-key"
-python3 skills/famulor-skill/scripts/famulor_client.py list_assistants
-```
+## Documentation and support
 
-If your key is valid, you get a JSON response from the API.
+- [Famulor MCP documentation](https://docs.famulor.io/en/mcp/client)
+- [Famulor API documentation](https://docs.famulor.io/en/api-reference/introduction)
+- [Famulor support](https://www.famulor.io/support)
+- [Privacy policy](https://www.famulor.io/privacy)
+- [Terms](https://www.famulor.io/terms)
 
-## Verify Installation
-
-- `echo $FAMULOR_API_KEY` returns a non-empty value
-- `python3 skills/famulor-skill/scripts/famulor_client.py list_assistants` returns API data
-- No `401 Unauthorized` error
-
-## Example Workflows
-
-1. **Build an assistant** — the agent gathers requirements, loads voices/models/languages, generates a system prompt, and creates the assistant.
-2. **Start a campaign** — the agent selects an outbound assistant, configures time windows and retry logic, adds leads, and starts the campaign.
-3. **Enable a knowledge base** — the agent creates a knowledge base, imports documents, and links it to an assistant.
-
-## Standard Build Flow
-
-1. Clarify the use case and desired assistant behavior.
-2. Load available options (models, voices, languages, numbers).
-3. Create or update the resource (assistant/campaign/knowledge base/tool).
-4. Run a test conversation or dry-run.
-5. Iterate prompt, voice, and webhook settings.
-
-## Troubleshooting
-
-| Issue | Likely Cause | Fix |
-|---|---|---|
-| `FAMULOR_API_KEY` missing | Env var not set in current shell | Run `export FAMULOR_API_KEY="..."` again |
-| `401 Unauthorized` | Invalid or expired API key | Create a new key in Famulor dashboard and retry |
-| Empty/failed API response | Temporary API or network issue | Retry; verify connectivity |
-| Assistant creation fails | Incompatible mode/model combination | Re-check mode-specific model requirements in SKILL.md |
-| `405 Method Not Allowed` on create | Wrong endpoint | Use `POST /user/assistant` (singular) |
-| `field must not be greater than 16 characters` | Long post_call_schema field name | Use a short alias (e.g. `wunsch_mitarb`) |
-| `initial_message may not be greater than 200 characters` | Greeting too long | Shorten the welcome message |
-| WhatsApp send error | Sender/template/session mismatch | Fetch valid senders/templates and re-check session status |
-
-## Security Notes
-
-- Never commit API keys to Git.
-- Prefer local environment variables or a `.env` file excluded via `.gitignore`.
-- Rotate API keys immediately if exposed.
-
-## Contributing
-
-1. Fork the repository.
-2. Create a feature branch.
-3. Update docs or implementation with clear examples.
-4. Open a pull request with a short test/verification note.
-
-## Updating
-
-1. Pull the latest repository changes.
-2. Re-import or refresh `famulor.skill` in your agent platform.
-3. Start a new session so updated instructions load.
-
-## Support
-
-- Issues: open a GitHub issue in this repository.
-- Platform: [https://www.famulor.io](https://www.famulor.io)
-
-## License
-
-See [LICENSE](LICENSE).
+Licensed under the [MIT License](LICENSE).

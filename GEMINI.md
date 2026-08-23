@@ -1,15 +1,5 @@
-# Famulor.io Skill Context
+# Famulor plugin context
 
-This repository ships the Famulor skill following the [Open Plugins](https://open-plugins.com) layout.
+Use `skills/famulor-skill/SKILL.md` for Famulor tasks. It routes to domain references under `skills/famulor-skill/references/` and operates the hosted OAuth MCP server from `mcp.json`.
 
-When users ask to build or manage Famulor resources, prioritize:
-
-1. Valid API configuration (`FAMULOR_API_KEY` environment variable)
-2. Correct resource type selection (assistant, campaign, knowledge base, messaging)
-3. Safe iterative setup with test runs before production use
-
-Primary skill entry point:
-
-- `skills/famulor-skill/SKILL.md` — full instructions and onboarding flow
-- `skills/famulor-skill/references/nischen_intelligenz.md` — niche/branche-specific intelligence
-- `skills/famulor-skill/scripts/famulor_client.py` — Python API client
+Do not duplicate or reinterpret the skill instructions here. The live MCP schemas are authoritative for tool arguments and availability.

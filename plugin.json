@@ -1,8 +1,8 @@
 {
-  "$schema": "https://open-plugins.com/schema/plugin.schema.json",
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "famulor",
   "version": "2.0.0",
-  "description": "Operate all customer-facing Famulor capabilities through OAuth-secured MCP tools and progressive agent guidance.",
+  "description": "Operate all customer-facing Famulor MCP capabilities with tenant-safe, progressive tool guidance.",
   "author": {
     "name": "BEK Service GmbH",
     "email": "info@bekservice.de",
@@ -20,6 +20,5 @@
     "campaigns",
     "messaging",
     "automation"
-  ],
-  "skills": "./skills"
+  ]
 }

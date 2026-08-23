@@ -1,27 +1,27 @@
 {
-  "name": "famulor-skill",
-  "version": "1.2.1",
-  "description": "Build and manage Famulor AI phone assistants, campaigns, leads, knowledge bases, and WhatsApp/SMS workflows via the Famulor API.",
+  "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
+  "name": "famulor",
+  "displayName": "Famulor",
+  "version": "2.0.0",
+  "description": "Operate Famulor assistants, calls, history, campaigns, messaging, telephony, knowledge, dashboards, automations, and workspace settings through OAuth-secured MCP tools.",
   "author": {
-    "name": "bekservice",
+    "name": "BEK Service GmbH",
     "email": "info@bekservice.de",
-    "url": "https://www.bekservice.de"
+    "url": "https://www.famulor.io"
   },
-  "homepage": "https://github.com/bekservice/Famulor-Skill",
+  "homepage": "https://www.famulor.io",
   "repository": "https://github.com/bekservice/Famulor-Skill",
   "license": "MIT",
   "keywords": [
     "famulor",
+    "mcp",
     "voice-agent",
-    "phone-bot",
-    "ai-assistant",
-    "campaign",
-    "outbound",
-    "inbound",
-    "whatsapp",
-    "sms",
-    "knowledge-base",
+    "assistants",
+    "calls",
+    "campaigns",
+    "messaging",
     "automation"
   ],
-  "skills": "./skills"
+  "skills": "./skills/",
+  "mcpServers": "./.mcp.json"
 }

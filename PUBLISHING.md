@@ -1,69 +1,60 @@
-# Publishing & Distribution
+# Publishing and distribution
 
-How to publish the Famulor skill to the registries so users can install it everywhere.
+This repository is the Famulor agent plugin and skill package. The hosted MCP server itself is registered separately from `bekservice/Famulor-MCP`; do not add or publish a duplicate `server.json` from this repository.
 
-## 1. ClawHub (OpenClaw)
+## Release checklist
 
-One-time setup:
+1. Update the version consistently in `plugin.json`, `.plugin/plugin.json`, `.claude-plugin/plugin.json`, `.cursor-plugin/plugin.json`, `gemini-extension.json`, and the skill metadata.
+2. Refresh the 13 toolset references from the canonical Famulor MCP registry and verify the total tool count.
+3. Run:
 
-```bash
-npm i -g clawhub
-clawhub login          # browser GitHub auth (account must be ≥ 1 week old)
-clawhub whoami         # verify
-```
+   ```bash
+   claude plugin validate . --strict
+   python3 /path/to/skill-creator/scripts/quick_validate.py skills/famulor-skill
+   ```
 
-Publish (from the repo root):
+4. Validate every JSON file and verify all relative component paths stay inside the plugin root.
+5. Regenerate the standalone archive:
+
+   ```bash
+   cd skills
+   zip -r -X ../famulor.skill famulor-skill
+   ```
+
+6. Inspect the archive with `unzip -l famulor.skill` and verify it contains no credentials, caches, or unrelated files.
+7. Commit, open a pull request, and merge only after validation and review.
+8. Tag the released commit after merge.
+
+## Claude community plugin directory
+
+The repository includes `.claude-plugin/plugin.json`, `.mcp.json`, and `skills/` at the plugin root. Submit the public repository or a zip through:
+
+- `https://platform.claude.com/plugins/submit` for individual authors
+- `https://claude.ai/admin-settings/directory/submissions/plugins/new` for Team/Enterprise organization owners or directory managers
+
+Anthropic runs the same `claude plugin validate` check plus safety screening. This plugin directory is separate from the Claude MCP Connector Directory.
+
+## Cursor
+
+Cursor discovers `.cursor-plugin/plugin.json`, `skills/`, and `mcp.json`. Test locally under `~/.cursor/plugins/local/famulor`, reload Cursor, and verify both the skill and OAuth MCP server appear.
+
+Official marketplace submissions use `https://cursor.com/marketplace/publish`. Review the current publisher terms before submitting a plan-gated service. The public repository can also be shared through community directories that accept open-source agent plugins.
+
+## Agent Plugins and universal skill installers
+
+The root `plugin.json` and `mcp.json` target Agent Plugins v1. `npx skills add bekservice/Famulor-Skill` discovers the skill from the public repository. `skills.sh` indexes compatible public repositories without a separate package upload.
+
+## ClawHub
+
+After authentication, publish the skill folder with the release version and a precise changelog:
 
 ```bash
 clawhub skill publish ./skills/famulor-skill \
   --slug famulor-skill \
-  --name "Famulor Skill" \
-  --version 1.2.1 \
-  --changelog "OpenClaw support, MCP setup instructions, npx install" \
+  --name "Famulor" \
+  --version 2.0.0 \
+  --changelog "Full 282-tool MCP coverage, progressive references, and tenant-safe workflows" \
   --tags latest
 ```
 
-Publish updates later:
-
-```bash
-clawhub sync --all
-```
-
-After publishing, users install with:
-
-```bash
-openclaw skills install famulor-skill
-```
-
-Skill page: `https://clawhub.ai/skills/famulor-skill` — your hub page: `https://clawhub.ai/user/<your-github-username>`.
-
-If the automated scan flags a false positive: `clawhub skill rescan famulor-skill`.
-
-## 2. skills.sh (npx skills add)
-
-No submission needed. Any public GitHub repo with valid `SKILL.md` files is picked up automatically once people install via the CLI:
-
-```bash
-npx skills add bekservice/Famulor-Skill
-```
-
-Repo page: `https://skills.sh/bekservice/Famulor-Skill`
-Badge for the README: `https://skills.sh/b/bekservice/Famulor-Skill`
-
-## 3. npm (famulor-mcp, in the Famulor-MCP repo)
-
-```bash
-cd ../Famulor-MCP
-npm login
-npm publish --access public
-```
-
-`prepublishOnly` runs the build automatically. After publishing, `npx -y famulor-mcp` works as a stdio MCP server (requires `FAMULOR_API_KEY` env var).
-
-## Checklist before publishing
-
-- [ ] `skills/famulor-skill/SKILL.md` frontmatter has `name` + `description`
-- [ ] Version bumped in `.plugin/plugin.json` and the `clawhub skill publish --version` flag
-- [ ] `famulor.skill` archive regenerated if skill contents changed:
-      `cd skills && zip -r ../famulor.skill famulor-skill`
-- [ ] Changes pushed to GitHub (`git push origin main`) — GitHub installs always serve the latest main
+Run the current ClawHub verification or rescan command after publishing.

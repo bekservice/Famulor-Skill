@@ -1,56 +1,27 @@
-# Installing Famulor Skill for Codex
+# Install Famulor for Codex
 
-Enable Famulor skills in Codex via native skill discovery.
-
-## Prerequisites
-
-- Git
-
-## Installation
-
-1. **Clone the repository:**
-   ```bash
-   git clone https://github.com/bekservice/Famulor-Skill.git ~/.codex/famulor-skill
-   ```
-
-2. **Create the skills symlink (points at the skill directory inside the repo):**
-
-   **macOS / Linux:**
-   ```bash
-   mkdir -p ~/.agents/skills
-   ln -s ~/.codex/famulor-skill/skills/famulor-skill ~/.agents/skills/famulor-skill
-   ```
-
-   **Windows (PowerShell):**
-   ```powershell
-   New-Item -ItemType Directory -Force -Path "$env:USERPROFILE\.agents\skills"
-   cmd /c mklink /J "$env:USERPROFILE\.agents\skills\famulor-skill" "$env:USERPROFILE\.codex\famulor-skill\skills\famulor-skill"
-   ```
-
-3. **Restart Codex** (quit and relaunch the CLI).
-
-## Verify
+Install the skill:
 
 ```bash
-ls -la ~/.agents/skills/famulor-skill/SKILL.md
+npx skills add bekservice/Famulor-Skill
 ```
 
-Then ask Codex to perform a Famulor task (for example: "Create an outbound assistant in Famulor").
-
-## Updating
+Add the hosted MCP server and complete OAuth:
 
 ```bash
-cd ~/.codex/famulor-skill && git pull
+codex mcp add famulor --url https://app.famulor.io/mcp
+codex mcp login famulor
+codex mcp get famulor
 ```
 
-## Uninstalling
+Restart the Codex session so skill discovery and the MCP connection are both available. Ask Codex to list Famulor assistants as a read-only verification.
+
+For a smaller catalog, remove the server and re-add a scoped URL such as:
 
 ```bash
-rm ~/.agents/skills/famulor-skill
+codex mcp remove famulor
+codex mcp add famulor --url 'https://app.famulor.io/mcp?toolsets=assistants,calls'
+codex mcp login famulor
 ```
 
-Optionally delete the clone:
-
-```bash
-rm -rf ~/.codex/famulor-skill
-```
+Never put a Famulor API key directly in the command. Server-to-server users can set a secret environment variable and use Codex's bearer-token environment option instead.
