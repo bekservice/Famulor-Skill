@@ -1,11 +1,11 @@
 {
   "name": "famulor",
   "displayName": "Famulor",
-  "version": "2.0.1",
+  "version": "2.1.0",
   "description": "Operate all customer-facing Famulor capabilities through OAuth-secured MCP tools and progressive agent guidance.",
   "author": {
     "name": "BEK Service GmbH",
-    "email": "info@bekservice.de",
+    "email": "support@famulor.io",
     "url": "https://www.famulor.io"
   },
   "homepage": "https://www.famulor.io",

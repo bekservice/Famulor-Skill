@@ -2,12 +2,12 @@
 
 A portable agent skill plus hosted Famulor MCP connections for Claude Code, Cursor, Codex, Gemini CLI, OpenCode, OpenClaw, and other Agent Skills-compatible clients.
 
-The repository has two deliberate distributions. The portable Agent Plugin and developer skill cover the complete 282-tool customer-facing MCP surface. The Claude community-store and Gemini Gallery packages are restricted to an Assistant & History profile with exactly 11 read-only tools.
+The repository has two deliberate distributions. The portable Agent Plugin and developer skill cover the complete 421-tool customer-facing MCP surface as of 2026-09-29. The Claude community-store and Gemini Gallery packages are restricted to an Assistant & History profile with exactly 11 read-only tools.
 
 ## What is included
 
 - `skills/famulor-skill/SKILL.md`: short operating workflow, authorization rules, and toolset router
-- `skills/famulor-skill/references/toolsets/`: all 282 current tools split across 13 progressively loaded references
+- `skills/famulor-skill/references/toolsets/`: all 421 current tools split across 14 progressively loaded references
 - `skills/famulor-skill/references/assistant-design.md`: assistant onboarding and prompt-design guidance without fixed model or voice IDs
 - `plugin.json` and `mcp.json`: portable Agent Plugins v1 package
 - `.claude-plugin/plugin.json` and `.mcp.json`: full native Claude developer plugin, kept for backward compatibility
@@ -105,7 +105,7 @@ Use the universal installer above for the full developer skill. Client-specific 
 - Requires explicit targets for calls, messages, campaign starts, payments, number changes, credit transfers, migrations, and destructive actions
 - Preserves workspace isolation, consent, suppression, roles, scopes, plan gates, and personal-data boundaries
 
-The 282-tool catalog is a dated navigation snapshot. The live MCP `tools/list` response remains authoritative for arguments, availability, annotations, and gating.
+The 421-tool catalog is a dated navigation snapshot. The live MCP `tools/list` response remains authoritative for arguments, availability, annotations, and gating. OAuth grants, workspace roles, plans, and selected toolsets determine which tools a given connection can see. Milian tools consume additional credits and require explicit approval per question or voice session.
 
 ## Validate locally
 

@@ -4,8 +4,8 @@ This repository is the Famulor agent plugin and skill package. The hosted MCP se
 
 ## Release checklist
 
-1. Update the version consistently in `plugin.json`, `.plugin/plugin.json`, `.claude-plugin/plugin.json`, `.cursor-plugin/plugin.json`, `gemini-extension.json`, and the skill metadata.
-2. Refresh the 13 toolset references from the canonical Famulor MCP registry and verify the total tool count.
+1. Update the version consistently in `plugin.json`, `.plugin/plugin.json`, `.claude-plugin/plugin.json`, `.cursor-plugin/plugin.json`, `gemini-extension.json`, `claude-store/.claude-plugin/plugin.json`, and both skill metadata files.
+2. Export the canonical Famulor MCP registry and refresh the 14 toolset references with `scripts/sync-catalog.py`; use `--check` to verify the total tool count and exact names.
 3. Run:
 
    ```bash
@@ -33,10 +33,7 @@ The Claude Store package is intentionally isolated under `claude-store/` so the 
 
 The profile exposes exactly 11 read-only tools: `list_assistants`, `get_assistant`, `list_assistant_versions`, `get_assistant_version`, `list_prompt_templates`, `get_languages`, `get_models`, `get_voices`, `list_history`, `get_call`, and `get_email_history_item`. It supports assistant review plus omnichannel call, email, Instagram, Messenger, and other connected messaging history when those records exist. Messaging history can be an overview or preview; do not advertise complete chat transcripts unless returned by the server. It has no mutation, outbound communication, campaign, telephony-purchase, billing, or administrative tools.
 
-Submit the public repository with `claude-store` as the plugin path, or submit a zip whose root is the contents of `claude-store/`, through:
-
-- `https://platform.claude.com/plugins/submit` for individual authors
-- `https://claude.ai/admin-settings/directory/submissions/plugins/new` for Team/Enterprise organization owners or directory managers
+Submit the public repository with `claude-store` as the plugin path, or submit a zip whose root is the contents of `claude-store/`, through [Claude's directory management portal](https://claude.ai/directory/manage). Submit the remote MCP URL separately as a connector; a plugin's MCP configuration does not create a connector listing.
 
 Anthropic runs the same `claude plugin validate` check plus safety screening. This plugin directory is separate from the Claude MCP Connector Directory.
 
@@ -50,7 +47,7 @@ Official marketplace submissions use `https://cursor.com/marketplace/publish`. R
 
 ## Agent Plugins and universal skill installers
 
-The root `plugin.json`, root `mcp.json`, and `skills/famulor-skill/` target Agent Plugins v1 and retain the complete 282-tool developer surface. `npx skills add bekservice/Famulor-Skill` discovers the full skill from the public repository. `skills.sh` indexes compatible public repositories without a separate package upload.
+The root `plugin.json`, root `mcp.json`, and `skills/famulor-skill/` target Agent Plugins v1 and retain the complete 421-tool developer surface. `npx skills add bekservice/Famulor-Skill` discovers the full skill from the public repository. `skills.sh` indexes compatible public repositories without a separate package upload.
 
 ## ClawHub
 
@@ -60,8 +57,8 @@ After authentication, publish the skill folder with the release version and a pr
 clawhub skill publish ./skills/famulor-skill \
   --slug famulor-skill \
   --name "Famulor" \
-  --version 2.0.1 \
-  --changelog "Clarify skills-only MCP setup and require a secure token handoff before minting" \
+  --version 2.1.0 \
+  --changelog "Refresh the full 421-tool catalog, add Milian credit safeguards, and update the restricted Claude package" \
   --tags latest
 ```
 

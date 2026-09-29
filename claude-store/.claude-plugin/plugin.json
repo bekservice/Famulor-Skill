@@ -2,11 +2,11 @@
   "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
   "name": "famulor-assistants-history",
   "displayName": "Famulor Assistants & History",
-  "version": "2.0.2",
+  "version": "2.1.0",
   "description": "Review Famulor assistants and read omnichannel call, messaging, and email history through an OAuth-secured, read-only 11-tool MCP profile.",
   "author": {
     "name": "BEK Service GmbH",
-    "email": "info@bekservice.de",
+    "email": "support@famulor.io",
     "url": "https://www.famulor.io"
   },
   "homepage": "https://www.famulor.io",

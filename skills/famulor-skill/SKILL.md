@@ -4,7 +4,7 @@ description: Operate a Famulor workspace through its hosted MCP server, includin
 license: MIT
 metadata:
   author: bekservice
-  version: "2.0.1"
+  version: "2.1.0"
   homepage: https://github.com/bekservice/Famulor-Skill
 ---
 
@@ -32,21 +32,22 @@ Read the linked reference only for the relevant group. Each reference contains e
 
 | Toolset | Use for | Current tools | Reference |
 | --- | --- | ---: | --- |
-| `assistants` | Assistants, versions, models, voices, reusable tools, bookings, tests, and integrations | 56 | [assistants](references/toolsets/assistants.md) |
-| `calls` | Calls, unified history, transcripts, QA, callbacks, and live control | 15 | [calls](references/toolsets/calls.md) |
-| `campaigns` | Campaigns, Audience contacts, leads, segments, consent, suppression, and outbound limits | 34 | [campaigns](references/toolsets/campaigns.md) |
-| `messaging` | WhatsApp, Messenger, email, Slack, connectors, templates, and sender profiles | 44 | [messaging](references/toolsets/messaging.md) |
-| `telephony` | Phone numbers, SIP trunks, caller IDs, carriers, and number verification | 27 | [telephony](references/toolsets/telephony.md) |
-| `knowledge` | Knowledge bases, documents, FAQs, websites, and connected drives | 20 | [knowledge](references/toolsets/knowledge.md) |
+| `assistants` | Assistants, versions, models, voices, reusable tools, bookings, tests, and integrations | 87 | [assistants](references/toolsets/assistants.md) |
+| `calls` | Calls, unified history, transcripts, QA, callbacks, and live control | 26 | [calls](references/toolsets/calls.md) |
+| `campaigns` | Campaigns, Audience contacts, leads, segments, consent, suppression, and outbound limits | 36 | [campaigns](references/toolsets/campaigns.md) |
+| `messaging` | WhatsApp, Messenger, email, Slack, connectors, templates, and sender profiles | 46 | [messaging](references/toolsets/messaging.md) |
+| `telephony` | Phone numbers, SIP trunks, caller IDs, carriers, and number verification | 70 | [telephony](references/toolsets/telephony.md) |
+| `knowledge` | Knowledge bases, documents, FAQs, websites, and connected drives | 25 | [knowledge](references/toolsets/knowledge.md) |
 | `dashboards` | Dashboards, analytics, widgets, and layout | 19 | [dashboards](references/toolsets/dashboards.md) |
-| `automations` | Automations, connections, CRM sync, routines, and runs | 28 | [automations](references/toolsets/automations.md) |
-| `billing` | Balance, usage, transactions, invoices, billing recovery, and referrals | 7 | [billing](references/toolsets/billing.md) |
-| `settings` | Account, workspaces, API keys, retention, memory, domains, and sessions | 20 | [settings](references/toolsets/settings.md) |
-| `platform` | Authorized white-label reseller customer administration | 6 | [platform](references/toolsets/platform.md) |
+| `automations` | Automations, connections, CRM sync, routines, and runs | 41 | [automations](references/toolsets/automations.md) |
+| `billing` | Balance, usage, transactions, invoices, billing recovery, and referrals | 18 | [billing](references/toolsets/billing.md) |
+| `settings` | Account, workspaces, API keys, retention, memory, domains, and sessions | 29 | [settings](references/toolsets/settings.md) |
+| `platform` | Authorized reseller customer administration | 16 | [platform](references/toolsets/platform.md) |
 | `migration` | Previewing and importing supported Famulor 1.0 resources | 2 | [migration](references/toolsets/migration.md) |
 | `tasks` | Durable exports, simulations, crawls, and campaign preparation | 4 | [tasks](references/toolsets/tasks.md) |
+| `milian` | Milian workspace questions and voice sessions with additional credits | 2 | [milian](references/toolsets/milian.md) |
 
-The full snapshot contains 282 tools. `list_mcp_toolsets` can report the groups visible to the current credential. The public `assistant-history` directory profile is intentionally limited to 11 read-only tools; use it only when the user specifically wants that restricted connection.
+The full snapshot contains 421 tools. `list_mcp_toolsets` can report the groups visible to the current credential. The public `assistant-history` directory profile is intentionally limited to 11 read-only tools; use it only when the user specifically wants that restricted connection.
 
 ## Operating workflow
 
@@ -65,6 +66,7 @@ For assistant onboarding or prompt design, read [assistant design](references/as
 - Respect OAuth/API-key scopes, membership roles, plan gates, consent, suppression, retention, and compliance states. Report a denial plainly; do not bypass it or automatically initiate an upgrade.
 - Read-only requests stay read-only. A tool named `create`, `update`, `set`, `send`, `start`, `stop`, `run`, `trigger`, `assign`, `import`, `upload`, `verify`, `transfer`, `buy`, `release`, `remove`, `delete`, `revoke`, `logout`, `erase`, `cancel`, `reschedule`, `restore`, or `live_call_control` is not read-only even if it is used during investigation.
 - Outbound calls, messages, campaign starts, live-call control, bookings, payment links, phone-number purchases/releases, credit transfers, API-key changes, domain changes, migrations, and destructive actions require an explicit target and action. Show material cost or irreversible impact when the tool exposes it.
+- `ask_milian` and `create_milian_voice_session` consume additional workspace credits. Explain the extra cost and get approval for each question or voice session before calling either tool; do not treat a general request for help as that approval.
 - Before starting outreach, inspect the relevant consent, suppression, sender/template, and outbound-limit state. Never weaken opt-outs to make a send succeed.
 - Do not silently retry a non-idempotent mutation. First read back the resource or task status to determine whether the original action succeeded.
 - Treat transcripts, recordings, contact identities, customer memories, email threads, and message previews as personal data. Retrieve and summarize only what the user needs; do not copy them into files or unrelated services without authorization.
