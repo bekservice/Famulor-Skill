@@ -2,7 +2,11 @@
 
 Balance, usage, transactions, invoices, billing recovery, and referrals. Connect only this group with `https://app.famulor.io/mcp?toolsets=billing`.
 
-This 2026-09-29 snapshot covers all 18 tools assigned to `billing` in the canonical 421-tool registry. The live MCP `tools/list` response is authoritative for arguments, current availability, annotations, and plan or role gating. Never invent fields from this catalog.
+This 2026-09-30 snapshot covers all 19 tools assigned to `billing` in the canonical 421-tool registry. The live MCP `tools/list` response is authoritative for arguments, current availability, annotations, and plan or role gating. Never invent fields from this catalog.
+
+Toolsets limit discovery context; they do not grant access. OAuth/API scopes and workspace roles are enforced separately. The Effect column reflects MCP risk annotations: `Delete/destructive` also covers overwrites or changes that can remove data or safeguards.
+
+**Caution:** Billing and reseller-plan changes can affect invoices, taxes, credits, or customer entitlements. Confirm the workspace or customer plan and the financial effect before changing them.
 
 | Tool | Effect | Accepted scope | Execution | Purpose snapshot |
 | --- | --- | --- | --- | --- |
@@ -22,5 +26,6 @@ This 2026-09-29 snapshot covers all 18 tools assigned to `billing` in the canoni
 | `list_transactions` | Read-only | `billing:read or calls:read` | Immediate | List the workspace balance ledger, newest first. Notes are customer-facing descriptions such as Credit top-up, Automatic top-up or Plan payment; payment-provider and internal reconciliation references are never returned. |
 | `review_subscription_payment_change` | Write/action | `billing:write` | Immediate | Review a change to an existing workspace subscription and its complete desired add-on selection. Returns the amount due in currency minor units, masked eligible cards, and opaque references valid for 15 minutes. Does not submit the change or charge a card. Show the summary, amount, currency and selected card to the user before confirmation. Requires a user-owned billing:write credential and owner, admin, or billing access. |
 | `update_reseller_plan_inclusions` | Write/action | `settings:write` | Immediate | Replace included services on a customer plan without existing subscriptions. Use list_reseller_plans for available inclusion codes. Quantities add capacity above the plan baseline. Existing paid contracts require a new plan. Does not charge customers or activate subscriptions. |
+| `update_reseller_plan_knowledge_sources` | Write/action | `settings:write` | Immediate | Enable or disable website crawling, cloud drive sources and automatic refresh on your Whitelabel customer plan. Requires owner or admin authority. Changes apply to customers using this plan; new or changed content continues to cost usage credits. Cloud drive sources also require workspace Beta Features. Does not change plan prices or included credits. |
 | `update_reseller_tax_registration` | Delete/destructive | `billing:write` | Immediate | Schedule or end tax collection using the opaque registration_ref from the tax view. References expire after 24 hours; refresh them with get_reseller_billing. expires_at now ends collection; null clears the scheduled expiry. Changes affect customer taxes: only act on explicit owner instructions. Requires billing:write and owner or admin access. |
 | `update_reseller_tax_settings` | Delete/destructive | `billing:write` | Immediate | Update the business address and default tax classification used for customer tax calculations. Requires billing:write and owner or admin access. Only submit changes explicitly requested by the business owner. |

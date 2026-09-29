@@ -19,7 +19,7 @@ REFERENCES = ROOT / "skills/famulor-skill/references/toolsets"
 GROUPS = {
     "assistants": ("Assistants, versions, models, voices, reusable tools, bookings, tests, and integrations", "Assistants, models, voices, reusable tools, bookings, integrations, tests, and simulations."),
     "calls": ("Calls, unified history, transcripts, QA, callbacks, and live control", "Calls, unified history, transcripts, QA, callbacks, and live control."),
-    "campaigns": ("Campaigns, Audience contacts, leads, segments, consent, suppression, and outbound limits", "Campaigns, Audience contacts, leads, segments, consent, suppression, and outbound limits."),
+    "campaigns": ("Campaigns, Audience contacts, leads, segments, consent records, and suppression", "Campaigns, Audience contacts, leads, segments, consent records, and suppression. Connect the `settings` group as well when you need workspace consent mode or outbound limits."),
     "messaging": ("WhatsApp, Messenger, email, Slack, connectors, templates, and sender profiles", "Messaging, email, connected channels, templates, and sender profiles."),
     "telephony": ("Phone numbers, SIP trunks, caller IDs, carriers, and number verification", "Phone numbers, SIP, caller IDs, routing, and verification."),
     "knowledge": ("Knowledge bases, documents, FAQs, websites, and connected drives", "Knowledge bases, documents, FAQs, websites, and connected drives."),
@@ -31,6 +31,23 @@ GROUPS = {
     "migration": ("Previewing and importing supported Famulor 1.0 resources", "Previewing and importing supported Famulor 1.0 resources."),
     "tasks": ("Durable exports, simulations, crawls, and campaign preparation", "Durable exports, simulations, crawls, and campaign preparation."),
     "milian": ("Milian workspace questions and voice sessions with additional credits", "Milian workspace questions and voice sessions. Both require explicit approval for additional credits."),
+}
+
+SAFETY_NOTES = {
+    "assistants": "Creating or changing an assistant can change live customer interactions. Read the current configuration and confirm the intended assistant and change before saving consequential edits.",
+    "calls": "Calls and live-call controls can incur charges or disrupt active conversations; history removal can permanently delete data. Confirm the exact call, recipient, and action before execution.",
+    "campaigns": "Campaign starts and contact changes affect real recipients. Erasing customer memory is permanent; removing suppression can restore contactability. Verify lawful consent and the exact target before these actions.",
+    "messaging": "Sending messages or disconnecting channels has real external effects. Deleting a domain removes its addresses; deleting a synced template may affect its provider copy. Confirm the recipient or resource before execution.",
+    "telephony": "Buying numbers or placing calls can incur charges; releasing numbers and changing routing can disrupt service. Confirm the number, target, cost, and intended action first.",
+    "knowledge": "Crawls and drive syncs can consume credits; deleting sources or documents may remove indexed content. Review source and cost before running or deleting.",
+    "dashboards": "Dashboard, widget, and logo deletion removes workspace resources. Confirm the exact resource and whether it can be recovered before deleting.",
+    "automations": "Routines can keep running unattended after a tool call returns, perform workspace actions, and incur charges. Review the prompt, schedule, permissions, and expected side effects; confirm before creating, enabling, or running one.",
+    "billing": "Billing and reseller-plan changes can affect invoices, taxes, credits, or customer entitlements. Confirm the workspace or customer plan and the financial effect before changing them.",
+    "settings": "API-key revocation, session sign-out, domain removal, retention changes, and ownership transfer can disrupt access or remove data. Confirm the exact account, workspace, and irreversible impact first.",
+    "platform": "Reseller administration can affect customer accounts and credits. Verify the customer workspace, authority, and intended change before execution.",
+    "migration": "Imports create or change workspace resources. Preview the exact source and destination, then confirm before starting an import.",
+    "tasks": "History exports can contain sensitive conversation data. Confirm export authority and handle download links privately; check asynchronous task status before claiming completion.",
+    "milian": "Milian questions and voice sessions consume additional workspace credits. Explain the cost and obtain approval for each request.",
 }
 
 
@@ -46,6 +63,10 @@ def render_reference(group, tools, date):
         f"{intro} Connect only this group with `https://app.famulor.io/mcp?toolsets={group}`.",
         "",
         f"This {date} snapshot covers all {len(tools)} tools assigned to `{group}` in the canonical {sum(COUNTS.values())}-tool registry. The live MCP `tools/list` response is authoritative for arguments, current availability, annotations, and plan or role gating. Never invent fields from this catalog.",
+        "",
+        "Toolsets limit discovery context; they do not grant access. OAuth/API scopes and workspace roles are enforced separately. The Effect column reflects MCP risk annotations: `Delete/destructive` also covers overwrites or changes that can remove data or safeguards.",
+        "",
+        f"**Caution:** {SAFETY_NOTES[group]}",
         "",
         "| Tool | Effect | Accepted scope | Execution | Purpose snapshot |",
         "| --- | --- | --- | --- | --- |",

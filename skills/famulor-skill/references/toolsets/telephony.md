@@ -2,7 +2,11 @@
 
 Phone numbers, SIP, caller IDs, routing, and verification. Connect only this group with `https://app.famulor.io/mcp?toolsets=telephony`.
 
-This 2026-09-29 snapshot covers all 70 tools assigned to `telephony` in the canonical 421-tool registry. The live MCP `tools/list` response is authoritative for arguments, current availability, annotations, and plan or role gating. Never invent fields from this catalog.
+This 2026-09-30 snapshot covers all 70 tools assigned to `telephony` in the canonical 421-tool registry. The live MCP `tools/list` response is authoritative for arguments, current availability, annotations, and plan or role gating. Never invent fields from this catalog.
+
+Toolsets limit discovery context; they do not grant access. OAuth/API scopes and workspace roles are enforced separately. The Effect column reflects MCP risk annotations: `Delete/destructive` also covers overwrites or changes that can remove data or safeguards.
+
+**Caution:** Buying numbers or placing calls can incur charges; releasing numbers and changing routing can disrupt service. Confirm the number, target, cost, and intended action first.
 
 | Tool | Effect | Accepted scope | Execution | Purpose snapshot |
 | --- | --- | --- | --- | --- |

@@ -2,7 +2,11 @@
 
 Knowledge bases, documents, FAQs, websites, and connected drives. Connect only this group with `https://app.famulor.io/mcp?toolsets=knowledge`.
 
-This 2026-09-29 snapshot covers all 25 tools assigned to `knowledge` in the canonical 421-tool registry. The live MCP `tools/list` response is authoritative for arguments, current availability, annotations, and plan or role gating. Never invent fields from this catalog.
+This 2026-09-30 snapshot covers all 24 tools assigned to `knowledge` in the canonical 421-tool registry. The live MCP `tools/list` response is authoritative for arguments, current availability, annotations, and plan or role gating. Never invent fields from this catalog.
+
+Toolsets limit discovery context; they do not grant access. OAuth/API scopes and workspace roles are enforced separately. The Effect column reflects MCP risk annotations: `Delete/destructive` also covers overwrites or changes that can remove data or safeguards.
+
+**Caution:** Crawls and drive syncs can consume credits; deleting sources or documents may remove indexed content. Review source and cost before running or deleting.
 
 | Tool | Effect | Accepted scope | Execution | Purpose snapshot |
 | --- | --- | --- | --- | --- |
@@ -30,4 +34,3 @@ This 2026-09-29 snapshot covers all 25 tools assigned to `knowledge` in the cano
 | `update_crawl_source` | Write/action | `knowledge:write or assistants:write` | Immediate | Update a website crawl source (custom name, root URL, include/exclude paths, page limit, auto-sync settings). |
 | `update_drive_source` | Write/action | `knowledge:write or assistants:write` | Immediate | Update a cloud drive sync source (custom name, app connection, folder, subfolder recursion, file limit, auto-sync settings). |
 | `update_faq_entry` | Write/action | `knowledge:write or assistants:write` | Immediate | Edit a FAQ or knowledge-gap draft and set its review status. Approval requires a non-empty answer and publishes it to retrieval. |
-| `update_reseller_plan_knowledge_sources` | Write/action | `settings:write` | Immediate | Enable or disable website crawling, cloud drive sources and automatic refresh on your Whitelabel customer plan. Requires owner or admin authority. Changes apply to customers using this plan; new or changed content continues to cost usage credits. Cloud drive sources also require workspace Beta Features. Does not change plan prices or included credits. |

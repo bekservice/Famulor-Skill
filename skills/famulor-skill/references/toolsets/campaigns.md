@@ -1,8 +1,12 @@
 # Campaigns toolset
 
-Campaigns, Audience contacts, leads, segments, consent, suppression, and outbound limits. Connect only this group with `https://app.famulor.io/mcp?toolsets=campaigns`.
+Campaigns, Audience contacts, leads, segments, consent records, and suppression. Connect the `settings` group as well when you need workspace consent mode or outbound limits. Connect only this group with `https://app.famulor.io/mcp?toolsets=campaigns`.
 
-This 2026-09-29 snapshot covers all 36 tools assigned to `campaigns` in the canonical 421-tool registry. The live MCP `tools/list` response is authoritative for arguments, current availability, annotations, and plan or role gating. Never invent fields from this catalog.
+This 2026-09-30 snapshot covers all 32 tools assigned to `campaigns` in the canonical 421-tool registry. The live MCP `tools/list` response is authoritative for arguments, current availability, annotations, and plan or role gating. Never invent fields from this catalog.
+
+Toolsets limit discovery context; they do not grant access. OAuth/API scopes and workspace roles are enforced separately. The Effect column reflects MCP risk annotations: `Delete/destructive` also covers overwrites or changes that can remove data or safeguards.
+
+**Caution:** Campaign starts and contact changes affect real recipients. Erasing customer memory is permanent; removing suppression can restore contactability. Verify lawful consent and the exact target before these actions.
 
 | Tool | Effect | Accepted scope | Execution | Purpose snapshot |
 | --- | --- | --- | --- | --- |
@@ -19,10 +23,8 @@ This 2026-09-29 snapshot covers all 36 tools assigned to `campaigns` in the cano
 | `erase_customer_memory` | Delete/destructive | `leads:write or calls:write` | Immediate | Permanently erase all stored summaries, preferences, and remembered variables for one Audience contact. A content-free deletion audit remains; the contact and exact channel identities remain. |
 | `get_campaign` | Read-only | `campaigns:read or calls:read` | Immediate | Fetch one campaign including channel settings, schedule, follow-up, and total lead count. |
 | `get_campaign_stats` | Read-only | `campaigns:read or calls:read` | Immediate | Progress aggregates for leads and deliveries, plus call count and voice duration for voice campaigns. |
-| `get_consent_mode` | Read-only | `settings:read or assistants:read` | Immediate | Read how marketing opt-outs are enforced in this workspace. universal suppresses every linked channel after any opt-out; per_channel suppresses only the channel where the opt-out was received. |
 | `get_customer_memory` | Read-only | `leads:read or calls:read` | Immediate | Get one Audience contact's workspace and assistant memories, exact channel identities, and recent memory audit events. |
 | `get_lead` | Read-only | `leads:read or calls:read` | Immediate | Get one campaign lead with editable contact fields, user-managed custom fields, and a separate read-only system_variables object. |
-| `get_outbound_limits` | Read-only | `settings:read or assistants:read` | Immediate | Read the workspace-wide daily quota, today's usage, remaining calls, reset time, and increase-request status for outbound calls through integrated numbers. Inbound, web, and customer-owned SIP trunk calls are unlimited. |
 | `list_audience_contact_channels` | Read-only | `leads:read or calls:read` | Immediate | List one Audience contact's manually manageable channel profiles. Microsoft Teams profiles expose only the current user-facing connection name; reconnect copies of the same Microsoft identity are normalized and internal account or routing identifiers are never returned. |
 | `list_audience_contacts` | Read-only | `leads:read or calls:read` | Immediate | List workspace contacts across all campaigns with dynamic Call QA averages. QA scores come from the per-call History scorecard; unscored calls are excluded. |
 | `list_campaign_deliveries` | Read-only | `campaigns:read or calls:read` | Immediate | List primary and follow-up delivery attempts with customer-visible status, timestamps and errors. |
@@ -35,8 +37,6 @@ This 2026-09-29 snapshot covers all 36 tools assigned to `campaigns` in the cano
 | `remove_lead_from_campaign` | Delete/destructive | `leads:write or calls:write` | Immediate | Remove a lead from campaign execution without deleting the Audience contact, calls, or campaign history. |
 | `remove_suppression_entry` | Delete/destructive | `suppression:write or campaigns:write` | Immediate | Restore consent for one active suppression by entry ID, E.164 phone number, or email address. This revokes the active suppression and appends an opt-in audit event; it does not erase consent history. |
 | `replace_audience_contact_channels` | Delete/destructive | `leads:write or calls:write` | Immediate | Replace one Audience contact's manually managed channel profiles. For Microsoft Teams, set connection_name to an active connection's visible name; it may be omitted only when exactly one Teams identity connection is active. Reconnect copies of the same Microsoft identity are normalized to the current connection name. Identity collisions are rejected and never merge contacts. |
-| `request_outbound_limit_increase` | Write/action | `settings:write or assistants:write` | Immediate | Submit a workspace-wide increase request for integrated outbound calls. Only workspace owners and admins can request a change. |
-| `set_consent_mode` | Delete/destructive | `settings:write or assistants:write` | Immediate | Set workspace marketing opt-out enforcement to universal or per_channel. Per-channel mode requires the Consent & Compliance plan feature; suppression enforcement itself is always active. |
 | `start_campaign` | Write/action | `campaigns:write or calls:write` | Immediate | Start or resume immediately and clear any schedule. Channel resources, outreach windows, suppression, concurrency, and credits are enforced before dispatch. |
 | `stop_campaign` | Write/action | `campaigns:write or calls:write` | Immediate | Stop (pause) a running campaign: sets status to 'paused'. Calls already in progress finish normally; the dialer just stops dialing new leads. Resume with start_campaign. |
 | `update_campaign` | Write/action | `campaigns:write or calls:write` | Immediate | Update campaign identity, channel configuration, schedule, voice settings, or follow-up. Channel/sender/template are immutable while running. |

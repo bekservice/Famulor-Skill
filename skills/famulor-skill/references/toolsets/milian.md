@@ -2,7 +2,11 @@
 
 Milian workspace questions and voice sessions. Both require explicit approval for additional credits. Connect only this group with `https://app.famulor.io/mcp?toolsets=milian`.
 
-This 2026-09-29 snapshot covers all 2 tools assigned to `milian` in the canonical 421-tool registry. The live MCP `tools/list` response is authoritative for arguments, current availability, annotations, and plan or role gating. Never invent fields from this catalog.
+This 2026-09-30 snapshot covers all 2 tools assigned to `milian` in the canonical 421-tool registry. The live MCP `tools/list` response is authoritative for arguments, current availability, annotations, and plan or role gating. Never invent fields from this catalog.
+
+Toolsets limit discovery context; they do not grant access. OAuth/API scopes and workspace roles are enforced separately. The Effect column reflects MCP risk annotations: `Delete/destructive` also covers overwrites or changes that can remove data or safeguards.
+
+**Caution:** Milian questions and voice sessions consume additional workspace credits. Explain the cost and obtain approval for each request.
 
 | Tool | Effect | Accepted scope | Execution | Purpose snapshot |
 | --- | --- | --- | --- | --- |
