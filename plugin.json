@@ -1,10 +1,10 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "famulor",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "description": "Operate all customer-facing Famulor MCP capabilities with tenant-safe, progressive tool guidance.",
   "author": {
-    "name": "BEK Service GmbH",
+    "name": "Famulor",
     "email": "support@famulor.io",
     "url": "https://www.famulor.io"
   },

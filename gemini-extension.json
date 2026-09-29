@@ -1,6 +1,6 @@
 {
   "name": "famulor",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "description": "Review Famulor assistants and omnichannel conversation history through an OAuth-secured, read-only MCP profile.",
   "contextFileName": "GEMINI.md",
   "mcpServers": {

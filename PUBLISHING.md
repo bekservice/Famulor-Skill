@@ -61,7 +61,7 @@ After authentication, publish the skill folder with the release version and a pr
 clawhub skill publish ./skills/famulor-skill \
   --slug famulor-skill \
   --name "Famulor" \
-  --version 2.1.1 \
+  --version 2.1.2 \
   --changelog "Add Claude Directory brand and privacy metadata; retain the complete 421-tool catalog" \
   --tags latest
 ```
