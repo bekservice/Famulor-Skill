@@ -10,10 +10,14 @@ This repository is the Famulor agent plugin and skill package. The hosted MCP se
 
    ```bash
    claude plugin validate . --strict
-   claude plugin validate ./claude-store --strict
+   claude plugin validate ./claude-store
    python3 /path/to/skill-creator/scripts/quick_validate.py skills/famulor-skill
    python3 /path/to/skill-creator/scripts/quick_validate.py claude-store/skills/famulor-assistants-history
    ```
+
+   Claude Code 2.1.228 reports the directory-required `privacyPolicyUrl` in the
+   isolated Store manifest as an unknown top-level field. The non-strict check
+   confirms it still loads; verify the directory's policy scan separately.
 
 4. Validate every JSON file and verify all relative component paths stay inside the plugin root.
 5. Regenerate the standalone archive:
@@ -57,8 +61,8 @@ After authentication, publish the skill folder with the release version and a pr
 clawhub skill publish ./skills/famulor-skill \
   --slug famulor-skill \
   --name "Famulor" \
-  --version 2.1.0 \
-  --changelog "Refresh the full 421-tool catalog, add Milian credit safeguards, and update the restricted Claude package" \
+  --version 2.1.1 \
+  --changelog "Add Claude Directory brand and privacy metadata; retain the complete 421-tool catalog" \
   --tags latest
 ```
 

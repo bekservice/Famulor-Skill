@@ -4,7 +4,7 @@ description: Operate a Famulor workspace through its hosted MCP server, includin
 license: MIT
 metadata:
   author: bekservice
-  version: "2.1.0"
+  version: "2.1.1"
   homepage: https://github.com/bekservice/Famulor-Skill
 ---
 
