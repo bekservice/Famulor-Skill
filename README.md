@@ -2,7 +2,7 @@
 
 A portable agent skill plus hosted Famulor MCP connections for Claude Code, Cursor, Codex, Gemini CLI, OpenCode, OpenClaw, and other Agent Skills-compatible clients.
 
-The repository has two deliberate distributions. The portable Agent Plugin and developer skill cover the complete 421-tool customer-facing MCP surface as of 2026-09-29. The Claude community-store and Gemini Gallery packages are restricted to an Assistant & History profile with exactly 11 read-only tools.
+The portable Agent Plugin, Gemini CLI extension, and developer skill cover the complete 421-tool customer-facing MCP surface as of 2026-09-29. The Claude community-store package is restricted to an Assistant & History profile with exactly 11 read-only tools.
 
 ## What is included
 
@@ -12,7 +12,7 @@ The repository has two deliberate distributions. The portable Agent Plugin and d
 - `plugin.json` and `mcp.json`: portable Agent Plugins v1 package
 - `.claude-plugin/plugin.json` and `.mcp.json`: full native Claude developer plugin, kept for backward compatibility
 - `claude-store/`: isolated Claude Store package with one read-only Assistant & History skill and a restricted OAuth MCP connection
-- `gemini-extension.json` and `GEMINI.md`: read-only Gemini Gallery package using the same Assistant & History profile
+- `gemini-extension.json` and `GEMINI.md`: Gemini CLI extension with the full MCP endpoint and bundled skill
 - `.cursor-plugin/plugin.json`: native Cursor plugin metadata
 - `.plugin/plugin.json`: Open Plugins compatibility
 - `famulor.skill`: standalone packaged Agent Skill archive
@@ -90,11 +90,33 @@ codex mcp login famulor
 
 ### Gemini CLI Gallery
 
-The root `gemini-extension.json` is the gallery package. It connects only to the read-only Assistant & History profile and loads the matching guidance from `GEMINI.md`.
+The root `gemini-extension.json` is the gallery package. It connects to the full MCP endpoint and loads `GEMINI.md` plus the bundled `skills/famulor-skill/` workflow. Gemini CLI discovers the extension from the public GitHub repository with the `gemini-cli-extension` topic and a tagged release; there is no separate submission form. The OAuth consent screen limits access to the workspace and toolsets a user approves.
 
-### OpenCode, OpenClaw, and manual Gemini developer setup
+```bash
+gemini extensions install https://github.com/bekservice/Famulor-Skill
+```
 
-Use the universal installer above for the full developer skill. Client-specific notes are in `.opencode/INSTALL.md` and `.openclaw/INSTALL.md`. For manual Gemini developer use, add the full hosted endpoint explicitly instead of installing the Gallery extension.
+After installation, run `/mcp auth famulor` in Gemini CLI if it asks for OAuth authentication.
+
+### Google Antigravity
+
+Antigravity uses a different MCP configuration format. Install the portable skill with `npx skills add bekservice/Famulor-Skill --skill famulor-skill --agent antigravity`, then add the remote server in Antigravity's MCP settings:
+
+```json
+{
+  "mcpServers": {
+    "famulor": {
+      "serverUrl": "https://app.famulor.io/mcp"
+    }
+  }
+}
+```
+
+Antigravity supports dynamic OAuth registration; authenticate the server in Settings → Customizations. Its curated plugin marketplace currently documents local and direct GitHub installation, but no public third-party submission process.
+
+### OpenCode, OpenClaw, and manual setup
+
+Use the universal installer above for the full developer skill. Client-specific notes are in `.opencode/INSTALL.md` and `.openclaw/INSTALL.md`.
 
 ## How the skill behaves
 

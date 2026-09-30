@@ -33,7 +33,7 @@ This repository is the Famulor agent plugin and skill package. The hosted MCP se
 
 ## Claude community plugin directory
 
-The Claude Store package is intentionally isolated under `claude-store/` so the full root developer skill is not included in the store capability inventory. Its `.claude-plugin/plugin.json` loads only `claude-store/skills/famulor-assistants-history/`, while its `.mcp.json` connects to `https://app.famulor.io/mcp?profile=assistant-history`.
+The Claude Store package is intentionally isolated under `claude-store/` so the full root developer skill is not included in the store capability inventory. Its `.claude-plugin/plugin.json` loads only `claude-store/skills/famulor-assistants-history/`, while its `.mcp.json` connects to `https://app.famulor.io/mcp?profile=assistant-history`. The Gemini CLI gallery uses the repository root, discovers the full skill under `skills/`, and connects to the full MCP endpoint; keep its manifest and context consistent with that capability.
 
 The profile exposes exactly 11 read-only tools: `list_assistants`, `get_assistant`, `list_assistant_versions`, `get_assistant_version`, `list_prompt_templates`, `get_languages`, `get_models`, `get_voices`, `list_history`, `get_call`, and `get_email_history_item`. It supports assistant review plus omnichannel call, email, Instagram, Messenger, and other connected messaging history when those records exist. Messaging history can be an overview or preview; do not advertise complete chat transcripts unless returned by the server. It has no mutation, outbound communication, campaign, telephony-purchase, billing, or administrative tools.
 
@@ -49,6 +49,12 @@ Cursor discovers `.cursor-plugin/plugin.json`, `skills/`, and `mcp.json`. Test l
 
 Official marketplace submissions use `https://cursor.com/marketplace/publish`. Review the current publisher terms before submitting a plan-gated service. The public repository can also be shared through community directories that accept open-source agent plugins.
 
+## Google Gemini CLI and Antigravity
+
+Gemini CLI's gallery indexes public GitHub repositories with the `gemini-cli-extension` topic, a root `gemini-extension.json`, and a tag. No separate submission form is used. Check `https://geminicli.com/extensions/` after the daily crawl. This extension includes the full skill under `skills/`, so `GEMINI.md` and the MCP endpoint must match it; the Claude Store's restricted 11-tool profile is separate.
+
+Antigravity uses `serverUrl` in its MCP configuration, while Gemini CLI uses `httpUrl`. The public README contains direct installation instructions for the portable skill and remote MCP server. Google's curated Antigravity marketplace documentation does not currently expose a third-party submission route; do not claim that the repository is listed there.
+
 ## Agent Plugins and universal skill installers
 
 The root `plugin.json`, root `mcp.json`, and `skills/famulor-skill/` target Agent Plugins v1 and retain the complete 421-tool developer surface. `npx skills add bekservice/Famulor-Skill` discovers the full skill from the public repository. `skills.sh` indexes compatible public repositories without a separate package upload.
@@ -61,7 +67,7 @@ After authentication, publish the skill folder with the release version and a pr
 clawhub skill publish ./skills/famulor-skill \
   --slug famulor-skill \
   --name "Famulor" \
-  --version 2.1.3 \
+  --version 2.1.4 \
   --changelog "Clarify high-impact tools and move policy controls to administrative toolsets; retain all 421 tools" \
   --tags latest
 ```

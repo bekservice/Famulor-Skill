@@ -1,5 +1,5 @@
 # Famulor plugin context
 
-Use `claude-store/skills/famulor-assistants-history/SKILL.md` for Famulor tasks. The Gemini extension connects to the restricted Assistant & History MCP profile declared in `gemini-extension.json`.
+Use the bundled `skills/famulor-skill/SKILL.md` for Famulor tasks. Gemini CLI discovers that skill from this extension and connects to the full hosted MCP endpoint declared in `gemini-extension.json`.
 
-Keep every request read-only. Do not change resources, send messages, place calls, run campaigns, manage telephony, or access billing. The live MCP schemas are authoritative for tool arguments and availability.
+The live MCP schemas, authenticated workspace, granted OAuth scopes, and selected toolsets determine which tools are available. Read the current state before any change. Follow the skill's consent, billing, and external-action safeguards; do not infer permission to send messages, place calls, spend credits, or change resources from a read-only request.
