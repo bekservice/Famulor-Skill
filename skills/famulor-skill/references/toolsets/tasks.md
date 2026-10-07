@@ -2,7 +2,7 @@
 
 Durable exports, simulations, crawls, and campaign preparation. Connect only this group with `https://app.famulor.io/mcp?toolsets=tasks`.
 
-This 2026-09-30 snapshot covers all 4 tools assigned to `tasks` in the canonical 421-tool registry. The live MCP `tools/list` response is authoritative for arguments, current availability, annotations, and plan or role gating. Never invent fields from this catalog.
+This 2026-10-07 snapshot covers all 4 tools assigned to `tasks` in the canonical 437-tool registry. The live MCP `tools/list` response is authoritative for arguments, current availability, annotations, and plan or role gating. Never invent fields from this catalog.
 
 Toolsets limit discovery context; they do not grant access. OAuth/API scopes and workspace roles are enforced separately. The Effect column reflects MCP risk annotations: `Delete/destructive` also covers overwrites or changes that can remove data or safeguards.
 

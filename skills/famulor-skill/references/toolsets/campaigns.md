@@ -2,7 +2,7 @@
 
 Campaigns, Audience contacts, leads, segments, consent records, and suppression. Connect the `settings` group as well when you need workspace consent mode or outbound limits. Connect only this group with `https://app.famulor.io/mcp?toolsets=campaigns`.
 
-This 2026-09-30 snapshot covers all 32 tools assigned to `campaigns` in the canonical 421-tool registry. The live MCP `tools/list` response is authoritative for arguments, current availability, annotations, and plan or role gating. Never invent fields from this catalog.
+This 2026-10-07 snapshot covers all 32 tools assigned to `campaigns` in the canonical 437-tool registry. The live MCP `tools/list` response is authoritative for arguments, current availability, annotations, and plan or role gating. Never invent fields from this catalog.
 
 Toolsets limit discovery context; they do not grant access. OAuth/API scopes and workspace roles are enforced separately. The Effect column reflects MCP risk annotations: `Delete/destructive` also covers overwrites or changes that can remove data or safeguards.
 

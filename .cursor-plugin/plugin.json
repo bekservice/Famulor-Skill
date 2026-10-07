@@ -1,7 +1,7 @@
 {
   "name": "famulor",
   "displayName": "Famulor",
-  "version": "2.1.4",
+  "version": "2.1.5",
   "description": "Operate all customer-facing Famulor capabilities through OAuth-secured MCP tools and progressive agent guidance.",
   "author": {
     "name": "Famulor",

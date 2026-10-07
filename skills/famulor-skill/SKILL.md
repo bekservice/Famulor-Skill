@@ -3,8 +3,8 @@ name: famulor-skill
 description: Operate a Famulor workspace through its hosted MCP server, including assistants, conversation history, campaigns, messaging, telephony, knowledge, dashboards, automations, billing, settings, reseller administration, migrations, and long-running tasks. Use for requests that need actual Famulor data or actions; do not use for generic voice-agent advice that is unrelated to Famulor.
 license: MIT
 metadata:
-  author: bekservice
-  version: "2.1.4"
+  author: Famulor
+  version: "2.1.5"
   homepage: https://github.com/bekservice/Famulor-Skill
 ---
 
@@ -32,22 +32,22 @@ Read the linked reference only for the relevant group. Each reference contains e
 
 | Toolset | Use for | Current tools | Reference |
 | --- | --- | ---: | --- |
-| `assistants` | Assistants, versions, models, voices, reusable tools, bookings, tests, and integrations | 87 | [assistants](references/toolsets/assistants.md) |
-| `calls` | Calls, unified history, transcripts, QA, callbacks, and live control | 26 | [calls](references/toolsets/calls.md) |
+| `assistants` | Assistants, versions, models, voices, reusable tools, bookings, tests, and integrations | 92 | [assistants](references/toolsets/assistants.md) |
+| `calls` | Calls, unified history, transcripts, QA, callbacks, and live control | 27 | [calls](references/toolsets/calls.md) |
 | `campaigns` | Campaigns, Audience contacts, leads, segments, consent records, and suppression | 32 | [campaigns](references/toolsets/campaigns.md) |
 | `messaging` | WhatsApp, Messenger, email, Slack, connectors, templates, and sender profiles | 46 | [messaging](references/toolsets/messaging.md) |
 | `telephony` | Phone numbers, SIP trunks, caller IDs, carriers, and number verification | 70 | [telephony](references/toolsets/telephony.md) |
-| `knowledge` | Knowledge bases, documents, FAQs, websites, and connected drives | 24 | [knowledge](references/toolsets/knowledge.md) |
+| `knowledge` | Knowledge bases, documents, FAQs, websites, and connected drives | 26 | [knowledge](references/toolsets/knowledge.md) |
 | `dashboards` | Dashboards, analytics, widgets, and layout | 19 | [dashboards](references/toolsets/dashboards.md) |
 | `automations` | Automations, connections, CRM sync, routines, and runs | 41 | [automations](references/toolsets/automations.md) |
-| `billing` | Balance, usage, transactions, invoices, billing recovery, and referrals | 19 | [billing](references/toolsets/billing.md) |
-| `settings` | Account, workspaces, API keys, retention, memory, domains, and sessions | 33 | [settings](references/toolsets/settings.md) |
+| `billing` | Balance, usage, transactions, invoices, billing recovery, and referrals | 22 | [billing](references/toolsets/billing.md) |
+| `settings` | Account, workspaces, API keys, retention, memory, domains, and sessions | 38 | [settings](references/toolsets/settings.md) |
 | `platform` | Authorized reseller customer administration | 16 | [platform](references/toolsets/platform.md) |
 | `migration` | Previewing and importing supported Famulor 1.0 resources | 2 | [migration](references/toolsets/migration.md) |
 | `tasks` | Durable exports, simulations, crawls, and campaign preparation | 4 | [tasks](references/toolsets/tasks.md) |
 | `milian` | Milian workspace questions and voice sessions with additional credits | 2 | [milian](references/toolsets/milian.md) |
 
-The full snapshot contains 421 tools. `list_mcp_toolsets` can report the groups visible to the current credential. The public `assistant-history` directory profile is intentionally limited to 11 read-only tools; use it only when the user specifically wants that restricted connection.
+The full snapshot contains 437 tools. `list_mcp_toolsets` can report the groups visible to the current credential. The public `assistant-history` directory profile is intentionally limited to 11 read-only tools; use it only when the user specifically wants that restricted connection.
 
 ## Operating workflow
 

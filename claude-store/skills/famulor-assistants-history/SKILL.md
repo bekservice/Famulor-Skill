@@ -3,8 +3,8 @@ name: famulor-assistants-history
 description: Read Famulor assistant configurations, versions, catalogs, and omnichannel conversation history through the restricted Assistant & History MCP profile. Use for reviewing assistants or finding and summarizing call, messaging, or email history; never use it to change resources, send messages, place calls, run campaigns, manage telephony, or access billing.
 license: MIT
 metadata:
-  author: bekservice
-  version: "2.1.4"
+  author: Famulor
+  version: "2.1.5"
   homepage: https://www.famulor.io
 ---
 

@@ -2,7 +2,7 @@
 
 Phone numbers, SIP, caller IDs, routing, and verification. Connect only this group with `https://app.famulor.io/mcp?toolsets=telephony`.
 
-This 2026-09-30 snapshot covers all 70 tools assigned to `telephony` in the canonical 421-tool registry. The live MCP `tools/list` response is authoritative for arguments, current availability, annotations, and plan or role gating. Never invent fields from this catalog.
+This 2026-10-07 snapshot covers all 70 tools assigned to `telephony` in the canonical 437-tool registry. The live MCP `tools/list` response is authoritative for arguments, current availability, annotations, and plan or role gating. Never invent fields from this catalog.
 
 Toolsets limit discovery context; they do not grant access. OAuth/API scopes and workspace roles are enforced separately. The Effect column reflects MCP risk annotations: `Delete/destructive` also covers overwrites or changes that can remove data or safeguards.
 
@@ -59,7 +59,7 @@ Toolsets limit discovery context; they do not grant access. OAuth/API scopes and
 | `list_phone_numbers` | Read-only | `phone_numbers:read or calls:read` | Immediate | List the phone numbers of the account (number, assigned assistant, allowed directions, status, source). Optional filters: assistant, status, country. |
 | `list_sip_trunks` | Read-only | `sip_trunks:read or calls:read` | Immediate | List only the account's customer-owned SIP trunks (bring-your-own-carrier connections). Managed trunks for marketplace and verified caller-ID numbers are never returned. Credentials are never returned. |
 | `list_verification_catalog` | Read-only | `phone_numbers:read or calls:read` | Immediate | List countries, number types, and eligible registration types (business or individual) that require verification. Use get_number_verification_requirements to load the required fields and documents before submitting a case. |
-| `release_phone_number` | Delete/destructive | `phone_numbers:write or calls:write` | Immediate | Release a phone number. Paid marketplace numbers stay active until the Stripe billing period ends (cancel_at_period_end), then are released at the provider. Complimentary plan numbers are released immediately. Customer-provided numbers are deleted. Hard release cannot be undone. |
+| `release_phone_number` | Delete/destructive | `phone_numbers:write or calls:write` | Immediate | Release a phone number. Paid marketplace numbers stay active until the end of the billing period, then are released. Complimentary plan numbers are released immediately. Customer-provided numbers are deleted. Hard release cannot be undone. |
 | `remove_carrier_number` | Delete/destructive | `sip_trunks:write or calls:write` | Immediate | Remove ONE imported number: best-effort detach at the carrier, then deletes the local dispatch rule, phone number and platform trunk pair. |
 | `rename_loop_device` | Write/action | `loop:write` | Immediate | Rename one of the authenticated member's Loop devices. Registration credentials are never returned. |
 | `revoke_loop_device` | Delete/destructive | `loop:write` | Immediate | Revoke one of the authenticated member's Loop devices. Existing registration credentials stop working and are not returned. |
