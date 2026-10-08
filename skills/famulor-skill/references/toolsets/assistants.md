@@ -2,7 +2,7 @@
 
 Assistants, models, voices, reusable tools, bookings, integrations, tests, and simulations. Connect only this group with `https://app.famulor.io/mcp?toolsets=assistants`.
 
-This 2026-10-07 snapshot covers all 92 tools assigned to `assistants` in the canonical 437-tool registry. The live MCP `tools/list` response is authoritative for arguments, current availability, annotations, and plan or role gating. Never invent fields from this catalog.
+This 2026-10-08 snapshot covers all 92 tools assigned to `assistants` in the canonical 439-tool registry. The live MCP `tools/list` response is authoritative for arguments, current availability, annotations, and plan or role gating. Never invent fields from this catalog.
 
 Toolsets limit discovery context; they do not grant access. OAuth/API scopes and workspace roles are enforced separately. The Effect column reflects MCP risk annotations: `Delete/destructive` also covers overwrites or changes that can remove data or safeguards.
 

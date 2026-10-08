@@ -2,7 +2,7 @@
 
 Automations, connections, CRM sync, routines, and runs. Connect only this group with `https://app.famulor.io/mcp?toolsets=automations`.
 
-This 2026-10-07 snapshot covers all 41 tools assigned to `automations` in the canonical 437-tool registry. The live MCP `tools/list` response is authoritative for arguments, current availability, annotations, and plan or role gating. Never invent fields from this catalog.
+This 2026-10-08 snapshot covers all 43 tools assigned to `automations` in the canonical 439-tool registry. The live MCP `tools/list` response is authoritative for arguments, current availability, annotations, and plan or role gating. Never invent fields from this catalog.
 
 Toolsets limit discovery context; they do not grant access. OAuth/API scopes and workspace roles are enforced separately. The Effect column reflects MCP risk annotations: `Delete/destructive` also covers overwrites or changes that can remove data or safeguards.
 
@@ -24,6 +24,7 @@ Toolsets limit discovery context; they do not grant access. OAuth/API scopes and
 | `get_automation` | Read-only | `automations:read or calls:read` | Immediate | Get one automation and recent runs. |
 | `get_automation_connection` | Read-only | `automations:read or calls:read` | Immediate | Get one automation connection (secrets masked as '•••'). |
 | `get_automation_platform` | Read-only | `automations:read or calls:read` | Immediate | Get the workspace's native automation platform entitlement, monthly run allowance, and usage. |
+| `get_automation_run` | Read-only | `automations:read or calls:read` | Immediate | Get one automation run with its step log: each executed step's action, status, input (step config as saved), output, error and timing, plus the trigger payload. Use it to debug a failed run. |
 | `get_automation_trigger_test_data` | Read-only | `automations:read or calls:read` | Immediate | Read configured Conversation started samples or poll for a new conversation. Does not execute an automation. Listen without since first, then poll with the returned since timestamp. Choose source_id from sources when more than one channel matches. |
 | `get_crm_sync` | Read-only | `automations:read or calls:read` | Immediate | Get one CRM sync and its recent durable run history. |
 | `get_routine` | Read-only | `routines:read` | Immediate | Get one Milian Mission. |
@@ -32,6 +33,7 @@ Toolsets limit discovery context; they do not grant access. OAuth/API scopes and
 | `list_assistant_automations` | Read-only | `assistants:read` | Immediate | List automations an assistant can run in voice, web chat, messaging, or email conversations. |
 | `list_automation_ai_actions` | Read-only | `automations:read` | Immediate | Discover Milian AI classification, conditions, scores, labels and custom analysis, including configuration defaults, output fields and three editable presets. |
 | `list_automation_connections` | Read-only | `automations:read or calls:read` | Immediate | List workspace-scoped CRM / SMTP / MCP credentials that automation nodes can reference. Secrets are never returned; masked as '•••'. |
+| `list_automation_runs` | Read-only | `automations:read or calls:read` | Immediate | List one automation's runs, newest first, with status, trigger event, error, timing and credits. Filter by status; page with limit/offset (total included). Use get_automation_run for the step-by-step log of one run. |
 | `list_automations` | Read-only | `automations:read or calls:read` | Immediate | List native workspace automations (graph workflows). |
 | `list_calendly_connections` | Read-only | `integrations:read or assistants:read` | Immediate | List Calendly accounts connected to this workspace through OAuth. Tokens and secrets are never returned. |
 | `list_crm_syncs` | Read-only | `automations:read or calls:read` | Immediate | List CRM sync configurations and their current status. Provider credentials are never returned. |

@@ -4,7 +4,7 @@ description: Operate a Famulor workspace through its hosted MCP server, includin
 license: MIT
 metadata:
   author: Famulor
-  version: "2.1.5"
+  version: "2.1.6"
   homepage: https://github.com/bekservice/Famulor-Skill
 ---
 
@@ -39,7 +39,7 @@ Read the linked reference only for the relevant group. Each reference contains e
 | `telephony` | Phone numbers, SIP trunks, caller IDs, carriers, and number verification | 70 | [telephony](references/toolsets/telephony.md) |
 | `knowledge` | Knowledge bases, documents, FAQs, websites, and connected drives | 26 | [knowledge](references/toolsets/knowledge.md) |
 | `dashboards` | Dashboards, analytics, widgets, and layout | 19 | [dashboards](references/toolsets/dashboards.md) |
-| `automations` | Automations, connections, CRM sync, routines, and runs | 41 | [automations](references/toolsets/automations.md) |
+| `automations` | Automations, connections, CRM sync, routines, and runs | 43 | [automations](references/toolsets/automations.md) |
 | `billing` | Balance, usage, transactions, invoices, billing recovery, and referrals | 22 | [billing](references/toolsets/billing.md) |
 | `settings` | Account, workspaces, API keys, retention, memory, domains, and sessions | 38 | [settings](references/toolsets/settings.md) |
 | `platform` | Authorized reseller customer administration | 16 | [platform](references/toolsets/platform.md) |
@@ -47,7 +47,7 @@ Read the linked reference only for the relevant group. Each reference contains e
 | `tasks` | Durable exports, simulations, crawls, and campaign preparation | 4 | [tasks](references/toolsets/tasks.md) |
 | `milian` | Milian workspace questions and voice sessions with additional credits | 2 | [milian](references/toolsets/milian.md) |
 
-The full snapshot contains 437 tools. `list_mcp_toolsets` can report the groups visible to the current credential. The public `assistant-history` directory profile is intentionally limited to 11 read-only tools; use it only when the user specifically wants that restricted connection.
+The full snapshot contains 439 tools. `list_mcp_toolsets` can report the groups visible to the current credential. The public `assistant-history` directory profile is intentionally limited to 11 read-only tools; use it only when the user specifically wants that restricted connection.
 
 ## Operating workflow
 

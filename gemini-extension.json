@@ -1,6 +1,6 @@
 {
   "name": "famulor",
-  "version": "2.1.5",
+  "version": "2.1.6",
   "description": "Operate Famulor assistants, history, campaigns, messaging, telephony, knowledge, analytics, and more through the OAuth-secured MCP server and bundled agent skill.",
   "contextFileName": "GEMINI.md",
   "mcpServers": {
