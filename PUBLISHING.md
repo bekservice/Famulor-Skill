@@ -57,7 +57,7 @@ Antigravity uses `serverUrl` in its MCP configuration, while Gemini CLI uses `ht
 
 ## Agent Plugins and universal skill installers
 
-The root `plugin.json`, root `mcp.json`, and `skills/famulor-skill/` target Agent Plugins v1 and retain the complete 437-tool developer surface as of 2026-10-07. `npx skills add bekservice/Famulor-Skill` discovers the full skill from the public repository. `skills.sh` indexes compatible public repositories without a separate package upload.
+The root `plugin.json`, root `mcp.json`, and `skills/famulor-skill/` target Agent Plugins v1 and retain the complete 439-tool developer surface as of 2026-10-08. `npx skills add bekservice/Famulor-Skill` discovers the full skill from the public repository. `skills.sh` indexes compatible public repositories without a separate package upload.
 
 ## ClawHub
 
@@ -67,8 +67,8 @@ After authentication, publish the skill folder with the release version and a pr
 clawhub skill publish ./skills/famulor-skill \
   --slug famulor-skill \
   --name "Famulor" \
-  --version 2.1.5 \
-  --changelog "Refresh the full MCP catalog to 437 tools, including assistant, knowledge, billing, and settings additions" \
+  --version 2.1.6 \
+  --changelog "Refresh the full MCP catalog to 439 tools, including two new automation tools; use the official Famulor mark" \
   --tags latest
 ```
 

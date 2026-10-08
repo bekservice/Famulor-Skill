@@ -83,7 +83,7 @@ def render_reference(group, tools, date):
 parser = argparse.ArgumentParser(description=__doc__)
 parser.add_argument("registry_json", type=Path)
 parser.add_argument("--check", action="store_true", help="fail if the checked-in catalog differs")
-parser.add_argument("--date", default="2026-10-07")
+parser.add_argument("--date", default="2026-10-08")
 args = parser.parse_args()
 registry = json.loads(args.registry_json.read_text())
 names = [entry["name"] for entry in registry]
