@@ -79,7 +79,9 @@ Use `get_assistant` / `update_assistant`, `GET` / `PATCH /api/v1/assistants/{id}
 
 Messaging and native email can use assigned API tools, MCP tools, knowledge search, supported calendar integrations, and supported text built-ins such as time, business hours, SMS/email, callbacks, and variables. Extra connector actions must be enabled on the connector. Tool availability still depends on assignment, configuration, permissions, and plan.
 
-Call transfer, warm transfer, assistant transfer, end-call, telephone keypad actions, and payment-card collection are not available in the messaging/email tool subset. A prompt saying “transfer the call” does not create an equivalent text handoff. For website chat, inspect and test the session's own supported actions instead of assuming that all messaging or phone tools are identical.
+Transfer to another assistant works across voice, web chat, messaging and native email. Configure a target in the same workspace, the context-sharing mode, an optional pre-transfer message and whether to include the target greeting. The target uses its own instructions, knowledge and tools; messaging and email retain it for the next message in the same thread. Parallel source actions finish before the target begins. The channel default assignment remains unchanged.
+
+Call transfer to a telephone number, warm transfer, end-call, telephone keypad actions, and payment-card collection remain unavailable in messaging/email. A prompt saying “transfer the call” does not create an equivalent text handoff. For website chat, inspect and test the session's own supported actions instead of assuming that all messaging or phone tools are identical.
 
 For every configured action, specify:
 
@@ -183,6 +185,7 @@ Use synthetic customer data and an explicitly authorized test recipient or owned
 
 | Scenario | Expected evidence |
 | --- | --- |
+| Assistant handoff and follow-up | Target tools and instructions apply in the same reply and the next message. Check configured context, greeting, parallel actions and retry behavior. |
 | First message and follow-up | Appropriate identity, no repeated greeting, relevant thread context. |
 | Several quick messages | One coherent response when the configured delay groups them. |
 | Missing required booking or case detail | One useful question; no invented identifier or appointment. |
