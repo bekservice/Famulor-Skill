@@ -68,6 +68,8 @@ Treat interruption sensitivity, response timing, silence timeouts and maximum du
 
 These are templates to adapt, not ready-made permission to contact anyone. Replace all bracketed instructions, map actual tools, remove unsupported capabilities and test before live use.
 
+For complete examples, read [hotel front desk](examples/hotel-front-desk.md), [drive-thru corrections](examples/drive-thru.md) or [lead qualification](examples/lead-qualification.md). Each combines a full prompt with settings, runtime capability requirements, illustrative conversations and failure checks. Sample successes are not evidence that the gallery or the customer's system performed an action.
+
 ## Review checklist
 
 - One clear purpose; no contradictory business or language rules.

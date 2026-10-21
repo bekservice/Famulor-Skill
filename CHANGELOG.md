@@ -1,5 +1,12 @@
 # Changelog
 
+## 2.2.1 — 2026-10-21
+
+- Add four complete worked examples inspired by the public demo gallery: hotel front desk, drive-thru, order support across channels, and lead qualification.
+- Show full prompts, setting placement, required runtime capabilities, illustrative conversations, failure paths and acceptance criteria.
+- Add a model assistant deliverable and progressive example routing inside the installable skill.
+- Clearly separate fictional demo role-play, illustrative test fixtures and verified actions in a customer integration.
+
 ## 2.2.0 — 2026-10-21
 
 - Add practical channel-specific guidance for voice assistants, WhatsApp, website chat and email, with adaptable prompts and evaluation scenarios.

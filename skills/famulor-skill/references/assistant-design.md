@@ -44,6 +44,8 @@ Success evidence: A booking result, or an accurately described fallback.
 
 Use synthetic examples while drafting; do not retrieve customer conversations merely to make a template feel realistic.
 
+For a filled target rather than a blank template, choose one [worked example](examples/README.md). Present the complete result using the [assistant deliverable](examples/assistant-deliverable.md): setting placement, greeting, final prompt, knowledge, runtime capabilities, expected conversation, tests and evidence of what was actually done.
+
 ## Select the conversation structure
 
 **One Prompt** fits a bounded role with flexible ordering, such as reception or answering product questions. Use a **Conversational flow** when required collection, qualification, routing or explicit endings benefit from named steps.

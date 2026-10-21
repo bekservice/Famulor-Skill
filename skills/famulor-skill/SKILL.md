@@ -4,7 +4,7 @@ description: Design, configure, test and improve Famulor voice, WhatsApp, webcha
 license: MIT
 metadata:
   author: Famulor
-  version: "2.2.0"
+  version: "2.2.1"
   homepage: https://github.com/bekservice/Famulor-Skill
 ---
 
@@ -17,6 +17,7 @@ Turn the user's business outcome into a channel-appropriate assistant or a verif
 | User needs | Read |
 | --- | --- |
 | A new assistant, prompt review, configuration or language setup | [Assistant design](references/assistant-design.md) |
+| A complete example, demo-inspired assistant or the shape of an excellent finished result | [Worked examples](references/examples/README.md); load only the closest scenario |
 | Phone reception, appointment booking, opted-in outbound qualification | [Voice prompting](references/voice-prompting.md) |
 | WhatsApp, website text chat, social messaging or email | [Messaging and channels](references/messaging-and-channels.md) |
 | Tests, simulations, regression cases or call-quality review | [Testing and evaluation](references/testing-and-evaluation.md) |
@@ -70,6 +71,8 @@ The dated snapshot contains **493 tools** across 14 groups. `list_mcp_toolsets` 
 6. Follow [testing and evaluation](references/testing-and-evaluation.md). Text simulations, real voice tests and actual channel delivery prove different things. A saved prompt is not evidence of working audio, routing or message delivery.
 
 Prompt templates under `assets/prompts/` are starting points with deliberate business placeholders. Adapt them and resolve the required capabilities before saving. A request to draft stays a draft; a request to configure authorizes the requested edits. Do not repeatedly ask for permission already supplied.
+
+For a concrete target, use one [worked example](references/examples/README.md) and the [assistant deliverable format](references/examples/assistant-deliverable.md). Show the completed prompt together with greeting, knowledge, tool requirements, channel settings, expected conversation and acceptance checks. The public demo gallery provides conversational inspiration; its fictional business dialogue is not proof of a booking, order or integration. Never copy an illustrative tool result into a claim of completed work.
 
 ## Execute and verify
 
