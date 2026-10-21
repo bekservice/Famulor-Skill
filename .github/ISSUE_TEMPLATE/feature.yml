@@ -1,0 +1,10 @@
+name: Suggest a use case
+description: Suggest a workflow, example or guide that would help Famulor customers.
+body:
+  - type: textarea
+    id: outcome
+    attributes:
+      label: What are you trying to accomplish?
+      description: Describe the channel, business outcome and missing guidance using fictional data.
+    validations:
+      required: true

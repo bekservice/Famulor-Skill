@@ -1,0 +1,18 @@
+{
+  "name": "famulor",
+  "owner": {
+    "name": "Famulor",
+    "email": "support@famulor.io"
+  },
+  "metadata": {
+    "description": "Famulor voice and messaging agent skills"
+  },
+  "plugins": [
+    {
+      "name": "famulor",
+      "source": "./",
+      "description": "Famulor prompting, workspace operations and complete API reference",
+      "version": "2.2.0"
+    }
+  ]
+}

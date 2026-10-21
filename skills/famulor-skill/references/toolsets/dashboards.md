@@ -2,7 +2,7 @@
 
 Dashboards, analytics, widgets, and layout. Connect only this group with `https://app.famulor.io/mcp?toolsets=dashboards`.
 
-This 2026-10-08 snapshot covers all 19 tools assigned to `dashboards` in the canonical 439-tool registry. The live MCP `tools/list` response is authoritative for arguments, current availability, annotations, and plan or role gating. Never invent fields from this catalog.
+This 2026-10-21 snapshot covers all 19 tools assigned to `dashboards` in the canonical 493-tool registry. The live MCP `tools/list` response is authoritative for arguments, current availability, annotations, and plan or role gating. Never invent fields from this catalog.
 
 Toolsets limit discovery context; they do not grant access. OAuth/API scopes and workspace roles are enforced separately. The Effect column reflects MCP risk annotations: `Delete/destructive` also covers overwrites or changes that can remove data or safeguards.
 
@@ -17,7 +17,7 @@ Toolsets limit discovery context; they do not grant access. OAuth/API scopes and
 | `delete_widget_connector` | Delete/destructive | `assistants:write` | Immediate | Permanently delete a web widget connector. |
 | `delete_widget_connector_logo` | Delete/destructive | `assistants:write` | Immediate | Remove the header logo uploaded for a web widget connector. |
 | `get_dashboard` | Read-only | `dashboards:read or calls:read` | Immediate | Get one custom dashboard by ID. |
-| `get_dashboard_analytics` | Read-only | `dashboards:read or calls:read` | Immediate | Get call KPIs, comparison deltas, zero-filled activity series, breakdowns, assistant rankings, campaign progress, recent calls, and plan-gated booking/knowledge/simulation/live-monitoring summaries. |
+| `get_dashboard_analytics` | Read-only | `dashboards:read or calls:read` | Immediate | Get call KPIs, comparison deltas, zero-filled activity series, breakdowns, assistant rankings, campaign progress, recent calls, and plan-gated booking/knowledge/simulation/live-monitoring summaries. context.post_call_fields lists the workspace's post-call analysis fields; request their values with post_call_fields and filter calls with post_call_filters. |
 | `get_widget_connector` | Read-only | `assistants:read` | Immediate | Fetch a single web widget connector by its ID. |
 | `list_dashboard_widgets` | Read-only | `dashboards:read or calls:read` | Immediate | List a dashboard's widgets, conditions, visualization settings, order, and grid layout. |
 | `list_dashboards` | Read-only | `dashboards:read or calls:read` | Immediate | List the workspace's custom analytics dashboards in display order. |

@@ -2,7 +2,7 @@
 
 Campaigns, Audience contacts, leads, segments, consent records, and suppression. Connect the `settings` group as well when you need workspace consent mode or outbound limits. Connect only this group with `https://app.famulor.io/mcp?toolsets=campaigns`.
 
-This 2026-10-08 snapshot covers all 32 tools assigned to `campaigns` in the canonical 439-tool registry. The live MCP `tools/list` response is authoritative for arguments, current availability, annotations, and plan or role gating. Never invent fields from this catalog.
+This 2026-10-21 snapshot covers all 34 tools assigned to `campaigns` in the canonical 493-tool registry. The live MCP `tools/list` response is authoritative for arguments, current availability, annotations, and plan or role gating. Never invent fields from this catalog.
 
 Toolsets limit discovery context; they do not grant access. OAuth/API scopes and workspace roles are enforced separately. The Effect column reflects MCP risk annotations: `Delete/destructive` also covers overwrites or changes that can remove data or safeguards.
 
@@ -27,6 +27,8 @@ Toolsets limit discovery context; they do not grant access. OAuth/API scopes and
 | `get_lead` | Read-only | `leads:read or calls:read` | Immediate | Get one campaign lead with editable contact fields, user-managed custom fields, and a separate read-only system_variables object. |
 | `list_audience_contact_channels` | Read-only | `leads:read or calls:read` | Immediate | List one Audience contact's manually manageable channel profiles. Microsoft Teams profiles expose only the current user-facing connection name; reconnect copies of the same Microsoft identity are normalized and internal account or routing identifiers are never returned. |
 | `list_audience_contacts` | Read-only | `leads:read or calls:read` | Immediate | List workspace contacts across all campaigns with dynamic Call QA averages. QA scores come from the per-call History scorecard; unscored calls are excluded. |
+| `list_campaign_audience_products` | Read-only | `campaigns:read` | Immediate | Read live active product choices for an eligible native Shopify audience connection. No catalog import. |
+| `list_campaign_audience_segments` | Read-only | `campaigns:read` | Immediate | Read current source-owned segment choices for an eligible workspace connection. |
 | `list_campaign_deliveries` | Read-only | `campaigns:read or calls:read` | Immediate | List primary and follow-up delivery attempts with customer-visible status, timestamps and errors. |
 | `list_campaigns` | Read-only | `campaigns:read or calls:read` | Immediate | List multi-channel outreach campaigns, including primary channel, schedule, assistant/sender settings, and status. |
 | `list_customer_memories` | Read-only | `leads:read or calls:read` | Immediate | List one consent- and retention-aware customer-memory entry per contact with exact channel identities. Private assistant content is never exposed in the list. |

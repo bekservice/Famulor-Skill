@@ -1,0 +1,4 @@
+interface:
+  display_name: "Famulor"
+  short_description: "Build voice, WhatsApp and webchat agents with Famulor"
+  default_prompt: "Use $famulor-skill to design and validate my Famulor assistant for its intended channel."

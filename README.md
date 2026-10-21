@@ -1,158 +1,85 @@
-# Famulor Agent Plugin
+<p align="center"><img src="assets/logo.svg" alt="Famulor" width="88" /></p>
 
-A portable agent skill plus hosted Famulor MCP connections for Claude Code, Cursor, Codex, Gemini CLI, OpenCode, OpenClaw, and other Agent Skills-compatible clients.
+<h1 align="center">Famulor Skill</h1>
+<p align="center">Build better voice, WhatsApp and webchat agents from your AI assistant.</p>
 
-The portable Agent Plugin, Gemini CLI extension, and developer skill cover the complete 439-tool customer-facing MCP surface as of 2026-10-08. The Claude community-store package is restricted to an Assistant & History profile with exactly 11 read-only tools.
+<p align="center">
+<a href="https://github.com/bekservice/Famulor-Skill/releases"><img alt="Latest release" src="https://img.shields.io/github/v/release/bekservice/Famulor-Skill?color=087e98" /></a>
+<a href="https://github.com/bekservice/Famulor-Skill/actions/workflows/validate.yml"><img alt="Validate" src="https://github.com/bekservice/Famulor-Skill/actions/workflows/validate.yml/badge.svg" /></a>
+<a href="LICENSE"><img alt="MIT license" src="https://img.shields.io/badge/license-MIT-087e98" /></a>
+<a href="https://skills.sh/bekservice/Famulor-Skill"><img alt="skills.sh" src="https://skills.sh/b/bekservice/Famulor-Skill" /></a>
+</p>
+
+[Famulor](https://www.famulor.io) builds AI assistants for phone calls, websites and messaging. This open-source skill teaches your AI client how to design their prompts, configure their tools, test their behavior and work with your Famulor workspace.
+
+**Start with a business task.** The skill selects the relevant channel guide and current tools, instead of loading hundreds of endpoint descriptions into every conversation.
+
+```bash
+npx skills add bekservice/Famulor-Skill --skill famulor-skill
+```
+
+Then connect your client to `https://app.famulor.io/mcp` and sign in with OAuth. The skill supplies instructions; MCP supplies authorized workspace access. Prompt drafting works without a connection. Live data and changes require a Famulor account and the relevant plan and permissions.
+
+[Installation guide](docs/installation.md) · [Use cases](docs/use-cases.md) · [Prompt templates](skills/famulor-skill/assets/prompts) · [API index](skills/famulor-skill/references/api/index.md) · [Releases](https://github.com/bekservice/Famulor-Skill/releases)
+
+## Choose what you want to build
+
+| Use case | Try asking | Guide |
+| --- | --- | --- |
+| Phone receptionist | “Draft a bilingual receptionist that answers from our knowledge base and escalates urgent requests.” | [Voice prompting](skills/famulor-skill/references/voice-prompting.md) |
+| Appointment booking | “Review my booking assistant. Make it check availability, confirm the time zone and verify the booking result.” | [Assistant design](skills/famulor-skill/references/assistant-design.md) |
+| WhatsApp support | “Adapt our support assistant for WhatsApp, including human takeover and the messaging window.” | [Messaging](skills/famulor-skill/references/messaging-and-channels.md) |
+| Website chat | “Create a webchat prompt with readable links and no spoken filler phrases.” | [Webchat](skills/famulor-skill/references/messaging-and-channels.md) |
+| Email replies | “Draft email instructions with a clear answer and one next step.” | [Email](skills/famulor-skill/references/messaging-and-channels.md) |
+| Quality review | “Review these conversations, identify recurring failures and propose regression tests.” | [Testing](skills/famulor-skill/references/testing-and-evaluation.md) |
+| API integration | “Find the REST endpoint, CLI command and TypeScript method to list my assistants.” | [API and SDK](skills/famulor-skill/references/api-and-sdk.md) |
+
+## Install in your AI client
+
+| Client | Setup |
+| --- | --- |
+| **Claude Code** | `/plugin marketplace add bekservice/Famulor-Skill`, then `/plugin install famulor@famulor`; authenticate in `/mcp` |
+| **Claude web / desktop** | Upload the release's `famulor-skill.zip` in **Customize → Skills**, then connect Famulor separately |
+| **ChatGPT** | Install the [Famulor plugin](https://chatgpt.com/plugins/plugin_asdk_app_6a8a46791ed08191a79aa4c98f34d772) for assistant/history review; use a separate custom MCP connection for broader authorized actions |
+| **Codex** | Install the skill, run `codex mcp add famulor --url https://app.famulor.io/mcp`, then `codex mcp login famulor` |
+| **Cursor** | Install the skill and add the remote server in MCP settings |
+| **Gemini CLI** | `gemini extensions install https://github.com/bekservice/Famulor-Skill` |
+| **Other Agent Skills clients** | Use the universal installer above and configure Streamable HTTP MCP with OAuth |
+
+See the [step-by-step guide](docs/installation.md) for prerequisites, exact commands, first-run verification, updates and troubleshooting. Client controls depend on the installed version and workspace policy.
+
+**The public directory connection is read-only.** Its 11 tools review assistants and conversation history. Installing the full skill does not turn that profile into a write-enabled connection. A custom connection has its own approved permissions.
 
 ## What is included
 
-- `skills/famulor-skill/SKILL.md`: short operating workflow, authorization rules, and toolset router
-- `skills/famulor-skill/references/toolsets/`: all 439 current tools split across 14 progressively loaded references
-- `skills/famulor-skill/references/assistant-design.md`: assistant onboarding and prompt-design guidance without fixed model or voice IDs
-- `plugin.json` and `mcp.json`: portable Agent Plugins v1 package
-- `.claude-plugin/plugin.json` and `.mcp.json`: full native Claude developer plugin, kept for backward compatibility
-- `claude-store/`: isolated Claude Store package with one read-only Assistant & History skill and a restricted OAuth MCP connection
-- `gemini-extension.json` and `GEMINI.md`: Gemini CLI extension with the full MCP endpoint and bundled skill
-- `.cursor-plugin/plugin.json`: native Cursor plugin metadata
-- `.plugin/plugin.json`: Open Plugins compatibility
-- `famulor.skill`: standalone packaged Agent Skill archive
+- Channel-specific assistant design, voice prompting, messaging and evaluation guides grounded in Famulor's implementation.
+- Adaptable prompts for reception, booking, qualification, WhatsApp, website chat and email.
+- **493 MCP tools in 14 groups** and **487 public API operations** with REST, CLI and TypeScript SDK navigation, reviewed on **21 October 2026**.
+- An offline operation lookup, deterministic catalog generation and package validation.
+- Portable Agent Skills plus Claude Code, Cursor and Gemini packaging; a separate restricted Claude Store package.
+- Versioned ZIP and `.skill` downloads with SHA-256 checksums.
 
-The portable Agent Plugin, Cursor, Codex, OpenCode, and OpenClaw use the full hosted endpoint:
+The catalogs are dated navigation snapshots. Live MCP schemas, the public OpenAPI contract and the installed CLI/SDK remain authoritative. Features can depend on your role, plan, channel and enabled integrations. This release does not deploy or change the Famulor service.
 
-```text
-https://app.famulor.io/mcp
-```
+## A workflow you can review
 
-The server applies the authenticated workspace, approved scopes, role, plan, consent, and retention rules to every request. For smaller discovery results, append one or more toolsets, for example:
+1. **Discover:** identify the workspace, channel, current configuration and allowed tools.
+2. **Design:** separate instructions from knowledge, tool configuration and routing.
+3. **Validate:** test conversational behavior, tool outcomes and the actual target channel.
+4. **Verify:** report what was drafted, saved, tested or delivered, with evidence.
 
-```text
-https://app.famulor.io/mcp?toolsets=assistants,calls
-```
+The skill preserves the scope of your request. Reviewing a campaign does not start it; drafting a message does not send it. Authorized actions proceed without repeated confirmation, and uncertain writes are checked before retrying.
 
-## Install
+## Contribute
 
-### Universal Agent Skills installer
+Found an outdated endpoint or a reproducible prompt failure? Open an [issue](https://github.com/bekservice/Famulor-Skill/issues/new/choose) with a redacted example. See [CONTRIBUTING.md](CONTRIBUTING.md) for validation and [SECURITY.md](SECURITY.md) for private reports.
 
 ```bash
-npx skills add bekservice/Famulor-Skill
+python3 scripts/validate.py
+python3 -m unittest discover -s tests -v
+python3 scripts/package-release.py --check
 ```
 
-This installs the skill instructions. If the client does not also discover the repository's MCP configuration, add `https://app.famulor.io/mcp` as a remote Streamable HTTP server and complete OAuth.
+If the skill helps, a star makes it easier for other Famulor builders to find. Share useful examples and improvements rather than private customer transcripts.
 
-### Claude Code — full developer plugin
-
-Test directly from a clone:
-
-```bash
-git clone https://github.com/bekservice/Famulor-Skill.git
-claude --plugin-dir ./Famulor-Skill
-```
-
-Claude Code loads the full portable developer skill and root `.mcp.json`. Open `/mcp` to complete OAuth when prompted.
-
-### Claude Store — Assistants & History only
-
-The submission package lives at the repository path `claude-store/`. Test it independently:
-
-```bash
-claude --plugin-dir ./Famulor-Skill/claude-store
-```
-
-This isolated package connects only to:
-
-```text
-https://app.famulor.io/mcp?profile=assistant-history
-```
-
-It exposes exactly these 11 read-only tools: `list_assistants`, `get_assistant`, `list_assistant_versions`, `get_assistant_version`, `list_prompt_templates`, `get_languages`, `get_models`, `get_voices`, `list_history`, `get_call`, and `get_email_history_item`.
-
-`list_history` provides an omnichannel overview across calls, email, and connected messaging channels such as Instagram or Messenger when present. Messaging results may be previews rather than complete transcripts. The Claude Store package cannot modify assistants, send messages, place calls, run campaigns, purchase numbers, manage billing, or perform any other write action.
-
-### Cursor
-
-Install the repository as a plugin:
-
-```text
-/add-plugin https://github.com/bekservice/Famulor-Skill
-```
-
-For local testing, symlink or copy the repository to `~/.cursor/plugins/local/famulor`, reload Cursor, and authenticate the `famulor` MCP server. Cursor discovers `skills/` and `mcp.json` from the plugin root.
-
-### Codex
-
-See [.codex/INSTALL.md](.codex/INSTALL.md), or use:
-
-```bash
-npx skills add bekservice/Famulor-Skill
-codex mcp add famulor --url https://app.famulor.io/mcp
-codex mcp login famulor
-```
-
-### Gemini CLI Gallery
-
-The root `gemini-extension.json` is the gallery package. It connects to the full MCP endpoint and loads `GEMINI.md` plus the bundled `skills/famulor-skill/` workflow. Gemini CLI discovers the extension from the public GitHub repository with the `gemini-cli-extension` topic and a tagged release; there is no separate submission form. The OAuth consent screen limits access to the workspace and toolsets a user approves.
-
-```bash
-gemini extensions install https://github.com/bekservice/Famulor-Skill
-```
-
-After installation, run `/mcp auth famulor` in Gemini CLI if it asks for OAuth authentication.
-
-### Google Antigravity
-
-Antigravity uses a different MCP configuration format. Install the portable skill with `npx skills add bekservice/Famulor-Skill --skill famulor-skill --agent antigravity`, then add the remote server in Antigravity's MCP settings:
-
-```json
-{
-  "mcpServers": {
-    "famulor": {
-      "serverUrl": "https://app.famulor.io/mcp"
-    }
-  }
-}
-```
-
-Antigravity supports dynamic OAuth registration; authenticate the server in Settings → Customizations. Its curated plugin marketplace currently documents local and direct GitHub installation, but no public third-party submission process.
-
-### OpenCode, OpenClaw, and manual setup
-
-Use the universal installer above for the full developer skill. Client-specific notes are in `.opencode/INSTALL.md` and `.openclaw/INSTALL.md`.
-
-## How the skill behaves
-
-- Uses live MCP schemas instead of stale REST examples or fixed IDs
-- Loads only the reference for the relevant toolset
-- Reads current state before mutation and verifies results afterward
-- Keeps read-only requests read-only
-- Requires explicit targets for calls, messages, campaign starts, payments, number changes, credit transfers, migrations, and destructive actions
-- Preserves workspace isolation, consent, suppression, roles, scopes, plan gates, and personal-data boundaries
-
-The 439-tool catalog is a dated navigation snapshot. The live MCP `tools/list` response remains authoritative for arguments, availability, annotations, and gating. OAuth grants, workspace roles, plans, and selected toolsets determine which tools a given connection can see. Milian tools consume additional credits and require explicit approval per question or voice session.
-
-## Validate locally
-
-```bash
-claude plugin validate . --strict
-claude plugin validate ./claude-store --strict
-python3 /path/to/skill-creator/scripts/quick_validate.py skills/famulor-skill
-python3 /path/to/skill-creator/scripts/quick_validate.py claude-store/skills/famulor-assistants-history
-```
-
-Also validate every JSON file, confirm the packaged archive matches `skills/famulor-skill/`, and check that the live endpoint returns OAuth metadata rather than a server error.
-
-## Security
-
-- Do not commit API keys or OAuth tokens.
-- Prefer OAuth for interactive clients.
-- Treat transcript, recording, message, email, contact, and customer-memory data as personal data.
-- Review tool annotations and returned impact before external or destructive actions.
-
-## Documentation and support
-
-- [Famulor MCP documentation](https://docs.famulor.io/en/mcp/client)
-- [Famulor API documentation](https://docs.famulor.io/en/api-reference/introduction)
-- [Famulor support](https://www.famulor.io/support)
-- [Privacy policy](https://www.famulor.io/privacy)
-- [Terms](https://www.famulor.io/terms)
-
-Licensed under the [MIT License](LICENSE).
+[Customer docs](https://docs.famulor.io/mcp/overview) · [Website](https://www.famulor.io) · [Support](https://www.famulor.io/support) · [MIT License](LICENSE)
