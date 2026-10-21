@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.2.2 — 2026-10-21
+
+- Document customer assistant handoffs across messaging and native email, persistent target selection, channel restrictions and acceptance checks.
+- Refresh the public API catalog with the optional target greeting setting; retain existing operation IDs and client mappings.
+- Keep Milian identified as the platform copilot, separate from customer assistants.
+
 ## 2.2.1 — 2026-10-21
 
 - Add four complete worked examples inspired by the public demo gallery: hotel front desk, drive-thru, order support across channels, and lead qualification.
