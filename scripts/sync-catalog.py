@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-"""Refresh the portable skill's navigation snapshot from Famulor's MCP registry JSON.
+"""Refresh toolset references from a reviewed Famulor MCP catalog export.
 
-Export the canonical registry in Famulor-Multi-Tenancy with:
-  node --import tsx -e "import('./src/lib/mcp/tool-registry.generated.ts').then(m=>console.log(JSON.stringify(m.MCP_GENERATED_TOOL_REGISTRY)))" > /tmp/famulor-mcp-registry.json
-Then run this script with that JSON path. The live MCP schema remains authoritative.
+The JSON array contains name, description, toolset, scopes, taskSupport and
+annotations for every public tool. It must not contain credentials or account
+data. Run with --date YYYY-MM-DD; the live MCP schema remains authoritative.
 """
 
 import argparse
@@ -51,6 +51,16 @@ SAFETY_NOTES = {
 }
 
 
+def public_description(value):
+    """Remove infrastructure details while keeping customer-visible behavior."""
+    return (str(value)
+        .replace("workspace's Vercel project", "workspace")
+        .replace("live Vercel ownership", "live domain ownership")
+        .replace("from Vercel", "from the workspace")
+        .replace("Ask Vercel to recheck", "Recheck")
+        .replace(" (ON DELETE CASCADE)", ""))
+
+
 def cell(value):
     return str(value).replace("|", "\\|").replace("\n", " ").replace("\r", " ").strip()
 
@@ -76,14 +86,15 @@ def render_reference(group, tools, date):
         effect = "Read-only" if annotations["readOnlyHint"] else ("Delete/destructive" if annotations["destructiveHint"] else "Write/action")
         scopes = " or ".join(tool["scopes"]) or "None"
         execution = {"forbidden": "Immediate", "optional": "Task optional", "required": "Task required"}[tool["taskSupport"]]
-        lines.append(f"| `{tool['name']}` | {effect} | `{cell(scopes)}` | {execution} | {cell(tool['description'])} |")
+        lines.append(f"| `{tool['name']}` | {effect} | `{cell(scopes)}` | {execution} | {cell(public_description(tool['description']))} |")
     return "\n".join(lines) + "\n"
 
 
 parser = argparse.ArgumentParser(description=__doc__)
 parser.add_argument("registry_json", type=Path)
 parser.add_argument("--check", action="store_true", help="fail if the checked-in catalog differs")
-parser.add_argument("--date", default="2026-10-08")
+parser.add_argument("--date", required=True, help="reviewed source snapshot date, YYYY-MM-DD")
+parser.add_argument("--references-only", action="store_true", help="leave the skill entrypoint under manual editorial control")
 args = parser.parse_args()
 registry = json.loads(args.registry_json.read_text())
 names = [entry["name"] for entry in registry]
@@ -98,21 +109,22 @@ for group in GROUPS:
     path = REFERENCES / f"{group}.md"
     updates[path] = render_reference(group, [entry for entry in registry if entry["toolset"] == group], args.date)
 
-skill = SKILL.read_text()
-table = ["| Toolset | Use for | Current tools | Reference |", "| --- | --- | ---: | --- |"]
-for group, (purpose, _) in GROUPS.items():
-    table.append(f"| `{group}` | {purpose} | {COUNTS[group]} | [{group}](references/toolsets/{group}.md) |")
-skill, replacements = re.subn(
-    r"\| Toolset \| Use for \| Current tools \| Reference \|\n.*?(?=\nThe full snapshot contains)",
-    "\n".join(table) + "\n",
-    skill,
-    count=1,
-    flags=re.S,
-)
-if replacements != 1:
-    raise SystemExit("could not find skill toolset table")
-skill = re.sub(r"The full snapshot contains \d+ tools", f"The full snapshot contains {len(registry)} tools", skill)
-updates[SKILL] = skill
+if not args.references_only:
+    skill = SKILL.read_text()
+    table = ["| Toolset | Use for | Current tools | Reference |", "| --- | --- | ---: | --- |"]
+    for group, (purpose, _) in GROUPS.items():
+        table.append(f"| `{group}` | {purpose} | {COUNTS[group]} | [{group}](references/toolsets/{group}.md) |")
+    skill, replacements = re.subn(
+        r"\| Toolset \| Use for \| Current tools \| Reference \|\n.*?(?=\nThe full snapshot contains)",
+        "\n".join(table) + "\n",
+        skill,
+        count=1,
+        flags=re.S,
+    )
+    if replacements != 1:
+        raise SystemExit("could not find skill toolset table")
+    skill = re.sub(r"The full snapshot contains \d+ tools", f"The full snapshot contains {len(registry)} tools", skill)
+    updates[SKILL] = skill
 
 stale = [str(path.relative_to(ROOT)) for path, content in updates.items() if not path.exists() or path.read_text() != content]
 if args.check:
@@ -120,5 +132,7 @@ if args.check:
         raise SystemExit("stale catalog: " + ", ".join(stale))
 else:
     for path, content in updates.items():
-        path.write_text(content)
+        temporary = path.with_suffix(path.suffix + ".tmp")
+        temporary.write_text(content)
+        temporary.replace(path)
 print(f"{len(registry)} tools across {len(GROUPS)} toolsets; {'stale: ' + ', '.join(stale) if args.check and stale else 'catalog current'}")

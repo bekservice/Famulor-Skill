@@ -2,7 +2,7 @@
 
 Automations, connections, CRM sync, routines, and runs. Connect only this group with `https://app.famulor.io/mcp?toolsets=automations`.
 
-This 2026-10-08 snapshot covers all 43 tools assigned to `automations` in the canonical 439-tool registry. The live MCP `tools/list` response is authoritative for arguments, current availability, annotations, and plan or role gating. Never invent fields from this catalog.
+This 2026-10-21 snapshot covers all 46 tools assigned to `automations` in the canonical 493-tool registry. The live MCP `tools/list` response is authoritative for arguments, current availability, annotations, and plan or role gating. Never invent fields from this catalog.
 
 Toolsets limit discovery context; they do not grant access. OAuth/API scopes and workspace roles are enforced separately. The Effect column reflects MCP risk annotations: `Delete/destructive` also covers overwrites or changes that can remove data or safeguards.
 
@@ -29,6 +29,7 @@ Toolsets limit discovery context; they do not grant access. OAuth/API scopes and
 | `get_crm_sync` | Read-only | `automations:read or calls:read` | Immediate | Get one CRM sync and its recent durable run history. |
 | `get_routine` | Read-only | `routines:read` | Immediate | Get one Milian Mission. |
 | `get_routine_webhook` | Read-only | `routines:read` | Immediate | Get the public inbound webhook URL, required header name, and whether a secret is configured. The secret and internal Automation identity are never returned. |
+| `import_automation_connection` | Write/action | `automations:write` | Immediate | Import an existing workspace MCP Agent Tool into automation connections. Preserves credentials and selected tools, and recognizes Magicline connections. |
 | `list_acuity_connections` | Read-only | `integrations:read or assistants:read` | Immediate | List Acuity Scheduling accounts connected to this workspace through OAuth. Tokens and secrets are never returned. |
 | `list_assistant_automations` | Read-only | `assistants:read` | Immediate | List automations an assistant can run in voice, web chat, messaging, or email conversations. |
 | `list_automation_ai_actions` | Read-only | `automations:read` | Immediate | Discover Milian AI classification, conditions, scores, labels and custom analysis, including configuration defaults, output fields and three editable presets. |
@@ -36,6 +37,7 @@ Toolsets limit discovery context; they do not grant access. OAuth/API scopes and
 | `list_automation_runs` | Read-only | `automations:read or calls:read` | Immediate | List one automation's runs, newest first, with status, trigger event, error, timing and credits. Filter by status; page with limit/offset (total included). Use get_automation_run for the step-by-step log of one run. |
 | `list_automations` | Read-only | `automations:read or calls:read` | Immediate | List native workspace automations (graph workflows). |
 | `list_calendly_connections` | Read-only | `integrations:read or assistants:read` | Immediate | List Calendly accounts connected to this workspace through OAuth. Tokens and secrets are never returned. |
+| `list_campaign_audience_connections` | Read-only | `campaigns:read` | Immediate | Discover eligible beta Shopify/Klaviyo audience connections in this workspace. Does not import customer profiles. |
 | `list_crm_syncs` | Read-only | `automations:read or calls:read` | Immediate | List CRM sync configurations and their current status. Provider credentials are never returned. |
 | `list_routine_runs` | Read-only | `routines:read` | Immediate | List recent runs of one mission, most recent first — status, trigger, credits charged, and timing. |
 | `list_routine_versions` | Read-only | `routines:read` | Immediate | List drafts and immutable published versions of one Milian Mission, newest first. |
@@ -48,6 +50,7 @@ Toolsets limit discovery context; they do not grant access. OAuth/API scopes and
 | `run_routine` | Write/action | `routines:write` | Immediate | Trigger one mission right now as a background run, independent of its schedule. Starts an unattended AI copilot turn billed like a normal copilot turn, and returns immediately with the new run's id and status while it keeps executing in the background. |
 | `save_routine_draft` | Write/action | `routines:write` | Immediate | Create or replace the editable Mission draft while the published version keeps running unchanged. |
 | `set_routine_webhook_secret` | Write/action | `routines:write` | Immediate | Set or rotate a Mission inbound webhook secret. Generate a 32-byte random base64url value client-side and save it before calling this tool because the secret is accepted only as input and never returned. |
+| `tidy_automation_graph` | Write/action | `automations:write or calls:write` | Immediate | Arrange the saved automation graph from left to right with clear spacing: true branches above false ones, loop bodies below their done branch, and steps that skip ahead on a straight line. Changes positions only, preserving every step, configuration, connection and branch. |
 | `trigger_automation` | Write/action | `automations:write or calls:write` | Immediate | Manually start an automation run with an optional JSON payload. |
 | `update_automation` | Write/action | `automations:write or calls:write` | Immediate | Update name, status, trigger, graph, or tags of an automation. |
 | `update_automation_connection` | Write/action | `automations:write or calls:write` | Immediate | Patch an automation connection. Sending '•••' for a secret keeps the stored value; omit to leave a field unchanged. |

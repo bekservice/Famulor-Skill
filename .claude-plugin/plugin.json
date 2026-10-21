@@ -2,8 +2,8 @@
   "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
   "name": "famulor",
   "displayName": "Famulor",
-  "version": "2.1.6",
-  "description": "Operate Famulor assistants, calls, history, campaigns, messaging, telephony, knowledge, dashboards, automations, and workspace settings through OAuth-secured MCP tools.",
+  "version": "2.2.0",
+  "description": "Build and improve Famulor voice, WhatsApp and webchat assistants with channel-specific prompting, complete API guidance and workspace-aware MCP tools.",
   "author": {
     "name": "Famulor",
     "email": "support@famulor.io",
@@ -14,13 +14,17 @@
   "license": "MIT",
   "keywords": [
     "famulor",
-    "mcp",
+    "agent-skills",
+    "voice-ai",
     "voice-agent",
-    "assistants",
-    "calls",
-    "campaigns",
-    "messaging",
-    "automation"
+    "whatsapp",
+    "webchat",
+    "mcp",
+    "claude-code",
+    "codex",
+    "cursor",
+    "gemini-cli",
+    "prompt-engineering"
   ],
   "skills": "./skills/",
   "mcpServers": "./.mcp.json"

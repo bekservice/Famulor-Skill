@@ -51,7 +51,7 @@ The same directory is intentionally compatible with both marketplaces:
 
 ## Documentation and support
 
-- [Famulor MCP documentation](https://docs.famulor.io/en/mcp/client)
+- [Famulor MCP documentation](https://docs.famulor.io/mcp/overview)
 - [Famulor support](https://www.famulor.io/support)
 - [Privacy policy](https://www.famulor.io/privacy)
 - [Terms](https://www.famulor.io/terms)

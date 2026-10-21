@@ -1,0 +1,24 @@
+name: Report a problem
+description: Report an incorrect workflow, installation step or API mapping.
+title: "[Bug] "
+body:
+  - type: input
+    id: version
+    attributes:
+      label: Skill release and client
+      placeholder: v2.2.0, Claude Code / Codex / other
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Task and reproduction
+      description: Use fictional or redacted data. Never include tokens, private transcripts or customer identifiers.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected and observed result
+    validations:
+      required: true

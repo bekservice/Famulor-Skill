@@ -1,75 +1,64 @@
 # Publishing and distribution
 
-This repository is the Famulor agent plugin and skill package. The hosted MCP server itself is registered separately from `bekservice/Famulor-MCP`; do not add or publish a duplicate `server.json` from this repository.
+This repository publishes Famulor's customer skill and client packaging. It does not deploy the application, publish CLI/SDK packages or register a new MCP server. The hosted server has its own registry entry; do not add a duplicate `server.json` here.
 
-## Release checklist
+## Refresh the public contracts
 
-1. Update the version consistently in `plugin.json`, `.plugin/plugin.json`, `.claude-plugin/plugin.json`, `.cursor-plugin/plugin.json`, `gemini-extension.json`, `claude-store/.claude-plugin/plugin.json`, and both skill metadata files.
-2. Export the canonical Famulor MCP registry and refresh the 14 toolset references with `scripts/sync-catalog.py`; use `--check` to verify the total tool count and exact names.
+Maintainers export the current canonical MCP registry, public OpenAPI document, generated CLI catalog and TypeScript operation descriptors. Pass those inputs explicitly; no credentials are required. The CLI catalog must be regenerated against the same OpenAPI version before export.
+
+```bash
+python3 scripts/sync-catalog.py /path/to/mcp-registry.json --date YYYY-MM-DD --references-only
+python3 scripts/sync-api-catalog.py \
+  --openapi /path/to/openapi.json \
+  --cli-catalog /path/to/cli-catalog.json \
+  --sdk-descriptors /path/to/operations.ts \
+  --docs-dir /path/to/api-reference \
+  --navigation /path/to/docs.json \
+  --date YYYY-MM-DD
+```
+
+Run both commands again with `--check`. The API generator verifies the CLI's source hash and exact method/path/operation parity with the SDK. It projects public request constraints while excluding examples, defaults and response-property snapshots. Review the output for private fields and claims before publishing. Check the reviewed URL aliases in `scripts/api-doc-links.json` when endpoint summaries or routes change. The MCP generator's `--references-only` option leaves the hand-maintained entrypoint untouched; update its group counts deliberately.
+
+The source application repository is not required to install or validate a release. Contributors can run the included fixture-based tests and offline lookup using the bundled catalog.
+
+## Validate and release
+
+1. Review the diff, channel-specific claims, external links and realistic evaluation scenarios. Keep upstream SDK behavior separate from capabilities exposed by Famulor.
+2. Update `VERSION`, all six plugin/extension manifests, `.claude-plugin/marketplace.json`, both skill metadata versions and `CHANGELOG.md`. Update snapshot counts/dates where needed.
 3. Run:
 
    ```bash
-   claude plugin validate . --strict
+   python3 scripts/validate.py
+   python3 -m unittest discover -s tests -v
+   claude plugin validate .claude-plugin/marketplace.json --strict
+   claude plugin validate .claude-plugin/plugin.json --strict
    claude plugin validate ./claude-store
-   python3 /path/to/skill-creator/scripts/quick_validate.py skills/famulor-skill
-   python3 /path/to/skill-creator/scripts/quick_validate.py claude-store/skills/famulor-assistants-history
+   python3 scripts/package-release.py
+   python3 scripts/package-release.py --check
+   git diff --check
    ```
 
-   Claude Code 2.1.228 reports the directory-required `privacyPolicyUrl` in the
-   isolated Store manifest as an unknown top-level field. The non-strict check
-   confirms it still loads; verify the directory's policy scan separately.
+   The restricted Store manifest retains its directory-required `privacyPolicyUrl`; Claude Code can warn that it ignores that field. Review actual validator errors separately.
 
-4. Validate every JSON file and verify all relative component paths stay inside the plugin root.
-5. Regenerate the standalone archive:
+4. Review the archive contents. `famulor.skill` and `dist/famulor-skill.zip` contain only the portable skill directory. They are byte-identical ZIP archives. `dist/SHA256SUMS` records both asset hashes.
+5. Open a pull request, wait for **Validate skill** to pass, review and merge the exact tested changes.
+6. Tag the merged commit and publish a GitHub release with `famulor.skill`, `famulor-skill.zip` and `SHA256SUMS`. Confirm the release is public and the downloaded assets match the checksums.
 
-   ```bash
-   cd skills
-   zip -r -X ../famulor.skill famulor-skill
-   ```
+The generator uses fixed ZIP metadata and stable ordering so packaging is reproducible. Never edit or overwrite an existing release's versioned assets silently; publish a new patch release for corrections.
 
-6. Inspect the archive with `unzip -l famulor.skill` and verify it contains no credentials, caches, or unrelated files.
-7. Commit, open a pull request, and merge only after validation and review.
-8. Tag the released commit after merge.
+## Discoverability
 
-## Claude community plugin directory
+- Keep GitHub's description specific: Famulor voice, WhatsApp, webchat, prompts, MCP and API workflows.
+- Maintain relevant topics, a clear README, working installation commands, real examples, issue templates and versioned releases.
+- The [Agent Skills specification](https://agentskills.io/specification) defines the portable folder structure. The [skills installer](https://github.com/vercel-labs/skills) can install directly from this public repository.
+- [skills.sh](https://skills.sh/docs) ranks skills using actual installation telemetry. Do not manufacture installs, stars or endorsements. A compatible release is not a guarantee of indexing, ranking or audience growth.
+- Gemini distribution uses the root `gemini-extension.json`, GitHub tags and the `gemini-cli-extension` topic. Check the [current gallery guidance](https://geminicli.com/docs/extensions/) and verify any listing independently.
+- `.claude-plugin/marketplace.json` provides a repository-hosted Claude Code marketplace. This does not claim inclusion in Anthropic's reviewed directory.
 
-The Claude Store package is intentionally isolated under `claude-store/` so the full root developer skill is not included in the store capability inventory. Its `.claude-plugin/plugin.json` loads only `claude-store/skills/famulor-assistants-history/`, while its `.mcp.json` connects to `https://app.famulor.io/mcp?profile=assistant-history`. The Gemini CLI gallery uses the repository root, discovers the full skill under `skills/`, and connects to the full MCP endpoint; keep its manifest and context consistent with that capability.
+## Directory profiles and separate submissions
 
-The profile exposes exactly 11 read-only tools: `list_assistants`, `get_assistant`, `list_assistant_versions`, `get_assistant_version`, `list_prompt_templates`, `get_languages`, `get_models`, `get_voices`, `list_history`, `get_call`, and `get_email_history_item`. It supports assistant review plus omnichannel call, email, Instagram, Messenger, and other connected messaging history when those records exist. Messaging history can be an overview or preview; do not advertise complete chat transcripts unless returned by the server. It has no mutation, outbound communication, campaign, telephony-purchase, billing, or administrative tools.
+The root developer plugin exposes the authenticated full MCP endpoint. `claude-store/` remains a separate Assistant & History package connected to `?profile=assistant-history` with exactly 11 read tools. Never submit the full root package as though it had the restricted profile's permissions.
 
-Submit the public repository with `claude-store` as the plugin path, or submit a zip whose root is the contents of `claude-store/`, through [Claude's directory management portal](https://claude.ai/directory/manage). Submit the remote MCP URL separately as a connector; a plugin's MCP configuration does not create a connector listing.
+Public ChatGPT/Claude directory listings are separately reviewed products. Publishing this GitHub release does not update them. A marketplace listing, submission or gallery indexing must be verified in that service before claiming availability.
 
-Anthropic runs the same `claude plugin validate` check plus safety screening. This plugin directory is separate from the Claude MCP Connector Directory.
-
-Before submission, confirm `claude --plugin-dir ./claude-store plugin details famulor-assistants-history@inline` reports exactly one skill and one MCP server. Do not submit the repository root to the Store: root `.claude-plugin/plugin.json`, root `.mcp.json`, and `skills/famulor-skill/` intentionally remain the full developer plugin for backward compatibility.
-
-## Cursor
-
-Cursor discovers `.cursor-plugin/plugin.json`, `skills/`, and `mcp.json`. Test locally under `~/.cursor/plugins/local/famulor`, reload Cursor, and verify both the skill and OAuth MCP server appear.
-
-Official marketplace submissions use `https://cursor.com/marketplace/publish`. Review the current publisher terms before submitting a plan-gated service. The public repository can also be shared through community directories that accept open-source agent plugins.
-
-## Google Gemini CLI and Antigravity
-
-Gemini CLI's gallery indexes public GitHub repositories with the `gemini-cli-extension` topic, a root `gemini-extension.json`, and a tag. No separate submission form is used. Check `https://geminicli.com/extensions/` after the daily crawl. This extension includes the full skill under `skills/`, so `GEMINI.md` and the MCP endpoint must match it; the Claude Store's restricted 11-tool profile is separate.
-
-Antigravity uses `serverUrl` in its MCP configuration, while Gemini CLI uses `httpUrl`. The public README contains direct installation instructions for the portable skill and remote MCP server. Google's curated Antigravity marketplace documentation does not currently expose a third-party submission route; do not claim that the repository is listed there.
-
-## Agent Plugins and universal skill installers
-
-The root `plugin.json`, root `mcp.json`, and `skills/famulor-skill/` target Agent Plugins v1 and retain the complete 439-tool developer surface as of 2026-10-08. `npx skills add bekservice/Famulor-Skill` discovers the full skill from the public repository. `skills.sh` indexes compatible public repositories without a separate package upload.
-
-## ClawHub
-
-After authentication, publish the skill folder with the release version and a precise changelog:
-
-```bash
-clawhub skill publish ./skills/famulor-skill \
-  --slug famulor-skill \
-  --name "Famulor" \
-  --version 2.1.6 \
-  --changelog "Refresh the full MCP catalog to 439 tools, including two new automation tools; use the official Famulor mark" \
-  --tags latest
-```
-
-Run the current ClawHub verification or rescan command after publishing.
+Additional marketplace submissions, registry uploads and promotional posts are separate actions. Follow their current publisher instructions, preserve approved capability scopes and do not imply a listing exists until confirmed.

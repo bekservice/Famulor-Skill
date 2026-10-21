@@ -1,7 +1,7 @@
 {
   "name": "famulor",
-  "version": "2.1.6",
-  "description": "Operate Famulor assistants, history, campaigns, messaging, telephony, knowledge, analytics, and more through the OAuth-secured MCP server and bundled agent skill.",
+  "version": "2.2.0",
+  "description": "Build and improve Famulor voice, WhatsApp and webchat assistants with channel-specific prompting, complete API guidance and workspace-aware MCP tools.",
   "contextFileName": "GEMINI.md",
   "mcpServers": {
     "famulor": {
