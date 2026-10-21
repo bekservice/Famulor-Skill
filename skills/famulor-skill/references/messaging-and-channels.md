@@ -4,6 +4,8 @@ Use this reference when designing or changing a customer-facing text assistant, 
 
 ## Choose the actual channel first
 
+For a completed design, see [order support across voice, WhatsApp, webchat and email](examples/order-support.md). It shows one shared business policy, channel style additions, illustrative tool results, failure cases and a reviewable end result.
+
 The same assistant can be connected to several channels, but each has its own conversation and delivery rules.
 
 | Customer experience | What to configure | Prompting consequence |

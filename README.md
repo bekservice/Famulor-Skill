@@ -20,7 +20,7 @@ npx skills add bekservice/Famulor-Skill --skill famulor-skill
 
 Then connect your client to `https://app.famulor.io/mcp` and sign in with OAuth. The skill supplies instructions; MCP supplies authorized workspace access. Prompt drafting works without a connection. Live data and changes require a Famulor account and the relevant plan and permissions.
 
-[Installation guide](docs/installation.md) · [Use cases](docs/use-cases.md) · [Prompt templates](skills/famulor-skill/assets/prompts) · [API index](skills/famulor-skill/references/api/index.md) · [Releases](https://github.com/bekservice/Famulor-Skill/releases)
+[Installation guide](docs/installation.md) · [Worked examples](skills/famulor-skill/references/examples/README.md) · [Use cases](docs/use-cases.md) · [Prompt templates](skills/famulor-skill/assets/prompts) · [API index](skills/famulor-skill/references/api/index.md) · [Releases](https://github.com/bekservice/Famulor-Skill/releases)
 
 ## Choose what you want to build
 
@@ -33,6 +33,19 @@ Then connect your client to `https://app.famulor.io/mcp` and sign in with OAuth.
 | Email replies | “Draft email instructions with a clear answer and one next step.” | [Email](skills/famulor-skill/references/messaging-and-channels.md) |
 | Quality review | “Review these conversations, identify recurring failures and propose regression tests.” | [Testing](skills/famulor-skill/references/testing-and-evaluation.md) |
 | API integration | “Find the REST endpoint, CLI command and TypeScript method to list my assistants.” | [API and SDK](skills/famulor-skill/references/api-and-sdk.md) |
+
+## See a complete assistant
+
+The [worked examples](skills/famulor-skill/references/examples/README.md) turn familiar [Famulor demo scenarios](https://app.famulor.io/demo) into reviewable assistant designs:
+
+| Example | What good looks like |
+| --- | --- |
+| [Hotel front desk](skills/famulor-skill/references/examples/hotel-front-desk.md) | Clear greeting, hotel knowledge, returned availability, confirmed reservation and recovery |
+| [Drive-thru](skills/famulor-skill/references/examples/drive-thru.md) | Corrections update one basket; the current quote is confirmed and submitted once |
+| [Order support](skills/famulor-skill/references/examples/order-support.md) | Verified order facts and controlled changes, with WhatsApp, webchat and email adaptations |
+| [Lead qualification](skills/famulor-skill/references/examples/lead-qualification.md) | Useful discovery, an appropriate next step and respectful opt-out handling |
+
+Each includes a filled business brief, complete prompt, setting placement, required runtime capabilities, an illustrative conversation and acceptance checks. The gallery's fictional business role-play is inspiration; the examples explicitly identify the real integrations needed before making customer-facing action claims. Use the [deliverable format](skills/famulor-skill/references/examples/assistant-deliverable.md) to see how an agent should present the finished proposal and its verification status.
 
 ## Install in your AI client
 
@@ -54,6 +67,7 @@ See the [step-by-step guide](docs/installation.md) for prerequisites, exact comm
 
 - Channel-specific assistant design, voice prompting, messaging and evaluation guides grounded in Famulor's implementation.
 - Adaptable prompts for reception, booking, qualification, WhatsApp, website chat and email.
+- Four complete demo-inspired assistant designs, with expected conversations, failure paths and a model deliverable.
 - **493 MCP tools in 14 groups** and **487 public API operations** with REST, CLI and TypeScript SDK navigation, reviewed on **21 October 2026**.
 - An offline operation lookup, deterministic catalog generation and package validation.
 - Portable Agent Skills plus Claude Code, Cursor and Gemini packaging; a separate restricted Claude Store package.

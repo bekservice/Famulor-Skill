@@ -2,6 +2,14 @@
 
 Use these requests after [installation](installation.md). Replace the business details with your own. Requests that only draft or review do not change account data. State explicitly when you want a reviewed configuration saved or an external action performed.
 
+## Start from a completed example
+
+> Use Famulor Skill's hotel front-desk worked example as a quality reference. Adapt it to our business and show the greeting, full prompt, knowledge, tool bindings, an expected conversation and failure tests. Mark unresolved integrations and keep this as a draft.
+
+Choose [hotel front desk](../skills/famulor-skill/references/examples/hotel-front-desk.md), [drive-thru](../skills/famulor-skill/references/examples/drive-thru.md), [order support across channels](../skills/famulor-skill/references/examples/order-support.md), or [lead qualification](../skills/famulor-skill/references/examples/lead-qualification.md). The [example index](../skills/famulor-skill/references/examples/README.md) explains how to adapt them, and the [deliverable format](../skills/famulor-skill/references/examples/assistant-deliverable.md) shows the result an agent should produce.
+
+The examples use fictional businesses and explicitly illustrative tool results. They improve on the demo gallery's conversational role-play by showing the integrations and evidence needed for real bookings, orders or updates. They are included inside the downloadable skill, so installed agents can read them without access to the application source.
+
 ## Launch a voice receptionist
 
 > Use Famulor Skill to draft an English and German receptionist for our repair business. It should answer from our service knowledge base, collect the problem and preferred callback time, and escalate urgent issues. Explain which settings and tools need configuration. Do not place calls.
