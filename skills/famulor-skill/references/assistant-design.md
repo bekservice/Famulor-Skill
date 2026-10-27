@@ -78,6 +78,8 @@ For every action, establish four things:
 
 For booking: ask only for missing details, check availability, let the customer choose, confirm the concrete booking details when needed, then invoke the actual booking tool. An offered slot, an intake form or “I'll book that” is not a confirmed appointment. Do not keep asking permission for an action the customer has already clearly authorized with all necessary details.
 
+For Cal.com, the availability result lists the event type's meeting locations and the booking tool accepts the one the customer chose; without a choice, Cal.com's default location applies. With the integration setting **Ask callers which location they prefer** (`ask_location`; Booking → Integrations → Cal.com → Meeting location), the assistant asks before booking whenever the event type offers at least two locations, unless the customer already chose one; no preference books the default. Do not repeat that question in the prompt when the setting is on. For a phone-call location during a call, Famulor uses the caller's number unless the caller names another. Confirmation emails use the conversation language, falling back to the assistant's primary language.
+
 Tool names in sample prompts are roles to map to the actual assigned callable names. Listing a tool in prose does not give the assistant access to it. Prefer a small relevant toolset and precise descriptions over several tools with overlapping purposes.
 
 ## Variables, memory and extraction

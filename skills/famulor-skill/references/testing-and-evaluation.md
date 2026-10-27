@@ -41,6 +41,9 @@ Adapt the [voice regression scenarios](../assets/test-cases/voice-regression.jso
 | Caller corrects a value | Corrected value used, earlier completed effects preserved and reconciled |
 | Caller interrupts speech or a tool | Conversation recovers; cancellation not claimed without evidence |
 | Human request / transfer failure | Correct route and configured unavailable path |
+| Announced transfer or declined offer | Exactly one transfer right after the announcement and no assistant speech afterwards; a declined offer starts no transfer |
+| Booking with several meeting locations | Location question asked only when the setting is on and no choice was made; the chosen location is booked |
+| Group-thread follow-up | A later message in the same thread is answered without a new @mention; no private data in the shared thread |
 | Assistant handoff | Necessary facts preserved, no repeated intake or conflicting greeting |
 | Supported language switch | Continues in the supported language; literal names preserved |
 | Missing runtime variable | No raw placeholder spoken; sensible fallback |
@@ -48,6 +51,8 @@ Adapt the [voice regression scenarios](../assets/test-cases/voice-regression.jso
 | Goodbye or opt-out | Appropriate closing and configured suppression action when applicable |
 
 For required consent, test both acceptance and refusal before testing ordinary business tasks. For outbound tests, verify the permitted recipient and opt-out behavior. For account-sensitive actions, include failed identity verification and attempts to access another person's records.
+
+A remote MCP tool list loaded in the editor does not prove the tool works in a conversation. Run it in a real test on the intended channel; when the server rejects the token, reauthorize the connection instead of retrying.
 
 ## Voice acceptance
 

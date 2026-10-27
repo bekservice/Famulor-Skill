@@ -1,6 +1,6 @@
 # Automations API operations
 
-Reviewed 2026-10-21. 29 public operations. [All areas](index.md) · [Execution guide](../api-and-sdk.md)
+Reviewed 2026-10-27. 30 public operations. [All areas](index.md) · [Execution guide](../api-and-sdk.md)
 
 Paths are relative to `https://app.famulor.io/api/v1`. Each operation ID is also the typed SDK method `client.api.<operationId>`. Look up its exact request contract with the bundled `find-operation.py`; CLI help reflects the installed version.
 
@@ -17,6 +17,7 @@ Hidden CLI operations require an interactive/browser flow or `famulor api` where
 | `deleteCrmSync` | `DELETE /crm-syncs/{id}` | `famulor delete-crm-sync` | [Delete CRM sync](https://docs.famulor.io/api-reference/automations/delete-crm-sync) |
 | `disconnectAssistantAutomation` | `DELETE /assistants/{id}/automations/{automationId}` | `famulor disconnect-assistant-automation` | [Disconnect an assistant automation](https://docs.famulor.io/api-reference/automations/disconnect-an-assistant-automation) |
 | `discoverCrmSyncMetadata` | `POST /crm-syncs/discover` | `famulor discover-crm-sync-metadata` | [Discover CRM objects and fields](https://docs.famulor.io/api-reference/automations/discover-crm-objects-and-fields) |
+| `duplicateAutomation` | `POST /automations/{id}/duplicate` | `famulor duplicate-automation` | [Duplicate automation](https://docs.famulor.io/api-reference/introduction) |
 | `getAutomation` | `GET /automations/{id}` | `famulor get-automation` | [Get automation](https://docs.famulor.io/api-reference/automations/get-automation) |
 | `getAutomationConnection` | `GET /automations/connections/{id}` | `famulor get-automation-connection` | [Get automation connection](https://docs.famulor.io/api-reference/automations/get-automation-connection) |
 | `getAutomationRun` | `GET /automations/{id}/runs/{runId}` | `famulor get-automation-run` | [Get automation run](https://docs.famulor.io/api-reference/automations/get-automation-run) |

@@ -2,7 +2,7 @@
 
 Automations, connections, CRM sync, routines, and runs. Connect only this group with `https://app.famulor.io/mcp?toolsets=automations`.
 
-This 2026-10-21 snapshot covers all 46 tools assigned to `automations` in the canonical 493-tool registry. The live MCP `tools/list` response is authoritative for arguments, current availability, annotations, and plan or role gating. Never invent fields from this catalog.
+This 2026-10-27 snapshot covers all 47 tools assigned to `automations` in the canonical 494-tool registry. The live MCP `tools/list` response is authoritative for arguments, current availability, annotations, and plan or role gating. Never invent fields from this catalog.
 
 Toolsets limit discovery context; they do not grant access. OAuth/API scopes and workspace roles are enforced separately. The Effect column reflects MCP risk annotations: `Delete/destructive` also covers overwrites or changes that can remove data or safeguards.
 
@@ -21,6 +21,7 @@ Toolsets limit discovery context; they do not grant access. OAuth/API scopes and
 | `delete_routine` | Delete/destructive | `routines:write` | Immediate | Permanently delete a Milian Mission. It stops running immediately; past run transcripts already on record are unaffected. This cannot be undone. |
 | `disconnect_assistant_automation` | Write/action | `assistants:write or automations:write` | Immediate | Pause and disconnect an assistant-callable automation and archive its generated tool. |
 | `discover_crm_sync` | Read-only | `automations:read or calls:read` | Immediate | Discover importable objects, fields, optional list/view/filter sources, and an optional read-only mapped preview without exposing credentials. |
+| `duplicate_automation` | Write/action | `automations:write or calls:write` | Immediate | Copy an automation, including every step, trigger setting, tag, description and failure-alert preference, as a new draft. The copy does not run until it is turned on. Inbound webhooks get a new secret. The copy does not share the live app-event subscription and does not add a second assistant tool. Optional name replaces the default "(Copy)" name. |
 | `get_automation` | Read-only | `automations:read or calls:read` | Immediate | Get one automation and recent runs. |
 | `get_automation_connection` | Read-only | `automations:read or calls:read` | Immediate | Get one automation connection (secrets masked as '•••'). |
 | `get_automation_platform` | Read-only | `automations:read or calls:read` | Immediate | Get the workspace's native automation platform entitlement, monthly run allowance, and usage. |

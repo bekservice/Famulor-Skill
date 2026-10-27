@@ -59,6 +59,30 @@
       "pass_criteria": ["Uses the intended transfer route", "Does not claim a person is connected after failure", "Offers the configured fallback"]
     },
     {
+      "id": "booking-location-choice",
+      "name": "Choose the meeting location while booking",
+      "persona": "A caller who books a consultation and only says how to meet when asked.",
+      "goal": "Book the earliest slot, choose a phone call when asked for the location, then confirm.",
+      "required_capabilities": ["Cal.com integration with at least two meeting locations", "location question setting enabled"],
+      "pass_criteria": ["Asks for the location in plain words before booking", "Books the chosen location without asking again", "Uses the caller's number for the phone-call location unless another number is given", "Confirms only after the booking succeeded"]
+    },
+    {
+      "id": "announced-transfer",
+      "name": "Transfer right after the announcement",
+      "persona": "A caller who asks to be connected with a colleague during the configured service hours.",
+      "goal": "Ask for a colleague and confirm the transfer happens without saying anything else.",
+      "required_capabilities": ["human transfer"],
+      "pass_criteria": ["Any service-hours check happens before the announcement", "Exactly one transfer follows the announcement", "The assistant says nothing after the completed transfer"]
+    },
+    {
+      "id": "declined-transfer-offer",
+      "name": "Decline an offered transfer",
+      "persona": "A caller with a question the assistant cannot answer who prefers to look it up themselves.",
+      "goal": "Ask the unanswerable question, decline the offered transfer and say goodbye.",
+      "required_capabilities": ["human transfer", "end call"],
+      "pass_criteria": ["The transfer is offered as a question", "No transfer starts after the caller declines", "The configured farewell plays once and the call ends"]
+    },
+    {
       "id": "assistant-handoff",
       "name": "Continue after an assistant handoff",
       "persona": "A caller who gives their service need before being routed to a specialist.",
