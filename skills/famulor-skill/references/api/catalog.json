@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "reviewedAt": "2026-10-21",
+  "reviewedAt": "2026-10-27",
   "source": "Famulor public OpenAPI, CLI command catalog and TypeScript SDK operation descriptors",
-  "openapiSha256": "296a751d2837fa38cd112ccf19b720dc91cbd5f93faedec226aadbda0c1ca329",
+  "openapiSha256": "65e8d354d194e756860039721a3c6048bb83a39ce32c41daab4e38453d051918",
   "baseUrl": "https://app.famulor.io/api/v1",
   "notice": "Dated navigation and request-shape snapshot, not a runtime validator. Check the live public schema and installed client before execution. Descriptions, examples, default values and response properties are intentionally omitted.",
   "operations": [
@@ -438,6 +438,16 @@
               "gchat",
               "x",
               "whatsapp",
+              "linear",
+              "notion",
+              "twitch",
+              "mattermost",
+              "webex",
+              "lark",
+              "line",
+              "sendblue",
+              "linq",
+              "zernio",
               "freshdesk",
               "gmail",
               "outlook",
@@ -2773,6 +2783,16 @@
               "discord",
               "gchat",
               "x",
+              "linear",
+              "notion",
+              "twitch",
+              "mattermost",
+              "webex",
+              "lark",
+              "line",
+              "sendblue",
+              "linq",
+              "zernio",
               "freshdesk",
               "gmail",
               "outlook",
@@ -2806,6 +2826,16 @@
               "discord",
               "gchat",
               "x",
+              "linear",
+              "notion",
+              "twitch",
+              "mattermost",
+              "webex",
+              "lark",
+              "line",
+              "sendblue",
+              "linq",
+              "zernio",
               "freshdesk",
               "gmail",
               "outlook",
@@ -5877,7 +5907,17 @@
               "discord",
               "gchat",
               "x",
-              "whatsapp"
+              "whatsapp",
+              "linear",
+              "notion",
+              "twitch",
+              "mattermost",
+              "webex",
+              "lark",
+              "line",
+              "sendblue",
+              "linq",
+              "zernio"
             ]
           },
           {
@@ -5929,6 +5969,24 @@
             "type": "string"
           },
           {
+            "name": "app_id",
+            "flag": "--app-id",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "user_access_token",
+            "flag": "--user-access-token",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "refresh_token",
+            "flag": "--refresh-token",
+            "required": false,
+            "type": "string"
+          },
+          {
             "name": "verify_token",
             "flag": "--verify-token",
             "required": false,
@@ -5963,6 +6021,104 @@
             "flag": "--display-phone-number",
             "required": false,
             "type": "string"
+          },
+          {
+            "name": "api_key",
+            "flag": "--api-key",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "api_secret",
+            "flag": "--api-secret",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "from_number",
+            "flag": "--from-number",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "webhook_secret",
+            "flag": "--webhook-secret",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "token",
+            "flag": "--token",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "verification_token",
+            "flag": "--verification-token",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "client_id",
+            "flag": "--client-id",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "client_secret",
+            "flag": "--client-secret",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "bot_user_id",
+            "flag": "--bot-user-id",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "base_url",
+            "flag": "--body-base-url",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "encrypt_key",
+            "flag": "--encrypt-key",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "domain",
+            "flag": "--domain",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "lark",
+              "feishu"
+            ]
+          },
+          {
+            "name": "channel_access_token",
+            "flag": "--channel-access-token",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "channel_secret",
+            "flag": "--channel-secret",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "mode",
+            "flag": "--mode",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "comments",
+              "agent-sessions"
+            ]
           },
           {
             "name": "whatsapp_text_enabled",
@@ -10870,6 +11026,81 @@
         ],
         "403": [],
         "404": []
+      },
+      "binaryResponse": false
+    },
+    {
+      "operationId": "duplicateAutomation",
+      "method": "POST",
+      "path": "/automations/{id}/duplicate",
+      "group": "Automations",
+      "summary": "Duplicate automation",
+      "documentation": "https://docs.famulor.io/api-reference/introduction",
+      "cli": {
+        "command": "duplicate-automation",
+        "hidden": false,
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "flag": "id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "bodyFields": [
+          {
+            "name": "name",
+            "flag": "--name",
+            "required": false,
+            "type": "string"
+          }
+        ]
+      },
+      "sdkMethod": "client.api.duplicateAutomation",
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "format": "uuid",
+            "type": "string"
+          }
+        }
+      ],
+      "requestBody": {
+        "required": false,
+        "content": {
+          "application/json": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "maxLength": 200,
+                "minLength": 1,
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "responses": {
+        "201": [],
+        "401": [
+          "application/json"
+        ],
+        "403": [
+          "application/json"
+        ],
+        "404": [
+          "application/json"
+        ],
+        "429": [
+          "application/json"
+        ],
+        "503": [
+          "application/json"
+        ]
       },
       "binaryResponse": false
     },
@@ -18663,6 +18894,16 @@
               "discord",
               "gchat",
               "x",
+              "linear",
+              "notion",
+              "twitch",
+              "mattermost",
+              "webex",
+              "lark",
+              "line",
+              "sendblue",
+              "linq",
+              "zernio",
               "freshdesk",
               "gmail",
               "outlook",
@@ -18841,6 +19082,16 @@
                 "discord",
                 "gchat",
                 "x",
+                "linear",
+                "notion",
+                "twitch",
+                "mattermost",
+                "webex",
+                "lark",
+                "line",
+                "sendblue",
+                "linq",
+                "zernio",
                 "freshdesk",
                 "gmail",
                 "outlook",
@@ -21499,6 +21750,16 @@
               "discord",
               "gchat",
               "x",
+              "linear",
+              "notion",
+              "twitch",
+              "mattermost",
+              "webex",
+              "lark",
+              "line",
+              "sendblue",
+              "linq",
+              "zernio",
               "freshdesk",
               "gmail",
               "outlook",
@@ -21703,6 +21964,16 @@
                 "discord",
                 "gchat",
                 "x",
+                "linear",
+                "notion",
+                "twitch",
+                "mattermost",
+                "webex",
+                "lark",
+                "line",
+                "sendblue",
+                "linq",
+                "zernio",
                 "freshdesk",
                 "gmail",
                 "outlook",
@@ -23402,6 +23673,16 @@
               "gchat",
               "x",
               "whatsapp",
+              "linear",
+              "notion",
+              "twitch",
+              "mattermost",
+              "webex",
+              "lark",
+              "line",
+              "sendblue",
+              "linq",
+              "zernio",
               "freshdesk",
               "gmail",
               "outlook",
@@ -23434,6 +23715,16 @@
               "gchat",
               "x",
               "whatsapp",
+              "linear",
+              "notion",
+              "twitch",
+              "mattermost",
+              "webex",
+              "lark",
+              "line",
+              "sendblue",
+              "linq",
+              "zernio",
               "freshdesk",
               "gmail",
               "outlook",
@@ -25464,6 +25755,16 @@
               "gchat",
               "x",
               "whatsapp",
+              "linear",
+              "notion",
+              "twitch",
+              "mattermost",
+              "webex",
+              "lark",
+              "line",
+              "sendblue",
+              "linq",
+              "zernio",
               "freshdesk",
               "gmail",
               "outlook",
@@ -29582,6 +29883,16 @@
               "discord",
               "gchat",
               "x",
+              "linear",
+              "notion",
+              "twitch",
+              "mattermost",
+              "webex",
+              "lark",
+              "line",
+              "sendblue",
+              "linq",
+              "zernio",
               "freshdesk",
               "gmail",
               "outlook",
@@ -29615,6 +29926,16 @@
               "discord",
               "gchat",
               "x",
+              "linear",
+              "notion",
+              "twitch",
+              "mattermost",
+              "webex",
+              "lark",
+              "line",
+              "sendblue",
+              "linq",
+              "zernio",
               "freshdesk",
               "gmail",
               "outlook",
@@ -35412,6 +35733,16 @@
               "discord",
               "gchat",
               "x",
+              "linear",
+              "notion",
+              "twitch",
+              "mattermost",
+              "webex",
+              "lark",
+              "line",
+              "sendblue",
+              "linq",
+              "zernio",
               "freshdesk",
               "gmail",
               "outlook",
@@ -35445,6 +35776,16 @@
               "discord",
               "gchat",
               "x",
+              "linear",
+              "notion",
+              "twitch",
+              "mattermost",
+              "webex",
+              "lark",
+              "line",
+              "sendblue",
+              "linq",
+              "zernio",
               "freshdesk",
               "gmail",
               "outlook",
@@ -39005,6 +39346,16 @@
               "discord",
               "gchat",
               "x",
+              "linear",
+              "notion",
+              "twitch",
+              "mattermost",
+              "webex",
+              "lark",
+              "line",
+              "sendblue",
+              "linq",
+              "zernio",
               "freshdesk",
               "gmail",
               "outlook",
@@ -42753,6 +43104,16 @@
             "discord",
             "gchat",
             "x",
+            "linear",
+            "notion",
+            "twitch",
+            "mattermost",
+            "webex",
+            "lark",
+            "line",
+            "sendblue",
+            "linq",
+            "zernio",
             "freshdesk",
             "gmail",
             "outlook",
@@ -43686,6 +44047,16 @@
         "discord",
         "gchat",
         "x",
+        "linear",
+        "notion",
+        "twitch",
+        "mattermost",
+        "webex",
+        "lark",
+        "line",
+        "sendblue",
+        "linq",
+        "zernio",
         "freshdesk",
         "gmail",
         "outlook",
@@ -43714,6 +44085,16 @@
         "gchat",
         "x",
         "whatsapp",
+        "linear",
+        "notion",
+        "twitch",
+        "mattermost",
+        "webex",
+        "lark",
+        "line",
+        "sendblue",
+        "linq",
+        "zernio",
         "freshdesk",
         "gmail",
         "outlook",
@@ -44175,10 +44556,31 @@
         "intercom": {
           "$ref": "#/components/schemas/DarkWindowChannelConfig"
         },
+        "lark": {
+          "$ref": "#/components/schemas/DarkWindowChannelConfig"
+        },
+        "line": {
+          "$ref": "#/components/schemas/DarkWindowChannelConfig"
+        },
+        "linear": {
+          "$ref": "#/components/schemas/DarkWindowChannelConfig"
+        },
+        "linq": {
+          "$ref": "#/components/schemas/DarkWindowChannelConfig"
+        },
+        "mattermost": {
+          "$ref": "#/components/schemas/DarkWindowChannelConfig"
+        },
         "messenger": {
           "$ref": "#/components/schemas/DarkWindowChannelConfig"
         },
+        "notion": {
+          "$ref": "#/components/schemas/DarkWindowChannelConfig"
+        },
         "outlook": {
+          "$ref": "#/components/schemas/DarkWindowChannelConfig"
+        },
+        "sendblue": {
           "$ref": "#/components/schemas/DarkWindowChannelConfig"
         },
         "servicenow": {
@@ -44196,7 +44598,13 @@
         "telegram": {
           "$ref": "#/components/schemas/DarkWindowChannelConfig"
         },
+        "twitch": {
+          "$ref": "#/components/schemas/DarkWindowChannelConfig"
+        },
         "voice": {
+          "$ref": "#/components/schemas/DarkWindowChannelConfig"
+        },
+        "webex": {
           "$ref": "#/components/schemas/DarkWindowChannelConfig"
         },
         "whatsapp": {
@@ -44206,6 +44614,9 @@
           "$ref": "#/components/schemas/DarkWindowChannelConfig"
         },
         "zendesk": {
+          "$ref": "#/components/schemas/DarkWindowChannelConfig"
+        },
+        "zernio": {
           "$ref": "#/components/schemas/DarkWindowChannelConfig"
         },
         "zoho_mail": {
@@ -44758,6 +45169,16 @@
               "discord",
               "gchat",
               "x",
+              "linear",
+              "notion",
+              "twitch",
+              "mattermost",
+              "webex",
+              "lark",
+              "line",
+              "sendblue",
+              "linq",
+              "zernio",
               "freshdesk",
               "gmail",
               "outlook",
@@ -45763,6 +46184,15 @@
         "allow_retrigger": {
           "type": "boolean"
         },
+        "api_key": {
+          "type": "string"
+        },
+        "api_secret": {
+          "type": "string"
+        },
+        "app_id": {
+          "type": "string"
+        },
         "app_secret": {
           "type": "string"
         },
@@ -45770,10 +46200,29 @@
           "format": "uuid",
           "type": "string"
         },
+        "base_url": {
+          "format": "uri",
+          "type": "string"
+        },
         "bot_token": {
           "type": "string"
         },
+        "bot_user_id": {
+          "type": "string"
+        },
         "bot_username": {
+          "type": "string"
+        },
+        "channel_access_token": {
+          "type": "string"
+        },
+        "channel_secret": {
+          "type": "string"
+        },
+        "client_id": {
+          "type": "string"
+        },
+        "client_secret": {
           "type": "string"
         },
         "conversation_ended_webhook_url": {
@@ -45784,6 +46233,19 @@
         "display_phone_number": {
           "type": "string"
         },
+        "domain": {
+          "enum": [
+            "lark",
+            "feishu"
+          ],
+          "type": "string"
+        },
+        "encrypt_key": {
+          "type": "string"
+        },
+        "from_number": {
+          "type": "string"
+        },
         "inactivity_timeout_min": {
           "maximum": 1440,
           "minimum": 1,
@@ -45791,6 +46253,13 @@
         },
         "linked_phone_number_id": {
           "format": "uuid",
+          "type": "string"
+        },
+        "mode": {
+          "enum": [
+            "comments",
+            "agent-sessions"
+          ],
           "type": "string"
         },
         "name": {
@@ -45819,8 +46288,21 @@
             "discord",
             "gchat",
             "x",
-            "whatsapp"
+            "whatsapp",
+            "linear",
+            "notion",
+            "twitch",
+            "mattermost",
+            "webex",
+            "lark",
+            "line",
+            "sendblue",
+            "linq",
+            "zernio"
           ],
+          "type": "string"
+        },
+        "refresh_token": {
           "type": "string"
         },
         "response_delay_sec": {
@@ -45834,10 +46316,22 @@
         "team_name": {
           "type": "string"
         },
+        "token": {
+          "type": "string"
+        },
+        "user_access_token": {
+          "type": "string"
+        },
+        "verification_token": {
+          "type": "string"
+        },
         "verify_token": {
           "type": "string"
         },
         "waba_id": {
+          "type": "string"
+        },
+        "webhook_secret": {
           "type": "string"
         },
         "whatsapp_outbound_voice_enabled": {
@@ -46936,6 +47430,16 @@
               "discord",
               "gchat",
               "x",
+              "linear",
+              "notion",
+              "twitch",
+              "mattermost",
+              "webex",
+              "lark",
+              "line",
+              "sendblue",
+              "linq",
+              "zernio",
               "freshdesk",
               "gmail",
               "outlook",

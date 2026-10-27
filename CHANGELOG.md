@@ -1,5 +1,14 @@
 # Changelog
 
+## 2.3.0 — 2026-10-27
+
+- Refresh the bundled catalogs to 494 MCP tools and 488 public API operations, including duplicating an automation as an inactive draft and ten new messaging channels in the request contracts.
+- Voice: announce a human transfer only in the turn that performs it. Offers and questions start nothing, an announced transfer, SMS, email or hang-up is carried out, and the assistant stays silent after a completed transfer.
+- Booking: Cal.com meeting locations, the optional “Ask callers which location they prefer” setting, the caller's number for a phone-call location and confirmation emails in the conversation language.
+- Messaging: LINE, Sendblue, Linq, Zernio, Mattermost, Webex, Lark/Feishu, Linear, Notion and Twitch, with reply formats, group-thread follow-ups without a new mention and Meta's 24-hour window for Messenger and Instagram.
+- Testing: regression scenarios for an announced transfer, a declined transfer offer and a booking with a location choice; check remote MCP tools in a real conversation.
+- Installation: Cursor signs in with OAuth natively.
+
 ## 2.2.2 — 2026-10-21
 
 - Document customer assistant handoffs across messaging and native email, persistent target selection, channel restrictions and acceptance checks.

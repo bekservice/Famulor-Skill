@@ -4,7 +4,7 @@ Use the interface already connected to the user's workspace. MCP fits interactiv
 
 ## Find any endpoint
 
-The [complete operation index](api/index.md) covers **487 public REST operations across 40 areas**, reviewed on 2026-10-21. Every entry maps the public operation ID to its HTTP method/path, actual generated CLI command and `client.api` SDK method. The [MCP references](toolsets/assistants.md) separately cover the MCP tools; counts and names differ because some capabilities use several tools or an action selector.
+The [complete operation index](api/index.md) covers **488 public REST operations across 40 areas**, reviewed on 2026-10-27. Every entry maps the public operation ID to its HTTP method/path, actual generated CLI command and `client.api` SDK method. The [MCP references](toolsets/assistants.md) separately cover the MCP tools; counts and names differ because some capabilities use several tools or an action selector.
 
 For exact request shapes without loading the entire catalog:
 

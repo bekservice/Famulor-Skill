@@ -14,14 +14,17 @@ The same assistant can be connected to several channels, but each has its own co
 | Website voice or phone | Voice-enabled widget or phone routing | Use the spoken guidance in [voice prompting](voice-prompting.md), including the greeting and configured call tools. |
 | WhatsApp messages | WhatsApp sender, chat assistant, and AI Auto-Responses | Use the WhatsApp text behavior; respect the service window, templates, and human takeover. |
 | WhatsApp calls | Calling readiness and voice assistant configuration | This is a voice conversation. Enabling text responses does not enable calls. |
-| Telegram, Messenger, Instagram, X, SMS | The corresponding channel connector | Keep messages compact; match the channel's actual formatting and media support. |
-| Slack, Teams, Discord, Google Chat, Zulip | The corresponding collaboration connector | Lead with the answer; use short lists for decisions and next steps. A group participant's name is not proof of a private customer identity. |
+| Telegram, Messenger, Instagram, X, SMS, LINE, Sendblue, Linq, Zernio | The corresponding channel connector | Keep messages compact; match the channel's actual formatting and media support. Messenger and Instagram allow free-form replies only inside Meta's 24-hour window, like WhatsApp. |
+| Slack, Teams, Discord, Google Chat, Zulip, Mattermost, Webex, Lark/Feishu | The corresponding collaboration connector | Lead with the answer; use short lists for decisions and next steps. A group participant's name is not proof of a private customer identity. |
+| Linear, Notion, Twitch | The corresponding connector (issue or page comments, chat mentions) | Answer the comment or mention that addressed the assistant; keep the reply short and on topic. |
 | Freshdesk, Zendesk, ServiceNow, Intercom | A supported ticket connector | Preserve case context; give the resolution or next step first. Do not claim a ticket changed without the relevant action succeeding. |
 | Native Famulor email address | An address under Settings → Channels → Email | Generate the email body. The email channel manages the subject/thread and configured signature. |
 | Gmail, Outlook, Zoho Mail, AgentMail | A connected mailbox channel | Check the account, watched mailbox or folder, and reply behavior. Gmail/Outlook may save drafts instead of sending. |
 | Milian workspace assistant | The workspace copilot or an explicitly authorized Mission | Milian manages the workspace. Its tool access and long-running tasks are separate from the customer assistant's prompt and tool assignments. |
 
 Some connectors require Beta Features or a plan entitlement. Read the current available channels and connection status; a connector appearing in this guide does not mean it is enabled in every workspace.
+
+In Slack, Teams, Discord, Google Chat, Mattermost, Webex, Lark, Linear, Notion and Twitch, one @mention opens the thread: later messages in the same thread reach the assistant without a new mention. Everyone in that thread can read the replies, so keep private customer data out of shared threads.
 
 ### Why a successful test on one channel is insufficient
 
@@ -155,7 +158,8 @@ Use the [email support template](../assets/prompts/email-support.md), and distin
 | --- | --- | --- |
 | SMS | One short, complete plain-text message within the service's returned limit | Assuming a long WhatsApp answer or attachment works unchanged. |
 | Messenger, Instagram | Brief plain paragraphs and ordinary URLs | Raw Markdown markers appearing in the customer's message. |
-| Slack, Teams, Discord, Google Chat, Zulip | Standard Markdown, compact lists, useful links | Exposing private customer data in a group conversation. |
+| Slack, Teams, Discord, Google Chat, Zulip, Mattermost, Webex, Lark, Linear, Notion | Standard Markdown, compact lists, useful links | Exposing private customer data in a group conversation. |
+| LINE, Sendblue, Linq, Zernio, Twitch | Plain text; the runtime removes or converts Markdown | Relying on bold text, Markdown lists or formatted links. |
 | Telegram | Standard Markdown with simple structure | Manually escaping transport syntax the channel already converts. |
 | X | Short plain text | Treating a character-limited social channel like email. |
 | Support tickets | Plain-text resolution, relevant case context, next action | Claiming assignment, closure, refund, or escalation from text alone. |

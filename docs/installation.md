@@ -100,7 +100,7 @@ Install the skill with the universal installer and select Cursor. Add the remote
 }
 ```
 
-Authenticate when prompted and verify the server's tools are enabled. This repository also includes native Cursor plugin metadata; the direct skill-plus-MCP setup does not depend on a marketplace listing.
+Cursor completes Famulor's OAuth sign-in natively; choose the workspace and tool groups on the consent screen, then verify the server's tools are enabled. An earlier setup that used an API key can switch to OAuth. This repository also includes native Cursor plugin metadata; the direct skill-plus-MCP setup does not depend on a marketplace listing.
 
 [Official skills documentation](https://cursor.com/docs/skills) · [Official MCP documentation](https://cursor.com/docs/context/mcp) · [Plugin documentation](https://cursor.com/docs/plugins)
 

@@ -2,7 +2,7 @@
 
 Messaging, email, connected channels, templates, and sender profiles. Connect only this group with `https://app.famulor.io/mcp?toolsets=messaging`.
 
-This 2026-10-21 snapshot covers all 48 tools assigned to `messaging` in the canonical 493-tool registry. The live MCP `tools/list` response is authoritative for arguments, current availability, annotations, and plan or role gating. Never invent fields from this catalog.
+This 2026-10-27 snapshot covers all 48 tools assigned to `messaging` in the canonical 494-tool registry. The live MCP `tools/list` response is authoritative for arguments, current availability, annotations, and plan or role gating. Never invent fields from this catalog.
 
 Toolsets limit discovery context; they do not grant access. OAuth/API scopes and workspace roles are enforced separately. The Effect column reflects MCP risk annotations: `Delete/destructive` also covers overwrites or changes that can remove data or safeguards.
 
@@ -34,7 +34,7 @@ Toolsets limit discovery context; they do not grant access. OAuth/API scopes and
 | `list_email_domains` | Read-only | `assistants:read` | Immediate | List connected email domains, including verification status and the DNS records required at your DNS provider. Requires a tenant admin/owner credential. |
 | `list_email_senders` | Read-only | `settings:read or assistants:read` | Immediate | List the secrets-free sender choices available to reusable send_email tools: the platform mail server, and verified assistant email addresses. Also returns the workspace display-name and signature defaults. |
 | `list_messaging_connector_watch_options` | Read-only | `assistants:read` | Immediate | List Gmail labels, Outlook/Zoho Mail folders, or AgentMail inboxes a connected mailbox can watch. Same as GET /api/v1/messaging-connectors/{id}/watch-options. Pass a returned id and name when updating the connector to watch a specific label, folder, or AgentMail inbox. |
-| `list_messaging_connectors` | Read-only | `assistants:read` | Immediate | List messaging channels (SMS, Telegram, Slack, Messenger, Teams, Discord, Google Chat, X, WhatsApp, Freshdesk, Gmail, Outlook, Zendesk, ServiceNow, Intercom, Zoho Mail, AgentMail, Instagram, Zulip) linked to assistants. Includes conversation settings and WhatsApp flags when present. |
+| `list_messaging_connectors` | Read-only | `assistants:read` | Immediate | List messaging channels (SMS, Telegram, Slack, Messenger, Teams, Discord, Google Chat, X, WhatsApp, Linear, Notion, Twitch, Mattermost, Webex, Lark / Feishu, LINE, Sendblue, Linq, Zernio, Freshdesk, Gmail, Outlook, Zendesk, ServiceNow, Intercom, Zoho Mail, AgentMail, Instagram, Zulip) linked to assistants. Includes conversation settings and WhatsApp flags when present. |
 | `list_messenger_facebook_pages` | Write/action | `assistants:write` | Immediate | List the Facebook Pages a user access token (from Facebook Login on your own frontend) can manage. Returns only page IDs and names. Complete the connector with the original access_token plus the selected page_id; page credentials are never returned. Same as POST /api/v1/messenger/facebook-login/pages. Platform-root workspaces only. The access token is never logged. |
 | `list_whatsapp_template_library` | Read-only | `assistants:read` | Immediate | List safe, pre-written utility templates from Meta's official template library for one sender. |
 | `list_whatsapp_templates` | Read-only | `assistants:read` | Immediate | List WhatsApp HSM message templates for the workspace. Same as GET /api/v1/whatsapp/templates. |
