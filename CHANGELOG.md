@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.4.0 — 2026-10-28
+
+- Refresh the bundled catalogs to 507 MCP tools and 501 public API operations.
+- Automations: folders (list, create, rename, delete; `folder_id` on list, create and update), keyless export and import, share links (share, read, revoke, import from a link) and built-in templates (list, read, use). Imports, share links and templates always create drafts; connections, keys, workspace ids and captured test data are removed and listed as setup steps.
+- Going live is refused while a draft still has required fields or placeholders (`YOUR_API_KEY`, `YOUR_ID`, `https://YOUR_WEBHOOK_URL`) open.
+
 ## 2.3.0 — 2026-10-27
 
 - Refresh the bundled catalogs to 494 MCP tools and 488 public API operations, including duplicating an automation as an inactive draft and ten new messaging channels in the request contracts.
