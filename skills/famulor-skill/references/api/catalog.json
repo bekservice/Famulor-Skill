@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "reviewedAt": "2026-10-27",
+  "reviewedAt": "2026-10-28",
   "source": "Famulor public OpenAPI, CLI command catalog and TypeScript SDK operation descriptors",
-  "openapiSha256": "65e8d354d194e756860039721a3c6048bb83a39ce32c41daab4e38453d051918",
+  "openapiSha256": "745ee404e151f3e9fab54fc64ed41141d56a979d82a20c8a7f4f9e04abf36efb",
   "baseUrl": "https://app.famulor.io/api/v1",
   "notice": "Dated navigation and request-shape snapshot, not a runtime validator. Check the live public schema and installed client before execution. Descriptions, examples, default values and response properties are intentionally omitted.",
   "operations": [
@@ -3389,13 +3389,104 @@
         "command": "create-automation",
         "hidden": false,
         "parameters": [],
-        "bodyFields": []
+        "bodyFields": [
+          {
+            "name": "name",
+            "flag": "--name",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "description",
+            "flag": "--description",
+            "required": false,
+            "type": "string",
+            "nullable": true
+          },
+          {
+            "name": "status",
+            "flag": "--status",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "draft",
+              "active"
+            ]
+          },
+          {
+            "name": "trigger",
+            "flag": "--trigger",
+            "required": false,
+            "type": "object"
+          },
+          {
+            "name": "graph",
+            "flag": "--graph",
+            "required": false,
+            "type": "object"
+          },
+          {
+            "name": "tags",
+            "flag": "--tags",
+            "required": false,
+            "type": "array",
+            "itemType": "string"
+          },
+          {
+            "name": "folder_id",
+            "flag": "--folder-id",
+            "required": false,
+            "type": "string"
+          }
+        ]
       },
       "sdkMethod": "client.api.createAutomation",
       "parameters": [],
       "requestBody": {
-        "required": false,
-        "content": {}
+        "required": true,
+        "content": {
+          "application/json": {
+            "type": "object",
+            "properties": {
+              "description": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "folder_id": {
+                "format": "uuid",
+                "type": "string"
+              },
+              "graph": {
+                "type": "object",
+                "additionalProperties": true
+              },
+              "name": {
+                "maxLength": 200,
+                "type": "string"
+              },
+              "status": {
+                "enum": [
+                  "draft",
+                  "active"
+                ],
+                "type": "string"
+              },
+              "tags": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "trigger": {
+                "type": "object",
+                "additionalProperties": true
+              }
+            },
+            "additionalProperties": true
+          }
+        }
       },
       "responses": {
         "201": [],
@@ -3439,6 +3530,71 @@
           "application/json"
         ],
         "403": [
+          "application/json"
+        ],
+        "429": [
+          "application/json"
+        ],
+        "503": [
+          "application/json"
+        ]
+      },
+      "binaryResponse": false
+    },
+    {
+      "operationId": "createAutomationFolder",
+      "method": "POST",
+      "path": "/automation-folders",
+      "group": "Automations",
+      "summary": "Create automation folder",
+      "documentation": "https://docs.famulor.io/api-reference/introduction",
+      "cli": {
+        "command": "create-automation-folder",
+        "hidden": false,
+        "parameters": [],
+        "bodyFields": [
+          {
+            "name": "name",
+            "flag": "--name",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      },
+      "sdkMethod": "client.api.createAutomationFolder",
+      "parameters": [],
+      "requestBody": {
+        "required": true,
+        "content": {
+          "application/json": {
+            "required": [
+              "name"
+            ],
+            "type": "object",
+            "properties": {
+              "name": {
+                "maxLength": 80,
+                "minLength": 1,
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "responses": {
+        "201": [
+          "application/json"
+        ],
+        "400": [
+          "application/json"
+        ],
+        "401": [
+          "application/json"
+        ],
+        "403": [
+          "application/json"
+        ],
+        "409": [
           "application/json"
         ],
         "429": [
@@ -8484,6 +8640,65 @@
       "binaryResponse": false
     },
     {
+      "operationId": "deleteAutomationFolder",
+      "method": "DELETE",
+      "path": "/automation-folders/{id}",
+      "group": "Automations",
+      "summary": "Delete automation folder",
+      "documentation": "https://docs.famulor.io/api-reference/introduction",
+      "cli": {
+        "command": "delete-automation-folder",
+        "hidden": false,
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "flag": "id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "bodyFields": []
+      },
+      "sdkMethod": "client.api.deleteAutomationFolder",
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "format": "uuid",
+            "type": "string"
+          }
+        }
+      ],
+      "requestBody": {
+        "required": false,
+        "content": {}
+      },
+      "responses": {
+        "200": [
+          "application/json"
+        ],
+        "401": [
+          "application/json"
+        ],
+        "403": [
+          "application/json"
+        ],
+        "404": [
+          "application/json"
+        ],
+        "429": [
+          "application/json"
+        ],
+        "503": [
+          "application/json"
+        ]
+      },
+      "binaryResponse": false
+    },
+    {
       "operationId": "deleteAvatar",
       "method": "DELETE",
       "path": "/avatars/{id}",
@@ -11035,7 +11250,7 @@
       "path": "/automations/{id}/duplicate",
       "group": "Automations",
       "summary": "Duplicate automation",
-      "documentation": "https://docs.famulor.io/api-reference/introduction",
+      "documentation": "https://docs.famulor.io/api-reference/automations/duplicate-automation",
       "cli": {
         "command": "duplicate-automation",
         "hidden": false,
@@ -11398,6 +11613,68 @@
           "application/json"
         ],
         "502": []
+      },
+      "binaryResponse": false
+    },
+    {
+      "operationId": "exportAutomation",
+      "method": "GET",
+      "path": "/automations/{id}/export",
+      "group": "Automations",
+      "summary": "Export automation",
+      "documentation": "https://docs.famulor.io/api-reference/introduction",
+      "cli": {
+        "command": "export-automation",
+        "hidden": false,
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "flag": "id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "bodyFields": []
+      },
+      "sdkMethod": "client.api.exportAutomation",
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "format": "uuid",
+            "type": "string"
+          }
+        }
+      ],
+      "requestBody": {
+        "required": false,
+        "content": {}
+      },
+      "responses": {
+        "200": [
+          "application/json"
+        ],
+        "400": [
+          "application/json"
+        ],
+        "401": [
+          "application/json"
+        ],
+        "403": [
+          "application/json"
+        ],
+        "404": [
+          "application/json"
+        ],
+        "429": [
+          "application/json"
+        ],
+        "503": [
+          "application/json"
+        ]
       },
       "binaryResponse": false
     },
@@ -12236,6 +12513,126 @@
           "required": true,
           "schema": {
             "format": "uuid",
+            "type": "string"
+          }
+        }
+      ],
+      "requestBody": {
+        "required": false,
+        "content": {}
+      },
+      "responses": {
+        "200": [
+          "application/json"
+        ],
+        "401": [
+          "application/json"
+        ],
+        "403": [
+          "application/json"
+        ],
+        "404": [
+          "application/json"
+        ],
+        "429": [
+          "application/json"
+        ],
+        "503": [
+          "application/json"
+        ]
+      },
+      "binaryResponse": false
+    },
+    {
+      "operationId": "getAutomationShare",
+      "method": "GET",
+      "path": "/automations/{id}/share",
+      "group": "Automations",
+      "summary": "Get automation share link",
+      "documentation": "https://docs.famulor.io/api-reference/introduction",
+      "cli": {
+        "command": "get-automation-share",
+        "hidden": false,
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "flag": "id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "bodyFields": []
+      },
+      "sdkMethod": "client.api.getAutomationShare",
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "format": "uuid",
+            "type": "string"
+          }
+        }
+      ],
+      "requestBody": {
+        "required": false,
+        "content": {}
+      },
+      "responses": {
+        "200": [
+          "application/json"
+        ],
+        "400": [
+          "application/json"
+        ],
+        "401": [
+          "application/json"
+        ],
+        "403": [
+          "application/json"
+        ],
+        "404": [
+          "application/json"
+        ],
+        "429": [
+          "application/json"
+        ],
+        "503": [
+          "application/json"
+        ]
+      },
+      "binaryResponse": false
+    },
+    {
+      "operationId": "getAutomationTemplate",
+      "method": "GET",
+      "path": "/automation-templates/{slug}",
+      "group": "Automations",
+      "summary": "Get automation template",
+      "documentation": "https://docs.famulor.io/api-reference/introduction",
+      "cli": {
+        "command": "get-automation-template",
+        "hidden": false,
+        "parameters": [
+          {
+            "name": "slug",
+            "in": "path",
+            "flag": "slug",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "bodyFields": []
+      },
+      "sdkMethod": "client.api.getAutomationTemplate",
+      "parameters": [
+        {
+          "name": "slug",
+          "in": "path",
+          "required": true,
+          "schema": {
             "type": "string"
           }
         }
@@ -17838,6 +18235,96 @@
       "binaryResponse": false
     },
     {
+      "operationId": "importAutomation",
+      "method": "POST",
+      "path": "/automations/import",
+      "group": "Automations",
+      "summary": "Import automation",
+      "documentation": "https://docs.famulor.io/api-reference/introduction",
+      "cli": {
+        "command": "import-automation",
+        "hidden": false,
+        "parameters": [],
+        "bodyFields": [
+          {
+            "name": "file",
+            "flag": "--file",
+            "required": false,
+            "type": "any"
+          },
+          {
+            "name": "folder_id",
+            "flag": "--folder-id",
+            "required": false,
+            "type": "string",
+            "nullable": true
+          },
+          {
+            "name": "name",
+            "flag": "--name",
+            "required": false,
+            "type": "string"
+          }
+        ]
+      },
+      "sdkMethod": "client.api.importAutomation",
+      "parameters": [],
+      "requestBody": {
+        "required": true,
+        "content": {
+          "application/json": {
+            "type": "object",
+            "properties": {
+              "file": {
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/PortableAutomation"
+                  },
+                  {
+                    "type": "string"
+                  }
+                ]
+              },
+              "folder_id": {
+                "format": "uuid",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "name": {
+                "maxLength": 200,
+                "minLength": 1,
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "responses": {
+        "201": [
+          "application/json"
+        ],
+        "400": [
+          "application/json"
+        ],
+        "401": [
+          "application/json"
+        ],
+        "403": [
+          "application/json"
+        ],
+        "413": [],
+        "429": [
+          "application/json"
+        ],
+        "503": [
+          "application/json"
+        ]
+      },
+      "binaryResponse": false
+    },
+    {
       "operationId": "importAutomationConnection",
       "method": "POST",
       "path": "/automations/connections/import",
@@ -17946,6 +18433,102 @@
       },
       "responses": {
         "200": [
+          "application/json"
+        ],
+        "400": [
+          "application/json"
+        ],
+        "401": [
+          "application/json"
+        ],
+        "403": [
+          "application/json"
+        ],
+        "404": [
+          "application/json"
+        ],
+        "429": [
+          "application/json"
+        ],
+        "503": [
+          "application/json"
+        ]
+      },
+      "binaryResponse": false
+    },
+    {
+      "operationId": "importSharedAutomation",
+      "method": "POST",
+      "path": "/automation-shares/{token}/import",
+      "group": "Automations",
+      "summary": "Import shared automation",
+      "documentation": "https://docs.famulor.io/api-reference/introduction",
+      "cli": {
+        "command": "import-shared-automation",
+        "hidden": false,
+        "parameters": [
+          {
+            "name": "token",
+            "in": "path",
+            "flag": "token",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "bodyFields": [
+          {
+            "name": "folder_id",
+            "flag": "--folder-id",
+            "required": false,
+            "type": "string",
+            "nullable": true
+          },
+          {
+            "name": "name",
+            "flag": "--name",
+            "required": false,
+            "type": "string"
+          }
+        ]
+      },
+      "sdkMethod": "client.api.importSharedAutomation",
+      "parameters": [
+        {
+          "name": "token",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "maxLength": 64,
+            "minLength": 22,
+            "pattern": "^[A-Za-z0-9_-]+$",
+            "type": "string"
+          }
+        }
+      ],
+      "requestBody": {
+        "required": false,
+        "content": {
+          "application/json": {
+            "type": "object",
+            "properties": {
+              "folder_id": {
+                "format": "uuid",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "name": {
+                "maxLength": 200,
+                "minLength": 1,
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "responses": {
+        "201": [
           "application/json"
         ],
         "400": [
@@ -19345,6 +19928,44 @@
       "binaryResponse": false
     },
     {
+      "operationId": "listAutomationFolders",
+      "method": "GET",
+      "path": "/automation-folders",
+      "group": "Automations",
+      "summary": "List automation folders",
+      "documentation": "https://docs.famulor.io/api-reference/introduction",
+      "cli": {
+        "command": "list-automation-folders",
+        "hidden": false,
+        "parameters": [],
+        "bodyFields": []
+      },
+      "sdkMethod": "client.api.listAutomationFolders",
+      "parameters": [],
+      "requestBody": {
+        "required": false,
+        "content": {}
+      },
+      "responses": {
+        "200": [
+          "application/json"
+        ],
+        "401": [
+          "application/json"
+        ],
+        "403": [
+          "application/json"
+        ],
+        "429": [
+          "application/json"
+        ],
+        "503": [
+          "application/json"
+        ]
+      },
+      "binaryResponse": false
+    },
+    {
       "operationId": "listAutomationRuns",
       "method": "GET",
       "path": "/automations/{id}/runs",
@@ -19469,6 +20090,96 @@
       "binaryResponse": false
     },
     {
+      "operationId": "listAutomationTemplates",
+      "method": "GET",
+      "path": "/automation-templates",
+      "group": "Automations",
+      "summary": "List automation templates",
+      "documentation": "https://docs.famulor.io/api-reference/introduction",
+      "cli": {
+        "command": "list-automation-templates",
+        "hidden": false,
+        "parameters": [
+          {
+            "name": "query",
+            "in": "query",
+            "flag": "--query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "category",
+            "in": "query",
+            "flag": "--category",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "calls",
+              "bookings",
+              "leads",
+              "messaging",
+              "crm",
+              "team"
+            ]
+          }
+        ],
+        "bodyFields": []
+      },
+      "sdkMethod": "client.api.listAutomationTemplates",
+      "parameters": [
+        {
+          "name": "query",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "maxLength": 200,
+            "type": "string"
+          }
+        },
+        {
+          "name": "category",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "enum": [
+              "calls",
+              "bookings",
+              "leads",
+              "messaging",
+              "crm",
+              "team"
+            ],
+            "type": "string"
+          }
+        }
+      ],
+      "requestBody": {
+        "required": false,
+        "content": {}
+      },
+      "responses": {
+        "200": [
+          "application/json"
+        ],
+        "400": [
+          "application/json"
+        ],
+        "401": [
+          "application/json"
+        ],
+        "403": [
+          "application/json"
+        ],
+        "429": [
+          "application/json"
+        ],
+        "503": [
+          "application/json"
+        ]
+      },
+      "binaryResponse": false
+    },
+    {
       "operationId": "listAutomations",
       "method": "GET",
       "path": "/automations",
@@ -19478,11 +20189,28 @@
       "cli": {
         "command": "list-automations",
         "hidden": false,
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "folder_id",
+            "in": "query",
+            "flag": "--folder-id",
+            "required": false,
+            "type": "string"
+          }
+        ],
         "bodyFields": []
       },
       "sdkMethod": "client.api.listAutomations",
-      "parameters": [],
+      "parameters": [
+        {
+          "name": "folder_id",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
       "requestBody": {
         "required": false,
         "content": {}
@@ -31138,6 +31866,65 @@
       "binaryResponse": false
     },
     {
+      "operationId": "revokeAutomationShare",
+      "method": "DELETE",
+      "path": "/automations/{id}/share",
+      "group": "Automations",
+      "summary": "Stop sharing automation",
+      "documentation": "https://docs.famulor.io/api-reference/introduction",
+      "cli": {
+        "command": "revoke-automation-share",
+        "hidden": false,
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "flag": "id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "bodyFields": []
+      },
+      "sdkMethod": "client.api.revokeAutomationShare",
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "format": "uuid",
+            "type": "string"
+          }
+        }
+      ],
+      "requestBody": {
+        "required": false,
+        "content": {}
+      },
+      "responses": {
+        "200": [
+          "application/json"
+        ],
+        "401": [
+          "application/json"
+        ],
+        "403": [
+          "application/json"
+        ],
+        "404": [
+          "application/json"
+        ],
+        "429": [
+          "application/json"
+        ],
+        "503": [
+          "application/json"
+        ]
+      },
+      "binaryResponse": false
+    },
+    {
       "operationId": "revokeLoopDevice",
       "method": "DELETE",
       "path": "/loop/devices/{id}",
@@ -33402,6 +34189,92 @@
           "application/json"
         ],
         "409": [
+          "application/json"
+        ],
+        "429": [
+          "application/json"
+        ],
+        "503": [
+          "application/json"
+        ]
+      },
+      "binaryResponse": false
+    },
+    {
+      "operationId": "shareAutomation",
+      "method": "POST",
+      "path": "/automations/{id}/share",
+      "group": "Automations",
+      "summary": "Share automation",
+      "documentation": "https://docs.famulor.io/api-reference/introduction",
+      "cli": {
+        "command": "share-automation",
+        "hidden": false,
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "flag": "id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "bodyFields": [
+          {
+            "name": "description",
+            "flag": "--description",
+            "required": false,
+            "type": "string",
+            "nullable": true
+          }
+        ]
+      },
+      "sdkMethod": "client.api.shareAutomation",
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "format": "uuid",
+            "type": "string"
+          }
+        }
+      ],
+      "requestBody": {
+        "required": false,
+        "content": {
+          "application/json": {
+            "type": "object",
+            "properties": {
+              "description": {
+                "maxLength": 500,
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            }
+          }
+        }
+      },
+      "responses": {
+        "200": [
+          "application/json"
+        ],
+        "201": [
+          "application/json"
+        ],
+        "400": [
+          "application/json"
+        ],
+        "401": [
+          "application/json"
+        ],
+        "403": [
+          "application/json"
+        ],
+        "404": [
           "application/json"
         ],
         "429": [
@@ -36247,7 +37120,59 @@
             "type": "string"
           }
         ],
-        "bodyFields": []
+        "bodyFields": [
+          {
+            "name": "name",
+            "flag": "--name",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "description",
+            "flag": "--description",
+            "required": false,
+            "type": "string",
+            "nullable": true
+          },
+          {
+            "name": "status",
+            "flag": "--status",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "draft",
+              "active",
+              "paused",
+              "archived"
+            ]
+          },
+          {
+            "name": "trigger",
+            "flag": "--trigger",
+            "required": false,
+            "type": "object"
+          },
+          {
+            "name": "graph",
+            "flag": "--graph",
+            "required": false,
+            "type": "object"
+          },
+          {
+            "name": "tags",
+            "flag": "--tags",
+            "required": false,
+            "type": "array",
+            "itemType": "string"
+          },
+          {
+            "name": "folder_id",
+            "flag": "--folder-id",
+            "required": false,
+            "type": "string",
+            "nullable": true
+          }
+        ]
       },
       "sdkMethod": "client.api.updateAutomation",
       "parameters": [
@@ -36262,11 +37187,70 @@
         }
       ],
       "requestBody": {
-        "required": false,
-        "content": {}
+        "required": true,
+        "content": {
+          "application/json": {
+            "type": "object",
+            "properties": {
+              "description": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "folder_id": {
+                "format": "uuid",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "graph": {
+                "type": "object",
+                "additionalProperties": true
+              },
+              "name": {
+                "maxLength": 200,
+                "type": "string"
+              },
+              "status": {
+                "enum": [
+                  "draft",
+                  "active",
+                  "paused",
+                  "archived"
+                ],
+                "type": "string"
+              },
+              "tags": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "trigger": {
+                "type": "object",
+                "additionalProperties": true
+              }
+            },
+            "additionalProperties": true
+          }
+        }
       },
       "responses": {
         "200": [],
+        "400": [
+          "application/json"
+        ],
+        "401": [
+          "application/json"
+        ],
+        "403": [
+          "application/json"
+        ],
+        "404": [
+          "application/json"
+        ],
         "429": [
           "application/json"
         ],
@@ -36315,6 +37299,92 @@
       },
       "responses": {
         "200": [],
+        "429": [
+          "application/json"
+        ],
+        "503": [
+          "application/json"
+        ]
+      },
+      "binaryResponse": false
+    },
+    {
+      "operationId": "updateAutomationFolder",
+      "method": "PATCH",
+      "path": "/automation-folders/{id}",
+      "group": "Automations",
+      "summary": "Rename automation folder",
+      "documentation": "https://docs.famulor.io/api-reference/introduction",
+      "cli": {
+        "command": "update-automation-folder",
+        "hidden": false,
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "flag": "id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "bodyFields": [
+          {
+            "name": "name",
+            "flag": "--name",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      },
+      "sdkMethod": "client.api.updateAutomationFolder",
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "format": "uuid",
+            "type": "string"
+          }
+        }
+      ],
+      "requestBody": {
+        "required": true,
+        "content": {
+          "application/json": {
+            "required": [
+              "name"
+            ],
+            "type": "object",
+            "properties": {
+              "name": {
+                "maxLength": 80,
+                "minLength": 1,
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "responses": {
+        "200": [
+          "application/json"
+        ],
+        "400": [
+          "application/json"
+        ],
+        "401": [
+          "application/json"
+        ],
+        "403": [
+          "application/json"
+        ],
+        "404": [
+          "application/json"
+        ],
+        "409": [
+          "application/json"
+        ],
         "429": [
           "application/json"
         ],
@@ -41645,6 +42715,99 @@
       },
       "responses": {
         "200": [
+          "application/json"
+        ],
+        "429": [
+          "application/json"
+        ],
+        "503": [
+          "application/json"
+        ]
+      },
+      "binaryResponse": false
+    },
+    {
+      "operationId": "useAutomationTemplate",
+      "method": "POST",
+      "path": "/automation-templates/{slug}/use",
+      "group": "Automations",
+      "summary": "Use automation template",
+      "documentation": "https://docs.famulor.io/api-reference/introduction",
+      "cli": {
+        "command": "use-automation-template",
+        "hidden": false,
+        "parameters": [
+          {
+            "name": "slug",
+            "in": "path",
+            "flag": "slug",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "bodyFields": [
+          {
+            "name": "folder_id",
+            "flag": "--folder-id",
+            "required": false,
+            "type": "string",
+            "nullable": true
+          },
+          {
+            "name": "name",
+            "flag": "--name",
+            "required": false,
+            "type": "string"
+          }
+        ]
+      },
+      "sdkMethod": "client.api.useAutomationTemplate",
+      "parameters": [
+        {
+          "name": "slug",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "requestBody": {
+        "required": false,
+        "content": {
+          "application/json": {
+            "type": "object",
+            "properties": {
+              "folder_id": {
+                "format": "uuid",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "name": {
+                "maxLength": 200,
+                "minLength": 1,
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "responses": {
+        "201": [
+          "application/json"
+        ],
+        "400": [
+          "application/json"
+        ],
+        "401": [
+          "application/json"
+        ],
+        "403": [
+          "application/json"
+        ],
+        "404": [
           "application/json"
         ],
         "429": [
@@ -47101,6 +48264,68 @@
         }
       },
       "additionalProperties": false
+    },
+    "#/components/schemas/PortableAutomation": {
+      "required": [
+        "format",
+        "version",
+        "name",
+        "description",
+        "tags",
+        "trigger",
+        "graph"
+      ],
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "exported_at": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "format": {
+          "enum": [
+            "famulor.automation"
+          ],
+          "type": "string"
+        },
+        "graph": {
+          "type": "object",
+          "additionalProperties": true
+        },
+        "name": {
+          "maxLength": 200,
+          "type": "string"
+        },
+        "source": {
+          "enum": [
+            "export",
+            "share",
+            "template"
+          ],
+          "type": "string"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "trigger": {
+          "type": "object",
+          "additionalProperties": true
+        },
+        "version": {
+          "enum": [
+            1
+          ],
+          "type": "integer"
+        }
+      }
     },
     "#/components/schemas/QaScorecardConfig": {
       "type": "object",

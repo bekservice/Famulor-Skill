@@ -1,6 +1,6 @@
 {
   "name": "famulor",
-  "version": "2.3.0",
+  "version": "2.4.0",
   "description": "Build and improve Famulor voice, WhatsApp and webchat assistants with channel-specific prompting, complete API guidance and workspace-aware MCP tools.",
   "contextFileName": "GEMINI.md",
   "mcpServers": {

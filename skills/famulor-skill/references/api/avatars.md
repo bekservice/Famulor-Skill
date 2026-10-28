@@ -1,6 +1,6 @@
 # Avatars API operations
 
-Reviewed 2026-10-27. 7 public operations. [All areas](index.md) · [Execution guide](../api-and-sdk.md)
+Reviewed 2026-10-28. 7 public operations. [All areas](index.md) · [Execution guide](../api-and-sdk.md)
 
 Paths are relative to `https://app.famulor.io/api/v1`. Each operation ID is also the typed SDK method `client.api.<operationId>`. Look up its exact request contract with the bundled `find-operation.py`; CLI help reflects the installed version.
 
