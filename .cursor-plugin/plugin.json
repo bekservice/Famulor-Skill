@@ -1,7 +1,7 @@
 {
   "name": "famulor",
   "displayName": "Famulor",
-  "version": "2.4.0",
+  "version": "2.5.0",
   "description": "Build and improve Famulor voice, WhatsApp and webchat assistants with channel-specific prompting, complete API guidance and workspace-aware MCP tools.",
   "author": {
     "name": "Famulor",

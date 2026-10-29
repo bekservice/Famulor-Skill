@@ -56,7 +56,9 @@ A remote MCP tool list loaded in the editor does not prove the tool works in a c
 
 ## Voice acceptance
 
-Listen to the actual audio when available. Check the opening, first user turn, interruption and recovery, difficult names/numbers, tool waits, closing and a repeat conversation. Include a realistic noisy or telephony scenario when that is the intended channel. A transcript can look correct while the spoken output is clipped, delayed or mispronounced.
+Listen to the actual audio when available. Check the opening, first user turn, interruption and recovery, difficult names/numbers, tool waits, closing and a repeat conversation. Include a realistic noisy or telephony scenario when that is the intended channel. A transcript can look correct while the spoken output is clipped, delayed or mispronounced. Read a call in the order it was spoken: a greeting can be stored after the caller's first words and is shown in spoken order, including on older calls.
+
+A call in which the caller never spoke is not scored and is not charged for AI Quality Assurance. The scorecard then says it could not be scored and leaves the score empty. When a call is scored, the judge can see the assistant's tool actions, not only the spoken words. A cohort run lists silent calls as skipped rather than as failures.
 
 Response timings describe different stages. Do not sum overlapping recognition, model and speech measurements. Compare equivalent test types and modes. A missing metric means unmeasured, not zero latency; text simulation completion time is not voice response latency. Allow completed history records and measurements to settle before drawing conclusions.
 

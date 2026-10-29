@@ -138,6 +138,8 @@ Website chat uploads and asynchronous messaging attachments have different capab
 
 A voice test does not validate the web chat experience. Test the actual widget on an allowed website, with a fresh session, the intended language, pre-chat values, links, tools, attachments, and the final History record. Opening the launcher alone is not a conversation-started event. Web chat uses conversation events; do not attach a phone-only completed-call automation and assume it covers text chat.
 
+Quick replies are optional clickable answers in live website chat and the dashboard Test Chat. They stay off until switched on under Settings → Conversation → Live chat → Interactive responses. They do not appear on phone calls, WhatsApp, Messenger, Slack, or email. A click sends that button's text as the visitor's next message; it is not a separate command. The assistant offers them only when the visitor is choosing among a few short options, and it keeps answering in normal text as well.
+
 Use the [web chat support template](../assets/prompts/webchat-support.md).
 
 ## Native email and connected mailboxes

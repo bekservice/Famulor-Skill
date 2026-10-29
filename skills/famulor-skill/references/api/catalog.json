@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "reviewedAt": "2026-10-28",
+  "reviewedAt": "2026-10-29",
   "source": "Famulor public OpenAPI, CLI command catalog and TypeScript SDK operation descriptors",
-  "openapiSha256": "745ee404e151f3e9fab54fc64ed41141d56a979d82a20c8a7f4f9e04abf36efb",
+  "openapiSha256": "66f58931e4b98bcde13460db8bc6284b15595f24093e99255b265b868304dbb2",
   "baseUrl": "https://app.famulor.io/api/v1",
   "notice": "Dated navigation and request-shape snapshot, not a runtime validator. Check the live public schema and installed client before execution. Descriptions, examples, default values and response properties are intentionally omitted.",
   "operations": [
@@ -668,6 +668,18 @@
               "fr",
               "es"
             ]
+          },
+          {
+            "name": "effort",
+            "flag": "--effort",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "low",
+              "medium",
+              "high",
+              "xhigh"
+            ]
           }
         ]
       },
@@ -688,6 +700,15 @@
                   true
                 ],
                 "type": "boolean"
+              },
+              "effort": {
+                "enum": [
+                  "low",
+                  "medium",
+                  "high",
+                  "xhigh"
+                ],
+                "type": "string"
               },
               "locale": {
                 "enum": [
@@ -2078,6 +2099,12 @@
           {
             "name": "response_by_channel",
             "flag": "--response-by-channel",
+            "required": false,
+            "type": "object"
+          },
+          {
+            "name": "interactive_responses",
+            "flag": "--interactive-responses",
             "required": false,
             "type": "object"
           },
@@ -6903,6 +6930,9 @@
       },
       "responses": {
         "201": [],
+        "400": [
+          "application/json"
+        ],
         "402": [],
         "403": [],
         "429": [
@@ -22588,7 +22618,8 @@
             "type": "string",
             "enum": [
               "passed",
-              "failed"
+              "failed",
+              "not_scorable"
             ]
           },
           {
@@ -22842,7 +22873,8 @@
           "schema": {
             "enum": [
               "passed",
-              "failed"
+              "failed",
+              "not_scorable"
             ],
             "type": "string"
           }
@@ -29910,6 +29942,12 @@
             "type": "object"
           },
           {
+            "name": "interactive_responses",
+            "flag": "--interactive-responses",
+            "required": false,
+            "type": "object"
+          },
+          {
             "name": "mode",
             "flag": "--mode",
             "required": false,
@@ -35901,6 +35939,12 @@
           {
             "name": "response_by_channel",
             "flag": "--response-by-channel",
+            "required": false,
+            "type": "object"
+          },
+          {
+            "name": "interactive_responses",
+            "flag": "--interactive-responses",
             "required": false,
             "type": "object"
           },
@@ -43731,6 +43775,9 @@
           "minimum": 30,
           "type": "integer"
         },
+        "interactive_responses": {
+          "$ref": "#/components/schemas/InteractiveResponses"
+        },
         "is_active": {
           "type": "boolean"
         },
@@ -44810,9 +44857,23 @@
           "minimum": 5,
           "type": "integer"
         },
+        "timezone": {
+          "maxLength": 64,
+          "type": "string"
+        },
         "tones": {
           "maxLength": 32,
           "pattern": "^[0-9*#A-D]{1,32}$",
+          "type": "string"
+        },
+        "transfer_hours": {
+          "$ref": "#/components/schemas/TransferHours"
+        },
+        "transfer_hours_enabled": {
+          "type": "boolean"
+        },
+        "transfer_hours_note": {
+          "maxLength": 500,
           "type": "string"
         },
         "type": {
@@ -46268,7 +46329,8 @@
         "qa": {
           "enum": [
             "passed",
-            "failed"
+            "failed",
+            "not_scorable"
           ],
           "type": "string"
         },
@@ -46405,6 +46467,38 @@
           "type": "string"
         }
       }
+    },
+    "#/components/schemas/InteractiveResponses": {
+      "required": [
+        "version",
+        "quick_replies"
+      ],
+      "type": "object",
+      "properties": {
+        "quick_replies": {
+          "required": [
+            "enabled"
+          ],
+          "type": "object",
+          "properties": {
+            "enabled": {
+              "type": "boolean"
+            },
+            "instructions": {
+              "maxLength": 500,
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        },
+        "version": {
+          "enum": [
+            1
+          ],
+          "type": "integer"
+        }
+      },
+      "additionalProperties": false
     },
     "#/components/schemas/KnowledgeBaseCreate": {
       "required": [
@@ -47789,6 +47883,19 @@
           "items": {
             "type": "string"
           }
+        },
+        "effort": {
+          "enum": [
+            "low",
+            "medium",
+            "high",
+            "xhigh",
+            null
+          ],
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "filters": {
           "$ref": "#/components/schemas/MissionFilterGroup"
@@ -49381,6 +49488,22 @@
         }
       },
       "additionalProperties": false
+    },
+    "#/components/schemas/TransferHours": {
+      "type": "object",
+      "additionalProperties": {
+        "maxItems": 4,
+        "type": "array",
+        "items": {
+          "maxItems": 2,
+          "minItems": 2,
+          "type": "array",
+          "items": {
+            "pattern": "^([01][0-9]|2[0-3]):[0-5][0-9]$",
+            "type": "string"
+          }
+        }
+      }
     },
     "#/components/schemas/TranslationConfig": {
       "required": [
