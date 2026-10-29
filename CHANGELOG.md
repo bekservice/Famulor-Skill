@@ -1,5 +1,13 @@
 # Changelog
 
+## 2.5.0 — 2026-10-29
+
+- Refresh the bundled catalogs to the 2026-10-29 public contracts. Still 507 MCP tools and 501 public API operations.
+- Live chat: optional quick replies. Clickable answers in website chat and Test Chat, off until enabled. A click is the visitor's next message. Phone, WhatsApp, Messenger, Slack and email do not show them.
+- Voice: a human-transfer tool can have its own hours. Outside those hours the transfer is refused and the call continues.
+- History: transcripts are read in spoken order, including older calls. A greeting can appear after the caller's first words.
+- Quality Assurance: a call with no caller speech is not scored and not charged. A scored call's judge can see the assistant's tool actions.
+
 ## 2.4.0 — 2026-10-28
 
 - Refresh the bundled catalogs to 507 MCP tools and 501 public API operations.

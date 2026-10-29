@@ -1,6 +1,6 @@
 # Public API operation index
 
-Reviewed 2026-10-28: **501 operations across 40 areas**. Every operation is cross-checked against the generated CLI catalog and TypeScript SDK descriptors.
+Reviewed 2026-10-29: **501 operations across 40 areas**. Every operation is cross-checked against the generated CLI catalog and TypeScript SDK descriptors.
 
 Use this index to find the right endpoint. Open only the relevant area; use [API, CLI and SDK guidance](../api-and-sdk.md) for authentication, execution and verification. Public reseller operations remain subject to the authenticated workspace's entitlement and permissions.
 

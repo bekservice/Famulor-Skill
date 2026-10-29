@@ -4,7 +4,7 @@ description: Design, configure, test and improve Famulor voice, WhatsApp, webcha
 license: MIT
 metadata:
   author: Famulor
-  version: "2.4.0"
+  version: "2.5.0"
   homepage: https://github.com/bekservice/Famulor-Skill
 ---
 
@@ -90,7 +90,7 @@ For a concrete target, use one [worked example](references/examples/README.md) a
 
 **History:** `list_history` is an omnichannel index. Use a detail tool when available; a preview is not a full transcript. Use `get_call` for call detail and `get_email_history_item` for a native email thread. Do not infer active speech processing from a text-chat configuration's voice settings.
 
-**Voice and messaging:** customer assistant handoff supports voice, web chat, messaging and native email; Milian is the separate platform copilot. Distinguish assistant handoff, transfer to a human, pause for human takeover and conversation end. Confirm a booking, send or transfer only from its successful tool result. A voice test can run real tools; review its effects before execution.
+**Voice and messaging:** customer assistant handoff supports voice, web chat, messaging and native email; Milian is the separate platform copilot. Distinguish assistant handoff, transfer to a human, pause for human takeover and conversation end. Confirm a booking, send or transfer only from its successful tool result. A transfer tool can refuse outside its own hours while the call continues. Quick replies are live website chat and Test Chat only, and stay off until enabled. A voice test can run real tools; review its effects before execution. A caller who never spoke is not scored.
 
 **Billing and telephony:** search and inspect the offer before buying a number. Purchase, assignment, import, routing and release are separate actions. A checkout or payment link does not mean payment is complete.
 
