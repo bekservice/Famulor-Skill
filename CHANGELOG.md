@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.6.0 — 2026-11-01
+
+- Refresh the bundled catalogs to the 2026-11-01 public contracts: 509 MCP tools and 503 public API operations, including cancelling a running CRM sync.
+- Number verification: every verification needs an address, even where the country's rules list no address document. An older verification in review or approved without one (`has_address: false`) gets it with `add_number_verification_address` / `POST /phone-numbers/verifications/{id}/address` (`famulor add-phone-number-verification-address`); it is not resubmitted and stays approved.
+- Buying a number: `verification_address_required` names the verification that still needs its address; `bundle_address_missing` is a support case.
+
 ## 2.5.0 — 2026-10-29
 
 - Refresh the bundled catalogs to the 2026-10-29 public contracts. Still 507 MCP tools and 501 public API operations.

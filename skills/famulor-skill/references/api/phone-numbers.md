@@ -1,6 +1,6 @@
 # Phone Numbers API operations
 
-Reviewed 2026-10-29. 15 public operations. [All areas](index.md) · [Execution guide](../api-and-sdk.md)
+Reviewed 2026-11-01. 16 public operations. [All areas](index.md) · [Execution guide](../api-and-sdk.md)
 
 Paths are relative to `https://app.famulor.io/api/v1`. Each operation ID is also the typed SDK method `client.api.<operationId>`. Look up its exact request contract with the bundled `find-operation.py`; CLI help reflects the installed version.
 
@@ -8,6 +8,7 @@ Hidden CLI operations require an interactive/browser flow or `famulor api` where
 
 | Operation ID / SDK method suffix | HTTP endpoint | CLI command | Purpose |
 | --- | --- | --- | --- |
+| `addPhoneNumberVerificationAddress` | `POST /phone-numbers/verifications/{id}/address` | `famulor add-phone-number-verification-address` | [Add an address to a number verification](https://docs.famulor.io/api-reference/phone-numbers/add-an-address-to-a-number-verification) |
 | `buyPhoneNumber` | `POST /phone-numbers` | `famulor buy-phone-number` | [Buy a phone number](https://docs.famulor.io/api-reference/phone-numbers/buy-a-phone-number) |
 | `deletePhoneNumberVerification` | `DELETE /phone-numbers/verifications/{id}` | `famulor delete-phone-number-verification` | [Delete regulatory number verification](https://docs.famulor.io/api-reference/introduction) |
 | `getPhoneNumber` | `GET /phone-numbers/{id}` | `famulor get-phone-number` | [Get a phone number](https://docs.famulor.io/api-reference/phone-numbers/get-a-phone-number) |
