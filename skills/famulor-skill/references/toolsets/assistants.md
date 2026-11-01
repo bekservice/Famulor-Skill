@@ -2,7 +2,7 @@
 
 Assistants, models, voices, reusable tools, bookings, integrations, tests, and simulations. Connect only this group with `https://app.famulor.io/mcp?toolsets=assistants`.
 
-This 2026-10-29 snapshot covers all 122 tools assigned to `assistants` in the canonical 507-tool registry. The live MCP `tools/list` response is authoritative for arguments, current availability, annotations, and plan or role gating. Never invent fields from this catalog.
+This 2026-11-01 snapshot covers all 122 tools assigned to `assistants` in the canonical 509-tool registry. The live MCP `tools/list` response is authoritative for arguments, current availability, annotations, and plan or role gating. Never invent fields from this catalog.
 
 Toolsets limit discovery context; they do not grant access. OAuth/API scopes and workspace roles are enforced separately. The Effect column reflects MCP risk annotations: `Delete/destructive` also covers overwrites or changes that can remove data or safeguards.
 
@@ -72,7 +72,7 @@ Toolsets limit discovery context; they do not grant access. OAuth/API scopes and
 | `get_tool` | Read-only | `assistants:read` | Immediate | Read a single reusable tool by ID. Secret values in the config are always masked. |
 | `get_voice_clone_capability` | Read-only | `voices:read or assistants:read` | Immediate | Check whether this workspace can create cloned voices and return its lifetime free creation allowance and current creation price in credits. |
 | `get_voice_clone_job` | Read-only | `voices:read or assistants:read` | Immediate | Get the workspace-scoped status of a voice-clone create or delete job by its opaque ID. |
-| `get_voices` | Read-only | `voices:read or assistants:read` | Immediate | Browse the workspace voice library using provider-neutral local selectors. Results can be filtered by language, gender, accent, or free-text search. Each result has a voice ID and mode-specific compatibility. Full Duplex uses its native voice for greetings, consent, and tool announcements. |
+| `get_voices` | Read-only | `voices:read or assistants:read` | Immediate | Browse the workspace voice library using provider-neutral local selectors. Results can be filtered by language, gender, accent, or free-text search. Set translation to true to list only voices that can be saved on a Translate assistant. Each result has a voice ID and mode-specific compatibility. Full Duplex uses its native voice for greetings, consent, and tool announcements. |
 | `get_webhook_subscription` | Read-only | `settings:read` | Immediate | Read one workspace webhook subscription without revealing its signing secret. Requires workspace admin access. |
 | `import_provider_assistants` | Write/action | `assistants:write` | Immediate | Import selected Retell AI, Vapi, Synthflow, or ElevenAgents assistant shells as inactive Famulor assistants. Preview first. Tools, knowledge, flows, squads, phone numbers, routing, and credentials are not copied and remain explicit review work. |
 | `list_acuity_appointment_types` | Read-only | `integrations:read or assistants:read` | Immediate | List active appointment types for a connected Acuity account, including ID, name, duration, kind, and eligible calendars. |

@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "reviewedAt": "2026-10-29",
+  "reviewedAt": "2026-11-01",
   "source": "Famulor public OpenAPI, CLI command catalog and TypeScript SDK operation descriptors",
-  "openapiSha256": "66f58931e4b98bcde13460db8bc6284b15595f24093e99255b265b868304dbb2",
+  "openapiSha256": "cbbd3e2f89b7139ea0862d362f88b35b46f3054521c52542bcc0854a04e72f58",
   "baseUrl": "https://app.famulor.io/api/v1",
   "notice": "Dated navigation and request-shape snapshot, not a runtime validator. Check the live public schema and installed client before execution. Descriptions, examples, default values and response properties are intentionally omitted.",
   "operations": [
@@ -371,6 +371,128 @@
           "application/json"
         ],
         "401": [
+          "application/json"
+        ],
+        "403": [
+          "application/json"
+        ],
+        "404": [
+          "application/json"
+        ],
+        "409": [
+          "application/json"
+        ],
+        "429": [
+          "application/json"
+        ],
+        "503": [
+          "application/json"
+        ]
+      },
+      "binaryResponse": false
+    },
+    {
+      "operationId": "addPhoneNumberVerificationAddress",
+      "method": "POST",
+      "path": "/phone-numbers/verifications/{id}/address",
+      "group": "Phone Numbers",
+      "summary": "Add an address to a number verification",
+      "documentation": "https://docs.famulor.io/api-reference/phone-numbers/add-an-address-to-a-number-verification",
+      "cli": {
+        "command": "add-phone-number-verification-address",
+        "hidden": false,
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "flag": "id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "bodyFields": [
+          {
+            "name": "customer_name",
+            "flag": "--customer-name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "street",
+            "flag": "--street",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "city",
+            "flag": "--city",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "region",
+            "flag": "--region",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "postal_code",
+            "flag": "--postal-code",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      },
+      "sdkMethod": "client.api.addPhoneNumberVerificationAddress",
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "format": "uuid",
+            "type": "string"
+          }
+        }
+      ],
+      "requestBody": {
+        "required": true,
+        "content": {
+          "application/json": {
+            "required": [
+              "customer_name",
+              "street",
+              "city",
+              "region",
+              "postal_code"
+            ],
+            "type": "object",
+            "properties": {
+              "city": {
+                "type": "string"
+              },
+              "customer_name": {
+                "maxLength": 64,
+                "type": "string"
+              },
+              "postal_code": {
+                "type": "string"
+              },
+              "region": {
+                "type": "string"
+              },
+              "street": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "responses": {
+        "200": [
+          "application/json"
+        ],
+        "400": [
           "application/json"
         ],
         "403": [
@@ -1142,6 +1264,76 @@
           "application/json"
         ],
         "404": [
+          "application/json"
+        ],
+        "429": [
+          "application/json"
+        ],
+        "503": [
+          "application/json"
+        ]
+      },
+      "binaryResponse": false
+    },
+    {
+      "operationId": "cancelCrmSyncRun",
+      "method": "POST",
+      "path": "/crm-syncs/{id}/runs/{runId}/cancel",
+      "group": "Automations",
+      "summary": "Cancel CRM sync run",
+      "documentation": "https://docs.famulor.io/api-reference/automations/cancel-crm-sync-run",
+      "cli": {
+        "command": "cancel-crm-sync-run",
+        "hidden": false,
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "flag": "id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "runId",
+            "in": "path",
+            "flag": "run-id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "bodyFields": []
+      },
+      "sdkMethod": "client.api.cancelCrmSyncRun",
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        {
+          "name": "runId",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "format": "uuid",
+            "type": "string"
+          }
+        }
+      ],
+      "requestBody": {
+        "required": false,
+        "content": {}
+      },
+      "responses": {
+        "200": [],
+        "404": [
+          "application/json"
+        ],
+        "409": [
           "application/json"
         ],
         "429": [
@@ -27148,6 +27340,13 @@
               2,
               3
             ]
+          },
+          {
+            "name": "translation",
+            "in": "query",
+            "flag": "--translation",
+            "required": false,
+            "type": "boolean"
           }
         ],
         "bodyFields": []
@@ -27245,6 +27444,14 @@
               3
             ],
             "type": "integer"
+          }
+        },
+        {
+          "name": "translation",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "boolean"
           }
         }
       ],
@@ -34940,7 +35147,7 @@
           {
             "name": "address",
             "flag": "--address",
-            "required": false,
+            "required": true,
             "type": "object"
           },
           {
@@ -34974,7 +35181,8 @@
             "required": [
               "country",
               "email",
-              "prefix"
+              "prefix",
+              "address"
             ],
             "type": "object",
             "properties": {
@@ -44655,6 +44863,64 @@
         }
       }
     },
+    "#/components/schemas/BrowserUseOAuthLogin": {
+      "required": [
+        "method",
+        "connection_id"
+      ],
+      "type": "object",
+      "properties": {
+        "connection_id": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "method": {
+          "enum": [
+            "oauth"
+          ],
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "#/components/schemas/BrowserUsePasswordLogin": {
+      "required": [
+        "method",
+        "username",
+        "password"
+      ],
+      "type": "object",
+      "properties": {
+        "login_url": {
+          "format": "uri",
+          "type": "string"
+        },
+        "method": {
+          "enum": [
+            "password"
+          ],
+          "type": "string"
+        },
+        "password": {
+          "maxLength": 1000,
+          "minLength": 1,
+          "type": "string"
+        },
+        "totp_secret": {
+          "maxLength": 160,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "username": {
+          "maxLength": 320,
+          "minLength": 1,
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
     "#/components/schemas/BuiltinTool": {
       "required": [
         "type"
@@ -44776,6 +45042,19 @@
             "fixed"
           ],
           "type": "string"
+        },
+        "login": {
+          "oneOf": [
+            {
+              "$ref": "#/components/schemas/BrowserUsePasswordLogin"
+            },
+            {
+              "$ref": "#/components/schemas/BrowserUseOAuthLogin"
+            },
+            {
+              "type": "null"
+            }
+          ]
         },
         "max_digits": {
           "maximum": 32,

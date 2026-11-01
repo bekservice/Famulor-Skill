@@ -2,7 +2,7 @@
 
 Automations, connections, CRM sync, routines, and runs. Connect only this group with `https://app.famulor.io/mcp?toolsets=automations`.
 
-This 2026-10-29 snapshot covers all 60 tools assigned to `automations` in the canonical 507-tool registry. The live MCP `tools/list` response is authoritative for arguments, current availability, annotations, and plan or role gating. Never invent fields from this catalog.
+This 2026-11-01 snapshot covers all 61 tools assigned to `automations` in the canonical 509-tool registry. The live MCP `tools/list` response is authoritative for arguments, current availability, annotations, and plan or role gating. Never invent fields from this catalog.
 
 Toolsets limit discovery context; they do not grant access. OAuth/API scopes and workspace roles are enforced separately. The Effect column reflects MCP risk annotations: `Delete/destructive` also covers overwrites or changes that can remove data or safeguards.
 
@@ -10,6 +10,7 @@ Toolsets limit discovery context; they do not grant access. OAuth/API scopes and
 
 | Tool | Effect | Accepted scope | Execution | Purpose snapshot |
 | --- | --- | --- | --- | --- |
+| `cancel_crm_sync_run` | Delete/destructive | `automations:write or calls:write` | Immediate | Stop a queued or running CRM sync run. The run ends after the page it is processing; contacts imported so far are kept. Use get_crm_sync to find the active run. |
 | `create_assistant_automation` | Write/action | `assistants:write or automations:write` | Immediate | Create a draft automation and securely connect it across voice, web chat, messaging, and email conversations. The webhook credential and tool assignment are handled automatically. |
 | `create_automation` | Write/action | `automations:write or calls:write` | Immediate | Create a native automation. For call.completed / call.variables, trigger.assistant_id is required before status=active. For call.variables, end the graph with variables.return. |
 | `create_automation_connection` | Write/action | `automations:write or calls:write` | Immediate | Store a reusable workspace credential for an external CRM (HubSpot, HighLevel, Salesforce, Pipedrive, Close, Zoho, Attio, Keap, or Twenty), SMTP relay, or an MCP endpoint. `credentials` values are AES-256-GCM encrypted at rest. |

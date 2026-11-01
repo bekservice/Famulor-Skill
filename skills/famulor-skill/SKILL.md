@@ -4,7 +4,7 @@ description: Design, configure, test and improve Famulor voice, WhatsApp, webcha
 license: MIT
 metadata:
   author: Famulor
-  version: "2.5.0"
+  version: "2.6.0"
   homepage: https://github.com/bekservice/Famulor-Skill
 ---
 
@@ -48,10 +48,10 @@ https://app.famulor.io/mcp?toolsets=assistants,calls
 | `calls` | Unified history, transcripts, quality review and permitted call control | 34 | [Calls](references/toolsets/calls.md) |
 | `campaigns` | Campaigns, audience, leads, consent and suppression | 34 | [Campaigns](references/toolsets/campaigns.md) |
 | `messaging` | WhatsApp, social channels, email, templates and conversations | 48 | [Messaging](references/toolsets/messaging.md) |
-| `telephony` | Numbers, own carriers, routing and team calling | 70 | [Telephony](references/toolsets/telephony.md) |
+| `telephony` | Numbers, own carriers, routing and team calling | 71 | [Telephony](references/toolsets/telephony.md) |
 | `knowledge` | Documents, FAQs, websites and connected knowledge sources | 28 | [Knowledge](references/toolsets/knowledge.md) |
 | `dashboards` | Analytics and dashboard widgets | 19 | [Dashboards](references/toolsets/dashboards.md) |
-| `automations` | Workflows, connections, CRM sync, Missions and run history | 60 | [Automations](references/toolsets/automations.md) |
+| `automations` | Workflows, connections, CRM sync, Missions and run history | 61 | [Automations](references/toolsets/automations.md) |
 | `billing` | Balance, usage, invoices and billing recovery | 22 | [Billing](references/toolsets/billing.md) |
 | `settings` | Workspaces, preferences, retention, domains and credentials | 43 | [Settings](references/toolsets/settings.md) |
 | `platform` | Authorized reseller customer management | 19 | [Reseller management](references/toolsets/platform.md) |
@@ -59,7 +59,7 @@ https://app.famulor.io/mcp?toolsets=assistants,calls
 | `tasks` | Durable exports, crawls, simulations and preparation | 4 | [Tasks](references/toolsets/tasks.md) |
 | `milian` | Workspace questions and voice sessions using additional credits | 2 | [Milian](references/toolsets/milian.md) |
 
-The dated snapshot contains **507 tools** across 14 groups. `list_mcp_toolsets` reports groups visible to a custom connection. The public `assistant-history` profile intentionally provides only 11 read tools. Installing a skill cannot expand that connection's permissions. Model-catalog visibility may require AI Safety & Control; use available defaults rather than trying to bypass a denial.
+The dated snapshot contains **509 tools** across 14 groups. `list_mcp_toolsets` reports groups visible to a custom connection. The public `assistant-history` profile intentionally provides only 11 read tools. Installing a skill cannot expand that connection's permissions. Model-catalog visibility may require AI Safety & Control; use available defaults rather than trying to bypass a denial.
 
 ## Design before configuration
 
@@ -92,7 +92,7 @@ For a concrete target, use one [worked example](references/examples/README.md) a
 
 **Voice and messaging:** customer assistant handoff supports voice, web chat, messaging and native email; Milian is the separate platform copilot. Distinguish assistant handoff, transfer to a human, pause for human takeover and conversation end. Confirm a booking, send or transfer only from its successful tool result. A transfer tool can refuse outside its own hours while the call continues. Quick replies are live website chat and Test Chat only, and stay off until enabled. A voice test can run real tools; review its effects before execution. A caller who never spoke is not scored.
 
-**Billing and telephony:** search and inspect the offer before buying a number. Purchase, assignment, import, routing and release are separate actions. A checkout or payment link does not mean payment is complete.
+**Billing and telephony:** search and inspect the offer before buying a number. Purchase, assignment, import, routing and release are separate actions. A checkout or payment link does not mean payment is complete. Every number verification needs an address, even where the country's rules list no address document. A case in review or approved with `has_address: false` gets it with `add_number_verification_address` (`famulor add-phone-number-verification-address`); never resubmit or delete an approved case for it. A purchase error `verification_address_required` points to that case; `bundle_address_missing` is a support case.
 
 **Tasks:** retain the returned task handle and follow queued/running/completed/failed/cancelled status. Cancellation cannot promise rollback of an external action already accepted.
 
