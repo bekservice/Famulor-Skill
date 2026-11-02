@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.6.1 — 2026-11-02
+
+- Number buyers can review the quoted monthly rent and setup fee in the checkout currency. The skill explains how to refresh an offer for the same number and how to handle an address or voice-capability conflict.
+- Refreshed the public catalog of 509 MCP tools and 503 API operations and aligned the README with the bundled references.
+
 ## 2.6.0 — 2026-11-01
 
 - Refresh the bundled catalogs to the 2026-11-01 public contracts: 509 MCP tools and 503 public API operations, including cancelling a running CRM sync.
