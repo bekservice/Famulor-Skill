@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.6.2 — 2026-11-02
+
+- Explain which part of a number to enter when submitting a verification. The offline API catalog now preserves conditional requirements, including the area code required for local numbers.
+
 ## 2.6.1 — 2026-11-02
 
 - Number buyers can review the quoted monthly rent and setup fee in the checkout currency. The skill explains how to refresh an offer for the same number and how to handle an address or voice-capability conflict.

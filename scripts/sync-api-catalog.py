@@ -21,7 +21,7 @@ SCHEMA_KEYS = {
     "minLength", "maxLength", "pattern", "minItems", "maxItems", "uniqueItems",
     "minProperties", "maxProperties", "readOnly", "writeOnly", "discriminator",
 }
-SCHEMA_CHILDREN = {"items", "additionalProperties", "not", "contains"}
+SCHEMA_CHILDREN = {"items", "additionalProperties", "not", "contains", "if", "then", "else"}
 SCHEMA_LISTS = {"allOf", "oneOf", "anyOf", "prefixItems"}
 
 
