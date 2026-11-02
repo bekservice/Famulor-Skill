@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.6.2 — 2026-11-02
+
+- Explain how to replace or deactivate an unused payment link in the operator’s billing scope and schedule a running subscription to end at period end.
+
 ## 2.6.1 — 2026-11-02
 
 - Number buyers can review the quoted monthly rent and setup fee in the checkout currency. The skill explains how to refresh an offer for the same number and how to handle an address or voice-capability conflict.
