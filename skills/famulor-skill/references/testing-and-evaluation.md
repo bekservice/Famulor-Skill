@@ -37,6 +37,7 @@ Adapt the [voice regression scenarios](../assets/test-cases/voice-regression.jso
 | Normal supported request | Correct answer/action, minimal questions, clear completion |
 | Missing required detail | One useful clarification; no invented value or premature write |
 | Unknown or conflicting fact | Appropriate lookup or explicit uncertainty; supported fallback |
+| Expired phone-number offer | Search again for the same number and type. Review the new monthly price, setup fee and currency before an authorized purchase. If it is unavailable, ask the buyer to choose another. |
 | Tool error or timeout | No false success; no blind duplicate mutation |
 | Caller corrects a value | Corrected value used, earlier completed effects preserved and reconciled |
 | Caller interrupts speech or a tool | Conversation recovers; cancellation not claimed without evidence |
