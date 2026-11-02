@@ -4,7 +4,7 @@ description: Design, configure, test and improve Famulor voice, WhatsApp, webcha
 license: MIT
 metadata:
   author: Famulor
-  version: "2.6.1"
+  version: "2.6.2"
   homepage: https://github.com/bekservice/Famulor-Skill
 ---
 
@@ -91,6 +91,8 @@ For a concrete target, use one [worked example](references/examples/README.md) a
 **History:** `list_history` is an omnichannel index. Use a detail tool when available; a preview is not a full transcript. Use `get_call` for call detail and `get_email_history_item` for a native email thread. Do not infer active speech processing from a text-chat configuration's voice settings.
 
 **Voice and messaging:** customer assistant handoff supports voice, web chat, messaging and native email; Milian is the separate platform copilot. Distinguish assistant handoff, transfer to a human, pause for human takeover and conversation end. Confirm a booking, send or transfer only from its successful tool result. A transfer tool can refuse outside its own hours while the call continues. Quick replies are live website chat and Test Chat only, and stay off until enabled. A voice test can run real tools; review its effects before execution. A caller who never spoke is not scored.
+
+**Custom payments.** For platform or reseller billing, look up the payment and verify its customer, workspace, status and available actions. To edit an unused payment link, confirm the replacement terms and whether to notify the customer. Call `create_custom_payment` with `replace_payment_id`, the same payment kind and `channel: payment_link`. Retry with identical terms after an uncertain result. To close only the unused link, use `run_custom_payment_action` with `deactivate_link`. For a running subscription, confirm the effective date and use `cancel_at_period_end` to end renewal. Verify the returned link or scheduled cancellation.
 
 **Buying a number.** Search for the exact number with `search_phone_numbers`. Review the monthly price, setup fee, capabilities and quoted currency before buying. Use the returned `display_*` amounts for a paid offer outside EUR. They are in the quoted currency's smallest unit. In EUR, use `monthly_price_cents` and `setup_fee_cents`. The checkout currency may follow the billing account's existing subscription. Pass the chosen number and its purchase token unchanged. Assign an assistant only to a voice-capable number. For an invalid, expired or changed offer, search for the same number and type again. Review its new terms before buying. If the service returns `marketplace_number_unavailable` or the same number has disappeared, let the user choose another. A paid purchase stays pending until payment completes.
 
