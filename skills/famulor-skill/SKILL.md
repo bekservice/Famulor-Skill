@@ -4,7 +4,7 @@ description: Design, configure, test and improve Famulor voice, WhatsApp, webcha
 license: MIT
 metadata:
   author: Famulor
-  version: "2.6.1"
+  version: "2.6.2"
   homepage: https://github.com/bekservice/Famulor-Skill
 ---
 
@@ -94,7 +94,7 @@ For a concrete target, use one [worked example](references/examples/README.md) a
 
 **Buying a number.** Search for the exact number with `search_phone_numbers`. Review the monthly price, setup fee, capabilities and quoted currency before buying. Use the returned `display_*` amounts for a paid offer outside EUR. They are in the quoted currency's smallest unit. In EUR, use `monthly_price_cents` and `setup_fee_cents`. The checkout currency may follow the billing account's existing subscription. Pass the chosen number and its purchase token unchanged. Assign an assistant only to a voice-capable number. For an invalid, expired or changed offer, search for the same number and type again. Review its new terms before buying. If the service returns `marketplace_number_unavailable` or the same number has disappeared, let the user choose another. A paid purchase stays pending until payment completes.
 
-**Number verification.** For `verification_address_required`, add the address to the named case with `add_number_verification_address` or `famulor add-phone-number-verification-address`. An approved case keeps its status. New verification submissions collect the address. An existing verification without one can still be used for a number that does not require it. When the service reports `bundle_address_missing`, `number_address_locality_mismatch` or `number_address_rejected`, contact support for that number. Check an API or MCP conflict's `error.reason` for the specific recovery step.
+**Number verification.** For a local number, submit only the area code of the address. For example, for a Vienna number written as `01 2345678`, enter `01` or `+431`. For mobile or national numbers, leave the prefix empty or provide a number range without the subscriber number. Apply this when submitting a new case or correcting one the customer has asked to resubmit. For `verification_address_required`, add the address to the named case with `add_number_verification_address` or `famulor add-phone-number-verification-address`. An approved case keeps its status. New verification submissions collect the address. An existing verification without one can still be used for a number that does not require it. When the service reports `bundle_address_missing`, `number_address_locality_mismatch` or `number_address_rejected`, contact support for that number. Check an API or MCP conflict's `error.reason` for the specific recovery step.
 
 **Tasks:** retain the returned task handle and follow queued/running/completed/failed/cancelled status. Cancellation cannot promise rollback of an external action already accepted.
 

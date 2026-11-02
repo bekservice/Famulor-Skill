@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "reviewedAt": "2026-11-02",
   "source": "Famulor public OpenAPI, CLI command catalog and TypeScript SDK operation descriptors",
-  "openapiSha256": "710ee3dcdc33cc099c6782d6957a87d71ac793bb395b1b45a9242ee1995c000b",
+  "openapiSha256": "a4ddf37ec67e54d201b12d199dc9366265d01510a6f61aff909f142a7839b978",
   "baseUrl": "https://app.famulor.io/api/v1",
   "notice": "Dated navigation and request-shape snapshot, not a runtime validator. Check the live public schema and installed client before execution. Descriptions, examples, default values and response properties are intentionally omitted.",
   "operations": [
@@ -35141,7 +35141,7 @@
           {
             "name": "prefix",
             "flag": "--prefix",
-            "required": true,
+            "required": false,
             "type": "string"
           },
           {
@@ -35181,7 +35181,6 @@
             "required": [
               "country",
               "email",
-              "prefix",
               "address"
             ],
             "type": "object",
@@ -35277,7 +35276,23 @@
                 ],
                 "type": "string"
               }
-            }
+            },
+            "allOf": [
+              {
+                "if": {
+                  "properties": {
+                    "type": {
+                      "const": "local"
+                    }
+                  }
+                },
+                "then": {
+                  "required": [
+                    "prefix"
+                  ]
+                }
+              }
+            ]
           }
         }
       },
@@ -45173,6 +45188,10 @@
             "browser_use"
           ],
           "type": "string"
+        },
+        "wait_message": {
+          "maxLength": 500,
+          "type": "string"
         }
       },
       "additionalProperties": true
@@ -47671,7 +47690,22 @@
           "type": "string"
         }
       },
-      "additionalProperties": false
+      "additionalProperties": false,
+      "if": {
+        "required": [
+          "shortage_policy"
+        ],
+        "properties": {
+          "shortage_policy": {
+            "const": "auto_topup"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "auto_topup_consent_token"
+        ]
+      }
     },
     "#/components/schemas/MarketingSettingsInput": {
       "type": "object",

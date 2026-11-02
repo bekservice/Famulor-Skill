@@ -103,6 +103,13 @@ class PublicCatalogTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "SDK descriptors are stale"):
             sync.verify_sdk_hash('export const contractHash = "' + 'a' * 64 + '";', 'b' * 64)
 
+    def test_conditional_area_code_requirement_survives_projection(self):
+        condition = {"properties": {"type": {"const": "local"}}}
+        source = {"allOf": [{"if": condition, "then": {"required": ["prefix"]},
+                             "else": {"description": "private implementation prose", "type": "object"}}]}
+        self.assertEqual(sync.project_schema(source), {"allOf": [{"if": condition,
+            "then": {"required": ["prefix"]}, "else": {"type": "object"}}]})
+
     def test_navigation_links_follow_published_schema_tags_and_overrides(self):
         spec = {"paths": {
             "/things": {"get": {"summary": "List a segment's things", "tags": ["Actual tag"]}},
