@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.6.3 — 2026-11-03
+
+- Explain how to handle a duplicate WhatsApp draft without overwriting or sending the existing template. Update the public API catalog with the draft conflict response.
+
 ## 2.6.2 — 2026-11-02
 
 - Explain how to replace or deactivate an unused payment link in the operator’s billing scope and schedule a running subscription to end at period end.

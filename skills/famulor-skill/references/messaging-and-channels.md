@@ -124,6 +124,8 @@ A human reply from History pauses AI replies for that conversation. WhatsApp Bus
 
 Imported Business-app history is a historical record, not a new inbound message or an open service window. Do not send a reply to imported messages to “test” the setup. WhatsApp Business app Coexistence and Cloud calling have different capabilities; verify the sender's actual calling readiness before suggesting a voice workflow.
 
+When creating a custom WhatsApp template, the sender, name, and language identify one template. If creation reports a conflict, list that sender’s templates and inspect the existing one. Do not retry the same creation, replace its content, or send a message to test it. Edit the existing template only if the user requested an edit; ask for a different name if they want a separate draft.
+
 Use the [WhatsApp support template](../assets/prompts/whatsapp-support.md) for the business workflow and the channel-specific addition.
 
 ## Website chat
