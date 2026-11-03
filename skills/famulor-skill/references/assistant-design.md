@@ -67,6 +67,8 @@ Full Duplex is a Realtime variant, not another engine value: `realtime_variant` 
 
 ## Separate behavior, knowledge and actions
 
+When someone asks to change what callers hear during a knowledge lookup, use **Assistant → Settings → Knowledge → Knowledge search announcement**. Set `knowledge_search_announcement_enabled` to false to disable the fixed message, or keep it true and set `knowledge_search_announcement_text` to the caller’s exact wording (up to 500 characters). Clear the text with null to use the conversation-language default. The announcement can play after 1.5 seconds in a voice search. A spoken introduction in the same reply suppresses this announcement. Standard Realtime can play the fixed text in the configured TTS voice. Text chat and Full Duplex skip this automatic announcement; Full Duplex can acknowledge the search in its own words. Verify the saved assistant and exercise a slow search in a voice test.
+
 Keep the system prompt focused on identity, goals, conversation policy, tool decisions and boundaries. Put substantial reference material in maintained knowledge sources. Use a live tool for changing facts such as inventory, customer account status or appointment availability. A knowledge document containing a price is not evidence of current calendar availability.
 
 For every action, establish four things:

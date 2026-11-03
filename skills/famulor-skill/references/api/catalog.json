@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "reviewedAt": "2026-11-02",
+  "reviewedAt": "2026-11-03",
   "source": "Famulor public OpenAPI, CLI command catalog and TypeScript SDK operation descriptors",
-  "openapiSha256": "bc178c88b615ccb3a3f763f9486395be62e0fc5d701ee0d2ca6a79449b815085",
+  "openapiSha256": "577d8fd91edf4872607b6ed7a6fbfba795887bc869b4959605daffa0b55a7893",
   "baseUrl": "https://app.famulor.io/api/v1",
   "notice": "Dated navigation and request-shape snapshot, not a runtime validator. Check the live public schema and installed client before execution. Descriptions, examples, default values and response properties are intentionally omitted.",
   "operations": [
@@ -2702,6 +2702,19 @@
           {
             "name": "knowledgebase_id",
             "flag": "--knowledgebase-id",
+            "required": false,
+            "type": "string",
+            "nullable": true
+          },
+          {
+            "name": "knowledge_search_announcement_enabled",
+            "flag": "--knowledge-search-announcement-enabled",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "knowledge_search_announcement_text",
+            "flag": "--knowledge-search-announcement-text",
             "required": false,
             "type": "string",
             "nullable": true
@@ -30567,6 +30580,19 @@
             "nullable": true
           },
           {
+            "name": "knowledge_search_announcement_enabled",
+            "flag": "--knowledge-search-announcement-enabled",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "knowledge_search_announcement_text",
+            "flag": "--knowledge-search-announcement-text",
+            "required": false,
+            "type": "string",
+            "nullable": true
+          },
+          {
             "name": "knowledge_gap_mode",
             "flag": "--knowledge-gap-mode",
             "required": false,
@@ -36564,6 +36590,19 @@
           {
             "name": "knowledgebase_id",
             "flag": "--knowledgebase-id",
+            "required": false,
+            "type": "string",
+            "nullable": true
+          },
+          {
+            "name": "knowledge_search_announcement_enabled",
+            "flag": "--knowledge-search-announcement-enabled",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "knowledge_search_announcement_text",
+            "flag": "--knowledge-search-announcement-text",
             "required": false,
             "type": "string",
             "nullable": true
@@ -44003,6 +44042,16 @@
             "tentative_live"
           ],
           "type": "string"
+        },
+        "knowledge_search_announcement_enabled": {
+          "type": "boolean"
+        },
+        "knowledge_search_announcement_text": {
+          "maxLength": 500,
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "knowledgebase_id": {
           "format": "uuid",
