@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.7.0
+
+- Document per-assistant knowledge search announcements, voice behavior and exact configuration across the public assistant clients.
+
 ## 2.6.2 — 2026-11-02
 
 - Explain how to replace or deactivate an unused payment link in the operator’s billing scope and schedule a running subscription to end at period end.
