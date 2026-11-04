@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.6.4 — 2026-11-04
+
+- Refresh the 510-tool MCP catalog, public request contracts and client mappings for 504 operations, including the optional published no-failures condition for manual/scheduled Milian Missions.
+- Explain the explicit approval boundary, one-to-six owned automation references, shared call/runtime limits and zero-model empty checks. Incomplete reads never prove that no failures occurred.
+
 ## 2.6.3 — 2026-11-04
 
 - Explain safe runtime variable substitution in messaging, email and SMS tools, external CRM identifiers, target-assistant attribute permissions and post-call follow-up regression checks.

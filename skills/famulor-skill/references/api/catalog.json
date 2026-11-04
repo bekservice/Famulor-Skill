@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "reviewedAt": "2026-11-02",
+  "reviewedAt": "2026-11-04",
   "source": "Famulor public OpenAPI, CLI command catalog and TypeScript SDK operation descriptors",
-  "openapiSha256": "bc178c88b615ccb3a3f763f9486395be62e0fc5d701ee0d2ca6a79449b815085",
+  "openapiSha256": "5b4527af145609bbe039d00425258379ea56997e586377c1ef91b85e3810bdde",
   "baseUrl": "https://app.famulor.io/api/v1",
   "notice": "Dated navigation and request-shape snapshot, not a runtime validator. Check the live public schema and installed client before execution. Descriptions, examples, default values and response properties are intentionally omitted.",
   "operations": [
@@ -2702,6 +2702,19 @@
           {
             "name": "knowledgebase_id",
             "flag": "--knowledgebase-id",
+            "required": false,
+            "type": "string",
+            "nullable": true
+          },
+          {
+            "name": "knowledge_search_announcement_enabled",
+            "flag": "--knowledge-search-announcement-enabled",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "knowledge_search_announcement_text",
+            "flag": "--knowledge-search-announcement-text",
             "required": false,
             "type": "string",
             "nullable": true
@@ -16211,6 +16224,44 @@
           "application/json"
         ],
         "404": [
+          "application/json"
+        ],
+        "429": [
+          "application/json"
+        ],
+        "503": [
+          "application/json"
+        ]
+      },
+      "binaryResponse": false
+    },
+    {
+      "operationId": "getPlanUsage",
+      "method": "GET",
+      "path": "/plan-usage",
+      "group": "Billing",
+      "summary": "Get plan usage",
+      "documentation": "https://docs.famulor.io/api-reference/billing/get-plan-usage",
+      "cli": {
+        "command": "get-plan-usage",
+        "hidden": false,
+        "parameters": [],
+        "bodyFields": []
+      },
+      "sdkMethod": "client.api.getPlanUsage",
+      "parameters": [],
+      "requestBody": {
+        "required": false,
+        "content": {}
+      },
+      "responses": {
+        "200": [
+          "application/json"
+        ],
+        "401": [
+          "application/json"
+        ],
+        "403": [
           "application/json"
         ],
         "429": [
@@ -30567,6 +30618,19 @@
             "nullable": true
           },
           {
+            "name": "knowledge_search_announcement_enabled",
+            "flag": "--knowledge-search-announcement-enabled",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "knowledge_search_announcement_text",
+            "flag": "--knowledge-search-announcement-text",
+            "required": false,
+            "type": "string",
+            "nullable": true
+          },
+          {
             "name": "knowledge_gap_mode",
             "flag": "--knowledge-gap-mode",
             "required": false,
@@ -35147,7 +35211,7 @@
           {
             "name": "prefix",
             "flag": "--prefix",
-            "required": true,
+            "required": false,
             "type": "string"
           },
           {
@@ -35187,7 +35251,6 @@
             "required": [
               "country",
               "email",
-              "prefix",
               "address"
             ],
             "type": "object",
@@ -35283,7 +35346,10 @@
                 ],
                 "type": "string"
               }
-            }
+            },
+            "allOf": [
+              {}
+            ]
           }
         }
       },
@@ -36564,6 +36630,19 @@
           {
             "name": "knowledgebase_id",
             "flag": "--knowledgebase-id",
+            "required": false,
+            "type": "string",
+            "nullable": true
+          },
+          {
+            "name": "knowledge_search_announcement_enabled",
+            "flag": "--knowledge-search-announcement-enabled",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "knowledge_search_announcement_text",
+            "flag": "--knowledge-search-announcement-text",
             "required": false,
             "type": "string",
             "nullable": true
@@ -43572,6 +43651,9 @@
       "responses": {
         "200": [],
         "201": [],
+        "409": [
+          "application/json"
+        ],
         "429": [
           "application/json"
         ],
@@ -44003,6 +44085,16 @@
             "tentative_live"
           ],
           "type": "string"
+        },
+        "knowledge_search_announcement_enabled": {
+          "type": "boolean"
+        },
+        "knowledge_search_announcement_text": {
+          "maxLength": 500,
+          "type": [
+            "string",
+            "null"
+          ]
         },
         "knowledgebase_id": {
           "format": "uuid",
@@ -48223,6 +48315,30 @@
           "maxLength": 8000,
           "minLength": 1,
           "type": "string"
+        },
+        "readCheck": {
+          "required": [
+            "kind",
+            "lookbackMinutes"
+          ],
+          "type": [
+            "object",
+            "null"
+          ],
+          "properties": {
+            "kind": {
+              "enum": [
+                "automation_failures"
+              ],
+              "type": "string"
+            },
+            "lookbackMinutes": {
+              "maximum": 1440,
+              "minimum": 1,
+              "type": "integer"
+            }
+          },
+          "additionalProperties": false
         },
         "references": {
           "type": "array",

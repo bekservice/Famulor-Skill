@@ -1,6 +1,6 @@
 # Billing API operations
 
-Reviewed 2026-11-02. 15 public operations. [All areas](index.md) · [Execution guide](../api-and-sdk.md)
+Reviewed 2026-11-04. 16 public operations. [All areas](index.md) · [Execution guide](../api-and-sdk.md)
 
 Paths are relative to `https://app.famulor.io/api/v1`. Each operation ID is also the typed SDK method `client.api.<operationId>`. Look up its exact request contract with the bundled `find-operation.py`; CLI help reflects the installed version.
 
@@ -14,6 +14,7 @@ Hidden CLI operations require an interactive/browser flow or `famulor api` where
 | `createInvoicePaymentLink` | `POST /billing/invoice-payment` | `famulor create-invoice-payment-link` | [Create invoice payment link](https://docs.famulor.io/api-reference/billing/create-invoice-payment-link) |
 | `getBalance` | `GET /balance` | `famulor get-balance` | [Get balance](https://docs.famulor.io/api-reference/billing/get-balance) |
 | `getPaymentStatus` | `GET /billing/payment-status` | `famulor get-payment-status` | [Get workspace payment status](https://docs.famulor.io/api-reference/billing/get-workspace-payment-status) |
+| `getPlanUsage` | `GET /plan-usage` | `famulor get-plan-usage` | [Get plan usage](https://docs.famulor.io/api-reference/billing/get-plan-usage) |
 | `getReferrals` | `GET /referrals` | `famulor get-referrals` | [Get referrals](https://docs.famulor.io/api-reference/billing/get-referrals) |
 | `getSmsRegistrationBilling` | `GET /billing/sms-registration` | `famulor get-sms-registration-billing` | [Get workspace SMS registration billing](https://docs.famulor.io/api-reference/billing/get-workspace-sms-registration-billing) |
 | `getTelephonyUsageRates` | `GET /usage/telephony-rates` | `famulor get-telephony-usage-rates` | [Estimate assistant or Loop phone rates](https://docs.famulor.io/api-reference/billing/estimate-assistant-or-loop-phone-rates) |

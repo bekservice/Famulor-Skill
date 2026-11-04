@@ -140,3 +140,13 @@ Use returned error codes and recovery guidance: reconnect on authentication fail
 | Review conversations | [History](api/history.md), [Calls](api/calls.md), [QA](api/qa.md) | Complete channel-specific detail, not only a preview |
 | Automate a workflow | [Automations](api/automations.md), [Missions](api/milian-missions.md), [Webhooks](api/webhook-subscriptions.md) | Reviewed scope, run status and resulting resources |
 | Manage telephony, teams or billing | [All API areas](api/index.md) | Explicit target/workspace, allowed operation and resulting state |
+
+## Milian Mission failure alerts
+
+A manual or scheduled Mission can explicitly publish a no-failures condition in its complete specification: `readCheck: {kind: "automation_failures", lookbackMinutes: 60}`. It needs Read and one to six owned automation references, a lookback of 1–1440 minutes and at least one tool call per reference plus two control calls. Use the existing draft/version/publish workflow; the published version is the approval boundary. Do not silently add this to another Mission.
+
+If all guarded checks succeed with zero matching failed runs, the Mission records its evidence without a model call, message or configuration change. Denied, malformed or incomplete reads never count as no failures; positive or uncertain results continue within the existing grants and remaining limits. A successful empty check does not prove that automations ran or that their external integrations work.
+
+Discover `createRoutineVersionDraft` and `publishRoutineVersion` from the [Missions operation guide](api/milian-missions.md). REST uses `POST /routines/{id}/versions` then `POST /routines/{id}/publish`; MCP uses `save_routine_draft` then `publish_routine`; CLI uses `famulor create-routine-version-draft <id> --spec @mission-spec.json` then `famulor publish-routine-version <id> --version-id <version-id>`. The generated TypeScript methods are `client.api.createRoutineVersionDraft` and `client.api.publishRoutineVersion`. Read the complete live schemas and review the full specification before publishing.
+
+When summarizing unified History, preserve source coverage. Email text-search totals can be lower bounds even after every returned page is read; narrow the search rather than calling them exact. Paginated email/messaging detail covers the available source window, not necessarily the full lifetime conversation.
