@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.6.3 — 2026-11-04
+
+- Explain safe runtime variable substitution in messaging, email and SMS tools, external CRM identifiers, target-assistant attribute permissions and post-call follow-up regression checks.
+
 ## 2.6.2 — 2026-11-02
 
 - Explain how to replace or deactivate an unused payment link in the operator’s billing scope and schedule a running subscription to end at period end.

@@ -76,3 +76,9 @@ External effects: None; booking responses in these runs were simulated.
 For a real test, include the authorized test ID or call ID and actual returned result, without copying unnecessary personal data. State pending, accepted, delivered, completed and paid only when the corresponding evidence supports that state. Keep customer transcripts and recordings out of public issues and regression fixtures.
 
 References: [Famulor simulations](https://docs.famulor.io/assistants/simulations), [post-call analysis](https://docs.famulor.io/assistants/analysis), [LiveKit testing overview](https://docs.livekit.io/testing/overview/). General testing guidance complements the product-specific distinctions above.
+
+### Variable and follow-up regression checks
+
+Test the actual delivery channel with synthetic values: permitted and denied contact attributes, defaults, explicit inputs, collected values, empty values, zero/false, URL punctuation and a missing link identifier. Compare the rendered link to the expected external identifier without sending to a real customer. A source-only field must not become available to an assistant after handoff; target-selected fields must load with the target's permissions, and source tools must finish before final target rendering.
+
+Campaign follow-ups that use post-call extraction wait for that analysis after hangup. Include a call longer than the analysis wait window, then verify the follow-up waits after the call ends and uses the resulting extraction values. A sent opening template or a completed delivery lead is not evidence that the customer conversation completed.
