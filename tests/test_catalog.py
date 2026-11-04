@@ -28,14 +28,22 @@ class PublicCatalogTests(unittest.TestCase):
 
     def test_unique_complete_release_catalog(self):
         operations = self.catalog["operations"]
-        self.assertEqual(len(operations), 503)
-        self.assertEqual(len({op["operationId"] for op in operations}), 503)
-        self.assertEqual(len({(op["method"], op["path"]) for op in operations}), 503)
+        self.assertEqual(len(operations), 504)
+        self.assertEqual(len({op["operationId"] for op in operations}), 504)
+        self.assertEqual(len({(op["method"], op["path"]) for op in operations}), 504)
         self.assertEqual(len({op["group"] for op in operations}), 40)
         self.assertEqual(sum(op["cli"]["hidden"] for op in operations), 4)
         for op in operations:
             self.assertEqual(op["sdkMethod"], "client.api." + op["operationId"])
             self.assertFalse(op["path"].startswith(("/api/", "/admin/", "/internal/")))
+
+    def test_mission_failure_check_is_optional_and_bounded(self):
+        spec = self.catalog["definitions"]["#/components/schemas/MissionVersionSpec"]
+        self.assertNotIn("readCheck", spec.get("required", []))
+        check = spec["properties"]["readCheck"]
+        self.assertEqual(check["properties"]["kind"]["enum"], ["automation_failures"])
+        minutes = check["properties"]["lookbackMinutes"]
+        self.assertEqual((minutes["minimum"], minutes["maximum"]), (1, 1440))
 
     def test_all_references_resolve_and_detail_is_scoped(self):
         for op in self.catalog["operations"]:
