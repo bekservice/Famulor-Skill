@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "reviewedAt": "2026-11-04",
   "source": "Famulor public OpenAPI, CLI command catalog and TypeScript SDK operation descriptors",
-  "openapiSha256": "5b4527af145609bbe039d00425258379ea56997e586377c1ef91b85e3810bdde",
+  "openapiSha256": "13c807abd4f3e9ef54b2e7862c0684066594db91c76851d8bdedb46d576cc50e",
   "baseUrl": "https://app.famulor.io/api/v1",
   "notice": "Dated navigation and request-shape snapshot, not a runtime validator. Check the live public schema and installed client before execution. Descriptions, examples, default values and response properties are intentionally omitted.",
   "operations": [
@@ -6568,6 +6568,30 @@
             "flag": "--outbound-sms-enabled",
             "required": false,
             "type": "boolean"
+          },
+          {
+            "name": "sms_delivery_mode",
+            "flag": "--sms-delivery-mode",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "sms_only",
+              "rcs_preferred",
+              "rcs_only"
+            ]
+          },
+          {
+            "name": "rcs_sender_id",
+            "flag": "--rcs-sender-id",
+            "required": false,
+            "type": "string",
+            "nullable": true
+          },
+          {
+            "name": "rcs_default_connector",
+            "flag": "--rcs-default-connector",
+            "required": false,
+            "type": "boolean"
           }
         ]
       },
@@ -7809,6 +7833,105 @@
         "403": [
           "application/json"
         ],
+        "429": [
+          "application/json"
+        ],
+        "503": [
+          "application/json"
+        ]
+      },
+      "binaryResponse": false
+    },
+    {
+      "operationId": "createSmsRcsSender",
+      "method": "POST",
+      "path": "/sms/rcs/senders",
+      "group": "SMS",
+      "summary": "Draft a company sender for SMS and RCS",
+      "documentation": "https://docs.famulor.io/api-reference/sms/draft-a-company-sender-for-sms-and-rcs",
+      "cli": {
+        "command": "create-sms-rcs-sender",
+        "hidden": false,
+        "parameters": [],
+        "bodyFields": [
+          {
+            "name": "profile",
+            "flag": "--body-profile",
+            "required": true,
+            "type": "object"
+          },
+          {
+            "name": "details",
+            "flag": "--details",
+            "required": false,
+            "type": "object"
+          },
+          {
+            "name": "countries",
+            "flag": "--countries",
+            "required": false,
+            "type": "array",
+            "enum": [
+              "DE"
+            ],
+            "itemType": "string"
+          },
+          {
+            "name": "assistant_id",
+            "flag": "--assistant-id",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "linked_phone_number_id",
+            "flag": "--linked-phone-number-id",
+            "required": false,
+            "type": "string",
+            "nullable": true
+          },
+          {
+            "name": "default_connector_id",
+            "flag": "--default-connector-id",
+            "required": false,
+            "type": "string",
+            "nullable": true
+          },
+          {
+            "name": "expected_updated_at",
+            "flag": "--expected-updated-at",
+            "required": false,
+            "type": "string"
+          }
+        ]
+      },
+      "sdkMethod": "client.api.createSmsRcsSender",
+      "parameters": [],
+      "requestBody": {
+        "required": true,
+        "content": {
+          "application/json": {
+            "$ref": "#/components/schemas/SmsRcsSenderCreate"
+          }
+        }
+      },
+      "responses": {
+        "201": [
+          "application/json"
+        ],
+        "400": [
+          "application/json"
+        ],
+        "401": [
+          "application/json"
+        ],
+        "402": [],
+        "403": [
+          "application/json"
+        ],
+        "404": [
+          "application/json"
+        ],
+        "409": [],
         "429": [
           "application/json"
         ],
@@ -17526,6 +17649,70 @@
       "binaryResponse": false
     },
     {
+      "operationId": "getSmsRcsSender",
+      "method": "GET",
+      "path": "/sms/rcs/senders/{id}",
+      "group": "SMS",
+      "summary": "Get a company sender application",
+      "documentation": "https://docs.famulor.io/api-reference/sms/get-a-company-sender-application",
+      "cli": {
+        "command": "get-sms-rcs-sender",
+        "hidden": false,
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "flag": "id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "bodyFields": []
+      },
+      "sdkMethod": "client.api.getSmsRcsSender",
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "format": "uuid",
+            "type": "string"
+          }
+        }
+      ],
+      "requestBody": {
+        "required": false,
+        "content": {}
+      },
+      "responses": {
+        "200": [
+          "application/json"
+        ],
+        "400": [
+          "application/json"
+        ],
+        "401": [
+          "application/json"
+        ],
+        "402": [],
+        "403": [
+          "application/json"
+        ],
+        "404": [
+          "application/json"
+        ],
+        "409": [],
+        "429": [
+          "application/json"
+        ],
+        "503": [
+          "application/json"
+        ]
+      },
+      "binaryResponse": false
+    },
+    {
       "operationId": "getSmsRegistration",
       "method": "GET",
       "path": "/phone-numbers/{id}/sms-registration",
@@ -26694,6 +26881,52 @@
       "binaryResponse": false
     },
     {
+      "operationId": "listSmsRcsSenders",
+      "method": "GET",
+      "path": "/sms/rcs/senders",
+      "group": "SMS",
+      "summary": "List company senders for SMS and RCS",
+      "documentation": "https://docs.famulor.io/api-reference/sms/list-company-senders-for-sms-and-rcs",
+      "cli": {
+        "command": "list-sms-rcs-senders",
+        "hidden": false,
+        "parameters": [],
+        "bodyFields": []
+      },
+      "sdkMethod": "client.api.listSmsRcsSenders",
+      "parameters": [],
+      "requestBody": {
+        "required": false,
+        "content": {}
+      },
+      "responses": {
+        "200": [
+          "application/json"
+        ],
+        "400": [
+          "application/json"
+        ],
+        "401": [
+          "application/json"
+        ],
+        "402": [],
+        "403": [
+          "application/json"
+        ],
+        "404": [
+          "application/json"
+        ],
+        "409": [],
+        "429": [
+          "application/json"
+        ],
+        "503": [
+          "application/json"
+        ]
+      },
+      "binaryResponse": false
+    },
+    {
       "operationId": "listSupportRequests",
       "method": "GET",
       "path": "/support/requests",
@@ -29530,6 +29763,70 @@
         "404": [
           "application/json"
         ],
+        "429": [
+          "application/json"
+        ],
+        "503": [
+          "application/json"
+        ]
+      },
+      "binaryResponse": false
+    },
+    {
+      "operationId": "refreshSmsRcsSender",
+      "method": "POST",
+      "path": "/sms/rcs/senders/{id}/refresh",
+      "group": "SMS",
+      "summary": "Refresh company sender verification",
+      "documentation": "https://docs.famulor.io/api-reference/sms/refresh-company-sender-verification",
+      "cli": {
+        "command": "refresh-sms-rcs-sender",
+        "hidden": false,
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "flag": "id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "bodyFields": []
+      },
+      "sdkMethod": "client.api.refreshSmsRcsSender",
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "format": "uuid",
+            "type": "string"
+          }
+        }
+      ],
+      "requestBody": {
+        "required": false,
+        "content": {}
+      },
+      "responses": {
+        "200": [
+          "application/json"
+        ],
+        "400": [
+          "application/json"
+        ],
+        "401": [
+          "application/json"
+        ],
+        "402": [],
+        "403": [
+          "application/json"
+        ],
+        "404": [
+          "application/json"
+        ],
+        "409": [],
         "429": [
           "application/json"
         ],
@@ -33597,8 +33894,8 @@
       "method": "POST",
       "path": "/sms/send",
       "group": "SMS",
-      "summary": "Send an SMS",
-      "documentation": "https://docs.famulor.io/api-reference/sms/send-an-sms",
+      "summary": "Send an SMS channel message",
+      "documentation": "https://docs.famulor.io/api-reference/sms/send-an-sms-channel-message",
       "cli": {
         "command": "send-sms",
         "hidden": false,
@@ -33621,6 +33918,42 @@
             "flag": "--body",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "delivery_mode",
+            "flag": "--delivery-mode",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "sms_only",
+              "rcs_preferred",
+              "rcs_only"
+            ]
+          },
+          {
+            "name": "idempotency_key",
+            "flag": "--idempotency-key",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "media_urls",
+            "flag": "--media-urls",
+            "required": false,
+            "type": "array",
+            "itemType": "string"
+          },
+          {
+            "name": "rich_content",
+            "flag": "--rich-content",
+            "required": false,
+            "type": "object"
+          },
+          {
+            "name": "sms_fallback_body",
+            "flag": "--sms-fallback-body",
+            "required": false,
+            "type": "string"
           }
         ]
       },
@@ -33642,8 +33975,187 @@
                 "minLength": 1,
                 "type": "string"
               },
+              "delivery_mode": {
+                "$ref": "#/components/schemas/SmsDeliveryMode"
+              },
               "from_number_id": {
                 "format": "uuid",
+                "type": "string"
+              },
+              "idempotency_key": {
+                "maxLength": 128,
+                "minLength": 1,
+                "type": "string"
+              },
+              "media_urls": {
+                "maxItems": 1,
+                "type": "array",
+                "items": {
+                  "format": "uri",
+                  "maxLength": 2048,
+                  "pattern": "^https://",
+                  "type": "string"
+                }
+              },
+              "rich_content": {
+                "$ref": "#/components/schemas/SmsRcsRichContent"
+              },
+              "sms_fallback_body": {
+                "maxLength": 1600,
+                "minLength": 1,
+                "type": "string"
+              },
+              "to": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "responses": {
+        "201": [
+          "application/json"
+        ],
+        "400": [
+          "application/json"
+        ],
+        "401": [
+          "application/json"
+        ],
+        "402": [],
+        "403": [
+          "application/json"
+        ],
+        "429": [
+          "application/json"
+        ],
+        "503": [
+          "application/json"
+        ]
+      },
+      "binaryResponse": false
+    },
+    {
+      "operationId": "sendSmsFromConnector",
+      "method": "POST",
+      "path": "/sms/connectors/{id}/send",
+      "group": "SMS",
+      "summary": "Send from an SMS connection",
+      "documentation": "https://docs.famulor.io/api-reference/sms/send-from-an-sms-connection",
+      "cli": {
+        "command": "send-sms-from-connector",
+        "hidden": false,
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "flag": "id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "bodyFields": [
+          {
+            "name": "to",
+            "flag": "--to",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "flag": "--body",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "delivery_mode",
+            "flag": "--delivery-mode",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "sms_only",
+              "rcs_preferred",
+              "rcs_only"
+            ]
+          },
+          {
+            "name": "idempotency_key",
+            "flag": "--idempotency-key",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "media_urls",
+            "flag": "--media-urls",
+            "required": false,
+            "type": "array",
+            "itemType": "string"
+          },
+          {
+            "name": "rich_content",
+            "flag": "--rich-content",
+            "required": false,
+            "type": "object"
+          },
+          {
+            "name": "sms_fallback_body",
+            "flag": "--sms-fallback-body",
+            "required": false,
+            "type": "string"
+          }
+        ]
+      },
+      "sdkMethod": "client.api.sendSmsFromConnector",
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "format": "uuid",
+            "type": "string"
+          }
+        }
+      ],
+      "requestBody": {
+        "required": true,
+        "content": {
+          "application/json": {
+            "required": [
+              "to",
+              "body"
+            ],
+            "type": "object",
+            "properties": {
+              "body": {
+                "maxLength": 1600,
+                "minLength": 1,
+                "type": "string"
+              },
+              "delivery_mode": {
+                "$ref": "#/components/schemas/SmsDeliveryMode"
+              },
+              "idempotency_key": {
+                "maxLength": 128,
+                "minLength": 1,
+                "type": "string"
+              },
+              "media_urls": {
+                "maxItems": 1,
+                "type": "array",
+                "items": {
+                  "format": "uri",
+                  "maxLength": 2048,
+                  "pattern": "^https://",
+                  "type": "string"
+                }
+              },
+              "rich_content": {
+                "$ref": "#/components/schemas/SmsRcsRichContent"
+              },
+              "sms_fallback_body": {
+                "maxLength": 1600,
+                "minLength": 1,
                 "type": "string"
               },
               "to": {
@@ -35360,6 +35872,93 @@
         "400": [
           "application/json"
         ],
+        "429": [
+          "application/json"
+        ],
+        "503": [
+          "application/json"
+        ]
+      },
+      "binaryResponse": false
+    },
+    {
+      "operationId": "submitSmsRcsSender",
+      "method": "POST",
+      "path": "/sms/rcs/senders/{id}/submit",
+      "group": "SMS",
+      "summary": "Book company sender setup",
+      "documentation": "https://docs.famulor.io/api-reference/sms/book-company-sender-setup",
+      "cli": {
+        "command": "submit-sms-rcs-sender",
+        "hidden": false,
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "flag": "id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "bodyFields": [
+          {
+            "name": "confirmed_setup_credits",
+            "flag": "--confirmed-setup-credits",
+            "required": true,
+            "type": "number"
+          }
+        ]
+      },
+      "sdkMethod": "client.api.submitSmsRcsSender",
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "format": "uuid",
+            "type": "string"
+          }
+        }
+      ],
+      "requestBody": {
+        "required": true,
+        "content": {
+          "application/json": {
+            "required": [
+              "confirmed_setup_credits"
+            ],
+            "type": "object",
+            "properties": {
+              "confirmed_setup_credits": {
+                "maximum": 1000000,
+                "minimum": 0,
+                "multipleOf": 0.01,
+                "type": "number"
+              }
+            },
+            "additionalProperties": false
+          }
+        }
+      },
+      "responses": {
+        "200": [
+          "application/json"
+        ],
+        "400": [
+          "application/json"
+        ],
+        "401": [
+          "application/json"
+        ],
+        "402": [],
+        "403": [
+          "application/json"
+        ],
+        "404": [
+          "application/json"
+        ],
+        "409": [],
         "429": [
           "application/json"
         ],
@@ -40972,6 +41571,30 @@
             "flag": "--expected-updated-at",
             "required": false,
             "type": "string"
+          },
+          {
+            "name": "sms_delivery_mode",
+            "flag": "--sms-delivery-mode",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "sms_only",
+              "rcs_preferred",
+              "rcs_only"
+            ]
+          },
+          {
+            "name": "rcs_sender_id",
+            "flag": "--rcs-sender-id",
+            "required": false,
+            "type": "string",
+            "nullable": true
+          },
+          {
+            "name": "rcs_default_connector",
+            "flag": "--rcs-default-connector",
+            "required": false,
+            "type": "boolean"
           }
         ]
       },
@@ -42203,6 +42826,123 @@
       "binaryResponse": false
     },
     {
+      "operationId": "updateSmsRcsSender",
+      "method": "PATCH",
+      "path": "/sms/rcs/senders/{id}",
+      "group": "SMS",
+      "summary": "Update a company sender application",
+      "documentation": "https://docs.famulor.io/api-reference/sms/update-a-company-sender-application",
+      "cli": {
+        "command": "update-sms-rcs-sender",
+        "hidden": false,
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "flag": "id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "bodyFields": [
+          {
+            "name": "profile",
+            "flag": "--body-profile",
+            "required": true,
+            "type": "object"
+          },
+          {
+            "name": "details",
+            "flag": "--details",
+            "required": true,
+            "type": "object"
+          },
+          {
+            "name": "countries",
+            "flag": "--countries",
+            "required": false,
+            "type": "array",
+            "enum": [
+              "DE"
+            ],
+            "itemType": "string"
+          },
+          {
+            "name": "assistant_id",
+            "flag": "--assistant-id",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "linked_phone_number_id",
+            "flag": "--linked-phone-number-id",
+            "required": false,
+            "type": "string",
+            "nullable": true
+          },
+          {
+            "name": "default_connector_id",
+            "flag": "--default-connector-id",
+            "required": false,
+            "type": "string",
+            "nullable": true
+          },
+          {
+            "name": "expected_updated_at",
+            "flag": "--expected-updated-at",
+            "required": false,
+            "type": "string"
+          }
+        ]
+      },
+      "sdkMethod": "client.api.updateSmsRcsSender",
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "format": "uuid",
+            "type": "string"
+          }
+        }
+      ],
+      "requestBody": {
+        "required": true,
+        "content": {
+          "application/json": {
+            "$ref": "#/components/schemas/SmsRcsSenderUpdate"
+          }
+        }
+      },
+      "responses": {
+        "200": [
+          "application/json"
+        ],
+        "400": [
+          "application/json"
+        ],
+        "401": [
+          "application/json"
+        ],
+        "402": [],
+        "403": [
+          "application/json"
+        ],
+        "404": [
+          "application/json"
+        ],
+        "409": [],
+        "429": [
+          "application/json"
+        ],
+        "503": [
+          "application/json"
+        ]
+      },
+      "binaryResponse": false
+    },
+    {
       "operationId": "updateTeamMemberRole",
       "method": "PATCH",
       "path": "/team-members/{id}",
@@ -42749,6 +43489,91 @@
         "422": [
           "application/json"
         ],
+        "429": [
+          "application/json"
+        ],
+        "503": [
+          "application/json"
+        ]
+      },
+      "binaryResponse": false
+    },
+    {
+      "operationId": "uploadSmsRcsAsset",
+      "method": "POST",
+      "path": "/sms/rcs/assets",
+      "group": "SMS",
+      "summary": "Upload a company sender logo or banner",
+      "documentation": "https://docs.famulor.io/api-reference/sms/upload-a-company-sender-logo-or-banner",
+      "cli": {
+        "command": "upload-sms-rcs-asset",
+        "hidden": false,
+        "parameters": [],
+        "bodyFields": [
+          {
+            "name": "kind",
+            "flag": "--kind",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "logo",
+              "banner"
+            ]
+          },
+          {
+            "name": "file",
+            "flag": "--file",
+            "required": true,
+            "type": "string"
+          }
+        ]
+      },
+      "sdkMethod": "client.api.uploadSmsRcsAsset",
+      "parameters": [],
+      "requestBody": {
+        "required": true,
+        "content": {
+          "multipart/form-data": {
+            "required": [
+              "kind",
+              "file"
+            ],
+            "type": "object",
+            "properties": {
+              "file": {
+                "format": "binary",
+                "type": "string"
+              },
+              "kind": {
+                "enum": [
+                  "logo",
+                  "banner"
+                ],
+                "type": "string"
+              }
+            },
+            "additionalProperties": false
+          }
+        }
+      },
+      "responses": {
+        "201": [
+          "application/json"
+        ],
+        "400": [
+          "application/json"
+        ],
+        "401": [
+          "application/json"
+        ],
+        "402": [],
+        "403": [
+          "application/json"
+        ],
+        "404": [
+          "application/json"
+        ],
+        "409": [],
         "429": [
           "application/json"
         ],
@@ -47944,6 +48769,17 @@
           ],
           "type": "string"
         },
+        "rcs_default_connector": {
+          "type": "boolean",
+          "writeOnly": true
+        },
+        "rcs_sender_id": {
+          "format": "uuid",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
         "refresh_token": {
           "type": "string"
         },
@@ -47954,6 +48790,9 @@
         },
         "signing_secret": {
           "type": "string"
+        },
+        "sms_delivery_mode": {
+          "$ref": "#/components/schemas/SmsDeliveryMode"
         },
         "team_name": {
           "type": "string"
@@ -48027,6 +48866,17 @@
         "outbound_sms_enabled": {
           "type": "boolean"
         },
+        "rcs_default_connector": {
+          "type": "boolean",
+          "writeOnly": true
+        },
+        "rcs_sender_id": {
+          "format": "uuid",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
         "reply_mode": {
           "enum": [
             "send",
@@ -48038,6 +48888,9 @@
           "maximum": 30,
           "minimum": 0,
           "type": "integer"
+        },
+        "sms_delivery_mode": {
+          "$ref": "#/components/schemas/SmsDeliveryMode"
         },
         "watch_id": {
           "nullable": true,
@@ -49551,6 +50404,394 @@
           "type": "string"
         }
       }
+    },
+    "#/components/schemas/SmsDeliveryMode": {
+      "enum": [
+        "sms_only",
+        "rcs_preferred",
+        "rcs_only"
+      ],
+      "type": "string"
+    },
+    "#/components/schemas/SmsRcsButton": {
+      "oneOf": [
+        {
+          "required": [
+            "type",
+            "label",
+            "value"
+          ],
+          "type": "object",
+          "properties": {
+            "label": {
+              "maxLength": 25,
+              "minLength": 1,
+              "type": "string"
+            },
+            "type": {
+              "enum": [
+                "url"
+              ],
+              "type": "string"
+            },
+            "value": {
+              "format": "uri",
+              "maxLength": 2048,
+              "pattern": "^https://",
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "required": [
+            "type",
+            "label",
+            "value"
+          ],
+          "type": "object",
+          "properties": {
+            "label": {
+              "maxLength": 25,
+              "minLength": 1,
+              "type": "string"
+            },
+            "type": {
+              "enum": [
+                "phone"
+              ],
+              "type": "string"
+            },
+            "value": {
+              "pattern": "^\\+[1-9]\\d{4,14}$",
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "required": [
+            "type",
+            "label",
+            "value"
+          ],
+          "type": "object",
+          "properties": {
+            "label": {
+              "maxLength": 20,
+              "minLength": 1,
+              "type": "string"
+            },
+            "type": {
+              "enum": [
+                "reply"
+              ],
+              "type": "string"
+            },
+            "value": {
+              "maxLength": 128,
+              "minLength": 1,
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        }
+      ]
+    },
+    "#/components/schemas/SmsRcsCard": {
+      "required": [
+        "body",
+        "media_url",
+        "buttons"
+      ],
+      "type": "object",
+      "properties": {
+        "body": {
+          "maxLength": 1600,
+          "type": "string"
+        },
+        "buttons": {
+          "maxItems": 2,
+          "minItems": 1,
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/SmsRcsButton"
+          }
+        },
+        "media_url": {
+          "format": "uri",
+          "type": "string"
+        },
+        "title": {
+          "maxLength": 200,
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "#/components/schemas/SmsRcsProfile": {
+      "required": [
+        "name"
+      ],
+      "type": "object",
+      "properties": {
+        "accent_color": {
+          "pattern": "^#[0-9a-fA-F]{6}$",
+          "type": "string"
+        },
+        "banner_url": {
+          "maxLength": 2048,
+          "type": "string"
+        },
+        "description": {
+          "maxLength": 100,
+          "type": "string"
+        },
+        "logo_url": {
+          "maxLength": 2048,
+          "type": "string"
+        },
+        "name": {
+          "maxLength": 100,
+          "minLength": 1,
+          "type": "string"
+        },
+        "privacy_policy_url": {
+          "maxLength": 2048,
+          "type": "string"
+        },
+        "support_email": {
+          "type": "string"
+        },
+        "support_phone": {
+          "maxLength": 20,
+          "type": "string"
+        },
+        "terms_url": {
+          "maxLength": 2048,
+          "type": "string"
+        },
+        "use_case": {
+          "enum": [
+            "PROMOTIONAL",
+            "TRANSACTIONAL",
+            "OTP",
+            "MULTI_USE"
+          ],
+          "type": "string"
+        },
+        "website_url": {
+          "maxLength": 2048,
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "#/components/schemas/SmsRcsReviewDetails": {
+      "type": "object",
+      "properties": {
+        "estimated_monthly_messages": {
+          "maximum": 1000000000,
+          "minimum": 0,
+          "type": "integer"
+        },
+        "legal_name": {
+          "maxLength": 200,
+          "type": "string"
+        },
+        "opt_in_description": {
+          "maxLength": 4000,
+          "type": "string"
+        },
+        "opt_in_url": {
+          "maxLength": 2048,
+          "type": "string"
+        },
+        "opt_out_description": {
+          "maxLength": 4000,
+          "type": "string"
+        },
+        "representative_email": {
+          "type": "string"
+        },
+        "representative_name": {
+          "maxLength": 200,
+          "type": "string"
+        },
+        "sample_messages": {
+          "maxItems": 5,
+          "type": "array",
+          "items": {
+            "maxLength": 1600,
+            "minLength": 1,
+            "type": "string"
+          }
+        },
+        "video_url": {
+          "maxLength": 2048,
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "#/components/schemas/SmsRcsRichContent": {
+      "oneOf": [
+        {
+          "required": [
+            "type"
+          ],
+          "type": "object",
+          "properties": {
+            "body": {
+              "maxLength": 1600,
+              "type": "string"
+            },
+            "buttons": {
+              "maxItems": 11,
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/SmsRcsButton"
+              }
+            },
+            "media_url": {
+              "format": "uri",
+              "type": "string"
+            },
+            "title": {
+              "maxLength": 200,
+              "type": "string"
+            },
+            "type": {
+              "enum": [
+                "card"
+              ],
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "required": [
+            "type",
+            "cards"
+          ],
+          "type": "object",
+          "properties": {
+            "cards": {
+              "maxItems": 10,
+              "minItems": 2,
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/SmsRcsCard"
+              }
+            },
+            "type": {
+              "enum": [
+                "carousel"
+              ],
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        }
+      ]
+    },
+    "#/components/schemas/SmsRcsSenderCreate": {
+      "required": [
+        "profile"
+      ],
+      "type": "object",
+      "properties": {
+        "assistant_id": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "countries": {
+          "maxItems": 1,
+          "minItems": 1,
+          "type": "array",
+          "items": {
+            "enum": [
+              "DE"
+            ],
+            "type": "string"
+          }
+        },
+        "default_connector_id": {
+          "format": "uuid",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "details": {
+          "$ref": "#/components/schemas/SmsRcsReviewDetails"
+        },
+        "expected_updated_at": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "linked_phone_number_id": {
+          "format": "uuid",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "profile": {
+          "$ref": "#/components/schemas/SmsRcsProfile"
+        }
+      },
+      "additionalProperties": false
+    },
+    "#/components/schemas/SmsRcsSenderUpdate": {
+      "required": [
+        "profile",
+        "details"
+      ],
+      "type": "object",
+      "properties": {
+        "assistant_id": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "countries": {
+          "maxItems": 1,
+          "minItems": 1,
+          "type": "array",
+          "items": {
+            "enum": [
+              "DE"
+            ],
+            "type": "string"
+          }
+        },
+        "default_connector_id": {
+          "format": "uuid",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "details": {
+          "$ref": "#/components/schemas/SmsRcsReviewDetails"
+        },
+        "expected_updated_at": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "linked_phone_number_id": {
+          "format": "uuid",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "profile": {
+          "$ref": "#/components/schemas/SmsRcsProfile"
+        }
+      },
+      "additionalProperties": false
     },
     "#/components/schemas/SmsRegistrationInput": {
       "required": [

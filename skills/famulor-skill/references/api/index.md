@@ -1,6 +1,6 @@
 # Public API operation index
 
-Reviewed 2026-11-04: **504 operations across 40 areas**. Every operation is cross-checked against the generated CLI catalog and TypeScript SDK descriptors.
+Reviewed 2026-11-04: **512 operations across 40 areas**. Every operation is cross-checked against the generated CLI catalog and TypeScript SDK descriptors.
 
 Use this index to find the right endpoint. Open only the relevant area; use [API, CLI and SDK guidance](../api-and-sdk.md) for authentication, execution and verification. Public reseller operations remain subject to the authenticated workspace's entitlement and permissions.
 
@@ -43,7 +43,7 @@ The full API uses `https://app.famulor.io/api/v1` plus the relative paths shown 
 | Phone Numbers | 16 | [Phone Numbers](phone-numbers.md) |
 | QA | 3 | [QA](qa.md) |
 | SIP Trunks | 5 | [SIP Trunks](sip-trunks.md) |
-| SMS | 1 | [SMS](sms.md) |
+| SMS | 9 | [SMS](sms.md) |
 | Segments | 6 | [Segments](segments.md) |
 | Settings | 29 | [Settings](settings.md) |
 | Shopify | 16 | [Shopify](shopify.md) |
