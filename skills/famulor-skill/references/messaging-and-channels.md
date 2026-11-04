@@ -240,3 +240,15 @@ Both transports stay under SMS in History. Check actual transport, delivery stat
 When several SMS connections share one company sender, the sender's `default_connector_id` selects the connection for new incoming RCS contacts. Existing conversations keep their connection. On messaging connector creation/update, optional `rcs_default_connector: true` selects this connection; `false` releases it if currently selected and may let another linked connection become default. Omit to preserve routing. This is a write-only choice; read the sender to confirm the actual selected connection, and never infer routing from the latest connection edited.
 
 For a plain-text send, SMS fallback sends `body` unchanged: omit `sms_fallback_body` or repeat the same text exactly. A different text alternative is accepted only for a rich card, carousel or media message. Send results may include the known `transport` and `fallback_used`; preserve an explicit false value. Accepted delivery is not final delivery, so read History for later updates.
+
+
+For a customer-facing price explanation, read the current workspace rates with REST `GET /api/v1/usage/rates`, MCP `get_usage_rates`, CLI `famulor get-workspace-usage-rates`, or `client.api.getWorkspaceUsageRates()`. RCS remains part of SMS and has four rate rows:
+
+| Code | Mode and unit | Meaning |
+| --- | --- | --- |
+| `rcs_setup` | Fixed, creation | One-time setup for one company sender; read and confirm the current booking quote before submission. |
+| `rcs_sent` | Fixed, message | Sending fee using the same effective base fee as SMS. |
+| `rcs_delivery` | Variable, message | RCS delivery usage with no fixed rate; inspect actual delivery charges in History. |
+| `rcs_received` | Variable, message | Incoming RCS usage with no fixed rate; inspect actual received-message charges in History. |
+
+A null amount means variable or usage-based pricing, never free usage. An explicit fixed zero remains zero. Creation is also the unit for existing voice-clone and custom-avatar charges. SMS fallback follows SMS delivery pricing. Keep setup, the fixed sending fee and variable delivery/receipt usage separate, and do not present a fixed base fee as the total delivery price.

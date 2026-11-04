@@ -4,6 +4,7 @@
 
 - Document RCS as an optional part of the SMS channel: company sender drafts, branding, consent, review, explicit setup-credit acceptance, activation and delivery policy.
 - Document explicit incoming RCS default routing, optional send transport metadata and identical plain-text SMS fallback.
+- Explain separate company setup, sending, delivery and receipt usage rates, including one-time creation units and variable null credit amounts.
 - Explain basic UTF-8 byte classes, Unicode SMS fallback segments, rich content and incoming RCS replies without inventing a separate channel.
 - Refresh 518 MCP tools and 512 public API operations with matching CLI and SDK mappings. Distribution assets are prepared locally; publication remains separate.
 
