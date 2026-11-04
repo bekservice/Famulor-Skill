@@ -4,7 +4,7 @@ Use the interface already connected to the user's workspace. MCP fits interactiv
 
 ## Find any endpoint
 
-The [complete operation index](api/index.md) covers **503 public REST operations across 40 areas**, reviewed on 2026-11-02. Every entry maps the public operation ID to its HTTP method/path, actual generated CLI command and `client.api` SDK method. The [MCP references](toolsets/assistants.md) separately cover the MCP tools; counts and names differ because some capabilities use several tools or an action selector.
+The [complete operation index](api/index.md) covers **512 public REST operations across 40 areas**, reviewed on 2026-11-04. Every entry maps the public operation ID to its HTTP method/path, actual generated CLI command and `client.api` SDK method. The [MCP references](toolsets/assistants.md) separately cover the MCP tools; counts and names differ because some capabilities use several tools or an action selector.
 
 For exact request shapes without loading the entire catalog:
 
@@ -150,3 +150,52 @@ If all guarded checks succeed with zero matching failed runs, the Mission record
 Discover `createRoutineVersionDraft` and `publishRoutineVersion` from the [Missions operation guide](api/milian-missions.md). REST uses `POST /routines/{id}/versions` then `POST /routines/{id}/publish`; MCP uses `save_routine_draft` then `publish_routine`; CLI uses `famulor create-routine-version-draft <id> --spec @mission-spec.json` then `famulor publish-routine-version <id> --version-id <version-id>`. The generated TypeScript methods are `client.api.createRoutineVersionDraft` and `client.api.publishRoutineVersion`. Read the complete live schemas and review the full specification before publishing.
 
 When summarizing unified History, preserve source coverage. Email text-search totals can be lower bounds even after every returned page is read; narrow the search rather than calling them exact. Paginated email/messaging detail covers the available source window, not necessarily the full lifetime conversation.
+
+## SMS with optional RCS
+
+Keep existing SMS sends and add company sender lifecycle operations only when requested. Read availability and the exact setup quote before a paid submission. The generated methods preserve response envelopes and credentials:
+
+```typescript
+const { data: quote } = await client.sms.listCompanySenders();
+const { data: sender } = await client.sms.getCompanySender(senderId);
+// Only after the user explicitly accepts quote.setup_credits:
+if (!quote || !sender) throw new Error("Read the sender and quote first.");
+await client.sms.submitCompanySender(sender.id, { confirmed_setup_credits: quote.setup_credits });
+await client.sms.refreshCompanySender(sender.id);
+await client.sms.sendFromConnector(connectorId, {
+  to: "+4915112345678", body: "Your order is ready.", delivery_mode: "rcs_preferred",
+  rich_content: { type: "card", title: "Order ready", media_url: "https://example.com/order.png" },
+  sms_fallback_body: "Your order is ready.", idempotency_key: "order-42-ready",
+});
+```
+
+Equivalent command discovery:
+
+```bash
+famulor list-sms-rcs-senders
+famulor get-sms-rcs-sender SENDER_UUID
+famulor submit-sms-rcs-sender SENDER_UUID --confirmed-setup-credits 500
+famulor refresh-sms-rcs-sender SENDER_UUID
+famulor send-sms-from-connector CONNECTOR_UUID --to +4915112345678 --body "Hello" --delivery-mode rcs_only
+famulor send-sms --from-number-id NUMBER_UUID --to +4915112345678 --body "Hello" --delivery-mode sms_only
+```
+
+The submit command is illustrative: replace 500 with the accepted current quote. Sender approval and activation must precede sending. See [messaging and channels](messaging-and-channels.md) for complete consent, branding, length and fallback checks. CLI/SDK and native connector distribution are separate releases; inspect the installed version's actual methods before execution.
+
+
+Choose incoming routing explicitly when a company sender has several connections:
+
+```typescript
+await client.api.updateMessagingConnector({
+  path: { id: connectorId }, body: { rcs_default_connector: true },
+});
+const { data: sender } = await client.sms.getCompanySender(senderId);
+console.log(sender?.default_connector_id);
+```
+
+```bash
+famulor update-messaging-connector CONNECTOR_UUID --rcs-default-connector true
+famulor get-sms-rcs-sender SENDER_UUID
+```
+
+The selection is a write-only input; sender details are the read authority. False releases the current default and may select another linked connection. Optional send response fields identify known transport and SMS fallback use. Plain-text fallback must retain the original message; separate text alternatives belong to rich/media content only.

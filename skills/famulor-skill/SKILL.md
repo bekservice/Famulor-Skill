@@ -4,7 +4,7 @@ description: Design, configure, test and improve Famulor voice, WhatsApp, webcha
 license: MIT
 metadata:
   author: Famulor
-  version: "2.6.4"
+  version: "2.7.0"
   homepage: https://github.com/bekservice/Famulor-Skill
 ---
 
@@ -19,7 +19,7 @@ Turn the user's business outcome into a channel-appropriate assistant or a verif
 | A new assistant, prompt review, configuration or language setup | [Assistant design](references/assistant-design.md) |
 | A complete example, demo-inspired assistant or the shape of an excellent finished result | [Worked examples](references/examples/README.md); load only the closest scenario |
 | Phone reception, appointment booking, opted-in outbound qualification | [Voice prompting](references/voice-prompting.md) |
-| WhatsApp, website text chat, social messaging or email | [Messaging and channels](references/messaging-and-channels.md) |
+| WhatsApp, SMS with optional RCS, website text chat, social messaging or email | [Messaging and channels](references/messaging-and-channels.md) |
 | Tests, simulations, regression cases or call-quality review | [Testing and evaluation](references/testing-and-evaluation.md) |
 | REST endpoint, CLI command, TypeScript method or integration code | [API and SDK](references/api-and-sdk.md) and [operation index](references/api/index.md) |
 | Workspace data or actions | The smallest matching MCP toolset below |
@@ -47,7 +47,7 @@ https://app.famulor.io/mcp?toolsets=assistants,calls
 | `assistants` | Assistants, prompts, models, voices, tools, bookings and tests | 122 | [Assistants](references/toolsets/assistants.md) |
 | `calls` | Unified history, transcripts, quality review and permitted call control | 34 | [Calls](references/toolsets/calls.md) |
 | `campaigns` | Campaigns, audience, leads, consent and suppression | 34 | [Campaigns](references/toolsets/campaigns.md) |
-| `messaging` | WhatsApp, social channels, email, templates and conversations | 48 | [Messaging](references/toolsets/messaging.md) |
+| `messaging` | WhatsApp, social channels, email, templates and conversations | 56 | [Messaging](references/toolsets/messaging.md) |
 | `telephony` | Numbers, own carriers, routing and team calling | 71 | [Telephony](references/toolsets/telephony.md) |
 | `knowledge` | Documents, FAQs, websites and connected knowledge sources | 28 | [Knowledge](references/toolsets/knowledge.md) |
 | `dashboards` | Analytics and dashboard widgets | 19 | [Dashboards](references/toolsets/dashboards.md) |
@@ -59,7 +59,7 @@ https://app.famulor.io/mcp?toolsets=assistants,calls
 | `tasks` | Durable exports, crawls, simulations and preparation | 4 | [Tasks](references/toolsets/tasks.md) |
 | `milian` | Workspace questions and voice sessions using additional credits | 2 | [Milian](references/toolsets/milian.md) |
 
-The dated snapshot contains **510 tools** across 14 groups. `list_mcp_toolsets` reports groups visible to a custom connection. The public `assistant-history` profile intentionally provides only 11 read tools. Installing a skill cannot expand that connection's permissions. Model-catalog visibility may require AI Safety & Control; use available defaults rather than trying to bypass a denial.
+The dated snapshot contains **518 tools** across 14 groups. `list_mcp_toolsets` reports groups visible to a custom connection. The public `assistant-history` profile intentionally provides only 11 read tools. Installing a skill cannot expand that connection's permissions. Model-catalog visibility may require AI Safety & Control; use available defaults rather than trying to bypass a denial.
 
 ## Design before configuration
 
