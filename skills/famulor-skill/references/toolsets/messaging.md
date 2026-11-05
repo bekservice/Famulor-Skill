@@ -2,7 +2,7 @@
 
 Messaging, email, connected channels, templates, and sender profiles. Connect only this group with `https://app.famulor.io/mcp?toolsets=messaging`.
 
-This 2026-11-04 snapshot covers all 56 tools assigned to `messaging` in the canonical 518-tool registry. The live MCP `tools/list` response is authoritative for arguments, current availability, annotations, and plan or role gating. Never invent fields from this catalog.
+This 2026-11-05 snapshot covers all 56 tools assigned to `messaging` in the canonical 518-tool registry. The live MCP `tools/list` response is authoritative for arguments, current availability, annotations, and plan or role gating. Never invent fields from this catalog.
 
 Toolsets limit discovery context; they do not grant access. OAuth/API scopes and workspace roles are enforced separately. The Effect column reflects MCP risk annotations: `Delete/destructive` also covers overwrites or changes that can remove data or safeguards.
 
@@ -59,7 +59,7 @@ Toolsets limit discovery context; they do not grant access. OAuth/API scopes and
 | `update_email_address` | Write/action | `assistants:write` | Immediate | Rename, reassign to another assistant, or toggle active on an email address. |
 | `update_email_settings` | Write/action | `assistants:write` | Immediate | Replace the workspace default sender name and signature. Both fields are replaced wholesale — an omitted field resets to empty. '{agent_name}' in the signature is replaced with the assistant's name at send time. |
 | `update_messaging_connector` | Write/action | `assistants:write` | Immediate | Patch name, assistant, credentials, WhatsApp toggles, conversation settings or optional SMS/RCS company sender and delivery policy. |
-| `update_sms_rcs_sender` | Write/action | `phone_numbers:write` | Immediate | Replace an editable company sender's complete profile and review details. Include the last updated_at value to detect concurrent edits. Approved or in-review profiles may be locked; corrections retain the original setup charge. |
+| `update_sms_rcs_sender` | Write/action | `phone_numbers:write` | Immediate | Replace an editable company sender's complete profile and review details. Include the last updated_at value to detect concurrent edits. Omit linked_phone_number_id to keep the current connection. To clear the default fallback, pass linked_phone_number_id as null and omit default_connector_id. The previous default number switches to SMS only. Approved or in-review profiles may be locked. Corrections retain the original setup charge. |
 | `update_whatsapp_sender_profile` | Write/action | `assistants:write` | Immediate | Patch local WhatsApp sender settings (name, assistant, AI, reactions, keep unread, response delay, conversation-end settings, business profile fields, read-receipts webhook). Same as PATCH /api/v1/whatsapp/connectors/{id}/profile. |
 | `update_whatsapp_template` | Write/action | `assistants:write` | Immediate | Update a draft locally. For an editable provider template, only component or category changes are sent to Meta; parameter mappings remain local and preserve the provider status. To mark opt-out buttons without touching Meta, use set_whatsapp_template_opt_out_buttons. |
 | `upload_sms_rcs_asset` | Write/action | `phone_numbers:write` | Immediate | Publish a customer-authorized brand image for an RCS sender. Logo: 224×224 pixels, at most 50 KB. Banner: 1440×448 pixels, at most 200 KB. PNG or JPEG only. The public result URL can be used in the sender profile; do not upload private documents or unrelated personal images. |

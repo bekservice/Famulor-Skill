@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.7.1 — 2026-11-05
+
+- Describe how to clear the default RCS fallback while retaining the existing SMS connection and other assigned numbers.
+
 ## 2.7.0 — 2026-11-04
 
 - Document RCS as an optional part of the SMS channel: company sender drafts, branding, consent, review, explicit setup-credit acceptance, activation and delivery policy.
