@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.8.0 — 2026-11-06
+
+- Document multi-country RCS applications, the supported workspace country suggestion and revision checks when confirming setup.
+- Document direct RCS-only Send SMS automations using a company sender, including connections without SMS fallback.
+- Refresh the generated public API and MCP catalogs.
+
 ## 2.7.2 — 2026-11-05
 
 - Add the booking deletion workflow and refresh the public REST, CLI, SDK and MCP catalogs.
