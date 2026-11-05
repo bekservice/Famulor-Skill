@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "reviewedAt": "2026-11-05",
   "source": "Famulor public OpenAPI, CLI command catalog and TypeScript SDK operation descriptors",
-  "openapiSha256": "42370011add5395ff823dd365dbe19d6ab5935115258a6901c6e1563c046c255",
+  "openapiSha256": "9fb34b1f48bc71adbdae4630747c7d9207bcbe4a2197889da8ac706a62cdcbe6",
   "baseUrl": "https://app.famulor.io/api/v1",
   "notice": "Dated navigation and request-shape snapshot, not a runtime validator. Check the live public schema and installed client before execution. Descriptions, examples, default values and response properties are intentionally omitted.",
   "operations": [
@@ -1608,7 +1608,7 @@
       "documentation": "https://docs.famulor.io/api-reference/messaging/complete-messenger-facebook-login",
       "cli": {
         "command": "complete-messenger-facebook-login",
-        "hidden": true,
+        "hidden": false,
         "parameters": [],
         "bodyFields": [
           {
@@ -1638,6 +1638,12 @@
           {
             "name": "name",
             "flag": "--name",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "page_selection",
+            "flag": "--page-selection",
             "required": false,
             "type": "string"
           }
@@ -1670,8 +1676,30 @@
               },
               "page_id": {
                 "type": "string"
+              },
+              "page_selection": {
+                "maxLength": 8192,
+                "type": "string",
+                "writeOnly": true
               }
-            }
+            },
+            "anyOf": [
+              {
+                "required": [
+                  "page_selection"
+                ]
+              },
+              {
+                "required": [
+                  "access_token"
+                ]
+              },
+              {
+                "required": [
+                  "page_access_token"
+                ]
+              }
+            ]
           }
         }
       },
@@ -15998,7 +16026,7 @@
       "documentation": "https://docs.famulor.io/api-reference/messaging/messenger-facebook-login-public-config",
       "cli": {
         "command": "get-messenger-facebook-login-config",
-        "hidden": true,
+        "hidden": false,
         "parameters": [],
         "bodyFields": []
       },
@@ -24968,7 +24996,13 @@
           {
             "name": "access_token",
             "flag": "--access-token",
-            "required": true,
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "code",
+            "flag": "--code",
+            "required": false,
             "type": "string"
           }
         ]
@@ -24979,15 +25013,28 @@
         "required": true,
         "content": {
           "application/json": {
-            "required": [
-              "access_token"
-            ],
             "type": "object",
             "properties": {
               "access_token": {
                 "type": "string"
+              },
+              "code": {
+                "type": "string",
+                "writeOnly": true
               }
-            }
+            },
+            "oneOf": [
+              {
+                "required": [
+                  "code"
+                ]
+              },
+              {
+                "required": [
+                  "access_token"
+                ]
+              }
+            ]
           }
         }
       },
