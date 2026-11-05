@@ -4,7 +4,7 @@ Use the interface already connected to the user's workspace. MCP fits interactiv
 
 ## Find any endpoint
 
-The [complete operation index](api/index.md) covers **512 public REST operations across 40 areas**, reviewed on 2026-11-04. Every entry maps the public operation ID to its HTTP method/path, actual generated CLI command and `client.api` SDK method. The [MCP references](toolsets/assistants.md) separately cover the MCP tools; counts and names differ because some capabilities use several tools or an action selector.
+The [complete operation index](api/index.md) covers **513 public REST operations across 40 areas**, reviewed on 2026-11-05. Every entry maps the public operation ID to its HTTP method/path, actual generated CLI command and `client.api` SDK method. The [MCP references](toolsets/assistants.md) separately cover the MCP tools; counts and names differ because some capabilities use several tools or an action selector.
 
 For exact request shapes without loading the entire catalog:
 
@@ -199,3 +199,7 @@ famulor get-sms-rcs-sender SENDER_UUID
 ```
 
 The selection is a write-only input; sender details are the read authority. False releases the current default and may select another linked connection. Optional send response fields identify known transport and SMS fallback use. Plain-text fallback must retain the original message; separate text alternatives belong to rich/media content only.
+
+## Permanently delete bookings
+
+Resolve the requested native booking IDs in the active workspace. Confirm the exact selection before deleting. Call `delete_bookings` or `POST /api/v1/bookings/delete` with `booking_ids` (1–200 UUIDs). Only ended or terminal bookings are eligible. Cancel an upcoming confirmed appointment first. Report `deleted_ids` and `skipped_ids` separately. Copies in connected calendars, email and other systems require separate handling.
