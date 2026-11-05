@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "reviewedAt": "2026-11-05",
   "source": "Famulor public OpenAPI, CLI command catalog and TypeScript SDK operation descriptors",
-  "openapiSha256": "9fb34b1f48bc71adbdae4630747c7d9207bcbe4a2197889da8ac706a62cdcbe6",
+  "openapiSha256": "a85cb39970e9fe68f20c8bde819ea5932a1f6d09cc489efac40863455c9c2dc8",
   "baseUrl": "https://app.famulor.io/api/v1",
   "notice": "Dated navigation and request-shape snapshot, not a runtime validator. Check the live public schema and installed client before execution. Descriptions, examples, default values and response properties are intentionally omitted.",
   "operations": [
@@ -8936,6 +8936,101 @@
       "binaryResponse": false
     },
     {
+      "operationId": "deleteAudienceContacts",
+      "method": "POST",
+      "path": "/leads/bulk-delete",
+      "group": "Leads",
+      "summary": "Permanently delete Audience contacts",
+      "documentation": "https://docs.famulor.io/api-reference/leads/permanently-delete-audience-contacts",
+      "cli": {
+        "command": "delete-audience-contacts",
+        "hidden": false,
+        "parameters": [],
+        "bodyFields": [
+          {
+            "name": "workspace_id",
+            "flag": "--workspace-id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "lead_ids",
+            "flag": "--lead-ids",
+            "required": true,
+            "type": "array",
+            "itemType": "string"
+          },
+          {
+            "name": "confirmed",
+            "flag": "--confirmed",
+            "required": true,
+            "type": "boolean",
+            "enum": [
+              true
+            ]
+          }
+        ]
+      },
+      "sdkMethod": "client.api.deleteAudienceContacts",
+      "parameters": [],
+      "requestBody": {
+        "required": true,
+        "content": {
+          "application/json": {
+            "required": [
+              "workspace_id",
+              "lead_ids",
+              "confirmed"
+            ],
+            "type": "object",
+            "properties": {
+              "confirmed": {
+                "enum": [
+                  true
+                ],
+                "type": "boolean"
+              },
+              "lead_ids": {
+                "maxItems": 100,
+                "minItems": 1,
+                "type": "array",
+                "items": {
+                  "format": "uuid",
+                  "type": "string"
+                }
+              },
+              "workspace_id": {
+                "format": "uuid",
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "responses": {
+        "200": [
+          "application/json"
+        ],
+        "400": [
+          "application/json"
+        ],
+        "401": [
+          "application/json"
+        ],
+        "403": [
+          "application/json"
+        ],
+        "409": [],
+        "429": [
+          "application/json"
+        ],
+        "503": [
+          "application/json"
+        ]
+      },
+      "binaryResponse": false
+    },
+    {
       "operationId": "deleteAutomation",
       "method": "DELETE",
       "path": "/automations/{id}",
@@ -9203,6 +9298,73 @@
           "application/json"
         ],
         "404": [
+          "application/json"
+        ],
+        "429": [
+          "application/json"
+        ],
+        "503": [
+          "application/json"
+        ]
+      },
+      "binaryResponse": false
+    },
+    {
+      "operationId": "deleteBookings",
+      "method": "POST",
+      "path": "/bookings/delete",
+      "group": "Bookings",
+      "summary": "Permanently delete bookings",
+      "documentation": "https://docs.famulor.io/api-reference/bookings/permanently-delete-bookings",
+      "cli": {
+        "command": "delete-bookings",
+        "hidden": false,
+        "parameters": [],
+        "bodyFields": [
+          {
+            "name": "booking_ids",
+            "flag": "--booking-ids",
+            "required": true,
+            "type": "array",
+            "itemType": "string"
+          }
+        ]
+      },
+      "sdkMethod": "client.api.deleteBookings",
+      "parameters": [],
+      "requestBody": {
+        "required": true,
+        "content": {
+          "application/json": {
+            "required": [
+              "booking_ids"
+            ],
+            "type": "object",
+            "properties": {
+              "booking_ids": {
+                "maxItems": 200,
+                "minItems": 1,
+                "type": "array",
+                "items": {
+                  "format": "uuid",
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "responses": {
+        "200": [
+          "application/json"
+        ],
+        "400": [
+          "application/json"
+        ],
+        "401": [
+          "application/json"
+        ],
+        "403": [
           "application/json"
         ],
         "429": [

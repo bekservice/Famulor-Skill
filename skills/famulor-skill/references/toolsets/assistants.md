@@ -2,7 +2,7 @@
 
 Assistants, models, voices, reusable tools, bookings, integrations, tests, and simulations. Connect only this group with `https://app.famulor.io/mcp?toolsets=assistants`.
 
-This 2026-11-05 snapshot covers all 122 tools assigned to `assistants` in the canonical 518-tool registry. The live MCP `tools/list` response is authoritative for arguments, current availability, annotations, and plan or role gating. Never invent fields from this catalog.
+This 2026-11-05 snapshot covers all 123 tools assigned to `assistants` in the canonical 520-tool registry. The live MCP `tools/list` response is authoritative for arguments, current availability, annotations, and plan or role gating. Never invent fields from this catalog.
 
 Toolsets limit discovery context; they do not grant access. OAuth/API scopes and workspace roles are enforced separately. The Effect column reflects MCP risk annotations: `Delete/destructive` also covers overwrites or changes that can remove data or safeguards.
 
@@ -36,6 +36,7 @@ Toolsets limit discovery context; they do not grant access. OAuth/API scopes and
 | `delete_assistant_version` | Delete/destructive | `assistants:write` | Immediate | Permanently delete one saved version snapshot. |
 | `delete_avatar` | Delete/destructive | `assistants:write` | Immediate | Permanently delete a workspace-owned custom avatar. Remove its widget assignments first. The one-time creation charge is not refunded. |
 | `delete_booking_event_type` | Delete/destructive | `bookings:write or assistants:write` | Immediate | Permanently delete a booking event type. All its bookings are removed with it. This cannot be undone. |
+| `delete_bookings` | Delete/destructive | `bookings:write` | Immediate | Permanently delete one or more ended, cancelled, completed or no-show native bookings. Ask for confirmation before deleting. Requires workspace owner/admin authority and bookings:write. Active, missing and inaccessible IDs are skipped. Copies in connected calendars, emails and external systems remain. |
 | `delete_integration` | Delete/destructive | `integrations:write or assistants:write` | Immediate | Permanently delete a calendar integration. Its assistant assignments are removed automatically. This cannot be undone. |
 | `delete_tool` | Delete/destructive | `assistants:write` | Immediate | Archive an unused tool. Assigned tools return tool_in_use; deactivate a tool instead when it must stop immediately. |
 | `delete_voice_clone` | Delete/destructive | `voices:write or assistants:write` | Immediate | Request durable deletion of a workspace-owned cloned voice. A voice still assigned to an assistant must be removed there first. |

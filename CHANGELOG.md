@@ -2,7 +2,7 @@
 
 ## 2.7.2 — 2026-11-05
 
-- Document Messenger Business Login with a short-lived Page selection and refresh the API, SDK, CLI and MCP references.
+- Document Messenger Business Login with the registered OAuth redirect and a short-lived Page selection. Refresh the 514 API operations and 520 MCP tools with matching CLI and SDK references.
 
 ## 2.7.1 — 2026-11-05
 

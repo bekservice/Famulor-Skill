@@ -2,7 +2,7 @@
 
 Messaging, email, connected channels, templates, and sender profiles. Connect only this group with `https://app.famulor.io/mcp?toolsets=messaging`.
 
-This 2026-11-05 snapshot covers all 56 tools assigned to `messaging` in the canonical 518-tool registry. The live MCP `tools/list` response is authoritative for arguments, current availability, annotations, and plan or role gating. Never invent fields from this catalog.
+This 2026-11-05 snapshot covers all 56 tools assigned to `messaging` in the canonical 520-tool registry. The live MCP `tools/list` response is authoritative for arguments, current availability, annotations, and plan or role gating. Never invent fields from this catalog.
 
 Toolsets limit discovery context; they do not grant access. OAuth/API scopes and workspace roles are enforced separately. The Effect column reflects MCP risk annotations: `Delete/destructive` also covers overwrites or changes that can remove data or safeguards.
 
@@ -26,7 +26,7 @@ Toolsets limit discovery context; they do not grant access. OAuth/API scopes and
 | `get_email_channel_options` | Read-only | `assistants:read` | Immediate | Read hosted address availability, workspace limits and the current one-time custom domain price in credits. Requires workspace owner/admin. |
 | `get_email_domain` | Read-only | `assistants:read` | Immediate | Fetch a single connected email domain, including DNS records and verification status. |
 | `get_email_settings` | Read-only | `assistants:read` | Immediate | Get the workspace default sender name and signature used when an address doesn't have its own. |
-| `get_messenger_facebook_login_config` | Read-only | `assistants:read` | Immediate | Returns whether Connect with Facebook for Messenger is enabled, the public Meta app ID for the browser FB.login flow and, when the Meta app uses Facebook Login for Business, the config_id to pass to FB.login (response_type "code") instead of a scope. Platform-root workspaces only (not whitelabel). |
+| `get_messenger_facebook_login_config` | Read-only | `assistants:read` | Immediate | Returns whether Connect with Facebook for Messenger is enabled, the public Meta app ID and the Business Login configuration ID. For Business Login, use the platform's registered root URL (including its trailing slash) as redirect_uri in the OAuth dialog and request an authorization code. Platform-root workspaces only (not whitelabel). |
 | `get_slack_oauth_config` | Read-only | `assistants:read` | Immediate | Returns whether Add to Slack is enabled and the public Slack client ID for the platform Famulor app. Platform-root workspaces only (not whitelabel). Same as GET /api/v1/slack/oauth. |
 | `get_sms_rcs_sender` | Read-only | `phone_numbers:read` | Immediate | Read an owned company sender's profile, evidence, review timeline and readiness. Draft, paid or submitted status does not establish production approval. |
 | `get_whatsapp_calling_status` | Read-only | `assistants:read` | Immediate | Check WhatsApp Cloud API calling readiness for a connector: current Meta call settings, business verification / messaging-limit notes, and whether inbound/outbound voice is ready. |
