@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.7.2 — 2026-11-05
+
+- Document Messenger Business Login with a short-lived Page selection and refresh the API, SDK, CLI and MCP references.
+
 ## 2.7.1 — 2026-11-05
 
 - Describe how to clear the default RCS fallback while retaining the existing SMS connection and other assigned numbers.
