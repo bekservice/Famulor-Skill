@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.7.2 — 2026-11-05
+
+- Add the booking deletion workflow and refresh the public REST, CLI, SDK and MCP catalogs.
+
 ## 2.7.1 — 2026-11-05
 
 - Describe how to clear the default RCS fallback while retaining the existing SMS connection and other assigned numbers.

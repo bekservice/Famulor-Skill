@@ -1,6 +1,6 @@
 # Public API operation index
 
-Reviewed 2026-11-05: **512 operations across 40 areas**. Every operation is cross-checked against the generated CLI catalog and TypeScript SDK descriptors.
+Reviewed 2026-11-05: **513 operations across 40 areas**. Every operation is cross-checked against the generated CLI catalog and TypeScript SDK descriptors.
 
 Use this index to find the right endpoint. Open only the relevant area; use [API, CLI and SDK guidance](../api-and-sdk.md) for authentication, execution and verification. Public reseller operations remain subject to the authenticated workspace's entitlement and permissions.
 
@@ -23,7 +23,7 @@ The full API uses `https://app.famulor.io/api/v1` plus the relative paths shown 
 | Automations | 44 | [Automations](automations.md) |
 | Avatars | 7 | [Avatars](avatars.md) |
 | Billing | 16 | [Billing](billing.md) |
-| Bookings | 13 | [Bookings](bookings.md) |
+| Bookings | 14 | [Bookings](bookings.md) |
 | Callbacks | 2 | [Callbacks](callbacks.md) |
 | Caller IDs | 4 | [Caller IDs](caller-ids.md) |
 | Calls | 13 | [Calls](calls.md) |
