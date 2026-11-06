@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.7.3 — 2026-11-06
+
+- Refresh public assistant voice contracts and catalog references.
+
 ## 2.7.2 — 2026-11-05
 
 - Add the booking deletion workflow and refresh the public REST, CLI, SDK and MCP catalogs.

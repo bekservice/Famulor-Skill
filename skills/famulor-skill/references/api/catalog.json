@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "reviewedAt": "2026-11-05",
+  "reviewedAt": "2026-11-06",
   "source": "Famulor public OpenAPI, CLI command catalog and TypeScript SDK operation descriptors",
-  "openapiSha256": "fda9e81b6b102dae7cb628423b5953ccf6a4b3f9d69f99db4b60b53ab58abf9d",
+  "openapiSha256": "a04d5a3fd95161261af8558a24c46c56bedd9afc7db86234f1370f71ffad268f",
   "baseUrl": "https://app.famulor.io/api/v1",
   "notice": "Dated navigation and request-shape snapshot, not a runtime validator. Check the live public schema and installed client before execution. Descriptions, examples, default values and response properties are intentionally omitted.",
   "operations": [
@@ -1608,7 +1608,7 @@
       "documentation": "https://docs.famulor.io/api-reference/messaging/complete-messenger-facebook-login",
       "cli": {
         "command": "complete-messenger-facebook-login",
-        "hidden": true,
+        "hidden": false,
         "parameters": [],
         "bodyFields": [
           {
@@ -1638,6 +1638,12 @@
           {
             "name": "name",
             "flag": "--name",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "page_selection",
+            "flag": "--page-selection",
             "required": false,
             "type": "string"
           }
@@ -1670,8 +1676,30 @@
               },
               "page_id": {
                 "type": "string"
+              },
+              "page_selection": {
+                "maxLength": 8192,
+                "type": "string",
+                "writeOnly": true
               }
-            }
+            },
+            "anyOf": [
+              {
+                "required": [
+                  "page_selection"
+                ]
+              },
+              {
+                "required": [
+                  "access_token"
+                ]
+              },
+              {
+                "required": [
+                  "page_access_token"
+                ]
+              }
+            ]
           }
         }
       },
@@ -2419,7 +2447,8 @@
               "inworld",
               "rime",
               "xai",
-              "gradium"
+              "gradium",
+              "assemblyai"
             ]
           },
           {
@@ -5046,6 +5075,12 @@
             "flag": "--sort-order",
             "required": false,
             "type": "integer"
+          },
+          {
+            "name": "pinned",
+            "flag": "--pinned",
+            "required": false,
+            "type": "boolean"
           },
           {
             "name": "show_default_sections",
@@ -7871,9 +7906,6 @@
             "flag": "--countries",
             "required": false,
             "type": "array",
-            "enum": [
-              "DE"
-            ],
             "itemType": "string"
           },
           {
@@ -8898,6 +8930,101 @@
       },
       "responses": {
         "204": [],
+        "429": [
+          "application/json"
+        ],
+        "503": [
+          "application/json"
+        ]
+      },
+      "binaryResponse": false
+    },
+    {
+      "operationId": "deleteAudienceContacts",
+      "method": "POST",
+      "path": "/leads/bulk-delete",
+      "group": "Leads",
+      "summary": "Permanently delete Audience contacts",
+      "documentation": "https://docs.famulor.io/api-reference/leads/permanently-delete-audience-contacts",
+      "cli": {
+        "command": "delete-audience-contacts",
+        "hidden": false,
+        "parameters": [],
+        "bodyFields": [
+          {
+            "name": "workspace_id",
+            "flag": "--workspace-id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "lead_ids",
+            "flag": "--lead-ids",
+            "required": true,
+            "type": "array",
+            "itemType": "string"
+          },
+          {
+            "name": "confirmed",
+            "flag": "--confirmed",
+            "required": true,
+            "type": "boolean",
+            "enum": [
+              true
+            ]
+          }
+        ]
+      },
+      "sdkMethod": "client.api.deleteAudienceContacts",
+      "parameters": [],
+      "requestBody": {
+        "required": true,
+        "content": {
+          "application/json": {
+            "required": [
+              "workspace_id",
+              "lead_ids",
+              "confirmed"
+            ],
+            "type": "object",
+            "properties": {
+              "confirmed": {
+                "enum": [
+                  true
+                ],
+                "type": "boolean"
+              },
+              "lead_ids": {
+                "maxItems": 100,
+                "minItems": 1,
+                "type": "array",
+                "items": {
+                  "format": "uuid",
+                  "type": "string"
+                }
+              },
+              "workspace_id": {
+                "format": "uuid",
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "responses": {
+        "200": [
+          "application/json"
+        ],
+        "400": [
+          "application/json"
+        ],
+        "401": [
+          "application/json"
+        ],
+        "403": [
+          "application/json"
+        ],
+        "409": [],
         "429": [
           "application/json"
         ],
@@ -16065,7 +16192,7 @@
       "documentation": "https://docs.famulor.io/api-reference/messaging/messenger-facebook-login-public-config",
       "cli": {
         "command": "get-messenger-facebook-login-config",
-        "hidden": true,
+        "hidden": false,
         "parameters": [],
         "bodyFields": []
       },
@@ -25035,7 +25162,13 @@
           {
             "name": "access_token",
             "flag": "--access-token",
-            "required": true,
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "code",
+            "flag": "--code",
+            "required": false,
             "type": "string"
           }
         ]
@@ -25046,15 +25179,28 @@
         "required": true,
         "content": {
           "application/json": {
-            "required": [
-              "access_token"
-            ],
             "type": "object",
             "properties": {
               "access_token": {
                 "type": "string"
+              },
+              "code": {
+                "type": "string",
+                "writeOnly": true
               }
-            }
+            },
+            "oneOf": [
+              {
+                "required": [
+                  "code"
+                ]
+              },
+              {
+                "required": [
+                  "access_token"
+                ]
+              }
+            ]
           }
         }
       },
@@ -30694,7 +30840,8 @@
               "inworld",
               "rime",
               "xai",
-              "gradium"
+              "gradium",
+              "assemblyai"
             ]
           },
           {
@@ -35973,6 +36120,12 @@
             "flag": "--confirmed-setup-credits",
             "required": true,
             "type": "number"
+          },
+          {
+            "name": "expected_updated_at",
+            "flag": "--expected-updated-at",
+            "required": false,
+            "type": "string"
           }
         ]
       },
@@ -36002,6 +36155,10 @@
                 "minimum": 0,
                 "multipleOf": 0.01,
                 "type": "number"
+              },
+              "expected_updated_at": {
+                "format": "date-time",
+                "type": "string"
               }
             },
             "additionalProperties": false
@@ -37013,7 +37170,8 @@
               "inworld",
               "rime",
               "xai",
-              "gradium"
+              "gradium",
+              "assemblyai"
             ]
           },
           {
@@ -39604,6 +39762,12 @@
             "flag": "--sort-order",
             "required": false,
             "type": "integer"
+          },
+          {
+            "name": "pinned",
+            "flag": "--pinned",
+            "required": false,
+            "type": "boolean"
           },
           {
             "name": "show_default_sections",
@@ -42929,9 +43093,6 @@
             "flag": "--countries",
             "required": false,
             "type": "array",
-            "enum": [
-              "DE"
-            ],
             "itemType": "string"
           },
           {
@@ -45376,7 +45537,8 @@
             "inworld",
             "rime",
             "xai",
-            "gradium"
+            "gradium",
+            "assemblyai"
           ],
           "type": "string"
         },
@@ -47167,6 +47329,9 @@
           "maxLength": 120,
           "minLength": 1,
           "type": "string"
+        },
+        "pinned": {
+          "type": "boolean"
         },
         "show_default_sections": {
           "type": "boolean"
@@ -50774,13 +50939,12 @@
           "type": "string"
         },
         "countries": {
-          "maxItems": 1,
+          "maxItems": 25,
           "minItems": 1,
           "type": "array",
+          "uniqueItems": true,
           "items": {
-            "enum": [
-              "DE"
-            ],
+            "pattern": "^[A-Z]{2}$",
             "type": "string"
           }
         },
@@ -50823,13 +50987,12 @@
           "type": "string"
         },
         "countries": {
-          "maxItems": 1,
+          "maxItems": 25,
           "minItems": 1,
           "type": "array",
+          "uniqueItems": true,
           "items": {
-            "enum": [
-              "DE"
-            ],
+            "pattern": "^[A-Z]{2}$",
             "type": "string"
           }
         },

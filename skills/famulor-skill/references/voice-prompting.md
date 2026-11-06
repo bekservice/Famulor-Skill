@@ -86,3 +86,7 @@ For complete examples, read [hotel front desk](examples/hotel-front-desk.md), [d
 Customer references: [speech prompting](https://docs.famulor.io/assistants/prompting-for-speech), [conversation quality](https://docs.famulor.io/assistants/conversation-quality), [languages](https://docs.famulor.io/assistants/languages).
 
 Design references reviewed: [LiveKit prompting](https://docs.livekit.io/agents/start/prompting/), [tool loop design](https://docs.livekit.io/agents/logic/tools/design/), [agents and handoffs](https://docs.livekit.io/agents/logic/agents-handoffs/), and the [open-source Agents implementation](https://github.com/livekit/agents). Apply these principles through Famulor's supported configuration; customers do not need to deploy or configure a separate voice runtime.
+
+## Select a voice for spoken output
+
+Use `get_voices` or `famulor list-voices --mode tts` to find a voice for Pipeline or Half-Cascade. Use the returned voice ID and check the assistant’s spoken languages before saving. Listen to its sample in the assistant’s voice library. Available voices depend on the workspace AI region and catalog.
