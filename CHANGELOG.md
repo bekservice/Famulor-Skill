@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.7.3 — 2026-11-06
+
+- Document workspace Home pins on the dashboard create and update operations, including the CLI and MCP commands.
+
 ## 2.7.2 — 2026-11-05
 
 - Add the booking deletion workflow and refresh the public REST, CLI, SDK and MCP catalogs.
