@@ -2,7 +2,7 @@
 
 Dashboards, analytics, widgets, and layout. Connect only this group with `https://app.famulor.io/mcp?toolsets=dashboards`.
 
-This 2026-11-05 snapshot covers all 19 tools assigned to `dashboards` in the canonical 519-tool registry. The live MCP `tools/list` response is authoritative for arguments, current availability, annotations, and plan or role gating. Never invent fields from this catalog.
+This 2026-11-06 snapshot covers all 19 tools assigned to `dashboards` in the canonical 520-tool registry. The live MCP `tools/list` response is authoritative for arguments, current availability, annotations, and plan or role gating. Never invent fields from this catalog.
 
 Toolsets limit discovery context; they do not grant access. OAuth/API scopes and workspace roles are enforced separately. The Effect column reflects MCP risk annotations: `Delete/destructive` also covers overwrites or changes that can remove data or safeguards.
 
@@ -25,7 +25,7 @@ Toolsets limit discovery context; they do not grant access. OAuth/API scopes and
 | `preview_natural_language_dashboard` | Write/action | `dashboards:write or calls:write` | Immediate | Turn a plain-language analytics request into a safe, allow-listed dashboard plan without saving any widgets. |
 | `remove_dashboard_widget` | Delete/destructive | `dashboards:write or calls:write` | Immediate | Detach a widget from one dashboard while retaining the reusable widget record. |
 | `save_natural_language_dashboard` | Write/action | `dashboards:write or calls:write` | Immediate | Validate a previously previewed semantic dashboard plan and add its widgets to the selected dashboard. |
-| `update_dashboard` | Write/action | `dashboards:write or calls:write` | Immediate | Rename, reorder, or switch a custom dashboard between the built-in overview and a blank canvas. |
+| `update_dashboard` | Write/action | `dashboards:write or calls:write` | Immediate | Rename, reorder, pin, or change the layout of a custom dashboard. |
 | `update_dashboard_widget` | Write/action | `dashboards:write or calls:write` | Immediate | Update a widget's data, visualization, filters, order, or 12-column grid layout. |
 | `update_widget_connector` | Write/action | `assistants:write` | Immediate | Patch a web widget connector, including email or SMS verification. Activating requires widget access; visitor verification requires a root workspace. |
 | `upload_widget_connector_logo` | Write/action | `assistants:write` | Immediate | Upload the header logo for a web widget connector. Provide EXACTLY ONE of url (downloaded server-side) or data_base64 + content_type. PNG or JPEG only, max 10 MB. Returns the stored url — write it into the connector's theme via update_widget_connector to actually use it (this tool only uploads). |
