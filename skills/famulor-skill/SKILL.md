@@ -4,7 +4,7 @@ description: Design, configure, test and improve Famulor voice, WhatsApp, webcha
 license: MIT
 metadata:
   author: Famulor
-  version: "2.7.2"
+  version: "2.7.3"
   homepage: https://github.com/bekservice/Famulor-Skill
 ---
 
@@ -59,7 +59,7 @@ https://app.famulor.io/mcp?toolsets=assistants,calls
 | `tasks` | Durable exports, crawls, simulations and preparation | 4 | [Tasks](references/toolsets/tasks.md) |
 | `milian` | Workspace questions and voice sessions using additional credits | 2 | [Milian](references/toolsets/milian.md) |
 
-The dated snapshot contains **519 tools** across 14 groups. `list_mcp_toolsets` reports groups visible to a custom connection. The public `assistant-history` profile intentionally provides only 11 read tools. Installing a skill cannot expand that connection's permissions. Model-catalog visibility may require AI Safety & Control; use available defaults rather than trying to bypass a denial.
+The dated snapshot contains **520 tools** across 14 groups. `list_mcp_toolsets` reports groups visible to a custom connection. The public `assistant-history` profile intentionally provides only 11 read tools. Installing a skill cannot expand that connection's permissions. Model-catalog visibility may require AI Safety & Control; use available defaults rather than trying to bypass a denial.
 
 ## Design before configuration
 
