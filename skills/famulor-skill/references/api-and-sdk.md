@@ -185,7 +185,7 @@ famulor send-sms-from-connector CONNECTOR_UUID --to +4915112345678 --body "Hello
 famulor send-sms --from-number-id NUMBER_UUID --to +4915112345678 --body "Hello" --delivery-mode sms_only
 ```
 
-The submit command is illustrative: replace 500 with the accepted current quote. Sender approval and activation must precede sending; the only exception is a registered test number while a booked sender is in review, which uses RCS without SMS fallback. Senders in network review are re-checked automatically every 15 minutes; `refreshCompanySender` or `refresh-sms-rcs-sender` checks immediately. See [messaging and channels](messaging-and-channels.md) for complete consent, branding, length and fallback checks. CLI/SDK and native connector distribution are separate releases; inspect the installed version's actual methods before execution.
+The submit command is illustrative: replace 500 with the accepted current quote. Sender approval and activation must precede sending; the only exception is a registered test number while a booked sender is in review, which uses RCS without SMS fallback; the assistant answers it only when automatic replies are on for that connection. Senders in network review are re-checked automatically every 15 minutes; `refreshCompanySender` or `refresh-sms-rcs-sender` checks immediately. See [messaging and channels](messaging-and-channels.md) for complete consent, branding, length and fallback checks. CLI/SDK and native connector distribution are separate releases; inspect the installed version's actual methods before execution.
 
 
 Choose incoming routing explicitly when a company sender has several connections:
