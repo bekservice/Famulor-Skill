@@ -1,6 +1,6 @@
 # Leads API operations
 
-Reviewed 2026-11-05. 16 public operations. [All areas](index.md) · [Execution guide](../api-and-sdk.md)
+Reviewed 2026-11-08. 17 public operations. [All areas](index.md) · [Execution guide](../api-and-sdk.md)
 
 Paths are relative to `https://app.famulor.io/api/v1`. Each operation ID is also the typed SDK method `client.api.<operationId>`. Look up its exact request contract with the bundled `find-operation.py`; CLI help reflects the installed version.
 
@@ -11,6 +11,7 @@ Hidden CLI operations require an interactive/browser flow or `famulor api` where
 | `addLeads` | `POST /campaigns/{id}/leads` | `famulor add-leads` | [Add leads](https://docs.famulor.io/api-reference/leads/add-leads) |
 | `assignLeadsToCampaign` | `POST /campaigns/{id}/leads/assign` | `famulor assign-leads-to-campaign` | [Assign leads to a campaign](https://docs.famulor.io/api-reference/leads/assign-leads-to-a-campaign) |
 | `createAudienceContact` | `POST /leads` | `famulor create-audience-contact` | [Create an Audience contact](https://docs.famulor.io/api-reference/leads/create-an-audience-contact) |
+| `deleteAudienceContacts` | `POST /leads/bulk-delete` | `famulor delete-audience-contacts` | [Permanently delete Audience contacts](https://docs.famulor.io/api-reference/leads/permanently-delete-audience-contacts) |
 | `deleteLead` | `DELETE /campaigns/{id}/leads/{leadId}` | `famulor delete-lead` | [Remove a lead from a campaign](https://docs.famulor.io/api-reference/leads/remove-a-lead-from-a-campaign) |
 | `eraseCustomerMemory` | `DELETE /contacts/{id}/memory` | `famulor erase-customer-memory` | [Erase customer memory](https://docs.famulor.io/api-reference/leads/erase-customer-memory) |
 | `getCustomerMemory` | `GET /contacts/{id}/memory` | `famulor get-customer-memory` | [Get customer memory](https://docs.famulor.io/api-reference/leads/get-customer-memory) |

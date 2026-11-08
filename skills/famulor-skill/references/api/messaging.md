@@ -1,6 +1,6 @@
 # Messaging API operations
 
-Reviewed 2026-11-05. 36 public operations. [All areas](index.md) · [Execution guide](../api-and-sdk.md)
+Reviewed 2026-11-08. 36 public operations. [All areas](index.md) · [Execution guide](../api-and-sdk.md)
 
 Paths are relative to `https://app.famulor.io/api/v1`. Each operation ID is also the typed SDK method `client.api.<operationId>`. Look up its exact request contract with the bundled `find-operation.py`; CLI help reflects the installed version.
 
@@ -9,7 +9,7 @@ Hidden CLI operations require an interactive/browser flow or `famulor api` where
 | Operation ID / SDK method suffix | HTTP endpoint | CLI command | Purpose |
 | --- | --- | --- | --- |
 | `checkEmailAddressAvailability` | `GET /email/availability` | `famulor check-email-address-availability` | [Check hosted email name](https://docs.famulor.io/api-reference/messaging/check-hosted-email-name) |
-| `completeMessengerFacebookLogin` | `POST /messenger/facebook-login` | Browser flow / raw API | [Complete Messenger Facebook Login](https://docs.famulor.io/api-reference/messaging/complete-messenger-facebook-login) |
+| `completeMessengerFacebookLogin` | `POST /messenger/facebook-login` | `famulor complete-messenger-facebook-login` | [Complete Messenger Facebook Login](https://docs.famulor.io/api-reference/messaging/complete-messenger-facebook-login) |
 | `completeWhatsAppEmbeddedSignup` | `POST /whatsapp/embedded-signup` | `famulor complete-whatsapp-embedded-signup` | [Complete WhatsApp Embedded Signup](https://docs.famulor.io/api-reference/messaging/complete-whatsapp-embedded-signup) |
 | `createEmailAddress` | `POST /email/addresses` | `famulor create-email-address` | [Create an email address](https://docs.famulor.io/api-reference/messaging/create-an-email-address) |
 | `createEmailDomain` | `POST /email/domains` | `famulor create-email-domain` | [Connect an email domain](https://docs.famulor.io/api-reference/messaging/connect-an-email-domain) |
@@ -21,7 +21,7 @@ Hidden CLI operations require an interactive/browser flow or `famulor api` where
 | `getEmailChannelOptions` | `GET /email/options` | `famulor get-email-channel-options` | [Get email channel options](https://docs.famulor.io/api-reference/messaging/get-email-channel-options) |
 | `getEmailDomain` | `GET /email/domains/{id}` | `famulor get-email-domain` | [Get an email domain](https://docs.famulor.io/api-reference/messaging/get-an-email-domain) |
 | `getEmailSettings` | `GET /email/settings` | `famulor get-email-settings` | [Get email channel defaults](https://docs.famulor.io/api-reference/messaging/get-email-channel-defaults) |
-| `getMessengerFacebookLoginConfig` | `GET /messenger/facebook-login` | Browser flow / raw API | [Messenger Facebook Login public config](https://docs.famulor.io/api-reference/messaging/messenger-facebook-login-public-config) |
+| `getMessengerFacebookLoginConfig` | `GET /messenger/facebook-login` | `famulor get-messenger-facebook-login-config` | [Messenger Facebook Login public config](https://docs.famulor.io/api-reference/messaging/messenger-facebook-login-public-config) |
 | `getSlackOauthConfig` | `GET /slack/oauth` | `famulor get-slack-oauth-config` | [Slack Add to Slack public config](https://docs.famulor.io/api-reference/messaging/slack-add-to-slack-public-config) |
 | `getWhatsAppCallingReadiness` | `GET /whatsapp/calling` | `famulor get-whatsapp-calling-readiness` | [WhatsApp calling readiness](https://docs.famulor.io/api-reference/messaging/whatsapp-calling-readiness) |
 | `getWhatsAppEmbeddedSignupConfig` | `GET /whatsapp/embedded-signup` | `famulor get-whatsapp-embedded-signup-config` | [WhatsApp Embedded Signup public config](https://docs.famulor.io/api-reference/messaging/whatsapp-embedded-signup-public-config) |

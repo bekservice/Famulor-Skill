@@ -1,5 +1,12 @@
 # Changelog
 
+## 2.7.3 — 2026-11-08
+
+- Document RCS test numbers: up to five personal mobile numbers can exchange RCS-only messages with a booked company sender while it awaits approval.
+- Describe the automatic 15-minute re-check of senders in network review, automatic activation of RCS-only connections after approval and the submitter email.
+- Use the web app's **Settings → Channels → SMS & RCS** path.
+- Refresh the public REST, CLI, SDK and MCP catalogs, including the new test-number operation and Audience contact deletion.
+
 ## 2.7.2 — 2026-11-05
 
 - Add the booking deletion workflow and refresh the public REST, CLI, SDK and MCP catalogs.
