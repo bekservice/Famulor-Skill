@@ -28,11 +28,11 @@ class PublicCatalogTests(unittest.TestCase):
 
     def test_unique_complete_release_catalog(self):
         operations = self.catalog["operations"]
-        self.assertEqual(len(operations), 513)
-        self.assertEqual(len({op["operationId"] for op in operations}), 513)
-        self.assertEqual(len({(op["method"], op["path"]) for op in operations}), 513)
+        self.assertEqual(len(operations), 515)
+        self.assertEqual(len({op["operationId"] for op in operations}), 515)
+        self.assertEqual(len({(op["method"], op["path"]) for op in operations}), 515)
         self.assertEqual(len({op["group"] for op in operations}), 40)
-        self.assertEqual(sum(op["cli"]["hidden"] for op in operations), 4)
+        self.assertEqual(sum(op["cli"]["hidden"] for op in operations), 2)
         for op in operations:
             self.assertEqual(op["sdkMethod"], "client.api." + op["operationId"])
             self.assertFalse(op["path"].startswith(("/api/", "/admin/", "/internal/")))

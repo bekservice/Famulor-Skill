@@ -4,7 +4,7 @@ description: Design, configure, test and improve Famulor voice, WhatsApp, webcha
 license: MIT
 metadata:
   author: Famulor
-  version: "2.7.2"
+  version: "2.7.3"
   homepage: https://github.com/bekservice/Famulor-Skill
 ---
 
@@ -46,8 +46,8 @@ https://app.famulor.io/mcp?toolsets=assistants,calls
 | --- | --- | ---: | --- |
 | `assistants` | Assistants, prompts, models, voices, tools, bookings and tests | 123 | [Assistants](references/toolsets/assistants.md) |
 | `calls` | Unified history, transcripts, quality review and permitted call control | 34 | [Calls](references/toolsets/calls.md) |
-| `campaigns` | Campaigns, audience, leads, consent and suppression | 34 | [Campaigns](references/toolsets/campaigns.md) |
-| `messaging` | WhatsApp, social channels, email, templates and conversations | 56 | [Messaging](references/toolsets/messaging.md) |
+| `campaigns` | Campaigns, audience, leads, consent and suppression | 35 | [Campaigns](references/toolsets/campaigns.md) |
+| `messaging` | WhatsApp, social channels, email, templates and conversations | 57 | [Messaging](references/toolsets/messaging.md) |
 | `telephony` | Numbers, own carriers, routing and team calling | 71 | [Telephony](references/toolsets/telephony.md) |
 | `knowledge` | Documents, FAQs, websites and connected knowledge sources | 28 | [Knowledge](references/toolsets/knowledge.md) |
 | `dashboards` | Analytics and dashboard widgets | 19 | [Dashboards](references/toolsets/dashboards.md) |
@@ -59,7 +59,7 @@ https://app.famulor.io/mcp?toolsets=assistants,calls
 | `tasks` | Durable exports, crawls, simulations and preparation | 4 | [Tasks](references/toolsets/tasks.md) |
 | `milian` | Workspace questions and voice sessions using additional credits | 2 | [Milian](references/toolsets/milian.md) |
 
-The dated snapshot contains **519 tools** across 14 groups. `list_mcp_toolsets` reports groups visible to a custom connection. The public `assistant-history` profile intentionally provides only 11 read tools. Installing a skill cannot expand that connection's permissions. Model-catalog visibility may require AI Safety & Control; use available defaults rather than trying to bypass a denial.
+The dated snapshot contains **521 tools** across 14 groups. `list_mcp_toolsets` reports groups visible to a custom connection. The public `assistant-history` profile intentionally provides only 11 read tools. Installing a skill cannot expand that connection's permissions. Model-catalog visibility may require AI Safety & Control; use available defaults rather than trying to bypass a denial.
 
 ## Design before configuration
 

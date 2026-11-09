@@ -2,7 +2,7 @@
 
 Campaigns, Audience contacts, leads, segments, consent records, and suppression. Connect the `settings` group as well when you need workspace consent mode or outbound limits. Connect only this group with `https://app.famulor.io/mcp?toolsets=campaigns`.
 
-This 2026-11-05 snapshot covers all 34 tools assigned to `campaigns` in the canonical 519-tool registry. The live MCP `tools/list` response is authoritative for arguments, current availability, annotations, and plan or role gating. Never invent fields from this catalog.
+This 2026-11-08 snapshot covers all 35 tools assigned to `campaigns` in the canonical 521-tool registry. The live MCP `tools/list` response is authoritative for arguments, current availability, annotations, and plan or role gating. Never invent fields from this catalog.
 
 Toolsets limit discovery context; they do not grant access. OAuth/API scopes and workspace roles are enforced separately. The Effect column reflects MCP risk annotations: `Delete/destructive` also covers overwrites or changes that can remove data or safeguards.
 
@@ -17,6 +17,7 @@ Toolsets limit discovery context; they do not grant access. OAuth/API scopes and
 | `create_audience_contact` | Write/action | `leads:write or calls:write` | Immediate | Create an unassigned Audience contact, or upsert/open an existing contact with the same phone or email. Does not silently merge distinct contacts. User-defined tags are normalized and merged with existing tags. |
 | `create_campaign` | Write/action | `campaigns:write or calls:write` | Immediate | Create a Call, WhatsApp template, WhatsApp Call (Beta), or SMS campaign. Omit channel for a backward-compatible phone_call campaign. Add leads with add_leads, then start now or provide scheduled_start_at. |
 | `create_segment` | Write/action | `segments:write or calls:write` | Immediate | Save a lead filter as a reusable segment. Its matches are resolved live (dynamic, not a snapshot) — use the segment_id with assign_leads_to_campaign to assign whoever currently matches. |
+| `delete_audience_contacts` | Delete/destructive | `leads:write` | Immediate | Permanently delete up to 100 explicitly selected Audience contacts. Confirm the exact workspace and contact IDs with the user before invoking. Contacts with active campaign attempts are kept. Requires a user-owned credential from a workspace owner or admin. |
 | `delete_campaign` | Delete/destructive | `campaigns:write or calls:write` | Immediate | Delete a campaign. Its leads are kept (detached from the campaign). |
 | `delete_lead` | Delete/destructive | `leads:write or calls:write` | Immediate | Backward-compatible alias for remove_lead_from_campaign. The contact is retained in Audience and deleted=false is returned. |
 | `delete_segment` | Delete/destructive | `segments:write or calls:write` | Immediate | Delete a segment. The leads it currently matches are not affected. |

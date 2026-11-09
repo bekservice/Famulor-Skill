@@ -4,7 +4,7 @@ Use the interface already connected to the user's workspace. MCP fits interactiv
 
 ## Find any endpoint
 
-The [complete operation index](api/index.md) covers **513 public REST operations across 40 areas**, reviewed on 2026-11-05. Every entry maps the public operation ID to its HTTP method/path, actual generated CLI command and `client.api` SDK method. The [MCP references](toolsets/assistants.md) separately cover the MCP tools; counts and names differ because some capabilities use several tools or an action selector.
+The [complete operation index](api/index.md) covers **515 public REST operations across 40 areas**, reviewed on 2026-11-08. Every entry maps the public operation ID to its HTTP method/path, actual generated CLI command and `client.api` SDK method. The [MCP references](toolsets/assistants.md) separately cover the MCP tools; counts and names differ because some capabilities use several tools or an action selector.
 
 For exact request shapes without loading the entire catalog:
 
@@ -160,8 +160,12 @@ const { data: quote } = await client.sms.listCompanySenders();
 const { data: sender } = await client.sms.getCompanySender(senderId);
 // Only after the user explicitly accepts quote.setup_credits:
 if (!quote || !sender) throw new Error("Read the sender and quote first.");
-await client.sms.submitCompanySender(sender.id, { confirmed_setup_credits: quote.setup_credits });
+await client.sms.submitCompanySender(sender.id, {
+  confirmed_setup_credits: quote.setup_credits, expected_updated_at: sender.updated_at,
+});
 await client.sms.refreshCompanySender(sender.id);
+// Only numbers the user named; replaces the saved list (an empty list removes all):
+await client.sms.setCompanySenderTestNumbers(sender.id, { test_numbers: ["+4915112345678"] });
 await client.sms.sendFromConnector(connectorId, {
   to: "+4915112345678", body: "Your order is ready.", delivery_mode: "rcs_preferred",
   rich_content: { type: "card", title: "Order ready", media_url: "https://example.com/order.png" },
@@ -174,13 +178,14 @@ Equivalent command discovery:
 ```bash
 famulor list-sms-rcs-senders
 famulor get-sms-rcs-sender SENDER_UUID
-famulor submit-sms-rcs-sender SENDER_UUID --confirmed-setup-credits 500
+famulor submit-sms-rcs-sender SENDER_UUID --confirmed-setup-credits 500 --expected-updated-at "$REVIEWED_DRAFT_UPDATED_AT"
 famulor refresh-sms-rcs-sender SENDER_UUID
+famulor set-sms-rcs-sender-test-numbers SENDER_UUID --test-numbers '["+4915112345678"]'
 famulor send-sms-from-connector CONNECTOR_UUID --to +4915112345678 --body "Hello" --delivery-mode rcs_only
 famulor send-sms --from-number-id NUMBER_UUID --to +4915112345678 --body "Hello" --delivery-mode sms_only
 ```
 
-The submit command is illustrative: replace 500 with the accepted current quote. Sender approval and activation must precede sending. See [messaging and channels](messaging-and-channels.md) for complete consent, branding, length and fallback checks. CLI/SDK and native connector distribution are separate releases; inspect the installed version's actual methods before execution.
+The submit command is illustrative: replace 500 with the accepted current quote. Sender approval and activation must precede sending; the only exception is a registered test number while a booked sender is in review, which uses RCS without SMS fallback; the assistant answers it only when automatic replies are on for that connection. Senders in network review are re-checked automatically every 15 minutes; `refreshCompanySender` or `refresh-sms-rcs-sender` checks immediately. See [messaging and channels](messaging-and-channels.md) for complete consent, branding, length and fallback checks. CLI/SDK and native connector distribution are separate releases; inspect the installed version's actual methods before execution.
 
 
 Choose incoming routing explicitly when a company sender has several connections:
