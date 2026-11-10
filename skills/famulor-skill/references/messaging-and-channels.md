@@ -28,7 +28,9 @@ In Slack, Teams, Discord, Google Chat, Mattermost, Webex, Lark, Linear, Notion a
 
 ### Why a successful test on one channel is insufficient
 
-Website text chat runs a text-only assistant session. Messaging and native email assemble a text reply from the shared prompt, current conversation context, channel rules, and the tools supported by that channel. They do not execute the voice flow graph. Keep the shared business policy in the system prompt if the same assistant must answer on these channels; a rule that exists only in a voice flow node is insufficient.
+Website text chat runs a text-only assistant session. Messaging and native email assemble a text reply from the shared prompt, current conversation context, channel rules, and the tools supported by that channel. A Conversational flow is added to that reply prompt as a step-by-step guide; it is not the voice state machine. Phone-only steps (transfer, warm transfer, keypad) and tool steps without an assigned tool are skipped, and edge rules are checked against the known conversation variables by the model rather than enforced. A flow without any chat-relevant step leaves the reply on the base prompt. Keep the shared business policy in the base (system) prompt if the same assistant must answer on these channels, and test each text channel separately.
+
+The inbound variables source (a variables webhook or a `call.variables` automation) also runs once when a customer starts a messaging conversation or email thread, with the event `conversation.variables`. Conversations the business starts, such as a WhatsApp template sent first, do not trigger it. Values already stored for that conversation take precedence.
 
 Do not assume that a voice model, TTS preference, interruption setting, spoken greeting, or voice-only action changes asynchronous messages. Test the actual text channel. Similarly, a successful Milian task does not prove that a customer assistant has access to the same tools.
 
