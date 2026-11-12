@@ -4,7 +4,7 @@ Use the interface already connected to the user's workspace. MCP fits interactiv
 
 ## Find any endpoint
 
-The [complete operation index](api/index.md) covers **515 public REST operations across 40 areas**, reviewed on 2026-11-08. Every entry maps the public operation ID to its HTTP method/path, actual generated CLI command and `client.api` SDK method. The [MCP references](toolsets/assistants.md) separately cover the MCP tools; counts and names differ because some capabilities use several tools or an action selector.
+The [complete operation index](api/index.md) covers **535 public REST operations across 40 areas**, reviewed on 2026-11-12. Every entry maps the public operation ID to its HTTP method/path, actual generated CLI command and `client.api` SDK method. The [MCP references](toolsets/assistants.md) separately cover the MCP tools; counts and names differ because some capabilities use several tools or an action selector.
 
 For exact request shapes without loading the entire catalog:
 
@@ -135,11 +135,41 @@ Use returned error codes and recovery guidance: reconnect on authentication fail
 | Connect tools or booking | [Tools](api/tools.md), [Integrations](api/integrations.md), [Bookings](api/bookings.md) | Assigned tools, actual schema, confirmed availability/result |
 | WhatsApp, email or social channels | [Channel guide](messaging-and-channels.md), [Messaging API](api/messaging.md) | Connector state and conversation details/delivery state |
 | Add website voice/chat | [Widgets API](api/widgets.md), [Channel guide](messaging-and-channels.md) | Real widget conversation and history |
-| Start authorized outreach | [Campaigns](api/campaigns.md), [Calls](api/calls.md), [Suppression](api/suppression.md) | Consent, target list, run status and settled results |
+| Start authorized outreach | [Campaign guide](campaigns.md), [Campaigns](api/campaigns.md), [Calls](api/calls.md), [Suppression](api/suppression.md) | Human-confirmed attestation, target list, run status and settled analytics |
 | Add knowledge | [Knowledge Bases](api/knowledge-bases.md) | Index readiness and a source-grounded answer |
 | Review conversations | [History](api/history.md), [Calls](api/calls.md), [QA](api/qa.md) | Complete channel-specific detail, not only a preview |
 | Automate a workflow | [Automations](api/automations.md), [Missions](api/milian-missions.md), [Webhooks](api/webhook-subscriptions.md) | Reviewed scope, run status and resulting resources |
 | Manage telephony, teams or billing | [All API areas](api/index.md) | Explicit target/workspace, allowed operation and resulting state |
+
+## Campaign templates, launch and analytics
+
+Read [campaigns and sequences](campaigns.md) first: it covers template choice, senders, sequence rules, the launch confirmation and paused edits.
+
+```typescript
+const { data: templates } = await client.campaigns.templates({ language: "de", category: "appointments" });
+const template = templates.find((item) => item.id === chosenTemplateId); // an id the user picked from this list
+// Fill every empty sms / whatsapp_template sender with ids listed in this workspace before saving.
+const { data: campaign } = await client.api.createCampaign({
+  body: { name: "Appointment reminders", channel: "phone_call", assistant_id: assistantId, sequence: filledSequence },
+});
+const { data: current } = await client.api.getCampaign({ path: { id: campaign.id } });
+// Only after the user explicitly confirmed compliance for this campaign:
+await client.api.launchCampaign({
+  path: { id: campaign.id },
+  body: { compliance_attestation: true, sequence_hash: current.sequence_hash, start_at: null },
+});
+const { data: analytics } = await client.api.getCampaignAnalytics({ path: { id: campaign.id } });
+```
+
+```bash
+famulor list-campaign-templates --language de --category appointments
+famulor launch-campaign CAMPAIGN_UUID --compliance-attestation true --sequence-hash "$REVIEWED_SEQUENCE_HASH"
+famulor pause-campaign CAMPAIGN_UUID
+famulor resume-campaign CAMPAIGN_UUID --compliance-attestation true
+famulor get-campaign-analytics CAMPAIGN_UUID --from 2026-11-01 --to 2026-11-30
+```
+
+The TypeScript lines are illustrative: check the installed SDK's request and response types, and read back each campaign before claiming it saved or launched. `launch_required`, `attestation_required` and `sequence_changed` are recovery signals, not reasons to retry with a confirmation the user never gave.
 
 ## Milian Mission failure alerts
 

@@ -1,6 +1,6 @@
 # Public API operation index
 
-Reviewed 2026-11-08: **515 operations across 40 areas**. Every operation is cross-checked against the generated CLI catalog and TypeScript SDK descriptors.
+Reviewed 2026-11-12: **535 operations across 40 areas**. Every operation is cross-checked against the generated CLI catalog and TypeScript SDK descriptors.
 
 Use this index to find the right endpoint. Open only the relevant area; use [API, CLI and SDK guidance](../api-and-sdk.md) for authentication, execution and verification. Public reseller operations remain subject to the authenticated workspace's entitlement and permissions.
 
@@ -27,13 +27,13 @@ The full API uses `https://app.famulor.io/api/v1` plus the relative paths shown 
 | Callbacks | 2 | [Callbacks](callbacks.md) |
 | Caller IDs | 4 | [Caller IDs](caller-ids.md) |
 | Calls | 13 | [Calls](calls.md) |
-| Campaigns | 12 | [Campaigns](campaigns.md) |
+| Campaigns | 19 | [Campaigns](campaigns.md) |
 | Carrier Connections | 9 | [Carrier Connections](carrier-connections.md) |
 | Catalog | 3 | [Catalog](catalog.md) |
 | Dashboards | 12 | [Dashboards](dashboards.md) |
 | Famulor Loop | 38 | [Famulor Loop](famulor-loop.md) |
 | History | 13 | [History](history.md) |
-| Integrations | 16 | [Integrations](integrations.md) |
+| Integrations | 20 | [Integrations](integrations.md) |
 | Knowledge Bases | 31 | [Knowledge Bases](knowledge-bases.md) |
 | Leads | 17 | [Leads](leads.md) |
 | Messaging | 36 | [Messaging](messaging.md) |
@@ -45,11 +45,11 @@ The full API uses `https://app.famulor.io/api/v1` plus the relative paths shown 
 | SIP Trunks | 5 | [SIP Trunks](sip-trunks.md) |
 | SMS | 10 | [SMS](sms.md) |
 | Segments | 6 | [Segments](segments.md) |
-| Settings | 29 | [Settings](settings.md) |
+| Settings | 31 | [Settings](settings.md) |
 | Shopify | 16 | [Shopify](shopify.md) |
 | Simulations | 6 | [Simulations](simulations.md) |
-| Suppression | 3 | [Suppression](suppression.md) |
-| Tools | 18 | [Tools](tools.md) |
+| Suppression | 4 | [Suppression](suppression.md) |
+| Tools | 24 | [Tools](tools.md) |
 | Translation | 7 | [Translation](translation.md) |
 | Versions | 5 | [Versions](versions.md) |
 | Voices | 9 | [Voices](voices.md) |

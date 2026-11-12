@@ -1,6 +1,6 @@
 # Settings API operations
 
-Reviewed 2026-11-08. 29 public operations. [All areas](index.md) · [Execution guide](../api-and-sdk.md)
+Reviewed 2026-11-12. 31 public operations. [All areas](index.md) · [Execution guide](../api-and-sdk.md)
 
 Paths are relative to `https://app.famulor.io/api/v1`. Each operation ID is also the typed SDK method `client.api.<operationId>`. Look up its exact request contract with the bundled `find-operation.py`; CLI help reflects the installed version.
 
@@ -15,6 +15,7 @@ Hidden CLI operations require an interactive/browser flow or `famulor api` where
 | `getConsentComplianceSettings` | `GET /settings/consent-compliance` | `famulor get-consent-compliance-settings` | [Get consent compliance mode](https://docs.famulor.io/api-reference/settings/get-consent-compliance-mode) |
 | `getCustomDomainStatus` | `GET /custom-domain` | `famulor get-custom-domain-status` | [Get custom domain status](https://docs.famulor.io/api-reference/settings/get-custom-domain-status) |
 | `getDarkWindowSettings` | `GET /settings/dark-windows` | `famulor get-dark-window-settings` | [Get Dark Windows settings](https://docs.famulor.io/api-reference/settings/get-dark-windows-settings) |
+| `getDncRegistrySettings` | `GET /settings/dnc-registry` | `famulor get-dnc-registry-settings` | [Get federal and state DNC checks](https://docs.famulor.io/api-reference/settings/get-federal-and-state-dnc-checks) |
 | `getMarketingIntegrations` | `GET /settings/marketing` | `famulor get-marketing-integrations` | [Get marketing integrations](https://docs.famulor.io/api-reference/settings/get-marketing-integrations) |
 | `getMemorySettings` | `GET /settings/memory` | `famulor get-memory-settings` | [Get memory settings](https://docs.famulor.io/api-reference/settings/get-memory-settings) |
 | `getOutboundLimits` | `GET /settings/outbound-limits` | `famulor get-outbound-limits` | [Get outbound call limits](https://docs.famulor.io/api-reference/settings/get-outbound-call-limits) |
@@ -32,6 +33,7 @@ Hidden CLI operations require an interactive/browser flow or `famulor api` where
 | `updateAiInferenceSettings` | `PATCH /settings/ai-inference` | `famulor update-ai-inference-settings` | [Update AI inference settings](https://docs.famulor.io/api-reference/settings/update-ai-inference-settings) |
 | `updateConsentComplianceSettings` | `PATCH /settings/consent-compliance` | `famulor update-consent-compliance-settings` | [Update consent compliance mode](https://docs.famulor.io/api-reference/settings/update-consent-compliance-mode) |
 | `updateDarkWindowSettings` | `PATCH /settings/dark-windows` | `famulor update-dark-window-settings` | [Update Dark Windows settings](https://docs.famulor.io/api-reference/settings/update-dark-windows-settings) |
+| `updateDncRegistrySettings` | `PATCH /settings/dnc-registry` | `famulor update-dnc-registry-settings` | [Update federal and state DNC checks](https://docs.famulor.io/api-reference/settings/update-federal-and-state-dnc-checks) |
 | `updateMarketingIntegrations` | `PUT /settings/marketing` | `famulor update-marketing-integrations` | [Update marketing integrations](https://docs.famulor.io/api-reference/settings/update-marketing-integrations) |
 | `updateMemorySettings` | `PATCH /settings/memory` | `famulor update-memory-settings` | [Update memory settings](https://docs.famulor.io/api-reference/settings/update-memory-settings) |
 | `updateRetentionSettings` | `PATCH /settings/retention` | `famulor update-retention-settings` | [Update data retention settings](https://docs.famulor.io/api-reference/settings/update-data-retention-settings) |

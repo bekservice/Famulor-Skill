@@ -1,5 +1,13 @@
 # Changelog
 
+## 2.8.0 — 2026-11-12
+
+- Add a campaign guide: choose a ready-made sequence from the template gallery in the user's language, fill the SMS & RCS and WhatsApp senders when `needs_sender` is set, and save it with `create_campaign` or `update_campaign`. Template and sender ids come only from the workspace.
+- Explain call sequences: call and message steps, attempts, AI-described and rule-based outcomes, built-in No response, Other and Do not call, reply routes, contact-local calling hours, public holidays, double dial and local-presence number pools.
+- Explain the launch: `launch_campaign` needs `compliance_attestation: true`, which only the human (or the API key holder) may confirm for that campaign; `sequence_hash` guards against a changed sequence; scheduling, cancelling, pausing, editing a paused campaign, re-confirming on resume and duplicating a completed one.
+- Explain contact stages, outcomes and the analytics funnel (dialed, connected, converted, conversion rate, messages sent, outcome Sankey).
+- Refresh the public REST, CLI, SDK and MCP catalogs: 541 MCP tools and 535 operations, including the campaign template gallery, launch, pause, resume, schedule cancellation, duplication and analytics, plus app action tools, Cal.com connections, US DNC registry checks and suppression direction.
+
 ## 2.7.3 — 2026-11-08
 
 - Document RCS test numbers: up to five personal mobile numbers can exchange RCS-only messages with a booked company sender while it awaits approval; assistant replies follow the connection's automatic-replies setting.
