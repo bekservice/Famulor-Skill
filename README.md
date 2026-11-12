@@ -65,10 +65,10 @@ See the [step-by-step guide](docs/installation.md) for prerequisites, exact comm
 
 ## What is included
 
-- Channel-specific assistant design, voice prompting, messaging and evaluation guides grounded in Famulor's implementation.
+- Channel-specific assistant design, voice prompting, messaging, campaign sequence and evaluation guides grounded in Famulor's implementation.
 - Adaptable prompts for reception, booking, qualification, WhatsApp, website chat and email.
 - Four complete demo-inspired assistant designs, with expected conversations, failure paths and a model deliverable.
-- **521 MCP tools in 14 groups** and **515 public API operations** with REST, CLI and TypeScript SDK navigation, reviewed on **8 November 2026**.
+- **541 MCP tools in 14 groups** and **535 public API operations** with REST, CLI and TypeScript SDK navigation, reviewed on **12 November 2026**.
 - An offline operation lookup, deterministic catalog generation and package validation.
 - Portable Agent Skills plus Claude Code, Cursor and Gemini packaging; a separate restricted Claude Store package.
 - Versioned ZIP and `.skill` downloads with SHA-256 checksums.

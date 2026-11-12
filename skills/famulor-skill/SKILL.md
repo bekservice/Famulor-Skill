@@ -4,7 +4,7 @@ description: Design, configure, test and improve Famulor voice, WhatsApp, webcha
 license: MIT
 metadata:
   author: Famulor
-  version: "2.7.3"
+  version: "2.8.0"
   homepage: https://github.com/bekservice/Famulor-Skill
 ---
 
@@ -19,6 +19,7 @@ Turn the user's business outcome into a channel-appropriate assistant or a verif
 | A new assistant, prompt review, configuration or language setup | [Assistant design](references/assistant-design.md) |
 | A complete example, demo-inspired assistant or the shape of an excellent finished result | [Worked examples](references/examples/README.md); load only the closest scenario |
 | Phone reception, appointment booking, opted-in outbound qualification | [Voice prompting](references/voice-prompting.md) |
+| Outreach campaigns: templates, call sequences, launch confirmation, local presence, analytics | [Campaigns and sequences](references/campaigns.md) |
 | WhatsApp, SMS with optional RCS, website text chat, social messaging or email | [Messaging and channels](references/messaging-and-channels.md) |
 | Tests, simulations, regression cases or call-quality review | [Testing and evaluation](references/testing-and-evaluation.md) |
 | REST endpoint, CLI command, TypeScript method or integration code | [API and SDK](references/api-and-sdk.md) and [operation index](references/api/index.md) |
@@ -44,22 +45,22 @@ https://app.famulor.io/mcp?toolsets=assistants,calls
 
 | Toolset | Use for | Tools | Reference |
 | --- | --- | ---: | --- |
-| `assistants` | Assistants, prompts, models, voices, tools, bookings and tests | 123 | [Assistants](references/toolsets/assistants.md) |
+| `assistants` | Assistants, prompts, models, voices, tools, bookings and tests | 127 | [Assistants](references/toolsets/assistants.md) |
 | `calls` | Unified history, transcripts, quality review and permitted call control | 34 | [Calls](references/toolsets/calls.md) |
-| `campaigns` | Campaigns, audience, leads, consent and suppression | 35 | [Campaigns](references/toolsets/campaigns.md) |
+| `campaigns` | Campaigns, audience, leads, consent and suppression | 43 | [Campaigns](references/toolsets/campaigns.md) |
 | `messaging` | WhatsApp, social channels, email, templates and conversations | 57 | [Messaging](references/toolsets/messaging.md) |
 | `telephony` | Numbers, own carriers, routing and team calling | 71 | [Telephony](references/toolsets/telephony.md) |
 | `knowledge` | Documents, FAQs, websites and connected knowledge sources | 28 | [Knowledge](references/toolsets/knowledge.md) |
 | `dashboards` | Analytics and dashboard widgets | 19 | [Dashboards](references/toolsets/dashboards.md) |
-| `automations` | Workflows, connections, CRM sync, Missions and run history | 61 | [Automations](references/toolsets/automations.md) |
+| `automations` | Workflows, connections, CRM sync, Missions and run history | 67 | [Automations](references/toolsets/automations.md) |
 | `billing` | Balance, usage, invoices and billing recovery | 23 | [Billing](references/toolsets/billing.md) |
-| `settings` | Workspaces, preferences, retention, domains and credentials | 43 | [Settings](references/toolsets/settings.md) |
+| `settings` | Workspaces, preferences, retention, domains and credentials | 45 | [Settings](references/toolsets/settings.md) |
 | `platform` | Authorized reseller customer management | 19 | [Reseller management](references/toolsets/platform.md) |
 | `migration` | Preview and import supported legacy resources | 2 | [Migration](references/toolsets/migration.md) |
 | `tasks` | Durable exports, crawls, simulations and preparation | 4 | [Tasks](references/toolsets/tasks.md) |
 | `milian` | Workspace questions and voice sessions using additional credits | 2 | [Milian](references/toolsets/milian.md) |
 
-The dated snapshot contains **521 tools** across 14 groups. `list_mcp_toolsets` reports groups visible to a custom connection. The public `assistant-history` profile intentionally provides only 11 read tools. Installing a skill cannot expand that connection's permissions. Model-catalog visibility may require AI Safety & Control; use available defaults rather than trying to bypass a denial.
+The dated snapshot contains **541 tools** across 14 groups. `list_mcp_toolsets` reports groups visible to a custom connection. The public `assistant-history` profile intentionally provides only 11 read tools. Installing a skill cannot expand that connection's permissions. Model-catalog visibility may require AI Safety & Control; use available defaults rather than trying to bypass a denial.
 
 ## Design before configuration
 
@@ -79,7 +80,7 @@ For a concrete target, use one [worked example](references/examples/README.md) a
 - Resolve IDs using list/get operations in the authenticated workspace. Read current state, perform the smallest requested operation, and read it back or inspect the completed task result.
 - Keep read-only requests read-only. Creating an assistant or campaign does not authorize placing a call or starting the campaign.
 - For external or difficult-to-reverse actions, require the user's target and intended effect: recipient, message/call, campaign, booking, purchase, payment, deletion or migration. Existing explicit authorization is sufficient; ask only when consequential details are missing.
-- Before outreach, check consent, suppression, sender readiness, templates and limits. Do not weaken opt-outs or manufacture consent to make a send succeed.
+- Before outreach, check consent, suppression, sender readiness, templates and limits. Do not weaken opt-outs or manufacture consent to make a send succeed. Set a campaign's `compliance_attestation` only after the human explicitly confirms it for that campaign; never on your own.
 - `ask_milian` and `create_milian_voice_session` use additional credits. Explain this and obtain explicit approval for that question or voice session. A routine can continue unattended: review schedule, recipients, allowed actions and costs before enabling it.
 - Respect roles, scopes, plan gates and retention. Do not search other workspaces, grant new permissions, or upgrade plans to work around an error.
 - Never silently retry an uncertain non-idempotent write. Read back the resource/task first to distinguish success from failure and avoid duplicate calls, messages, bookings or charges.
