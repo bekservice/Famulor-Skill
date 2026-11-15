@@ -58,9 +58,30 @@ Use the configured End call tool or End node after the request is resolved, the 
 
 Configure the primary and supported secondary languages, not only a language sentence in the prompt. Author instructions and short examples in the intended conversation language when practical. A foreign name or a tool result in another language is not a request to switch. Preserve names and addresses without translating them.
 
-Use the pronunciation dictionary for recurring brand or product names. Do not assume SSML, bracketed emotion tags or stage directions work with every voice; unsupported markup can be spoken aloud. Start with normal punctuation and clear phrasing, then test supported voice controls.
+Use the pronunciation dictionary for recurring brand or product names with supported TTS voices. With native Full Duplex, put pronunciation hints directly in the prompt. A short phonetic spelling in the caller's language is often enough. Keep the stored spelling for tools and records. Start with plain punctuation and check supported markup before using tags or stage directions.
 
 Treat interruption sensitivity, response timing, silence timeouts and maximum duration as settings. The prompt can tell the assistant to acknowledge a correction; it cannot guarantee an exact pause length or override engine timing. Diagnose the actual symptom before tuning: premature response, missed interruption, long tool wait and difficult pronunciation have different causes.
+
+## Prompt for GPT-Live Full Duplex
+
+Discover workspace access and compatible conversation voices first. Use `get_voices` with `mode: "realtime"` and `realtime_variant: "full_duplex"`. The voice's listed language is a recommendation for its sound. Use the full compatible list when comparing voices in another language. Configure the assistant's primary and optional secondary languages separately and listen to the selected voice in each. Keep the current voice on an existing assistant until the user chooses a replacement.
+
+Keep the spoken role and task goal short. Write the prompt and spoken examples in the intended conversation language. Specify the form of address, how to listen, how to yield, and when to check current information. Keep the workflow and required confirmations with the configured tools and flow. Model-specific instructions about speech still need a voice test.
+
+- **Listening:** Allow the caller to finish names, contact details and corrections. Brief listening sounds are optional during a long explanation. Pause while the caller thinks or dictates.
+- **Interruptions:** Yield when the caller asks to stop, wait, or correct a detail. Continue with their latest request. If an action is running, check its outcome before confirming, canceling or retrying it. A brief listening sound from the caller is not agreement to an action.
+- **Tool waits:** Ask for a missing detail before requesting work. Summarize confirmed results in short spoken sentences. Give an update during a long wait only when it reflects actual progress. Leave the configured tool announcement to the tool.
+
+Example excerpt for German phone reception:
+
+```text
+Sprich ruhig und freundlich und verwende Sie. Stelle eine Frage pro Gesprächsschritt.
+Lass Anrufer Namen und Zahlen zu Ende sagen. Gib ihnen auch bei kurzen Denkpausen Zeit.
+Bei „Moment“ oder einer Korrektur gib das Wort ab. Verwende die zuletzt bestätigte Angabe.
+Prüfe aktuelle Termine über die verfügbare Kalenderfunktion. Bestätige eine Buchung erst nach Erfolg.
+```
+
+Use the [Full Duplex reception example](examples/full-duplex-reception.md) to test pronunciation, interruptions and tool waits together. A Voice Design Prompt and its sample script are inputs for creating a voice in systems that offer voice design. In Famulor, choose a supported voice from the catalog and put behavior such as pacing and listening in the assistant prompt.
 
 ## Three practical starting points
 
