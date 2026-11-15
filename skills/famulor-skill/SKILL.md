@@ -4,7 +4,7 @@ description: Design, configure, test and improve Famulor voice, WhatsApp, webcha
 license: MIT
 metadata:
   author: Famulor
-  version: "2.8.0"
+  version: "2.8.1"
   homepage: https://github.com/bekservice/Famulor-Skill
 ---
 
@@ -18,7 +18,7 @@ Turn the user's business outcome into a channel-appropriate assistant or a verif
 | --- | --- |
 | A new assistant, prompt review, configuration or language setup | [Assistant design](references/assistant-design.md) |
 | A complete example, demo-inspired assistant or the shape of an excellent finished result | [Worked examples](references/examples/README.md); load only the closest scenario |
-| Phone reception, appointment booking, opted-in outbound qualification | [Voice prompting](references/voice-prompting.md) |
+| Phone reception, appointment booking, opted-in outbound qualification, GPT-Live Full Duplex | [Voice prompting](references/voice-prompting.md) |
 | Outreach campaigns: templates, call sequences, launch confirmation, local presence, analytics | [Campaigns and sequences](references/campaigns.md) |
 | WhatsApp, SMS with optional RCS, website text chat, social messaging or email | [Messaging and channels](references/messaging-and-channels.md) |
 | Tests, simulations, regression cases or call-quality review | [Testing and evaluation](references/testing-and-evaluation.md) |

@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.8.1 — 2026-11-15
+
+- Add a GPT-Live Full Duplex guide and a worked reception example with language choice, pronunciation, interruption and confirmed tool outcomes.
+- Explain how to compare compatible conversation voices and where to put native pronunciation hints.
+- Add audio and tool-receipt regression scenarios for dictation, corrections and slow booking workflows.
+
 ## 2.8.0 — 2026-11-12
 
 - Add a campaign guide: choose a ready-made sequence from the template gallery in the user's language, fill the SMS & RCS and WhatsApp senders when `needs_sender` is set, and save it with `create_campaign` or `update_campaign`. Template and sender ids come only from the workspace.
