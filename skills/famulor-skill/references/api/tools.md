@@ -1,6 +1,6 @@
 # Tools API operations
 
-Reviewed 2026-11-12. 24 public operations. [All areas](index.md) · [Execution guide](../api-and-sdk.md)
+Reviewed 2026-11-15. 25 public operations. [All areas](index.md) · [Execution guide](../api-and-sdk.md)
 
 Paths are relative to `https://app.famulor.io/api/v1`. Each operation ID is also the typed SDK method `client.api.<operationId>`. Look up its exact request contract with the bundled `find-operation.py`; CLI help reflects the installed version.
 
@@ -11,6 +11,7 @@ Hidden CLI operations require an interactive/browser flow or `famulor api` where
 | `archiveTool` | `DELETE /tools/{id}` | `famulor archive-tool` | [Archive an unused tool](https://docs.famulor.io/api-reference/tools/archive-an-unused-tool) |
 | `connectMagicline` | `POST /tools/magicline` | `famulor connect-magicline` | [Connect Magicline Open API](https://docs.famulor.io/api-reference/tools/connect-magicline-open-api) |
 | `connectMagiclineConnect` | `POST /tools/magicline-connect` | `famulor connect-magicline-connect` | [Connect Magicline Connect API](https://docs.famulor.io/api-reference/tools/connect-magicline-connect-api) |
+| `connectSimplybook` | `POST /tools/simplybook` | `famulor connect-simplybook` | [Connect SimplyBook.me](https://docs.famulor.io/api-reference/tools/connect-simplybookme) |
 | `createAppActionTool` | `POST /tools/app-actions` | `famulor create-app-action-tool` | [Create an app action tool](https://docs.famulor.io/api-reference/tools/create-an-app-action-tool) |
 | `createTool` | `POST /tools` | `famulor create-tool` | [Create a tool](https://docs.famulor.io/api-reference/tools/create-a-tool) |
 | `discoverMagiclineConnectStudios` | `POST /tools/magicline-connect/studios` | `famulor discover-magicline-connect-studios` | [Find Magicline Connect API studios](https://docs.famulor.io/api-reference/tools/find-magicline-connect-api-studios) |

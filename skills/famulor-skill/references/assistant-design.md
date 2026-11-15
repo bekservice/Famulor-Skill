@@ -54,6 +54,11 @@ For a flow, Base prompt contains shared identity and business rules; Agent-node 
 
 Edge labels describe observable conditions, such as “customer wants to change an existing appointment.” Labels such as “next” or “option two” do not explain the decision. Condition branches should be distinct and include a fallback for uncertain input. Use the configured transfer or end path; an instruction to “transfer now” does not create a missing flow connection.
 
+For a Condition, ask one routing question. Use conversation for intent, fixed rules for known variables, or both to check direct rules first. Put more specific direct rules before broader ones. A path with a mandatory rule must meet that requirement before it can be picked from the conversation. Choose an unconditional default for unclear input or unavailable conversation routing.
+
+Use **Test path** with a clear reply, an ambiguous reply and the variable values that exercise each rule. For a saved condition, use MCP `preview_assistant_flow_condition`, `famulor preview-assistant-flow-condition` or `client.assistants.previewFlowCondition(id, nodeId, { sample: "I need a copy of my invoice." })`. The preview stops at path selection. Use QA audio to verify the actual voice turn and read its selected path under the original answer in Web Test and History.
+
+
 ## Select a compatible engine
 
 | UI mode | Public API value | Design consequence |

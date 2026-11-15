@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.8.2 — 2026-11-15
+
+- Document fixed rules, conversation-based paths, mandatory rules and default paths in Flow Builder.
+- Add the saved-condition preview to the public REST, CLI, SDK and MCP catalogs.
+
 ## 2.8.1 — 2026-11-15
 
 - Add a GPT-Live Full Duplex guide and a worked reception example with language choice, pronunciation, interruption and confirmed tool outcomes.

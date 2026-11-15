@@ -2,7 +2,7 @@
 
 Automations, connections, CRM sync, routines, and runs. Connect only this group with `https://app.famulor.io/mcp?toolsets=automations`.
 
-This 2026-11-12 snapshot covers all 67 tools assigned to `automations` in the canonical 541-tool registry. The live MCP `tools/list` response is authoritative for arguments, current availability, annotations, and plan or role gating. Never invent fields from this catalog.
+This 2026-11-15 snapshot covers all 67 tools assigned to `automations` in the canonical 543-tool registry. The live MCP `tools/list` response is authoritative for arguments, current availability, annotations, and plan or role gating. Never invent fields from this catalog.
 
 Toolsets limit discovery context; they do not grant access. OAuth/API scopes and workspace roles are enforced separately. The Effect column reflects MCP risk annotations: `Delete/destructive` also covers overwrites or changes that can remove data or safeguards.
 
@@ -40,7 +40,7 @@ Toolsets limit discovery context; they do not grant access. OAuth/API scopes and
 | `get_routine` | Read-only | `routines:read` | Immediate | Get one Milian Mission. |
 | `get_routine_webhook` | Read-only | `routines:read` | Immediate | Get the public inbound webhook URL, required header name, and whether a secret is configured. The secret and internal Automation identity are never returned. |
 | `import_automation` | Write/action | `automations:write or calls:write` | Immediate | Create a draft automation from a file made by export_automation (an object or its JSON text, at most 512 KB). The file is checked and cleaned again; the draft never runs until it is turned on. needs_setup lists the steps that need an account, number, assistant or key before it can go live. |
-| `import_automation_connection` | Write/action | `automations:write` | Immediate | Import an existing workspace MCP Agent Tool into automation connections. Preserves credentials and selected tools, and recognizes Magicline connections. |
+| `import_automation_connection` | Write/action | `automations:write` | Immediate | Import an existing workspace MCP Agent Tool into automation connections. Preserves credentials and selected tools, and recognizes Magicline and SimplyBook.me connections. |
 | `import_shared_automation` | Write/action | `automations:write or calls:write` | Immediate | Import an automation from a share link (the full link or its last part) into this workspace as a draft. needs_setup lists the steps that need an account, number, assistant or key before it can go live. A link that was stopped or never existed returns "This link no longer works." |
 | `list_acuity_connections` | Read-only | `integrations:read or assistants:read` | Immediate | List Acuity Scheduling accounts connected to this workspace through OAuth. Tokens and secrets are never returned. |
 | `list_app_actions` | Read-only | `automations:read` | Immediate | List the actions an app action tool can run with a connected-app connection (provider connected_app in list_automation_connections). Search by name with q and page with cursor. Actions that delete data are not listed. Requires an owner or admin credential and Automations in the plan. |
