@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "reviewedAt": "2026-11-12",
+  "reviewedAt": "2026-11-16",
   "source": "Famulor public OpenAPI, CLI command catalog and TypeScript SDK operation descriptors",
-  "openapiSha256": "6c22f5013f389a69eaeb96935a7c6b74d19992133927e1aea6a5c76ffb0c3dfc",
+  "openapiSha256": "a1af26d2405d60cbb08839d4013ed5dd769b002922190e4c91503866d20098ce",
   "baseUrl": "https://app.famulor.io/api/v1",
   "notice": "Dated navigation and request-shape snapshot, not a runtime validator. Check the live public schema and installed client before execution. Descriptions, examples, default values and response properties are intentionally omitted.",
   "operations": [
@@ -2023,6 +2023,105 @@
       "binaryResponse": false
     },
     {
+      "operationId": "connectIntegration",
+      "method": "POST",
+      "path": "/tools/integrations/{provider}",
+      "group": "Tools",
+      "summary": "Connect an integration",
+      "documentation": "https://docs.famulor.io/api-reference/tools/connect-an-integration",
+      "cli": {
+        "command": "connect-integration",
+        "hidden": false,
+        "parameters": [
+          {
+            "name": "provider",
+            "in": "path",
+            "flag": "provider",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "bodyFields": [
+          {
+            "name": "fields",
+            "flag": "--fields",
+            "required": true,
+            "type": "object"
+          },
+          {
+            "name": "name",
+            "flag": "--name",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "caller_recognition",
+            "flag": "--caller-recognition",
+            "required": false,
+            "type": "boolean"
+          }
+        ]
+      },
+      "sdkMethod": "client.api.connectIntegration",
+      "parameters": [
+        {
+          "name": "provider",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "pattern": "^[a-z][a-z0-9_]{1,23}$",
+            "type": "string"
+          }
+        }
+      ],
+      "requestBody": {
+        "required": true,
+        "content": {
+          "application/json": {
+            "required": [
+              "fields"
+            ],
+            "type": "object",
+            "properties": {
+              "caller_recognition": {
+                "type": "boolean"
+              },
+              "fields": {
+                "type": "object",
+                "additionalProperties": {
+                  "type": "string"
+                }
+              },
+              "name": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "responses": {
+        "201": [
+          "application/json"
+        ],
+        "400": [
+          "application/json"
+        ],
+        "401": [
+          "application/json"
+        ],
+        "403": [
+          "application/json"
+        ],
+        "404": [
+          "application/json"
+        ],
+        "429": [
+          "application/json"
+        ]
+      },
+      "binaryResponse": false
+    },
+    {
       "operationId": "connectMagicline",
       "method": "POST",
       "path": "/tools/magicline",
@@ -2212,6 +2311,134 @@
                   "with_trainer",
                   "without_trainer"
                 ],
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "responses": {
+        "201": [
+          "application/json"
+        ],
+        "400": [
+          "application/json"
+        ],
+        "401": [
+          "application/json"
+        ],
+        "403": [
+          "application/json"
+        ],
+        "429": [
+          "application/json"
+        ]
+      },
+      "binaryResponse": false
+    },
+    {
+      "operationId": "connectSimplybook",
+      "method": "POST",
+      "path": "/tools/simplybook",
+      "group": "Tools",
+      "summary": "Connect SimplyBook.me",
+      "documentation": "https://docs.famulor.io/api-reference/tools/connect-simplybookme",
+      "cli": {
+        "command": "connect-simplybook",
+        "hidden": false,
+        "parameters": [],
+        "bodyFields": [
+          {
+            "name": "api_host",
+            "flag": "--api-host",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "https://user-api-v2.simplybook.me",
+              "https://user-api-v2.simplybook.it",
+              "https://user-api-v2.simplybook.asia",
+              "https://user-api-v2.simplybook.us",
+              "https://user-api-v2.simplybook.vip",
+              "https://user-api-v2.simplybook.cc",
+              "https://user-api-v2.simplybook.pro",
+              "https://user-api-v2.enterpriseappointments.com",
+              "https://user-api-v2.simplybook.webnode.page",
+              "https://user-api-v2.servicebookings.net",
+              "https://user-api-v2.booking.names.uk",
+              "https://user-api-v2.booking.lcn.uk",
+              "https://user-api-v2.booking.register365.ie"
+            ]
+          },
+          {
+            "name": "company_login",
+            "flag": "--company-login",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "user_login",
+            "flag": "--user-login",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "api_key",
+            "flag": "--api-key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "flag": "--name",
+            "required": false,
+            "type": "string"
+          }
+        ]
+      },
+      "sdkMethod": "client.api.connectSimplybook",
+      "parameters": [],
+      "requestBody": {
+        "required": true,
+        "content": {
+          "application/json": {
+            "required": [
+              "api_host",
+              "company_login",
+              "user_login",
+              "api_key"
+            ],
+            "type": "object",
+            "properties": {
+              "api_host": {
+                "enum": [
+                  "https://user-api-v2.simplybook.me",
+                  "https://user-api-v2.simplybook.it",
+                  "https://user-api-v2.simplybook.asia",
+                  "https://user-api-v2.simplybook.us",
+                  "https://user-api-v2.simplybook.vip",
+                  "https://user-api-v2.simplybook.cc",
+                  "https://user-api-v2.simplybook.pro",
+                  "https://user-api-v2.enterpriseappointments.com",
+                  "https://user-api-v2.simplybook.webnode.page",
+                  "https://user-api-v2.servicebookings.net",
+                  "https://user-api-v2.booking.names.uk",
+                  "https://user-api-v2.booking.lcn.uk",
+                  "https://user-api-v2.booking.register365.ie"
+                ],
+                "type": "string"
+              },
+              "api_key": {
+                "type": "string",
+                "writeOnly": true
+              },
+              "company_login": {
+                "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,63}$",
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "user_login": {
                 "type": "string"
               }
             }
@@ -13645,6 +13872,44 @@
       },
       "responses": {
         "200": [
+          "application/json"
+        ],
+        "429": [
+          "application/json"
+        ],
+        "503": [
+          "application/json"
+        ]
+      },
+      "binaryResponse": false
+    },
+    {
+      "operationId": "getAutomaticCallSuppression",
+      "method": "GET",
+      "path": "/settings/automatic-call-suppression",
+      "group": "Settings",
+      "summary": "Get automatic blocking after calls",
+      "documentation": "https://docs.famulor.io/api-reference/settings/get-automatic-blocking-after-calls",
+      "cli": {
+        "command": "get-automatic-call-suppression",
+        "hidden": false,
+        "parameters": [],
+        "bodyFields": []
+      },
+      "sdkMethod": "client.api.getAutomaticCallSuppression",
+      "parameters": [],
+      "requestBody": {
+        "required": false,
+        "content": {}
+      },
+      "responses": {
+        "200": [
+          "application/json"
+        ],
+        "401": [
+          "application/json"
+        ],
+        "403": [
           "application/json"
         ],
         "429": [
@@ -31036,6 +31301,116 @@
       "binaryResponse": false
     },
     {
+      "operationId": "previewAssistantFlowCondition",
+      "method": "POST",
+      "path": "/assistants/{id}/flow/conditions/{nodeId}/preview",
+      "group": "Assistants",
+      "summary": "Preview a condition path",
+      "documentation": "https://docs.famulor.io/api-reference/assistants/preview-a-condition-path",
+      "cli": {
+        "command": "preview-assistant-flow-condition",
+        "hidden": false,
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "flag": "id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "nodeId",
+            "in": "path",
+            "flag": "node-id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "bodyFields": [
+          {
+            "name": "sample",
+            "flag": "--sample",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "variables",
+            "flag": "--variables",
+            "required": false,
+            "type": "object"
+          }
+        ]
+      },
+      "sdkMethod": "client.api.previewAssistantFlowCondition",
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        {
+          "name": "nodeId",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "requestBody": {
+        "required": false,
+        "content": {
+          "application/json": {
+            "type": "object",
+            "properties": {
+              "sample": {
+                "maxLength": 1200,
+                "type": "string"
+              },
+              "variables": {
+                "type": "object",
+                "additionalProperties": {
+                  "anyOf": [
+                    {
+                      "type": "string"
+                    },
+                    {
+                      "type": "number"
+                    },
+                    {
+                      "type": "boolean"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      },
+      "responses": {
+        "200": [
+          "application/json"
+        ],
+        "400": [],
+        "403": [],
+        "404": [],
+        "429": [
+          "application/json"
+        ],
+        "503": [
+          "application/json"
+        ]
+      },
+      "binaryResponse": false
+    },
+    {
       "operationId": "previewNaturalLanguageDashboard",
       "method": "POST",
       "path": "/dashboards/{id}/natural-language",
@@ -40212,6 +40587,66 @@
           "application/json"
         ],
         "404": [
+          "application/json"
+        ],
+        "429": [
+          "application/json"
+        ],
+        "503": [
+          "application/json"
+        ]
+      },
+      "binaryResponse": false
+    },
+    {
+      "operationId": "updateAutomaticCallSuppression",
+      "method": "PATCH",
+      "path": "/settings/automatic-call-suppression",
+      "group": "Settings",
+      "summary": "Update automatic blocking after calls",
+      "documentation": "https://docs.famulor.io/api-reference/settings/update-automatic-blocking-after-calls",
+      "cli": {
+        "command": "update-automatic-call-suppression",
+        "hidden": false,
+        "parameters": [],
+        "bodyFields": [
+          {
+            "name": "automatic_call_suppression",
+            "flag": "--automatic-call-suppression",
+            "required": true,
+            "type": "boolean"
+          }
+        ]
+      },
+      "sdkMethod": "client.api.updateAutomaticCallSuppression",
+      "parameters": [],
+      "requestBody": {
+        "required": true,
+        "content": {
+          "application/json": {
+            "required": [
+              "automatic_call_suppression"
+            ],
+            "type": "object",
+            "properties": {
+              "automatic_call_suppression": {
+                "type": "boolean"
+              }
+            }
+          }
+        }
+      },
+      "responses": {
+        "200": [
+          "application/json"
+        ],
+        "400": [
+          "application/json"
+        ],
+        "401": [
+          "application/json"
+        ],
+        "403": [
           "application/json"
         ],
         "429": [
