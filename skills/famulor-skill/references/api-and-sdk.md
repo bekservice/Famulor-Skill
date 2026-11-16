@@ -136,6 +136,7 @@ Use returned error codes and recovery guidance: reconnect on authentication fail
 | WhatsApp, email or social channels | [Channel guide](messaging-and-channels.md), [Messaging API](api/messaging.md) | Connector state and conversation details/delivery state |
 | Add website voice/chat | [Widgets API](api/widgets.md), [Channel guide](messaging-and-channels.md) | Real widget conversation and history |
 | Start authorized outreach | [Campaign guide](campaigns.md), [Campaigns](api/campaigns.md), [Calls](api/calls.md), [Suppression](api/suppression.md) | Human-confirmed attestation, target list, run status and settled analytics |
+| Configure automatic blocking after calls | [Settings](api/settings.md), [Suppression](api/suppression.md) | Use the workspace setting to skip post-call detection. Existing and manual blocks still apply. |
 | Add knowledge | [Knowledge Bases](api/knowledge-bases.md) | Index readiness and a source-grounded answer |
 | Review conversations | [History](api/history.md), [Calls](api/calls.md), [QA](api/qa.md) | Complete channel-specific detail, not only a preview |
 | Automate a workflow | [Automations](api/automations.md), [Missions](api/milian-missions.md), [Webhooks](api/webhook-subscriptions.md) | Reviewed scope, run status and resulting resources |
