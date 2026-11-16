@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.8.2 — 2026-11-16
+
+- Document the workspace setting for automatic call blocking, including its admin write permissions and how it differs from an existing block.
+- Refresh the public REST, CLI, SDK and MCP catalogs from the same reviewed contract.
+
 ## 2.8.1 — 2026-11-15
 
 - Add a GPT-Live Full Duplex guide and a worked reception example with language choice, pronunciation, interruption and confirmed tool outcomes.
