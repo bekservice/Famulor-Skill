@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.8.3 — 2026-11-17
+
+- Explain how to select a voice for Pipeline or Half-Cascade spoken output, including checking the assistant's spoken languages and listening to a sample.
+
 ## 2.8.2 — 2026-11-16
 
 - Document the workspace setting for automatic call blocking, including its admin write permissions and how it differs from an existing block.
