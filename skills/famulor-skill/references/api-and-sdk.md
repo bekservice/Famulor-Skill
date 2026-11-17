@@ -239,3 +239,7 @@ The selection is a write-only input; sender details are the read authority. Fals
 ## Permanently delete bookings
 
 Resolve the requested native booking IDs in the active workspace. Confirm the exact selection before deleting. Call `delete_bookings` or `POST /api/v1/bookings/delete` with `booking_ids` (1–200 UUIDs). Only ended or terminal bookings are eligible. Cancel an upcoming confirmed appointment first. Report `deleted_ids` and `skipped_ids` separately. Copies in connected calendars, email and other systems require separate handling.
+
+## Permanently delete Audience contacts
+
+For permanent Audience contact deletion, list the matching contacts and ask the user to confirm the exact workspace and IDs. Use `deleteAudienceContacts` with up to 100 explicit IDs and `confirmed: true` only after that confirmation. A user-owned workspace owner or admin credential with `leads:write` is required. Report `active_ids` separately because contacts with active campaign attempts remain.
