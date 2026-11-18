@@ -4,7 +4,7 @@ description: Design, configure, test and improve Famulor voice, WhatsApp, webcha
 license: MIT
 metadata:
   author: Famulor
-  version: "2.8.4"
+  version: "2.8.5"
   homepage: https://github.com/bekservice/Famulor-Skill
 ---
 
@@ -64,7 +64,7 @@ The dated snapshot contains **544 tools** across 14 groups. `list_mcp_toolsets` 
 
 ### Twilio regional number import
 
-Set the connection’s Twilio voice region to US1, IE1, or AU1 independently of the inbound SIP endpoint. The same Twilio account can use a separate connection for another region with the region’s Auth Token. Import unused numbers that already have the matching active Voice region in Twilio. For a number already in service, coordinate the move with support. See [Twilio voice regions](https://docs.famulor.io/telephony/carrier-import#twilio-voice-regions) in the product docs.
+Create a new connection for each Twilio voice region (US1, IE1 or AU1). In the dashboard, select the region, enter the same Twilio Account SID and enter the Auth Token for that region. IE1 defaults to the EU inbound SIP endpoint. You can choose another endpoint explicitly. For IE1 and AU1, that single regional token is sufficient for voice. The existing US1 SMS workflow requires saved US1 credentials or an optional US1 token supplied through the API. API clients can reuse a saved account by supplying its source connection ID instead of the Account SID. Import unused numbers whose active Voice region in Twilio matches the connection. For a number already in service, coordinate the move with support. See [Twilio voice regions](https://docs.famulor.io/telephony/carrier-import#twilio-voice-regions).
 
 ## Design before configuration
 
