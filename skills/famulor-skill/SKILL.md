@@ -62,6 +62,10 @@ https://app.famulor.io/mcp?toolsets=assistants,calls
 
 The dated snapshot contains **544 tools** across 14 groups. `list_mcp_toolsets` reports groups visible to a custom connection. The public `assistant-history` profile intentionally provides only 11 read tools. Installing a skill cannot expand that connection's permissions. Model-catalog visibility may require AI Safety & Control; use available defaults rather than trying to bypass a denial.
 
+### Twilio regional number import
+
+Set the connection’s Twilio voice region to US1, IE1, or AU1 independently of the inbound SIP endpoint. The same Twilio account can use a separate connection for another region with the region’s Auth Token. Import unused numbers that already have the matching active Voice region in Twilio. For a number already in service, coordinate the move with support. See [Twilio voice regions](https://docs.famulor.io/telephony/carrier-import#twilio-voice-regions) in the product docs.
+
 ## Design before configuration
 
 1. Identify channel, language, business outcome, permitted actions, knowledge sources and escalation destination. Ask only for missing choices that affect the result.
