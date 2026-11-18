@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.8.5 — 2026-11-18
+
+- Document how to create a connection for each Twilio voice region with one Auth Token in the dashboard, and when API clients can use US1 credentials for SMS.
+
 ## 2.8.4 — 2026-11-18
 
 - Document Twilio voice regions for one-click number import and reuse of a connected Twilio account.
