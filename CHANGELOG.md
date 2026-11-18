@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.8.4 — 2026-11-18
+
+- Document Twilio voice regions for one-click number import and reuse of a connected Twilio account.
+- Refresh the carrier connection request fields and command options in the bundled public contract.
+
 ## 2.8.3 — 2026-11-17
 
 - Explain how to select a voice for Pipeline or Half-Cascade spoken output, including checking the assistant's spoken languages and listening to a sample.
