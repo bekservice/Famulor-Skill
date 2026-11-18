@@ -2,7 +2,7 @@
 
 Phone numbers, SIP, caller IDs, routing, and verification. Connect only this group with `https://app.famulor.io/mcp?toolsets=telephony`.
 
-This 2026-11-16 snapshot covers all 71 tools assigned to `telephony` in the canonical 544-tool registry. The live MCP `tools/list` response is authoritative for arguments, current availability, annotations, and plan or role gating. Never invent fields from this catalog.
+This 2026-11-18 snapshot covers all 71 tools assigned to `telephony` in the canonical 544-tool registry. The live MCP `tools/list` response is authoritative for arguments, current availability, annotations, and plan or role gating. Never invent fields from this catalog.
 
 Toolsets limit discovery context; they do not grant access. OAuth/API scopes and workspace roles are enforced separately. The Effect column reflects MCP risk annotations: `Delete/destructive` also covers overwrites or changes that can remove data or safeguards.
 
@@ -80,4 +80,4 @@ Toolsets limit discovery context; they do not grant access. OAuth/API scopes and
 | `update_loop_routing_rule` | Write/action | `loop:write` | Immediate | Atomically replace a Loop routing rule, its weekly hours, time-conditioned steps, and pre-answer continuation outcomes. |
 | `update_loop_settings` | Write/action | `loop:write` | Immediate | Update customer-facing Loop availability, default phone number, dialing country, recording, and default routing rule. |
 | `update_phone_number_sms` | Write/action | `phone_numbers:write or calls:write` | Immediate | Enable or disable outbound SMS on a number, and optionally assign the SMS agent. For Twilio BYOC, enabling outbound SMS configures the inbound SMS webhook on the customer Twilio account and refreshes A2P status. |
-| `update_sip_trunk_identity` | Write/action | `sip_trunks:write or calls:write` | Immediate | Set how your own SIP trunk identifies outgoing calls. Phone number is the existing default; SIP username keeps the incoming number and sends caller ID separately. Imported carrier connections are managed separately. |
+| `update_sip_trunk_identity` | Write/action | `sip_trunks:write or calls:write` | Immediate | Set the outbound SIP identity or switch a custom trunk to its preconfigured fixed IP route. The phone number remains the default identity. Imported carrier connections are managed separately. |

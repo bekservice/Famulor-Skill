@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "reviewedAt": "2026-11-16",
+  "reviewedAt": "2026-11-18",
   "source": "Famulor public OpenAPI, CLI command catalog and TypeScript SDK operation descriptors",
-  "openapiSha256": "a1af26d2405d60cbb08839d4013ed5dd769b002922190e4c91503866d20098ce",
+  "openapiSha256": "c4c3837251f7677d6b30a84ca9dc26885792b45d7519b23919444c091a2a9b84",
   "baseUrl": "https://app.famulor.io/api/v1",
   "notice": "Dated navigation and request-shape snapshot, not a runtime validator. Check the live public schema and installed client before execution. Descriptions, examples, default values and response properties are intentionally omitted.",
   "operations": [
@@ -8522,6 +8522,12 @@
               "p_asserted_identity",
               "p_preferred_identity"
             ]
+          },
+          {
+            "name": "use_fixed_outbound_ip",
+            "flag": "--use-fixed-outbound-ip",
+            "required": false,
+            "type": "boolean"
           }
         ]
       },
@@ -38105,7 +38111,20 @@
               }
             },
             "allOf": [
-              {}
+              {
+                "if": {
+                  "properties": {
+                    "type": {
+                      "const": "local"
+                    }
+                  }
+                },
+                "then": {
+                  "required": [
+                    "prefix"
+                  ]
+                }
+              }
             ]
           }
         }
@@ -45549,6 +45568,12 @@
               "p_asserted_identity",
               "p_preferred_identity"
             ]
+          },
+          {
+            "name": "use_fixed_outbound_ip",
+            "flag": "--use-fixed-outbound-ip",
+            "required": false,
+            "type": "boolean"
           }
         ]
       },
@@ -45585,6 +45610,9 @@
                   "auth_username"
                 ],
                 "type": "string"
+              },
+              "use_fixed_outbound_ip": {
+                "type": "boolean"
               }
             },
             "additionalProperties": false
@@ -46088,6 +46116,13 @@
             "required": false,
             "type": "string",
             "nullable": true
+          },
+          {
+            "name": "read_receipts_webhook_url",
+            "flag": "--read-receipts-webhook-url",
+            "required": false,
+            "type": "string",
+            "nullable": true
           }
         ]
       },
@@ -46130,6 +46165,12 @@
               "keep_conversations_unread": {
                 "type": "boolean"
               },
+              "read_receipts_webhook_url": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
               "response_delay_sec": {
                 "maximum": 30,
                 "minimum": 0,
@@ -46141,7 +46182,9 @@
         }
       },
       "responses": {
-        "200": [],
+        "200": [
+          "application/json"
+        ],
         "429": [
           "application/json"
         ],
@@ -47356,8 +47399,12 @@
         }
       },
       "responses": {
-        "200": [],
-        "201": [],
+        "200": [
+          "application/json"
+        ],
+        "201": [
+          "application/json"
+        ],
         "409": [
           "application/json"
         ],
@@ -52414,7 +52461,22 @@
           "type": "string"
         }
       },
-      "additionalProperties": false
+      "additionalProperties": false,
+      "if": {
+        "required": [
+          "shortage_policy"
+        ],
+        "properties": {
+          "shortage_policy": {
+            "const": "auto_topup"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "auto_topup_consent_token"
+        ]
+      }
     },
     "#/components/schemas/MarketingSettingsInput": {
       "type": "object",
@@ -54214,6 +54276,9 @@
             "extension"
           ],
           "type": "string"
+        },
+        "use_fixed_outbound_ip": {
+          "type": "boolean"
         }
       }
     },
