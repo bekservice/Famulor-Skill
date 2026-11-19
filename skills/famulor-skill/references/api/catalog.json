@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "reviewedAt": "2026-11-19",
+  "reviewedAt": "2026-11-20",
   "source": "Famulor public OpenAPI, CLI command catalog and TypeScript SDK operation descriptors",
-  "openapiSha256": "3abf0f16f62ce1bc536ef29096bc497559d64b2136e1a962ba76c536433705ae",
+  "openapiSha256": "94663da088285628ffe1a0fb3886646c208c525d8700b76fe89914dbd19e400a",
   "baseUrl": "https://app.famulor.io/api/v1",
   "notice": "Dated navigation and request-shape snapshot, not a runtime validator. Check the live public schema and installed client before execution. Descriptions, examples, default values and response properties are intentionally omitted.",
   "operations": [
