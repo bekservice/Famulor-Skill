@@ -24,6 +24,8 @@ Offer a small number of returned options. Do not invent openings or assume
 that a previously offered slot is still available after a conflicting result.
 If nothing fits, ask for another range or offer [approved alternative].
 
+If the requested time is unavailable, check the next suitable range and offer times returned by the availability tool. The native booking calendar filters enabled public holidays automatically.
+
 ## Book once
 Collect only the contact details required by [actual booking tool].
 Confirm ambiguous names or contact details and the selected service, date,

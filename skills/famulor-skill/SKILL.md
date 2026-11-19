@@ -4,7 +4,7 @@ description: Design, configure, test and improve Famulor voice, WhatsApp, webcha
 license: MIT
 metadata:
   author: Famulor
-  version: "2.8.5"
+  version: "2.8.6"
   homepage: https://github.com/bekservice/Famulor-Skill
 ---
 
@@ -45,7 +45,7 @@ https://app.famulor.io/mcp?toolsets=assistants,calls
 
 | Toolset | Use for | Tools | Reference |
 | --- | --- | ---: | --- |
-| `assistants` | Assistants, prompts, models, voices, tools, bookings and tests | 130 | [Assistants](references/toolsets/assistants.md) |
+| `assistants` | Assistants, prompts, models, voices, tools, bookings and tests | 131 | [Assistants](references/toolsets/assistants.md) |
 | `calls` | Unified history, transcripts, quality review and permitted call control | 34 | [Calls](references/toolsets/calls.md) |
 | `campaigns` | Campaigns, audience, leads, consent and suppression | 43 | [Campaigns](references/toolsets/campaigns.md) |
 | `messaging` | WhatsApp, social channels, email, templates and conversations | 57 | [Messaging](references/toolsets/messaging.md) |
@@ -54,13 +54,13 @@ https://app.famulor.io/mcp?toolsets=assistants,calls
 | `dashboards` | Analytics and dashboard widgets | 19 | [Dashboards](references/toolsets/dashboards.md) |
 | `automations` | Workflows, connections, CRM sync, Missions and run history | 67 | [Automations](references/toolsets/automations.md) |
 | `billing` | Balance, usage, invoices and billing recovery | 23 | [Billing](references/toolsets/billing.md) |
-| `settings` | Workspaces, preferences, retention, domains and credentials | 45 | [Settings](references/toolsets/settings.md) |
+| `settings` | Workspaces, preferences, retention, domains and credentials | 47 | [Settings](references/toolsets/settings.md) |
 | `platform` | Authorized reseller customer management | 19 | [Reseller management](references/toolsets/platform.md) |
 | `migration` | Preview and import supported legacy resources | 2 | [Migration](references/toolsets/migration.md) |
 | `tasks` | Durable exports, crawls, simulations and preparation | 4 | [Tasks](references/toolsets/tasks.md) |
 | `milian` | Workspace questions and voice sessions using additional credits | 2 | [Milian](references/toolsets/milian.md) |
 
-The dated snapshot contains **544 tools** across 14 groups. `list_mcp_toolsets` reports groups visible to a custom connection. The public `assistant-history` profile intentionally provides only 11 read tools. Installing a skill cannot expand that connection's permissions. Model-catalog visibility may require AI Safety & Control; use available defaults rather than trying to bypass a denial.
+The dated snapshot contains **547 tools** across 14 groups. `list_mcp_toolsets` reports groups visible to a custom connection. The public `assistant-history` profile intentionally provides only 11 read tools. Installing a skill cannot expand that connection's permissions. Model-catalog visibility may require AI Safety & Control; use available defaults rather than trying to bypass a denial.
 
 ### Twilio regional number import
 
