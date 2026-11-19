@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "reviewedAt": "2026-11-19",
   "source": "Famulor public OpenAPI, CLI command catalog and TypeScript SDK operation descriptors",
-  "openapiSha256": "5e7b6a2f6027232eda490ec74a85a265b998b3cf486f51ef68b619c623cde296",
+  "openapiSha256": "2fcf30b4179d36d3fb6479aafe9692653a1e785df38a4f391b827b4e0a0a620a",
   "baseUrl": "https://app.famulor.io/api/v1",
   "notice": "Dated navigation and request-shape snapshot, not a runtime validator. Check the live public schema and installed client before execution. Descriptions, examples, default values and response properties are intentionally omitted.",
   "operations": [
@@ -34522,6 +34522,13 @@
             "flag": "number-id",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "switch_revision",
+            "in": "query",
+            "flag": "--switch-revision",
+            "required": true,
+            "type": "string"
           }
         ],
         "bodyFields": []
@@ -34540,6 +34547,15 @@
         {
           "name": "numberId",
           "in": "path",
+          "required": true,
+          "schema": {
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        {
+          "name": "switch_revision",
+          "in": "query",
           "required": true,
           "schema": {
             "format": "uuid",
