@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "reviewedAt": "2026-11-18",
+  "reviewedAt": "2026-11-19",
   "source": "Famulor public OpenAPI, CLI command catalog and TypeScript SDK operation descriptors",
-  "openapiSha256": "11b2877d52d6391e78db0371e7f78281ba9ca5252f4594e43499c3b9391ce5dc",
+  "openapiSha256": "6add7029a980f0c98376603d3b3eaf46415c92762e192f0f07fc17e6d330cc66",
   "baseUrl": "https://app.famulor.io/api/v1",
   "notice": "Dated navigation and request-shape snapshot, not a runtime validator. Check the live public schema and installed client before execution. Descriptions, examples, default values and response properties are intentionally omitted.",
   "operations": [
@@ -15554,6 +15554,44 @@
           "application/json"
         ],
         "404": [
+          "application/json"
+        ],
+        "429": [
+          "application/json"
+        ],
+        "503": [
+          "application/json"
+        ]
+      },
+      "binaryResponse": false
+    },
+    {
+      "operationId": "getCustomDomainLinkPreview",
+      "method": "GET",
+      "path": "/custom-domain/link-preview",
+      "group": "Settings",
+      "summary": "Get custom domain link preview",
+      "documentation": "https://docs.famulor.io/api-reference/settings/get-custom-domain-link-preview",
+      "cli": {
+        "command": "get-custom-domain-link-preview",
+        "hidden": false,
+        "parameters": [],
+        "bodyFields": []
+      },
+      "sdkMethod": "client.api.getCustomDomainLinkPreview",
+      "parameters": [],
+      "requestBody": {
+        "required": false,
+        "content": {}
+      },
+      "responses": {
+        "200": [
+          "application/json"
+        ],
+        "401": [
+          "application/json"
+        ],
+        "403": [
           "application/json"
         ],
         "429": [
@@ -42133,6 +42171,66 @@
       "binaryResponse": false
     },
     {
+      "operationId": "updateCustomDomainLinkPreview",
+      "method": "PATCH",
+      "path": "/custom-domain/link-preview",
+      "group": "Settings",
+      "summary": "Update custom domain link preview",
+      "documentation": "https://docs.famulor.io/api-reference/settings/update-custom-domain-link-preview",
+      "cli": {
+        "command": "update-custom-domain-link-preview",
+        "hidden": false,
+        "parameters": [],
+        "bodyFields": [
+          {
+            "name": "link_preview_title",
+            "flag": "--link-preview-title",
+            "required": false,
+            "type": "string",
+            "nullable": true
+          },
+          {
+            "name": "link_preview_description",
+            "flag": "--link-preview-description",
+            "required": false,
+            "type": "string",
+            "nullable": true
+          }
+        ]
+      },
+      "sdkMethod": "client.api.updateCustomDomainLinkPreview",
+      "parameters": [],
+      "requestBody": {
+        "required": true,
+        "content": {
+          "application/json": {
+            "$ref": "#/components/schemas/CustomDomainLinkPreviewUpdate"
+          }
+        }
+      },
+      "responses": {
+        "200": [
+          "application/json"
+        ],
+        "400": [
+          "application/json"
+        ],
+        "401": [
+          "application/json"
+        ],
+        "403": [
+          "application/json"
+        ],
+        "429": [
+          "application/json"
+        ],
+        "503": [
+          "application/json"
+        ]
+      },
+      "binaryResponse": false
+    },
+    {
       "operationId": "updateCustomerMemory",
       "method": "PATCH",
       "path": "/contacts/{id}/memory",
@@ -51200,6 +51298,26 @@
             "paused"
           ],
           "type": "string"
+        }
+      }
+    },
+    "#/components/schemas/CustomDomainLinkPreviewUpdate": {
+      "minProperties": 1,
+      "type": "object",
+      "properties": {
+        "link_preview_description": {
+          "maxLength": 200,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "link_preview_title": {
+          "maxLength": 70,
+          "type": [
+            "string",
+            "null"
+          ]
         }
       }
     },

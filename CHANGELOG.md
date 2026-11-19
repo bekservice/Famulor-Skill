@@ -1,9 +1,10 @@
 # Changelog
 
-## 2.8.6 — 2026-11-18
+## 2.8.6 — 2026-11-19
 
 - Document how to set recurring public holidays for a native booking event type and verify the resulting slots before offering an appointment.
 - Refresh the bundled REST, CLI, SDK and MCP catalogs for holiday discovery and event-type settings.
+- Document the title and description for a white-label custom domain link preview. Verify the saved result with the settings API or MCP before sharing a link.
 
 ## 2.8.5 — 2026-11-18
 
