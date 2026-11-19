@@ -32,6 +32,7 @@ Then connect your client to `https://app.famulor.io/mcp` and sign in with OAuth.
 | Website chat | “Create a webchat prompt with readable links and no spoken filler phrases.” | [Webchat](skills/famulor-skill/references/messaging-and-channels.md) |
 | Email replies | “Draft email instructions with a clear answer and one next step.” | [Email](skills/famulor-skill/references/messaging-and-channels.md) |
 | Quality review | “Review these conversations, identify recurring failures and propose regression tests.” | [Testing](skills/famulor-skill/references/testing-and-evaluation.md) |
+| Twilio region change | “Preview moving this existing number to Ireland and show what would change for incoming and outgoing calls.” | [Twilio regional number import](skills/famulor-skill/SKILL.md#twilio-regional-number-import) |
 | API integration | “Find the REST endpoint, CLI command and TypeScript method to list my assistants.” | [API and SDK](skills/famulor-skill/references/api-and-sdk.md) |
 
 ## See a complete assistant

@@ -4,7 +4,7 @@ description: Design, configure, test and improve Famulor voice, WhatsApp, webcha
 license: MIT
 metadata:
   author: Famulor
-  version: "2.8.7"
+  version: "2.8.8"
   homepage: https://github.com/bekservice/Famulor-Skill
 ---
 
@@ -64,7 +64,15 @@ The dated snapshot contains **550 tools** across 14 groups. `list_mcp_toolsets` 
 
 ### Twilio regional number import
 
-Create a new connection for each Twilio voice region (US1, IE1 or AU1). In the dashboard, select the region, enter the same Twilio Account SID and enter the Auth Token for that region. IE1 defaults to the EU inbound SIP endpoint. You can choose another endpoint explicitly. For IE1 and AU1, that single regional token is sufficient for voice. The existing US1 SMS workflow requires saved US1 credentials or an optional US1 token supplied through the API. API clients can reuse a saved account by supplying its source connection ID instead of the Account SID. Import unused numbers whose active Voice region in Twilio matches the connection. For a number already imported, preview the switch using the target regional connection and the existing number’s workspace ID. Select a verified target trunk on the same Twilio account and use the token from that preview. Choose outbound only to change where new outbound calls go. Choose both directions only after the preview confirms inbound routing to the target. Use the saved target SIP login when available, or provide both SIP fields through a secure input. To restore the previous route, use the target connection, the same number ID and the `switch_revision` from the preview of the current switch or its activation response. If the revision is stale, preview again and confirm the current change before restoring it. If `cleanup_pending` is true after restoration, wait for calls to drain, then repeat Restore with the same revision to remove the prepared route. When `twilio_inventory_unavailable` is true, the listed number is a saved switch available for recovery. Refresh the live inventory before starting a new switch. Preview and configuration readback do not verify call audio. See [Twilio voice regions](https://docs.famulor.io/telephony/carrier-import#twilio-voice-regions).
+Create a new connection for each Twilio voice region (US1, IE1 or AU1). In the dashboard, select the region, enter the same Twilio Account SID and enter the Auth Token for that region. IE1 defaults to the EU inbound SIP endpoint. You can choose another endpoint explicitly. For IE1 and AU1, that single regional token is sufficient for voice. The existing US1 SMS workflow requires saved US1 credentials or an optional US1 token supplied through the API. API clients can reuse a saved account by supplying its source connection ID instead of the Account SID. Import unused numbers whose active Voice region in Twilio matches the connection.
+
+For an imported number, use `preview_twilio_region_switch` with the target connection and the number’s existing workspace ID. Confirm the exact number, target region, call directions and creation of a new trunk with the user before changing live routing.
+
+- To create a secure trunk, use this option only when the preview returns `managed_available: true`. Both connections must belong to the same Twilio account. The source region must still be active and its secure inbound route and outgoing SIP login verifiable. The target region must have no existing customer trunk, Voice application or webhook for this number. Use the saved regional connection. Submit `mode: managed`, `direction: bidirectional` and the preview’s `managed_token`. Famulor creates the trunk and SIP login and retains the number ID and assistant assignments. If the option is unavailable, explain the preview’s reason and leave the number in place.
+- To reuse an existing secure trunk, use its preview token. Select outbound only to keep the current incoming route. Select both directions only when the preview verifies incoming routing to that trunk. Reuse its verified saved SIP login when available or collect the existing SIP credentials through a secure input.
+- To restore a switch, use the same target connection, number ID and current `switch_revision`. If the revision is stale, refresh the preview and reconfirm the change. For a managed switch, restoration also returns the number to its previous Twilio voice region and restores the previous target-region configuration. External changes can block restoration. If `cleanup_pending` is true, allow regional routing to propagate for up to five minutes and wait for relevant calls to end before repeating Restore with the same revision. When `twilio_inventory_unavailable` is true, use the saved entry for recovery. Refresh live inventory before a new switch.
+
+Report configuration readback separately from call audio. A test call requires its own authorization. [Twilio regional routing guide](https://docs.famulor.io/telephony/carrier-import#switch-the-region-of-an-imported-number)
 
 ## Design before configuration
 
