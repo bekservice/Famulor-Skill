@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.8.7 — 2026-11-19
+
+- Document preview, switch and restore for existing Twilio numbers, including outbound-only changes and verifying the target for incoming calls.
+
 ## 2.8.6 — 2026-11-19
 
 - Document how to set recurring public holidays for a native booking event type and verify the resulting slots before offering an appointment.

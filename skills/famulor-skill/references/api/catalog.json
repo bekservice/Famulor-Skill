@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "reviewedAt": "2026-11-19",
   "source": "Famulor public OpenAPI, CLI command catalog and TypeScript SDK operation descriptors",
-  "openapiSha256": "6add7029a980f0c98376603d3b3eaf46415c92762e192f0f07fc17e6d330cc66",
+  "openapiSha256": "2fcf30b4179d36d3fb6479aafe9692653a1e785df38a4f391b827b4e0a0a620a",
   "baseUrl": "https://app.famulor.io/api/v1",
   "notice": "Dated navigation and request-shape snapshot, not a runtime validator. Check the live public schema and installed client before execution. Descriptions, examples, default values and response properties are intentionally omitted.",
   "operations": [
@@ -31671,6 +31671,90 @@
       "binaryResponse": false
     },
     {
+      "operationId": "previewTwilioRegionSwitch",
+      "method": "GET",
+      "path": "/carrier-connections/{id}/numbers/{numberId}/region-switch",
+      "group": "Carrier Connections",
+      "summary": "Preview a Twilio region switch",
+      "documentation": "https://docs.famulor.io/api-reference/introduction",
+      "cli": {
+        "command": "preview-twilio-region-switch",
+        "hidden": false,
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "flag": "id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "numberId",
+            "in": "path",
+            "flag": "number-id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "bodyFields": []
+      },
+      "sdkMethod": "client.api.previewTwilioRegionSwitch",
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        {
+          "name": "numberId",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "format": "uuid",
+            "type": "string"
+          }
+        }
+      ],
+      "requestBody": {
+        "required": false,
+        "content": {}
+      },
+      "responses": {
+        "200": [
+          "application/json"
+        ],
+        "400": [
+          "application/json"
+        ],
+        "401": [
+          "application/json"
+        ],
+        "403": [
+          "application/json"
+        ],
+        "404": [
+          "application/json"
+        ],
+        "409": [
+          "application/json"
+        ],
+        "429": [
+          "application/json"
+        ],
+        "502": [
+          "application/json"
+        ],
+        "503": [
+          "application/json"
+        ]
+      },
+      "binaryResponse": false
+    },
+    {
       "operationId": "provisionShopifyAssistantTools",
       "method": "POST",
       "path": "/shopify/installations/{id}/tools",
@@ -34406,6 +34490,106 @@
           "application/json"
         ],
         "429": [
+          "application/json"
+        ],
+        "503": [
+          "application/json"
+        ]
+      },
+      "binaryResponse": false
+    },
+    {
+      "operationId": "restoreTwilioRegion",
+      "method": "DELETE",
+      "path": "/carrier-connections/{id}/numbers/{numberId}/region-switch",
+      "group": "Carrier Connections",
+      "summary": "Restore the previous route of a Twilio number",
+      "documentation": "https://docs.famulor.io/api-reference/introduction",
+      "cli": {
+        "command": "restore-twilio-region",
+        "hidden": false,
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "flag": "id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "numberId",
+            "in": "path",
+            "flag": "number-id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "switch_revision",
+            "in": "query",
+            "flag": "--switch-revision",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "bodyFields": []
+      },
+      "sdkMethod": "client.api.restoreTwilioRegion",
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        {
+          "name": "numberId",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        {
+          "name": "switch_revision",
+          "in": "query",
+          "required": true,
+          "schema": {
+            "format": "uuid",
+            "type": "string"
+          }
+        }
+      ],
+      "requestBody": {
+        "required": false,
+        "content": {}
+      },
+      "responses": {
+        "200": [
+          "application/json"
+        ],
+        "400": [
+          "application/json"
+        ],
+        "401": [
+          "application/json"
+        ],
+        "403": [
+          "application/json"
+        ],
+        "404": [
+          "application/json"
+        ],
+        "409": [
+          "application/json"
+        ],
+        "429": [
+          "application/json"
+        ],
+        "502": [
           "application/json"
         ],
         "503": [
@@ -38532,6 +38716,123 @@
         "402": [],
         "409": [],
         "429": [
+          "application/json"
+        ],
+        "503": [
+          "application/json"
+        ]
+      },
+      "binaryResponse": false
+    },
+    {
+      "operationId": "switchTwilioRegion",
+      "method": "POST",
+      "path": "/carrier-connections/{id}/numbers/{numberId}/region-switch",
+      "group": "Carrier Connections",
+      "summary": "Switch the region of an imported Twilio number",
+      "documentation": "https://docs.famulor.io/api-reference/introduction",
+      "cli": {
+        "command": "switch-twilio-region",
+        "hidden": false,
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "flag": "id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "numberId",
+            "in": "path",
+            "flag": "number-id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "bodyFields": [
+          {
+            "name": "direction",
+            "flag": "--direction",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "outbound_only",
+              "bidirectional"
+            ]
+          },
+          {
+            "name": "trunk_token",
+            "flag": "--trunk-token",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "sip_username",
+            "flag": "--sip-username",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "sip_password",
+            "flag": "--sip-password",
+            "required": false,
+            "type": "string"
+          }
+        ]
+      },
+      "sdkMethod": "client.api.switchTwilioRegion",
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        {
+          "name": "numberId",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "format": "uuid",
+            "type": "string"
+          }
+        }
+      ],
+      "requestBody": {
+        "required": true,
+        "content": {
+          "application/json": {
+            "$ref": "#/components/schemas/TwilioRegionSwitchInput"
+          }
+        }
+      },
+      "responses": {
+        "200": [
+          "application/json"
+        ],
+        "400": [
+          "application/json"
+        ],
+        "401": [
+          "application/json"
+        ],
+        "403": [
+          "application/json"
+        ],
+        "404": [
+          "application/json"
+        ],
+        "409": [
+          "application/json"
+        ],
+        "429": [
+          "application/json"
+        ],
+        "502": [
           "application/json"
         ],
         "503": [
@@ -55718,6 +56019,39 @@
         }
       },
       "additionalProperties": false
+    },
+    "#/components/schemas/TwilioRegionSwitchInput": {
+      "required": [
+        "direction",
+        "trunk_token"
+      ],
+      "type": "object",
+      "properties": {
+        "direction": {
+          "enum": [
+            "outbound_only",
+            "bidirectional"
+          ],
+          "type": "string"
+        },
+        "sip_password": {
+          "maxLength": 256,
+          "minLength": 1,
+          "type": "string",
+          "writeOnly": true
+        },
+        "sip_username": {
+          "maxLength": 128,
+          "minLength": 1,
+          "type": "string",
+          "writeOnly": true
+        },
+        "trunk_token": {
+          "maxLength": 4096,
+          "minLength": 1,
+          "type": "string"
+        }
+      }
     },
     "#/components/schemas/UserToolInput": {
       "type": "object",
