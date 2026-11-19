@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "reviewedAt": "2026-11-19",
   "source": "Famulor public OpenAPI, CLI command catalog and TypeScript SDK operation descriptors",
-  "openapiSha256": "2fcf30b4179d36d3fb6479aafe9692653a1e785df38a4f391b827b4e0a0a620a",
+  "openapiSha256": "fcbdfe490bdee175c0e5ba5f4d40cbfedfebec0d879bcd1f6cfa4a76a2ed91f9",
   "baseUrl": "https://app.famulor.io/api/v1",
   "notice": "Dated navigation and request-shape snapshot, not a runtime validator. Check the live public schema and installed client before execution. Descriptions, examples, default values and response properties are intentionally omitted.",
   "operations": [
@@ -22500,14 +22500,7 @@
             "in": "query",
             "flag": "--style",
             "required": false,
-            "type": "string",
-            "enum": [
-              "all",
-              "realistic",
-              "animated_3d",
-              "illustrated",
-              "custom"
-            ]
+            "type": "string"
           }
         ],
         "bodyFields": []
@@ -22546,13 +22539,8 @@
           "in": "query",
           "required": false,
           "schema": {
-            "enum": [
-              "all",
-              "realistic",
-              "animated_3d",
-              "illustrated",
-              "custom"
-            ],
+            "maxLength": 50,
+            "minLength": 1,
             "type": "string"
           }
         }
