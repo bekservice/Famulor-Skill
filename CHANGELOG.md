@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.8.9 — 2026-11-20
+
+- Guide agents through checking WhatsApp delivery receipts in conversation History and automation run details.
+
 ## 2.8.8 — 2026-11-20
 
 - Guide agents through previewing a regional move for an existing Twilio number, confirming both call directions and restoring its previous route. Include the managed trunk option in the public API, CLI, SDK and MCP catalogs.
