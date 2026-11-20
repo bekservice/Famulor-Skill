@@ -4,7 +4,7 @@ description: Read Famulor assistant configurations, versions, catalogs, and omni
 license: MIT
 metadata:
   author: Famulor
-  version: "2.8.7"
+  version: "2.8.8"
   homepage: https://www.famulor.io
 ---
 

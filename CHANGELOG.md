@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.8.8 — 2026-11-20
+
+- Guide agents through previewing a regional move for an existing Twilio number, confirming both call directions and restoring its previous route. Include the managed trunk option in the public API, CLI, SDK and MCP catalogs.
+
 ## 2.8.7 — 2026-11-19
 
 - Document preview, switch and restore for existing Twilio numbers, including outbound-only changes and verifying the target for incoming calls.
