@@ -99,6 +99,22 @@
       "pass_criteria": ["Uses the requested supported language", "Does not translate the customer's name", "Does not switch language again merely because of the name"]
     },
     {
+      "id": "full-duplex-listening-and-confirmation",
+      "name": "Finish dictation and confirm the concrete slot",
+      "persona": "A caller who pauses between digit groups and murmurs briefly during a readback.",
+      "goal": "Dictate a callback number, say 'mhm' during the readback, then explicitly confirm the proposed Wednesday slot.",
+      "required_capabilities": ["Full Duplex voice test", "test calendar and booking receipt"],
+      "pass_criteria": ["Preserves all dictated digits", "Waits for explicit confirmation of the concrete slot", "Submits one booking after confirmation"]
+    },
+    {
+      "id": "full-duplex-tool-wait",
+      "name": "Say the verified outcome of a slow operation",
+      "persona": "A caller who corrects the date while an availability lookup is running.",
+      "goal": "Request Tuesday availability, change to Wednesday, and repeat the returned Wednesday time.",
+      "required_capabilities": ["Full Duplex voice test", "controlled availability responses"],
+      "pass_criteria": ["Yields to the correction", "Does not present the stale Tuesday result as current", "Repeats the verified Wednesday result without a redundant lookup"]
+    },
+    {
       "id": "missing-variable",
       "name": "Missing personalization",
       "persona": "An unidentified caller with no name supplied at conversation start.",

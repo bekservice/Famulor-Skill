@@ -1,6 +1,6 @@
 # Settings API operations
 
-Reviewed 2026-11-12. 31 public operations. [All areas](index.md) · [Execution guide](../api-and-sdk.md)
+Reviewed 2026-11-20. 35 public operations. [All areas](index.md) · [Execution guide](../api-and-sdk.md)
 
 Paths are relative to `https://app.famulor.io/api/v1`. Each operation ID is also the typed SDK method `client.api.<operationId>`. Look up its exact request contract with the bundled `find-operation.py`; CLI help reflects the installed version.
 
@@ -12,7 +12,9 @@ Hidden CLI operations require an interactive/browser flow or `famulor api` where
 | `createSupportRequest` | `POST /support/requests` | `famulor create-support-request` | [Create a support request](https://docs.famulor.io/api-reference/settings/create-a-support-request) |
 | `deletePasskey` | `DELETE /settings/passkeys` | `famulor delete-passkey` | [Delete a passkey](https://docs.famulor.io/api-reference/settings/delete-a-passkey) |
 | `getAiInferenceSettings` | `GET /settings/ai-inference` | `famulor get-ai-inference-settings` | [Get AI inference settings](https://docs.famulor.io/api-reference/settings/get-ai-inference-settings) |
+| `getAutomaticCallSuppression` | `GET /settings/automatic-call-suppression` | `famulor get-automatic-call-suppression` | [Get automatic blocking after calls](https://docs.famulor.io/api-reference/settings/get-automatic-blocking-after-calls) |
 | `getConsentComplianceSettings` | `GET /settings/consent-compliance` | `famulor get-consent-compliance-settings` | [Get consent compliance mode](https://docs.famulor.io/api-reference/settings/get-consent-compliance-mode) |
+| `getCustomDomainLinkPreview` | `GET /custom-domain/link-preview` | `famulor get-custom-domain-link-preview` | [Get custom domain link preview](https://docs.famulor.io/api-reference/settings/get-custom-domain-link-preview) |
 | `getCustomDomainStatus` | `GET /custom-domain` | `famulor get-custom-domain-status` | [Get custom domain status](https://docs.famulor.io/api-reference/settings/get-custom-domain-status) |
 | `getDarkWindowSettings` | `GET /settings/dark-windows` | `famulor get-dark-window-settings` | [Get Dark Windows settings](https://docs.famulor.io/api-reference/settings/get-dark-windows-settings) |
 | `getDncRegistrySettings` | `GET /settings/dnc-registry` | `famulor get-dnc-registry-settings` | [Get federal and state DNC checks](https://docs.famulor.io/api-reference/settings/get-federal-and-state-dnc-checks) |
@@ -31,7 +33,9 @@ Hidden CLI operations require an interactive/browser flow or `famulor api` where
 | `requestOutboundLimitIncrease` | `POST /settings/outbound-limits/requests` | `famulor request-outbound-limit-increase` | [Request an outbound call limit increase](https://docs.famulor.io/api-reference/settings/request-an-outbound-call-limit-increase) |
 | `signOutAccountSession` | `DELETE /settings/sessions` | `famulor sign-out-account-session` | [Sign out an account session](https://docs.famulor.io/api-reference/settings/sign-out-an-account-session) |
 | `updateAiInferenceSettings` | `PATCH /settings/ai-inference` | `famulor update-ai-inference-settings` | [Update AI inference settings](https://docs.famulor.io/api-reference/settings/update-ai-inference-settings) |
+| `updateAutomaticCallSuppression` | `PATCH /settings/automatic-call-suppression` | `famulor update-automatic-call-suppression` | [Update automatic blocking after calls](https://docs.famulor.io/api-reference/settings/update-automatic-blocking-after-calls) |
 | `updateConsentComplianceSettings` | `PATCH /settings/consent-compliance` | `famulor update-consent-compliance-settings` | [Update consent compliance mode](https://docs.famulor.io/api-reference/settings/update-consent-compliance-mode) |
+| `updateCustomDomainLinkPreview` | `PATCH /custom-domain/link-preview` | `famulor update-custom-domain-link-preview` | [Update custom domain link preview](https://docs.famulor.io/api-reference/settings/update-custom-domain-link-preview) |
 | `updateDarkWindowSettings` | `PATCH /settings/dark-windows` | `famulor update-dark-window-settings` | [Update Dark Windows settings](https://docs.famulor.io/api-reference/settings/update-dark-windows-settings) |
 | `updateDncRegistrySettings` | `PATCH /settings/dnc-registry` | `famulor update-dnc-registry-settings` | [Update federal and state DNC checks](https://docs.famulor.io/api-reference/settings/update-federal-and-state-dnc-checks) |
 | `updateMarketingIntegrations` | `PUT /settings/marketing` | `famulor update-marketing-integrations` | [Update marketing integrations](https://docs.famulor.io/api-reference/settings/update-marketing-integrations) |
