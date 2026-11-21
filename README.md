@@ -4,10 +4,10 @@
 <p align="center">Build better voice, WhatsApp and webchat agents from your AI assistant.</p>
 
 <p align="center">
-<a href="https://github.com/bekservice/Famulor-Skill/releases"><img alt="Latest release" src="https://img.shields.io/github/v/release/bekservice/Famulor-Skill?color=087e98" /></a>
-<a href="https://github.com/bekservice/Famulor-Skill/actions/workflows/validate.yml"><img alt="Validate" src="https://github.com/bekservice/Famulor-Skill/actions/workflows/validate.yml/badge.svg" /></a>
+<a href="https://github.com/Famulor-SI/Famulor-Skill/releases"><img alt="Latest release" src="https://img.shields.io/github/v/release/Famulor-SI/Famulor-Skill?color=087e98" /></a>
+<a href="https://github.com/Famulor-SI/Famulor-Skill/actions/workflows/validate.yml"><img alt="Validate" src="https://github.com/Famulor-SI/Famulor-Skill/actions/workflows/validate.yml/badge.svg" /></a>
 <a href="LICENSE"><img alt="MIT license" src="https://img.shields.io/badge/license-MIT-087e98" /></a>
-<a href="https://skills.sh/bekservice/Famulor-Skill"><img alt="skills.sh" src="https://skills.sh/b/bekservice/Famulor-Skill" /></a>
+<a href="https://skills.sh/famulor-si/famulor-skill"><img alt="skills.sh" src="https://skills.sh/b/famulor-si/famulor-skill" /></a>
 </p>
 
 [Famulor](https://www.famulor.io) builds AI assistants for phone calls, websites and messaging. This open-source skill teaches your AI client how to design their prompts, configure their tools, test their behavior and work with your Famulor workspace.
@@ -15,12 +15,12 @@
 **Start with a business task.** The skill selects the relevant channel guide and current tools, instead of loading hundreds of endpoint descriptions into every conversation.
 
 ```bash
-npx skills add bekservice/Famulor-Skill --skill famulor-skill
+npx skills add Famulor-SI/Famulor-Skill --skill famulor-skill
 ```
 
 Then connect your client to `https://app.famulor.io/mcp` and sign in with OAuth. The skill supplies instructions; MCP supplies authorized workspace access. Prompt drafting works without a connection. Live data and changes require a Famulor account and the relevant plan and permissions.
 
-[Installation guide](docs/installation.md) · [Worked examples](skills/famulor-skill/references/examples/README.md) · [Use cases](docs/use-cases.md) · [Prompt templates](skills/famulor-skill/assets/prompts) · [API index](skills/famulor-skill/references/api/index.md) · [Releases](https://github.com/bekservice/Famulor-Skill/releases)
+[Installation guide](docs/installation.md) · [Worked examples](skills/famulor-skill/references/examples/README.md) · [Use cases](docs/use-cases.md) · [Prompt templates](skills/famulor-skill/assets/prompts) · [API index](skills/famulor-skill/references/api/index.md) · [Releases](https://github.com/Famulor-SI/Famulor-Skill/releases)
 
 ## Choose what you want to build
 
@@ -32,6 +32,7 @@ Then connect your client to `https://app.famulor.io/mcp` and sign in with OAuth.
 | Website chat | “Create a webchat prompt with readable links and no spoken filler phrases.” | [Webchat](skills/famulor-skill/references/messaging-and-channels.md) |
 | Email replies | “Draft email instructions with a clear answer and one next step.” | [Email](skills/famulor-skill/references/messaging-and-channels.md) |
 | Quality review | “Review these conversations, identify recurring failures and propose regression tests.” | [Testing](skills/famulor-skill/references/testing-and-evaluation.md) |
+| Twilio region change | “Preview moving this existing number to Ireland and show what would change for incoming and outgoing calls.” | [Twilio regional number import](skills/famulor-skill/SKILL.md#twilio-regional-number-import) |
 | API integration | “Find the REST endpoint, CLI command and TypeScript method to list my assistants.” | [API and SDK](skills/famulor-skill/references/api-and-sdk.md) |
 
 ## See a complete assistant
@@ -51,12 +52,12 @@ Each includes a filled business brief, complete prompt, setting placement, requi
 
 | Client | Setup |
 | --- | --- |
-| **Claude Code** | `/plugin marketplace add bekservice/Famulor-Skill`, then `/plugin install famulor@famulor`; authenticate in `/mcp` |
+| **Claude Code** | `/plugin marketplace add Famulor-SI/Famulor-Skill`, then `/plugin install famulor@famulor`; authenticate in `/mcp` |
 | **Claude web / desktop** | Upload the release's `famulor-skill.zip` in **Customize → Skills**, then connect Famulor separately |
 | **ChatGPT** | Install the [Famulor plugin](https://chatgpt.com/plugins/plugin_asdk_app_6a8a46791ed08191a79aa4c98f34d772) for assistant/history review; use a separate custom MCP connection for broader authorized actions |
 | **Codex** | Install the skill, run `codex mcp add famulor --url https://app.famulor.io/mcp`, then `codex mcp login famulor` |
 | **Cursor** | Install the skill and add the remote server in MCP settings |
-| **Gemini CLI** | `gemini extensions install https://github.com/bekservice/Famulor-Skill` |
+| **Gemini CLI** | `gemini extensions install https://github.com/Famulor-SI/Famulor-Skill` |
 | **Other Agent Skills clients** | Use the universal installer above and configure Streamable HTTP MCP with OAuth |
 
 See the [step-by-step guide](docs/installation.md) for prerequisites, exact commands, first-run verification, updates and troubleshooting. Client controls depend on the installed version and workspace policy.
@@ -65,10 +66,10 @@ See the [step-by-step guide](docs/installation.md) for prerequisites, exact comm
 
 ## What is included
 
-- Channel-specific assistant design, voice prompting, messaging and evaluation guides grounded in Famulor's implementation.
+- Channel-specific assistant design, voice prompting, messaging, campaign sequence and evaluation guides grounded in Famulor's implementation.
 - Adaptable prompts for reception, booking, qualification, WhatsApp, website chat and email.
 - Four complete demo-inspired assistant designs, with expected conversations, failure paths and a model deliverable.
-- **509 MCP tools in 14 groups** and **503 public API operations** with REST, CLI and TypeScript SDK navigation, reviewed on **2 November 2026**.
+- **550 MCP tools in 14 groups** and **546 public API operations** with REST, CLI and TypeScript SDK navigation, reviewed on **19 November 2026**.
 - An offline operation lookup, deterministic catalog generation and package validation.
 - Portable Agent Skills plus Claude Code, Cursor and Gemini packaging; a separate restricted Claude Store package.
 - Versioned ZIP and `.skill` downloads with SHA-256 checksums.
@@ -86,7 +87,7 @@ The skill preserves the scope of your request. Reviewing a campaign does not sta
 
 ## Contribute
 
-Found an outdated endpoint or a reproducible prompt failure? Open an [issue](https://github.com/bekservice/Famulor-Skill/issues/new/choose) with a redacted example. See [CONTRIBUTING.md](CONTRIBUTING.md) for validation and [SECURITY.md](SECURITY.md) for private reports.
+Found an outdated endpoint or a reproducible prompt failure? Open an [issue](https://github.com/Famulor-SI/Famulor-Skill/issues/new/choose) with a redacted example. See [CONTRIBUTING.md](CONTRIBUTING.md) for validation and [SECURITY.md](SECURITY.md) for private reports.
 
 ```bash
 python3 scripts/validate.py

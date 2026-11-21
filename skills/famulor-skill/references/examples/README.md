@@ -11,6 +11,7 @@ Read the closest example first. Load another only when it adds a behavior the ta
 | You are designing | Start here | Learn from it |
 | --- | --- | --- |
 | Reception, accommodation enquiries or reservations | [Hotel front desk](hotel-front-desk.md) | Separate policy answers, current availability and a confirmed reservation |
+| Native Full Duplex reception and booking | [Full Duplex reception](full-duplex-reception.md) | Test listening, interruption, pronunciation and verified action results with the selected voice |
 | Ordering or another conversation with frequent corrections | [Drive-thru](drive-thru.md) | Maintain the customer's current choices, confirm the final request and avoid duplicate submissions |
 | Customer support across voice and written channels | [Order support](order-support.md) | Retrieve the relevant facts, answer the pending question and adapt the presentation to the channel |
 | A short sales discovery or qualification conversation | [Lead qualification](lead-qualification.md) | Ask relevant questions, respect a refusal and distinguish a qualified lead from a booked appointment |

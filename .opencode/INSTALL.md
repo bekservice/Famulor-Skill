@@ -3,7 +3,7 @@
 Install the skill with the universal Agent Skills installer:
 
 ```bash
-npx skills add bekservice/Famulor-Skill
+npx skills add Famulor-SI/Famulor-Skill
 ```
 
 Configure `https://app.famulor.io/mcp` as a remote Streamable HTTP MCP server using OAuth in the current OpenCode MCP settings. Restart the session, then verify with a read-only request such as listing Famulor assistants.
