@@ -34,6 +34,7 @@ Then connect your client to `https://app.famulor.io/mcp` and sign in with OAuth.
 | Quality review | “Review these conversations, identify recurring failures and propose regression tests.” | [Testing](skills/famulor-skill/references/testing-and-evaluation.md) |
 | Twilio region change | “Preview moving this existing number to Ireland and show what would change for incoming and outgoing calls.” | [Twilio regional number import](skills/famulor-skill/SKILL.md#twilio-regional-number-import) |
 | API integration | “Find the REST endpoint, CLI command and TypeScript method to list my assistants.” | [API and SDK](skills/famulor-skill/references/api-and-sdk.md) |
+| Connector for your app | “Package our order-status MCP server as a Famulor connector and prepare the pull request.” | [Famulor Marketplace](https://github.com/Famulor-SI/famulor-marketplace) |
 
 ## See a complete assistant
 

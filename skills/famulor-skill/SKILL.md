@@ -4,7 +4,7 @@ description: Design, configure, test and improve Famulor voice, WhatsApp, webcha
 license: MIT
 metadata:
   author: Famulor
-  version: "2.8.11"
+  version: "2.8.12"
   homepage: https://github.com/Famulor-SI/Famulor-Skill
 ---
 
@@ -23,6 +23,7 @@ Turn the user's business outcome into a channel-appropriate assistant or a verif
 | WhatsApp, SMS with optional RCS, website text chat, social messaging or email | [Messaging and channels](references/messaging-and-channels.md) |
 | Tests, simulations, regression cases or call-quality review | [Testing and evaluation](references/testing-and-evaluation.md) |
 | REST endpoint, CLI command, TypeScript method or integration code | [API and SDK](references/api-and-sdk.md) and [operation index](references/api/index.md) |
+| A connector or automation template listed for every Famulor workspace, or a missing app | [Famulor Marketplace contributions](references/api-and-sdk.md#contribute-a-connector-or-automation-template) |
 | Workspace data or actions | The smallest matching MCP toolset below |
 
 Drafting prompts or reviewing user-provided configuration can work without a connection. Mark assumptions and placeholders; do not claim to have read, saved or tested anything in the account. For real workspace operations, use an available authenticated Famulor MCP connection or an explicitly configured public REST/CLI/SDK client. Never invent an undocumented endpoint.
