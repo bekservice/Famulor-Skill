@@ -65,6 +65,8 @@ A call in which the caller never spoke is not scored and is not charged for AI Q
 
 Response timings describe different stages. Do not sum overlapping recognition, model and speech measurements. Compare equivalent test types and modes. A missing metric means unmeasured, not zero latency; text simulation completion time is not voice response latency. Allow completed history records and measurements to settle before drawing conclusions.
 
+If an outbound call fails before dialing, read `get_call` (or `famulor get-call <call-id>`) and the originating automation step when applicable. **Destination not enabled** (`carrier_rate_missing`) means Famulor stopped the call before dialing because no rate was available. Contact support to check whether calls to that destination can be enabled. For `insufficient_credits`, check the workspace's available balance before advising a top-up.
+
 ## Report precisely
 
 ```text

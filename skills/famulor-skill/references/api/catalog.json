@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "reviewedAt": "2026-11-18",
+  "reviewedAt": "2026-11-20",
   "source": "Famulor public OpenAPI, CLI command catalog and TypeScript SDK operation descriptors",
-  "openapiSha256": "c4c3837251f7677d6b30a84ca9dc26885792b45d7519b23919444c091a2a9b84",
+  "openapiSha256": "1516cbe13d3c21fa80f749c2d3d073c732d6e8d5377a274cb7be5ae8dad8a5d5",
   "baseUrl": "https://app.famulor.io/api/v1",
   "notice": "Dated navigation and request-shape snapshot, not a runtime validator. Check the live public schema and installed client before execution. Descriptions, examples, default values and response properties are intentionally omitted.",
   "operations": [
@@ -4710,6 +4710,13 @@
             "type": "object"
           },
           {
+            "name": "public_holidays",
+            "flag": "--public-holidays",
+            "required": false,
+            "type": "object",
+            "nullable": true
+          },
+          {
             "name": "description",
             "flag": "--description",
             "required": false,
@@ -5428,6 +5435,29 @@
           {
             "name": "auth_token",
             "flag": "--auth-token",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "twilio_voice_region",
+            "flag": "--twilio-voice-region",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "us1",
+              "ie1",
+              "au1"
+            ]
+          },
+          {
+            "name": "regional_auth_token",
+            "flag": "--regional-auth-token",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "source_connection_id",
+            "flag": "--source-connection-id",
             "required": false,
             "type": "string"
           },
@@ -14648,6 +14678,108 @@
       "binaryResponse": false
     },
     {
+      "operationId": "getBookingHolidayCatalog",
+      "method": "GET",
+      "path": "/booking-holidays",
+      "group": "Bookings",
+      "summary": "Get the booking holiday catalog",
+      "documentation": "https://docs.famulor.io/api-reference/bookings/get-the-booking-holiday-catalog",
+      "cli": {
+        "command": "get-booking-holiday-catalog",
+        "hidden": false,
+        "parameters": [
+          {
+            "name": "country_code",
+            "in": "query",
+            "flag": "--country-code",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "subdivision_code",
+            "in": "query",
+            "flag": "--subdivision-code",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "locale",
+            "in": "query",
+            "flag": "--locale",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "en",
+              "de",
+              "fr",
+              "es"
+            ]
+          }
+        ],
+        "bodyFields": []
+      },
+      "sdkMethod": "client.api.getBookingHolidayCatalog",
+      "parameters": [
+        {
+          "name": "country_code",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "pattern": "^[A-Z]{2}$",
+            "type": "string"
+          }
+        },
+        {
+          "name": "subdivision_code",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "maxLength": 64,
+            "type": "string"
+          }
+        },
+        {
+          "name": "locale",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "enum": [
+              "en",
+              "de",
+              "fr",
+              "es"
+            ],
+            "type": "string"
+          }
+        }
+      ],
+      "requestBody": {
+        "required": false,
+        "content": {}
+      },
+      "responses": {
+        "200": [
+          "application/json"
+        ],
+        "400": [
+          "application/json"
+        ],
+        "401": [
+          "application/json"
+        ],
+        "403": [
+          "application/json"
+        ],
+        "429": [
+          "application/json"
+        ],
+        "503": [
+          "application/json"
+        ]
+      },
+      "binaryResponse": false
+    },
+    {
       "operationId": "getCall",
       "method": "GET",
       "path": "/calls/{id}",
@@ -15422,6 +15554,44 @@
           "application/json"
         ],
         "404": [
+          "application/json"
+        ],
+        "429": [
+          "application/json"
+        ],
+        "503": [
+          "application/json"
+        ]
+      },
+      "binaryResponse": false
+    },
+    {
+      "operationId": "getCustomDomainLinkPreview",
+      "method": "GET",
+      "path": "/custom-domain/link-preview",
+      "group": "Settings",
+      "summary": "Get custom domain link preview",
+      "documentation": "https://docs.famulor.io/api-reference/settings/get-custom-domain-link-preview",
+      "cli": {
+        "command": "get-custom-domain-link-preview",
+        "hidden": false,
+        "parameters": [],
+        "bodyFields": []
+      },
+      "sdkMethod": "client.api.getCustomDomainLinkPreview",
+      "parameters": [],
+      "requestBody": {
+        "required": false,
+        "content": {}
+      },
+      "responses": {
+        "200": [
+          "application/json"
+        ],
+        "401": [
+          "application/json"
+        ],
+        "403": [
           "application/json"
         ],
         "429": [
@@ -22330,14 +22500,7 @@
             "in": "query",
             "flag": "--style",
             "required": false,
-            "type": "string",
-            "enum": [
-              "all",
-              "realistic",
-              "animated_3d",
-              "illustrated",
-              "custom"
-            ]
+            "type": "string"
           }
         ],
         "bodyFields": []
@@ -22376,13 +22539,8 @@
           "in": "query",
           "required": false,
           "schema": {
-            "enum": [
-              "all",
-              "realistic",
-              "animated_3d",
-              "illustrated",
-              "custom"
-            ],
+            "maxLength": 50,
+            "minLength": 1,
             "type": "string"
           }
         }
@@ -31501,6 +31659,90 @@
       "binaryResponse": false
     },
     {
+      "operationId": "previewTwilioRegionSwitch",
+      "method": "GET",
+      "path": "/carrier-connections/{id}/numbers/{numberId}/region-switch",
+      "group": "Carrier Connections",
+      "summary": "Preview a Twilio region switch",
+      "documentation": "https://docs.famulor.io/api-reference/introduction",
+      "cli": {
+        "command": "preview-twilio-region-switch",
+        "hidden": false,
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "flag": "id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "numberId",
+            "in": "path",
+            "flag": "number-id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "bodyFields": []
+      },
+      "sdkMethod": "client.api.previewTwilioRegionSwitch",
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        {
+          "name": "numberId",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "format": "uuid",
+            "type": "string"
+          }
+        }
+      ],
+      "requestBody": {
+        "required": false,
+        "content": {}
+      },
+      "responses": {
+        "200": [
+          "application/json"
+        ],
+        "400": [
+          "application/json"
+        ],
+        "401": [
+          "application/json"
+        ],
+        "403": [
+          "application/json"
+        ],
+        "404": [
+          "application/json"
+        ],
+        "409": [
+          "application/json"
+        ],
+        "429": [
+          "application/json"
+        ],
+        "502": [
+          "application/json"
+        ],
+        "503": [
+          "application/json"
+        ]
+      },
+      "binaryResponse": false
+    },
+    {
       "operationId": "provisionShopifyAssistantTools",
       "method": "POST",
       "path": "/shopify/installations/{id}/tools",
@@ -34236,6 +34478,106 @@
           "application/json"
         ],
         "429": [
+          "application/json"
+        ],
+        "503": [
+          "application/json"
+        ]
+      },
+      "binaryResponse": false
+    },
+    {
+      "operationId": "restoreTwilioRegion",
+      "method": "DELETE",
+      "path": "/carrier-connections/{id}/numbers/{numberId}/region-switch",
+      "group": "Carrier Connections",
+      "summary": "Restore the previous route of a Twilio number",
+      "documentation": "https://docs.famulor.io/api-reference/introduction",
+      "cli": {
+        "command": "restore-twilio-region",
+        "hidden": false,
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "flag": "id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "numberId",
+            "in": "path",
+            "flag": "number-id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "switch_revision",
+            "in": "query",
+            "flag": "--switch-revision",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "bodyFields": []
+      },
+      "sdkMethod": "client.api.restoreTwilioRegion",
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        {
+          "name": "numberId",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        {
+          "name": "switch_revision",
+          "in": "query",
+          "required": true,
+          "schema": {
+            "format": "uuid",
+            "type": "string"
+          }
+        }
+      ],
+      "requestBody": {
+        "required": false,
+        "content": {}
+      },
+      "responses": {
+        "200": [
+          "application/json"
+        ],
+        "400": [
+          "application/json"
+        ],
+        "401": [
+          "application/json"
+        ],
+        "403": [
+          "application/json"
+        ],
+        "404": [
+          "application/json"
+        ],
+        "409": [
+          "application/json"
+        ],
+        "429": [
+          "application/json"
+        ],
+        "502": [
           "application/json"
         ],
         "503": [
@@ -38371,6 +38713,140 @@
       "binaryResponse": false
     },
     {
+      "operationId": "switchTwilioRegion",
+      "method": "POST",
+      "path": "/carrier-connections/{id}/numbers/{numberId}/region-switch",
+      "group": "Carrier Connections",
+      "summary": "Switch the region of an imported Twilio number",
+      "documentation": "https://docs.famulor.io/api-reference/introduction",
+      "cli": {
+        "command": "switch-twilio-region",
+        "hidden": false,
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "flag": "id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "numberId",
+            "in": "path",
+            "flag": "number-id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "bodyFields": [
+          {
+            "name": "direction",
+            "flag": "--direction",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "outbound_only",
+              "bidirectional",
+              "bidirectional"
+            ]
+          },
+          {
+            "name": "trunk_token",
+            "flag": "--trunk-token",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "sip_username",
+            "flag": "--sip-username",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "sip_password",
+            "flag": "--sip-password",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "mode",
+            "flag": "--mode",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "existing",
+              "managed"
+            ]
+          },
+          {
+            "name": "managed_token",
+            "flag": "--managed-token",
+            "required": false,
+            "type": "string"
+          }
+        ]
+      },
+      "sdkMethod": "client.api.switchTwilioRegion",
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        {
+          "name": "numberId",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "format": "uuid",
+            "type": "string"
+          }
+        }
+      ],
+      "requestBody": {
+        "required": true,
+        "content": {
+          "application/json": {
+            "$ref": "#/components/schemas/TwilioRegionSwitchInput"
+          }
+        }
+      },
+      "responses": {
+        "200": [
+          "application/json"
+        ],
+        "400": [
+          "application/json"
+        ],
+        "401": [
+          "application/json"
+        ],
+        "403": [
+          "application/json"
+        ],
+        "404": [
+          "application/json"
+        ],
+        "409": [
+          "application/json"
+        ],
+        "429": [
+          "application/json"
+        ],
+        "502": [
+          "application/json"
+        ],
+        "503": [
+          "application/json"
+        ]
+      },
+      "binaryResponse": false
+    },
+    {
       "operationId": "synchronizeShopifyWidgetPicker",
       "method": "POST",
       "path": "/shopify/installations/{id}/widgets",
@@ -40993,32 +41469,39 @@
           {
             "name": "name",
             "flag": "--name",
-            "required": true,
+            "required": false,
             "type": "string"
           },
           {
             "name": "slug",
             "flag": "--slug",
-            "required": true,
+            "required": false,
             "type": "string"
           },
           {
             "name": "duration_min",
             "flag": "--duration-min",
-            "required": true,
+            "required": false,
             "type": "integer"
           },
           {
             "name": "timezone",
             "flag": "--timezone",
-            "required": true,
+            "required": false,
             "type": "string"
           },
           {
             "name": "availability",
             "flag": "--availability",
-            "required": true,
+            "required": false,
             "type": "object"
+          },
+          {
+            "name": "public_holidays",
+            "flag": "--public-holidays",
+            "required": false,
+            "type": "object",
+            "nullable": true
           },
           {
             "name": "description",
@@ -41164,7 +41647,7 @@
         "required": true,
         "content": {
           "application/json": {
-            "$ref": "#/components/schemas/BookingEventTypeInput"
+            "$ref": "#/components/schemas/BookingEventTypeUpdateInput"
           }
         }
       },
@@ -41982,6 +42465,66 @@
           "application/json"
         ],
         "404": [
+          "application/json"
+        ],
+        "429": [
+          "application/json"
+        ],
+        "503": [
+          "application/json"
+        ]
+      },
+      "binaryResponse": false
+    },
+    {
+      "operationId": "updateCustomDomainLinkPreview",
+      "method": "PATCH",
+      "path": "/custom-domain/link-preview",
+      "group": "Settings",
+      "summary": "Update custom domain link preview",
+      "documentation": "https://docs.famulor.io/api-reference/settings/update-custom-domain-link-preview",
+      "cli": {
+        "command": "update-custom-domain-link-preview",
+        "hidden": false,
+        "parameters": [],
+        "bodyFields": [
+          {
+            "name": "link_preview_title",
+            "flag": "--link-preview-title",
+            "required": false,
+            "type": "string",
+            "nullable": true
+          },
+          {
+            "name": "link_preview_description",
+            "flag": "--link-preview-description",
+            "required": false,
+            "type": "string",
+            "nullable": true
+          }
+        ]
+      },
+      "sdkMethod": "client.api.updateCustomDomainLinkPreview",
+      "parameters": [],
+      "requestBody": {
+        "required": true,
+        "content": {
+          "application/json": {
+            "$ref": "#/components/schemas/CustomDomainLinkPreviewUpdate"
+          }
+        }
+      },
+      "responses": {
+        "200": [
+          "application/json"
+        ],
+        "400": [
+          "application/json"
+        ],
+        "401": [
+          "application/json"
+        ],
+        "403": [
           "application/json"
         ],
         "429": [
@@ -48717,6 +49260,9 @@
         "phone_required": {
           "type": "boolean"
         },
+        "public_holidays": {
+          "$ref": "#/components/schemas/BookingPublicHolidayPolicy"
+        },
         "reminder_hours": {
           "type": [
             "integer",
@@ -48740,6 +49286,237 @@
         },
         "timezone": {
           "type": "string"
+        }
+      }
+    },
+    "#/components/schemas/BookingEventTypeInput/properties/availability": {
+      "type": "object"
+    },
+    "#/components/schemas/BookingEventTypeInput/properties/booking_fields": {
+      "maxItems": 30,
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/BookingField"
+      }
+    },
+    "#/components/schemas/BookingEventTypeInput/properties/buffer_after_min": {
+      "type": "integer"
+    },
+    "#/components/schemas/BookingEventTypeInput/properties/buffer_before_min": {
+      "type": "integer"
+    },
+    "#/components/schemas/BookingEventTypeInput/properties/confirmation_email_body": {
+      "maxLength": 10000,
+      "nullable": true,
+      "type": "string"
+    },
+    "#/components/schemas/BookingEventTypeInput/properties/confirmation_email_subject": {
+      "maxLength": 200,
+      "nullable": true,
+      "type": "string"
+    },
+    "#/components/schemas/BookingEventTypeInput/properties/description": {
+      "maxLength": 2000,
+      "type": "string"
+    },
+    "#/components/schemas/BookingEventTypeInput/properties/duration_min": {
+      "maximum": 480,
+      "minimum": 5,
+      "type": "integer"
+    },
+    "#/components/schemas/BookingEventTypeInput/properties/email_locale": {
+      "enum": [
+        "en",
+        "de",
+        "fr",
+        "es",
+        null
+      ],
+      "nullable": true,
+      "type": "string"
+    },
+    "#/components/schemas/BookingEventTypeInput/properties/email_required": {
+      "type": "boolean"
+    },
+    "#/components/schemas/BookingEventTypeInput/properties/email_templates": {
+      "nullable": true,
+      "type": "object",
+      "properties": {
+        "cancellation": {
+          "$ref": "#/components/schemas/BookingEmailTemplate"
+        },
+        "host_cancellation": {
+          "$ref": "#/components/schemas/BookingEmailTemplate"
+        },
+        "host_confirmation": {
+          "$ref": "#/components/schemas/BookingEmailTemplate"
+        },
+        "host_reschedule": {
+          "$ref": "#/components/schemas/BookingEmailTemplate"
+        },
+        "reminder": {
+          "$ref": "#/components/schemas/BookingEmailTemplate"
+        },
+        "reschedule": {
+          "$ref": "#/components/schemas/BookingEmailTemplate"
+        }
+      },
+      "additionalProperties": false
+    },
+    "#/components/schemas/BookingEventTypeInput/properties/guest_emails_enabled": {
+      "type": "boolean"
+    },
+    "#/components/schemas/BookingEventTypeInput/properties/hour_cycle": {
+      "enum": [
+        "12h",
+        "24h"
+      ],
+      "type": "string"
+    },
+    "#/components/schemas/BookingEventTypeInput/properties/is_active": {
+      "type": "boolean"
+    },
+    "#/components/schemas/BookingEventTypeInput/properties/max_days_ahead": {
+      "type": "integer"
+    },
+    "#/components/schemas/BookingEventTypeInput/properties/min_notice_min": {
+      "type": "integer"
+    },
+    "#/components/schemas/BookingEventTypeInput/properties/name": {
+      "maxLength": 128,
+      "type": "string"
+    },
+    "#/components/schemas/BookingEventTypeInput/properties/phone_required": {
+      "type": "boolean"
+    },
+    "#/components/schemas/BookingEventTypeInput/properties/public_holidays": {
+      "required": [
+        "country_code"
+      ],
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "country_code": {
+          "pattern": "^[A-Z]{2}$",
+          "type": "string"
+        },
+        "overrides": {
+          "maxProperties": 300,
+          "type": "object",
+          "additionalProperties": {
+            "type": "boolean"
+          }
+        },
+        "subdivision_code": {
+          "maxLength": 64,
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "#/components/schemas/BookingEventTypeInput/properties/reminder_hours": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "#/components/schemas/BookingEventTypeInput/properties/sender_email_address_id": {
+      "format": "uuid",
+      "nullable": true,
+      "type": "string"
+    },
+    "#/components/schemas/BookingEventTypeInput/properties/slot_increment_min": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "#/components/schemas/BookingEventTypeInput/properties/slug": {
+      "pattern": "^[a-z0-9-]{3,64}$",
+      "type": "string"
+    },
+    "#/components/schemas/BookingEventTypeInput/properties/timezone": {
+      "type": "string"
+    },
+    "#/components/schemas/BookingEventTypeUpdateInput": {
+      "type": "object",
+      "properties": {
+        "availability": {
+          "$ref": "#/components/schemas/BookingEventTypeInput/properties/availability"
+        },
+        "booking_fields": {
+          "$ref": "#/components/schemas/BookingEventTypeInput/properties/booking_fields"
+        },
+        "buffer_after_min": {
+          "$ref": "#/components/schemas/BookingEventTypeInput/properties/buffer_after_min"
+        },
+        "buffer_before_min": {
+          "$ref": "#/components/schemas/BookingEventTypeInput/properties/buffer_before_min"
+        },
+        "confirmation_email_body": {
+          "$ref": "#/components/schemas/BookingEventTypeInput/properties/confirmation_email_body"
+        },
+        "confirmation_email_subject": {
+          "$ref": "#/components/schemas/BookingEventTypeInput/properties/confirmation_email_subject"
+        },
+        "description": {
+          "$ref": "#/components/schemas/BookingEventTypeInput/properties/description"
+        },
+        "duration_min": {
+          "$ref": "#/components/schemas/BookingEventTypeInput/properties/duration_min"
+        },
+        "email_locale": {
+          "$ref": "#/components/schemas/BookingEventTypeInput/properties/email_locale"
+        },
+        "email_required": {
+          "$ref": "#/components/schemas/BookingEventTypeInput/properties/email_required"
+        },
+        "email_templates": {
+          "$ref": "#/components/schemas/BookingEventTypeInput/properties/email_templates"
+        },
+        "guest_emails_enabled": {
+          "$ref": "#/components/schemas/BookingEventTypeInput/properties/guest_emails_enabled"
+        },
+        "hour_cycle": {
+          "$ref": "#/components/schemas/BookingEventTypeInput/properties/hour_cycle"
+        },
+        "is_active": {
+          "$ref": "#/components/schemas/BookingEventTypeInput/properties/is_active"
+        },
+        "max_days_ahead": {
+          "$ref": "#/components/schemas/BookingEventTypeInput/properties/max_days_ahead"
+        },
+        "min_notice_min": {
+          "$ref": "#/components/schemas/BookingEventTypeInput/properties/min_notice_min"
+        },
+        "name": {
+          "$ref": "#/components/schemas/BookingEventTypeInput/properties/name"
+        },
+        "phone_required": {
+          "$ref": "#/components/schemas/BookingEventTypeInput/properties/phone_required"
+        },
+        "public_holidays": {
+          "$ref": "#/components/schemas/BookingEventTypeInput/properties/public_holidays"
+        },
+        "reminder_hours": {
+          "$ref": "#/components/schemas/BookingEventTypeInput/properties/reminder_hours"
+        },
+        "sender_email_address_id": {
+          "$ref": "#/components/schemas/BookingEventTypeInput/properties/sender_email_address_id"
+        },
+        "slot_increment_min": {
+          "$ref": "#/components/schemas/BookingEventTypeInput/properties/slot_increment_min"
+        },
+        "slug": {
+          "$ref": "#/components/schemas/BookingEventTypeInput/properties/slug"
+        },
+        "timezone": {
+          "$ref": "#/components/schemas/BookingEventTypeInput/properties/timezone"
         }
       }
     },
@@ -48800,6 +49577,36 @@
           "type": "string"
         }
       }
+    },
+    "#/components/schemas/BookingPublicHolidayPolicy": {
+      "required": [
+        "country_code"
+      ],
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "country_code": {
+          "pattern": "^[A-Z]{2}$",
+          "type": "string"
+        },
+        "overrides": {
+          "maxProperties": 300,
+          "type": "object",
+          "additionalProperties": {
+            "type": "boolean"
+          }
+        },
+        "subdivision_code": {
+          "maxLength": 64,
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "additionalProperties": false
     },
     "#/components/schemas/BrowserUseOAuthLogin": {
       "required": [
@@ -50275,8 +51082,34 @@
           "minLength": 1,
           "type": "string"
         },
+        "regional_auth_token": {
+          "type": "string",
+          "writeOnly": true
+        },
         "sip_region": {
-          "$ref": "#/components/schemas/SipRegion"
+          "enum": [
+            "global",
+            "eu",
+            "us",
+            "uk",
+            "india",
+            "japan",
+            "aus",
+            "sa"
+          ],
+          "type": "string"
+        },
+        "source_connection_id": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "twilio_voice_region": {
+          "enum": [
+            "us1",
+            "ie1",
+            "au1"
+          ],
+          "type": "string"
         }
       }
     },
@@ -50771,6 +51604,26 @@
             "paused"
           ],
           "type": "string"
+        }
+      }
+    },
+    "#/components/schemas/CustomDomainLinkPreviewUpdate": {
+      "minProperties": 1,
+      "type": "object",
+      "properties": {
+        "link_preview_description": {
+          "maxLength": 200,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "link_preview_title": {
+          "maxLength": 70,
+          "type": [
+            "string",
+            "null"
+          ]
         }
       }
     },
@@ -55171,6 +56024,76 @@
         }
       },
       "additionalProperties": false
+    },
+    "#/components/schemas/TwilioRegionSwitchInput": {
+      "oneOf": [
+        {
+          "required": [
+            "direction",
+            "trunk_token"
+          ],
+          "type": "object",
+          "properties": {
+            "direction": {
+              "enum": [
+                "outbound_only",
+                "bidirectional"
+              ],
+              "type": "string"
+            },
+            "mode": {
+              "enum": [
+                "existing"
+              ],
+              "type": "string"
+            },
+            "sip_password": {
+              "maxLength": 256,
+              "minLength": 1,
+              "type": "string",
+              "writeOnly": true
+            },
+            "sip_username": {
+              "maxLength": 128,
+              "minLength": 1,
+              "type": "string",
+              "writeOnly": true
+            },
+            "trunk_token": {
+              "maxLength": 4096,
+              "minLength": 1,
+              "type": "string"
+            }
+          }
+        },
+        {
+          "required": [
+            "mode",
+            "direction",
+            "managed_token"
+          ],
+          "type": "object",
+          "properties": {
+            "direction": {
+              "enum": [
+                "bidirectional"
+              ],
+              "type": "string"
+            },
+            "managed_token": {
+              "maxLength": 4096,
+              "minLength": 1,
+              "type": "string"
+            },
+            "mode": {
+              "enum": [
+                "managed"
+              ],
+              "type": "string"
+            }
+          }
+        }
+      ]
     },
     "#/components/schemas/UserToolInput": {
       "type": "object",

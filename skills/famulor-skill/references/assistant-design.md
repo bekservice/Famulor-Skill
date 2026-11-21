@@ -69,6 +69,10 @@ Full Duplex is a Realtime variant, not another engine value: `realtime_variant` 
 
 Keep the system prompt focused on identity, goals, conversation policy, tool decisions and boundaries. Put substantial reference material in maintained knowledge sources. Use a live tool for changing facts such as inventory, customer account status or appointment availability. A knowledge document containing a price is not evidence of current calendar availability.
 
+To change what callers hear while the assistant searches its knowledge, use **Assistant → Settings → Knowledge → Knowledge search announcement**. Set `knowledge_search_announcement_enabled` to `false` to turn the fixed message off. To change the wording, keep it `true` and set `knowledge_search_announcement_text` to the exact text callers should hear (up to 500 characters). It is spoken as written, so write it in the callers' language. Send `null` or an empty text to restore the default in the conversation language. Use `PATCH /assistants/{id}`, MCP `update_assistant`, `famulor update-assistant` or the SDK. The message plays once when a voice search takes longer than 1.5 seconds, and is skipped if the assistant has already spoken in this reply. Standard Realtime can speak it with the configured text-to-speech voice, so it may sound different. Text chat and Full Duplex skip it; Full Duplex can acknowledge the search in its own words. Read the saved assistant back, then test a slow search in a voice call.
+
+For a native booking calendar, use `get_booking_holiday_catalog` when setting up recurring public holidays. Choose the country and optional region returned by that tool, then save the holiday policy through `update_booking_event_type`. Use the availability tool to confirm which times are bookable. It accounts for enabled holidays in the event type's time zone. If a caller asks for a closed date, look up the next open times and offer those. [Native booking calendar](https://docs.famulor.io/assistants/native-calendar#block-bookings-on-public-holidays)
+
 For every action, establish four things:
 
 1. **Trigger:** the specific customer intent that calls for it.

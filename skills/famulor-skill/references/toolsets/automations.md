@@ -2,7 +2,7 @@
 
 Automations, connections, CRM sync, routines, and runs. Connect only this group with `https://app.famulor.io/mcp?toolsets=automations`.
 
-This 2026-11-18 snapshot covers all 67 tools assigned to `automations` in the canonical 544-tool registry. The live MCP `tools/list` response is authoritative for arguments, current availability, annotations, and plan or role gating. Never invent fields from this catalog.
+This 2026-11-20 snapshot covers all 67 tools assigned to `automations` in the canonical 550-tool registry. The live MCP `tools/list` response is authoritative for arguments, current availability, annotations, and plan or role gating. Never invent fields from this catalog.
 
 Toolsets limit discovery context; they do not grant access. OAuth/API scopes and workspace roles are enforced separately. The Effect column reflects MCP risk annotations: `Delete/destructive` also covers overwrites or changes that can remove data or safeguards.
 
@@ -32,7 +32,7 @@ Toolsets limit discovery context; they do not grant access. OAuth/API scopes and
 | `get_automation` | Read-only | `automations:read or calls:read` | Immediate | Get one automation and recent runs. |
 | `get_automation_connection` | Read-only | `automations:read or calls:read` | Immediate | Get one automation connection (secrets masked as '•••'). |
 | `get_automation_platform` | Read-only | `automations:read or calls:read` | Immediate | Get the workspace's native automation platform entitlement, monthly run allowance, and usage. |
-| `get_automation_run` | Read-only | `automations:read or calls:read` | Immediate | Get one automation run with its step log: each executed step's action, status, input (step config as saved), output, error and timing, plus the trigger payload. Use it to debug a failed run. |
+| `get_automation_run` | Read-only | `automations:read or calls:read` | Immediate | Get one automation run with its step log: each executed step's action, status, input (step config as saved), output, error and timing, plus the trigger payload. WhatsApp template steps include the latest delivery receipt when available. Use it to debug a failed run or check template delivery. |
 | `get_automation_share` | Read-only | `automations:read or calls:read` | Immediate | Get the automation's active share link (url, description, step count, how often it was imported), or share: null when it is not shared. |
 | `get_automation_template` | Read-only | `automations:read or calls:read` | Immediate | Get one built-in automation template: description, steps in run order (condition branches via branch/parent_id), the apps used, and needs_setup (what to connect or fill in after using it). |
 | `get_automation_trigger_test_data` | Read-only | `automations:read or calls:read` | Immediate | Read configured Conversation started samples or poll for a new conversation. Does not execute an automation. Listen without since first, then poll with the returned since timestamp. Choose source_id from sources when more than one channel matches. |
