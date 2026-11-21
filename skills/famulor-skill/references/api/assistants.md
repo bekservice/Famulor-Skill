@@ -1,6 +1,6 @@
 # Assistants API operations
 
-Reviewed 2026-11-05. 21 public operations. [All areas](index.md) · [Execution guide](../api-and-sdk.md)
+Reviewed 2026-11-20. 22 public operations. [All areas](index.md) · [Execution guide](../api-and-sdk.md)
 
 Paths are relative to `https://app.famulor.io/api/v1`. Each operation ID is also the typed SDK method `client.api.<operationId>`. Look up its exact request contract with the bundled `find-operation.py`; CLI help reflects the installed version.
 
@@ -21,6 +21,7 @@ Hidden CLI operations require an interactive/browser flow or `famulor api` where
 | `listAssistantAvatarGallery` | `GET /assistants/avatar-gallery` | `famulor list-assistant-avatar-gallery` | [List assistant picture gallery](https://docs.famulor.io/api-reference/introduction) |
 | `listAssistants` | `GET /assistants` | `famulor list-assistants` | [List assistants](https://docs.famulor.io/api-reference/assistants/list-assistants) |
 | `prepareAssistantAnnouncements` | `POST /assistants/{id}/announcements` | `famulor prepare-assistant-announcements` | [Prepare saved announcement audio](https://docs.famulor.io/api-reference/assistants/prepare-saved-announcement-audio) |
+| `previewAssistantFlowCondition` | `POST /assistants/{id}/flow/conditions/{nodeId}/preview` | `famulor preview-assistant-flow-condition` | [Preview a condition path](https://docs.famulor.io/api-reference/assistants/preview-a-condition-path) |
 | `replaceAssistant` | `PUT /assistants/{id}` | `famulor replace-assistant` | [Update an assistant (PUT alias)](https://docs.famulor.io/api-reference/assistants/update-an-assistant-put-alias) |
 | `requestAssistantComplianceReview` | `POST /assistants/{id}/compliance-review` | `famulor request-assistant-compliance-review` | [Request manual compliance review](https://docs.famulor.io/api-reference/assistants/request-manual-compliance-review) |
 | `setAssistantAvatar` | `POST /assistants/{id}/avatar` | `famulor set-assistant-avatar` | [Set assistant picture](https://docs.famulor.io/api-reference/assistants/set-assistant-picture) |

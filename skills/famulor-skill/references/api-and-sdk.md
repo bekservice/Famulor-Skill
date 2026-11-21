@@ -4,7 +4,7 @@ Use the interface already connected to the user's workspace. MCP fits interactiv
 
 ## Find any endpoint
 
-The [complete operation index](api/index.md) covers **512 public REST operations across 40 areas**, reviewed on 2026-11-04. Every entry maps the public operation ID to its HTTP method/path, actual generated CLI command and `client.api` SDK method. The [MCP references](toolsets/assistants.md) separately cover the MCP tools; counts and names differ because some capabilities use several tools or an action selector.
+The [complete operation index](api/index.md) covers **535 public REST operations across 40 areas**, reviewed on 2026-11-12. Every entry maps the public operation ID to its HTTP method/path, actual generated CLI command and `client.api` SDK method. The [MCP references](toolsets/assistants.md) separately cover the MCP tools; counts and names differ because some capabilities use several tools or an action selector.
 
 For exact request shapes without loading the entire catalog:
 
@@ -82,7 +82,7 @@ console.log(assistants.map(({ id, name }) => ({ id, name })));
 
 The application supplies credentials explicitly; the SDK does not load `.env` files, select a workspace or run an OAuth consent flow. For a white-label workspace, supply its full HTTPS API base URL. For OAuth, supply `accessToken` instead of `apiKey`, never both. A token callback can retrieve the current token from your server's token store; your application owns refresh.
 
-For Messenger Business Login, obtain the public configuration with `famulor get-messenger-facebook-login-config` or `get_messenger_facebook_login_config`. Open the OAuth dialog with the returned configuration ID, `response_type=code`, and the registered platform root URL with its trailing slash as `redirect_uri`. Pass its code once to `listMessengerFacebookPages` in the SDK, `list_messenger_facebook_pages` in MCP, or `famulor list-messenger-facebook-pages --code FACEBOOK_LOGIN_CODE`. Use the selected Page's ID and `page_selection` within 10 minutes with the same workspace and credential. Complete the connection using `completeMessengerFacebookLogin`, `complete_messenger_facebook_login`, or `famulor complete-messenger-facebook-login --assistant-id ASSISTANT_UUID --page-id PAGE_ID --page-selection PAGE_SELECTION`. Keep the code and selection out of chat and logs. [Messenger guide](https://docs.famulor.io/channels/messenger)
+For Messenger Business Login on a root workspace (not on whitelabel domains), read the public configuration with `famulor get-messenger-facebook-login-config` or `get_messenger_facebook_login_config`. If `config_id` is null, Business Login is not available for this workspace; use a classic `access_token` instead. Otherwise open the OAuth dialog with `config_id`, `response_type=code` and the registered platform root URL with its trailing slash as `redirect_uri`; that redirect returns the code to the Famulor web app. Pass the code once to `listMessengerFacebookPages` in the SDK, `list_messenger_facebook_pages` in MCP, or `famulor list-messenger-facebook-pages --code FACEBOOK_LOGIN_CODE`. Use the selected Page's ID and `page_selection` within 10 minutes with the same workspace and credential. Complete the connection using `completeMessengerFacebookLogin`, `complete_messenger_facebook_login`, or `famulor complete-messenger-facebook-login --assistant-id ASSISTANT_UUID --page-id PAGE_ID --page-selection PAGE_SELECTION`. Keep the code and selection out of chat and logs. [Messenger guide](https://docs.famulor.io/channels/messenger)
 
 Every indexed operation is available through the generated `client.api` surface in the corresponding SDK contract. Resource aliases are convenient, but do not invent an alias when one does not exist:
 
@@ -137,11 +137,42 @@ Use returned error codes and recovery guidance: reconnect on authentication fail
 | Connect tools or booking | [Tools](api/tools.md), [Integrations](api/integrations.md), [Bookings](api/bookings.md) | Assigned tools, actual schema, confirmed availability/result |
 | WhatsApp, email or social channels | [Channel guide](messaging-and-channels.md), [Messaging API](api/messaging.md) | Connector state and conversation details/delivery state |
 | Add website voice/chat | [Widgets API](api/widgets.md), [Channel guide](messaging-and-channels.md) | Real widget conversation and history |
-| Start authorized outreach | [Campaigns](api/campaigns.md), [Calls](api/calls.md), [Suppression](api/suppression.md) | Consent, target list, run status and settled results |
+| Start authorized outreach | [Campaign guide](campaigns.md), [Campaigns](api/campaigns.md), [Calls](api/calls.md), [Suppression](api/suppression.md) | Human-confirmed attestation, target list, run status and settled analytics |
+| Configure automatic blocking after calls | [Settings](api/settings.md), [Suppression](api/suppression.md) | Use the workspace setting to skip post-call detection. Existing and manual blocks still apply. |
 | Add knowledge | [Knowledge Bases](api/knowledge-bases.md) | Index readiness and a source-grounded answer |
 | Review conversations | [History](api/history.md), [Calls](api/calls.md), [QA](api/qa.md) | Complete channel-specific detail, not only a preview |
 | Automate a workflow | [Automations](api/automations.md), [Missions](api/milian-missions.md), [Webhooks](api/webhook-subscriptions.md) | Reviewed scope, run status and resulting resources |
 | Manage telephony, teams or billing | [All API areas](api/index.md) | Explicit target/workspace, allowed operation and resulting state |
+
+## Campaign templates, launch and analytics
+
+Read [campaigns and sequences](campaigns.md) first: it covers template choice, senders, sequence rules, the launch confirmation and paused edits.
+
+```typescript
+const { data: templates } = await client.campaigns.templates({ language: "de", category: "appointments" });
+const template = templates.find((item) => item.id === chosenTemplateId); // an id the user picked from this list
+// Fill every empty sms / whatsapp_template sender with ids listed in this workspace before saving.
+const { data: campaign } = await client.api.createCampaign({
+  body: { name: "Appointment reminders", channel: "phone_call", assistant_id: assistantId, sequence: filledSequence },
+});
+const { data: current } = await client.api.getCampaign({ path: { id: campaign.id } });
+// Only after the user explicitly confirmed compliance for this campaign:
+await client.api.launchCampaign({
+  path: { id: campaign.id },
+  body: { compliance_attestation: true, sequence_hash: current.sequence_hash, start_at: null },
+});
+const { data: analytics } = await client.api.getCampaignAnalytics({ path: { id: campaign.id } });
+```
+
+```bash
+famulor list-campaign-templates --language de --category appointments
+famulor launch-campaign CAMPAIGN_UUID --compliance-attestation true --sequence-hash "$REVIEWED_SEQUENCE_HASH"
+famulor pause-campaign CAMPAIGN_UUID
+famulor resume-campaign CAMPAIGN_UUID --compliance-attestation true
+famulor get-campaign-analytics CAMPAIGN_UUID --from 2026-11-01 --to 2026-11-30
+```
+
+The TypeScript lines are illustrative: check the installed SDK's request and response types, and read back each campaign before claiming it saved or launched. `launch_required`, `attestation_required` and `sequence_changed` are recovery signals, not reasons to retry with a confirmation the user never gave.
 
 ## Milian Mission failure alerts
 
@@ -162,8 +193,12 @@ const { data: quote } = await client.sms.listCompanySenders();
 const { data: sender } = await client.sms.getCompanySender(senderId);
 // Only after the user explicitly accepts quote.setup_credits:
 if (!quote || !sender) throw new Error("Read the sender and quote first.");
-await client.sms.submitCompanySender(sender.id, { confirmed_setup_credits: quote.setup_credits });
+await client.sms.submitCompanySender(sender.id, {
+  confirmed_setup_credits: quote.setup_credits, expected_updated_at: sender.updated_at,
+});
 await client.sms.refreshCompanySender(sender.id);
+// Only numbers the user named; replaces the saved list (an empty list removes all):
+await client.sms.setCompanySenderTestNumbers(sender.id, { test_numbers: ["+4915112345678"] });
 await client.sms.sendFromConnector(connectorId, {
   to: "+4915112345678", body: "Your order is ready.", delivery_mode: "rcs_preferred",
   rich_content: { type: "card", title: "Order ready", media_url: "https://example.com/order.png" },
@@ -176,13 +211,14 @@ Equivalent command discovery:
 ```bash
 famulor list-sms-rcs-senders
 famulor get-sms-rcs-sender SENDER_UUID
-famulor submit-sms-rcs-sender SENDER_UUID --confirmed-setup-credits 500
+famulor submit-sms-rcs-sender SENDER_UUID --confirmed-setup-credits 500 --expected-updated-at "$REVIEWED_DRAFT_UPDATED_AT"
 famulor refresh-sms-rcs-sender SENDER_UUID
+famulor set-sms-rcs-sender-test-numbers SENDER_UUID --test-numbers '["+4915112345678"]'
 famulor send-sms-from-connector CONNECTOR_UUID --to +4915112345678 --body "Hello" --delivery-mode rcs_only
 famulor send-sms --from-number-id NUMBER_UUID --to +4915112345678 --body "Hello" --delivery-mode sms_only
 ```
 
-The submit command is illustrative: replace 500 with the accepted current quote. Sender approval and activation must precede sending. See [messaging and channels](messaging-and-channels.md) for complete consent, branding, length and fallback checks. CLI/SDK and native connector distribution are separate releases; inspect the installed version's actual methods before execution.
+The submit command is illustrative: replace 500 with the accepted current quote. Sender approval and activation must precede sending; the only exception is a registered test number while a booked sender is in review, which uses RCS without SMS fallback; the assistant answers it only when automatic replies are on for that connection. Senders in network review are re-checked automatically every 15 minutes; `refreshCompanySender` or `refresh-sms-rcs-sender` checks immediately. See [messaging and channels](messaging-and-channels.md) for complete consent, branding, length and fallback checks. CLI/SDK and native connector distribution are separate releases; inspect the installed version's actual methods before execution.
 
 
 Choose incoming routing explicitly when a company sender has several connections:
@@ -201,3 +237,33 @@ famulor get-sms-rcs-sender SENDER_UUID
 ```
 
 The selection is a write-only input; sender details are the read authority. False releases the current default and may select another linked connection. Optional send response fields identify known transport and SMS fallback use. Plain-text fallback must retain the original message; separate text alternatives belong to rich/media content only.
+
+## White-label link previews
+
+Use the custom domain's link preview settings to control the title and description shown when someone shares a workspace link. The title also appears on the browser tab. Work in the correct workspace with a workspace owner or admin credential and white-label access.
+
+Read the current settings with `get_custom_domain_link_preview` or `GET /api/v1/custom-domain/link-preview`. Update the requested fields with `update_custom_domain_link_preview` or `PATCH /api/v1/custom-domain/link-preview`.
+
+```bash
+famulor get-custom-domain-link-preview
+famulor update-custom-domain-link-preview --link-preview-title "Acme Scheduling"
+```
+
+```typescript
+const preview = await client.api.getCustomDomainLinkPreview();
+console.log(preview.data?.effective_title);
+
+await client.api.updateCustomDomainLinkPreview({
+  body: { link_preview_title: "Acme Scheduling" },
+});
+```
+
+Send `null` to reset a field. The title falls back to the workspace app name and the description is cleared. Check the effective title, effective description and verified domain in the response before sharing a link. Messaging apps may continue to show a cached preview. [Configure white-label branding](https://docs.famulor.io/admin/whitelabel-setup)
+
+## Permanently delete bookings
+
+Resolve the requested native booking IDs in the active workspace. Confirm the exact selection before deleting. Call `delete_bookings` or `POST /api/v1/bookings/delete` with `booking_ids` (1–200 UUIDs). Only ended or terminal bookings are eligible. Cancel an upcoming confirmed appointment first. Report `deleted_ids` and `skipped_ids` separately. Copies in connected calendars, email and other systems require separate handling.
+
+## Permanently delete Audience contacts
+
+For permanent Audience contact deletion, list the matching contacts and ask the user to confirm the exact workspace and IDs. Use `deleteAudienceContacts` with up to 100 explicit IDs and `confirmed: true` only after that confirmation. A user-owned workspace owner or admin credential with `leads:write` is required. Report `active_ids` separately because contacts with active campaign attempts remain.

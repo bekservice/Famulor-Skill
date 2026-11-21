@@ -1,8 +1,70 @@
 # Changelog
 
+## 2.8.10 — 2026-11-21
+
+- Move the repository to the Famulor-SI GitHub organization. Install commands, plugin manifests and links now use `Famulor-SI/Famulor-Skill`; old `bekservice/Famulor-Skill` links redirect.
+- Tell agents to check the effective Calls retention period first. With 0 days, the transcript and recording of a completed call may no longer be in History when a later task runs.
+
+## 2.8.9 — 2026-11-20
+
+- Guide agents through checking WhatsApp delivery receipts in conversation History and automation run details.
+
+## 2.8.8 — 2026-11-20
+
+- Guide agents through previewing a regional move for an existing Twilio number, confirming both call directions and restoring its previous route. Include the managed trunk option in the public API, CLI, SDK and MCP catalogs.
+
+## 2.8.7 — 2026-11-19
+
+- Document preview, switch and restore for existing Twilio numbers, including outbound-only changes and verifying the target for incoming calls.
+
+## 2.8.6 — 2026-11-19
+
+- Document how to set recurring public holidays for a native booking event type and verify the resulting slots before offering an appointment.
+- Refresh the bundled REST, CLI, SDK and MCP catalogs for holiday discovery and event-type settings.
+- Document the title and description for a white-label custom domain link preview. Verify the saved result with the settings API or MCP before sharing a link.
+
+## 2.8.5 — 2026-11-18
+
+- Document how to create a connection for each Twilio voice region with one Auth Token in the dashboard, and when API clients can use US1 credentials for SMS.
+
+## 2.8.4 — 2026-11-18
+
+- Document Twilio voice regions for one-click number import and reuse of a connected Twilio account.
+- Refresh the carrier connection request fields and command options in the bundled public contract.
+
+## 2.8.3 — 2026-11-17
+
+- Explain how to select a voice for Pipeline or Half-Cascade spoken output, including checking the assistant's spoken languages and listening to a sample.
+
+## 2.8.2 — 2026-11-16
+
+- Document the workspace setting for automatic call blocking, including its admin write permissions and how it differs from an existing block.
+- Refresh the public REST, CLI, SDK and MCP catalogs from the same reviewed contract.
+
+## 2.8.1 — 2026-11-15
+
+- Add a GPT-Live Full Duplex guide and a worked reception example with language choice, pronunciation, interruption and confirmed tool outcomes.
+- Explain how to compare compatible conversation voices and where to put native pronunciation hints.
+- Add audio and tool-receipt regression scenarios for dictation, corrections and slow booking workflows.
+
+## 2.8.0 — 2026-11-12
+
+- Add a campaign guide: choose a ready-made sequence from the template gallery in the user's language, fill the SMS & RCS and WhatsApp senders when `needs_sender` is set, and save it with `create_campaign` or `update_campaign`. Template and sender ids come only from the workspace.
+- Explain call sequences: call and message steps, attempts, AI-described and rule-based outcomes, built-in No response, Other and Do not call, reply routes, contact-local calling hours, public holidays, double dial and local-presence number pools.
+- Explain the launch: `launch_campaign` needs `compliance_attestation: true`, which only the human (or the API key holder) may confirm for that campaign; `sequence_hash` guards against a changed sequence; scheduling, cancelling, pausing, editing a paused campaign, re-confirming on resume and duplicating a completed one.
+- Explain contact stages, outcomes and the analytics funnel (dialed, connected, converted, conversion rate, messages sent, outcome Sankey).
+- Refresh the public REST, CLI, SDK and MCP catalogs: 541 MCP tools and 535 operations, including the campaign template gallery, launch, pause, resume, schedule cancellation, duplication and analytics, plus app action tools, Cal.com connections, US DNC registry checks and suppression direction.
+
+## 2.7.3 — 2026-11-08
+
+- Document RCS test numbers: up to five personal mobile numbers can exchange RCS-only messages with a booked company sender while it awaits approval; assistant replies follow the connection's automatic-replies setting.
+- Describe the automatic 15-minute re-check of senders in network review, automatic activation of company-only RCS connections at the first approval only, and the approval email.
+- Use the web app's **Settings → Channels → SMS & RCS** path.
+- Refresh the public REST, CLI, SDK and MCP catalogs, including the new test-number operation and Audience contact deletion.
+
 ## 2.7.2 — 2026-11-05
 
-- Document Messenger Business Login with the registered OAuth redirect and a short-lived Page selection. Refresh the 514 API operations and 520 MCP tools with matching CLI and SDK references.
+- Add the booking deletion workflow and refresh the public REST, CLI, SDK and MCP catalogs.
 
 ## 2.7.1 — 2026-11-05
 
@@ -88,4 +150,4 @@
 
 ## 2.1.6
 
-Official Famulor mark and the 439-tool MCP catalog. Earlier release details are available in [GitHub Releases](https://github.com/bekservice/Famulor-Skill/releases).
+Official Famulor mark and the 439-tool MCP catalog. Earlier release details are available in [GitHub Releases](https://github.com/Famulor-SI/Famulor-Skill/releases).
