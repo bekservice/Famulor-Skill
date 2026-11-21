@@ -1,6 +1,6 @@
 # Opted-in outbound qualification
 
-Use only for outreach the user has authorized to eligible recipients. Campaign consent, suppression and caller identification are operational settings; this prompt does not create permission to call. Replace all bracketed labels, configure a concrete next-step action and verify how opt-outs are recorded. Do not start a campaign as part of drafting this template.
+Use only for outreach the user has authorized to eligible recipients. Campaign consent, suppression and caller identification are operational settings; this prompt does not create permission to call. Replace all bracketed labels, configure a concrete next-step action and verify how opt-outs are recorded. Do not start a campaign as part of drafting this template. In a sequence campaign, outcomes are decided from this call's transcript and call data; align the next-step wording with the outcomes and messages the sequence actually has (see [campaigns and sequences](../../references/campaigns.md)).
 
 ## System prompt template
 

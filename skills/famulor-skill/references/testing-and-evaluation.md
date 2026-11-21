@@ -59,9 +59,13 @@ A remote MCP tool list loaded in the editor does not prove the tool works in a c
 
 Listen to the actual audio when available. Check the opening, first user turn, interruption and recovery, difficult names/numbers, tool waits, closing and a repeat conversation. Include a realistic noisy or telephony scenario when that is the intended channel. A transcript can look correct while the spoken output is clipped, delayed or mispronounced. Read a call in the order it was spoken: a greeting can be stored after the caller's first words and is shown in spoken order, including on older calls.
 
+For Full Duplex, use the same short test script when comparing two voices or two prompts. Include a thinking pause, an explicit “wait,” and a brief listening sound during a readback. Listen to how the agent yields and resumes. Check the tool receipt independently before judging a spoken booking or transfer confirmation.
+
 A call in which the caller never spoke is not scored and is not charged for AI Quality Assurance. The scorecard then says it could not be scored and leaves the score empty. When a call is scored, the judge can see the assistant's tool actions, not only the spoken words. A cohort run lists silent calls as skipped rather than as failures.
 
 Response timings describe different stages. Do not sum overlapping recognition, model and speech measurements. Compare equivalent test types and modes. A missing metric means unmeasured, not zero latency; text simulation completion time is not voice response latency. Allow completed history records and measurements to settle before drawing conclusions.
+
+If an outbound call fails before dialing, read `get_call` (or `famulor get-call <call-id>`) and the originating automation step when applicable. **Destination not enabled** (`carrier_rate_missing`) means Famulor stopped the call before dialing because no rate was available. Contact support to check whether calls to that destination can be enabled. For `insufficient_credits`, check the workspace's available balance before advising a top-up.
 
 ## Report precisely
 
@@ -76,3 +80,9 @@ External effects: None; booking responses in these runs were simulated.
 For a real test, include the authorized test ID or call ID and actual returned result, without copying unnecessary personal data. State pending, accepted, delivered, completed and paid only when the corresponding evidence supports that state. Keep customer transcripts and recordings out of public issues and regression fixtures.
 
 References: [Famulor simulations](https://docs.famulor.io/assistants/simulations), [post-call analysis](https://docs.famulor.io/assistants/analysis), [LiveKit testing overview](https://docs.livekit.io/testing/overview/). General testing guidance complements the product-specific distinctions above.
+
+### Variable and follow-up regression checks
+
+Test the actual delivery channel with synthetic values: permitted and denied contact attributes, defaults, explicit inputs, collected values, empty values, zero/false, URL punctuation and a missing link identifier. Compare the rendered link to the expected external identifier without sending to a real customer. A source-only field must not become available to an assistant after handoff; target-selected fields must load with the target's permissions, and source tools must finish before final target rendering.
+
+Campaign follow-ups that use post-call extraction wait for that analysis after hangup. Include a call longer than the analysis wait window, then verify the follow-up waits after the call ends and uses the resulting extraction values. A sent opening template or a completed delivery lead is not evidence that the customer conversation completed.

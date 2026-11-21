@@ -3,7 +3,7 @@
 Install the skill:
 
 ```bash
-npx skills add bekservice/Famulor-Skill
+npx skills add Famulor-SI/Famulor-Skill
 ```
 
 Add the hosted MCP server and complete OAuth:

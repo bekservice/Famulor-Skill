@@ -9,7 +9,7 @@ openclaw skills install famulor-skill
 Or install the public repository with the universal Agent Skills installer:
 
 ```bash
-npx skills add bekservice/Famulor-Skill
+npx skills add Famulor-SI/Famulor-Skill
 ```
 
 Add the hosted MCP server using OpenClaw's current remote Streamable HTTP and OAuth flow:
