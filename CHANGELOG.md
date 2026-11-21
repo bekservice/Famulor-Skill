@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.8.12 — 2026-11-21
+
+- Point app vendors and developers to the public [Famulor Marketplace](https://github.com/Famulor-SI/famulor-marketplace): submit a connector (MCP server or API tool) or an automation template by pull request, or request a missing app. The Famulor team reviews each entry and adds merged entries to the app with the next release.
+
 ## 2.8.11 — 2026-11-21
 
 - Explain call failures before dialing: **Destination not enabled** (`carrier_rate_missing`) means calls to that destination need support to enable them; check the balance for `insufficient_credits`.

@@ -144,6 +144,10 @@ Use returned error codes and recovery guidance: reconnect on authentication fail
 | Automate a workflow | [Automations](api/automations.md), [Missions](api/milian-missions.md), [Webhooks](api/webhook-subscriptions.md) | Reviewed scope, run status and resulting resources |
 | Manage telephony, teams or billing | [All API areas](api/index.md) | Explicit target/workspace, allowed operation and resulting state |
 
+## Contribute a connector or automation template
+
+To use a service in one workspace, add a custom MCP connector in **Agent Tools → Agent Connectors** or create a custom agent tool there. To list an app for every Famulor workspace, its vendor or developer opens a pull request in the public [Famulor Marketplace](https://github.com/Famulor-SI/famulor-marketplace) repository: a connector (`connectors/<slug>/connector.json`, kind `mcp` for a remote MCP server or `api_tool` for one HTTPS request) or an automation template (an unchanged `famulor.automation` export plus `listing.json`). The Famulor team reviews each one and adds merged entries to the app with the next release, so a merged pull request alone is not a live entry. For fields, checks and review, follow the repository's [CONTRIBUTING.md](https://github.com/Famulor-SI/famulor-marketplace/blob/main/CONTRIBUTING.md) instead of guessing the format. A missing app can be [requested](https://github.com/Famulor-SI/famulor-marketplace/issues/new?template=request-app.yml).
+
 ## Campaign templates, launch and analytics
 
 Read [campaigns and sequences](campaigns.md) first: it covers template choice, senders, sequence rules, the launch confirmation and paused edits.
