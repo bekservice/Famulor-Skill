@@ -120,6 +120,8 @@ Inspect the live conversation's service-window state. Free-form replies require 
 
 Template drafts, approval, and delivery are separate states. Use actual sender/template/language choices from the workspace. Resolve every parameter binding and inspect any media or dynamic-value requirements before sending. Creating a template is not submitting it for review; submitting it is not approval; approval is not proof that every supported template variant is sendable in every workflow.
 
+Sender, name and language identify one WhatsApp template. If creating a custom draft returns HTTP 409 ("A template with this name and language already exists for this sender."), list that sender's templates (`list_whatsapp_templates` with `connector_id`, or `GET /whatsapp/templates?connector_id=…`) and inspect the existing one. Do not retry the same creation, replace its content, or send a message to test it. Edit the existing template only if the user asked for an edit; ask for a different name if they want a separate draft.
+
 Before a send or campaign start, verify the authorized recipient set, purpose, content, consent/suppression, sender readiness, template status, and limits. Do not rewrite a marketing message as a service reply to bypass the channel's rules.
 
 ### Human takeover and Coexistence
