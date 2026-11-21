@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "reviewedAt": "2026-11-06",
+  "reviewedAt": "2026-11-20",
   "source": "Famulor public OpenAPI, CLI command catalog and TypeScript SDK operation descriptors",
-  "openapiSha256": "36ec88a371979b46efe1d2c7095c8eb2ed5c3b818dc1bd68f2688e1c423bbe90",
+  "openapiSha256": "1516cbe13d3c21fa80f749c2d3d073c732d6e8d5377a274cb7be5ae8dad8a5d5",
   "baseUrl": "https://app.famulor.io/api/v1",
   "notice": "Dated navigation and request-shape snapshot, not a runtime validator. Check the live public schema and installed client before execution. Descriptions, examples, default values and response properties are intentionally omitted.",
   "operations": [
@@ -587,6 +587,17 @@
             "flag": "--reason",
             "required": false,
             "type": "string"
+          },
+          {
+            "name": "direction",
+            "flag": "--direction",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "outbound",
+              "inbound",
+              "both"
+            ]
           }
         ]
       },
@@ -603,6 +614,14 @@
               },
               "contact_id": {
                 "format": "uuid",
+                "type": "string"
+              },
+              "direction": {
+                "enum": [
+                  "outbound",
+                  "inbound",
+                  "both"
+                ],
                 "type": "string"
               },
               "email": {
@@ -1264,6 +1283,68 @@
           "application/json"
         ],
         "404": [
+          "application/json"
+        ],
+        "429": [
+          "application/json"
+        ],
+        "503": [
+          "application/json"
+        ]
+      },
+      "binaryResponse": false
+    },
+    {
+      "operationId": "cancelCampaignSchedule",
+      "method": "POST",
+      "path": "/campaigns/{id}/cancel-schedule",
+      "group": "Campaigns",
+      "summary": "Cancel a campaign's schedule",
+      "documentation": "https://docs.famulor.io/api-reference/campaigns/cancel-a-campaigns-schedule",
+      "cli": {
+        "command": "cancel-campaign-schedule",
+        "hidden": false,
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "flag": "id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "bodyFields": []
+      },
+      "sdkMethod": "client.api.cancelCampaignSchedule",
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "format": "uuid",
+            "type": "string"
+          }
+        }
+      ],
+      "requestBody": {
+        "required": false,
+        "content": {}
+      },
+      "responses": {
+        "200": [
+          "application/json"
+        ],
+        "401": [
+          "application/json"
+        ],
+        "403": [
+          "application/json"
+        ],
+        "404": [
+          "application/json"
+        ],
+        "409": [
           "application/json"
         ],
         "429": [
@@ -1942,6 +2023,105 @@
       "binaryResponse": false
     },
     {
+      "operationId": "connectIntegration",
+      "method": "POST",
+      "path": "/tools/integrations/{provider}",
+      "group": "Tools",
+      "summary": "Connect an integration",
+      "documentation": "https://docs.famulor.io/api-reference/tools/connect-an-integration",
+      "cli": {
+        "command": "connect-integration",
+        "hidden": false,
+        "parameters": [
+          {
+            "name": "provider",
+            "in": "path",
+            "flag": "provider",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "bodyFields": [
+          {
+            "name": "fields",
+            "flag": "--fields",
+            "required": true,
+            "type": "object"
+          },
+          {
+            "name": "name",
+            "flag": "--name",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "caller_recognition",
+            "flag": "--caller-recognition",
+            "required": false,
+            "type": "boolean"
+          }
+        ]
+      },
+      "sdkMethod": "client.api.connectIntegration",
+      "parameters": [
+        {
+          "name": "provider",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "pattern": "^[a-z][a-z0-9_]{1,23}$",
+            "type": "string"
+          }
+        }
+      ],
+      "requestBody": {
+        "required": true,
+        "content": {
+          "application/json": {
+            "required": [
+              "fields"
+            ],
+            "type": "object",
+            "properties": {
+              "caller_recognition": {
+                "type": "boolean"
+              },
+              "fields": {
+                "type": "object",
+                "additionalProperties": {
+                  "type": "string"
+                }
+              },
+              "name": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "responses": {
+        "201": [
+          "application/json"
+        ],
+        "400": [
+          "application/json"
+        ],
+        "401": [
+          "application/json"
+        ],
+        "403": [
+          "application/json"
+        ],
+        "404": [
+          "application/json"
+        ],
+        "429": [
+          "application/json"
+        ]
+      },
+      "binaryResponse": false
+    },
+    {
       "operationId": "connectMagicline",
       "method": "POST",
       "path": "/tools/magicline",
@@ -2157,6 +2337,134 @@
       "binaryResponse": false
     },
     {
+      "operationId": "connectSimplybook",
+      "method": "POST",
+      "path": "/tools/simplybook",
+      "group": "Tools",
+      "summary": "Connect SimplyBook.me",
+      "documentation": "https://docs.famulor.io/api-reference/tools/connect-simplybookme",
+      "cli": {
+        "command": "connect-simplybook",
+        "hidden": false,
+        "parameters": [],
+        "bodyFields": [
+          {
+            "name": "api_host",
+            "flag": "--api-host",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "https://user-api-v2.simplybook.me",
+              "https://user-api-v2.simplybook.it",
+              "https://user-api-v2.simplybook.asia",
+              "https://user-api-v2.simplybook.us",
+              "https://user-api-v2.simplybook.vip",
+              "https://user-api-v2.simplybook.cc",
+              "https://user-api-v2.simplybook.pro",
+              "https://user-api-v2.enterpriseappointments.com",
+              "https://user-api-v2.simplybook.webnode.page",
+              "https://user-api-v2.servicebookings.net",
+              "https://user-api-v2.booking.names.uk",
+              "https://user-api-v2.booking.lcn.uk",
+              "https://user-api-v2.booking.register365.ie"
+            ]
+          },
+          {
+            "name": "company_login",
+            "flag": "--company-login",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "user_login",
+            "flag": "--user-login",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "api_key",
+            "flag": "--api-key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "flag": "--name",
+            "required": false,
+            "type": "string"
+          }
+        ]
+      },
+      "sdkMethod": "client.api.connectSimplybook",
+      "parameters": [],
+      "requestBody": {
+        "required": true,
+        "content": {
+          "application/json": {
+            "required": [
+              "api_host",
+              "company_login",
+              "user_login",
+              "api_key"
+            ],
+            "type": "object",
+            "properties": {
+              "api_host": {
+                "enum": [
+                  "https://user-api-v2.simplybook.me",
+                  "https://user-api-v2.simplybook.it",
+                  "https://user-api-v2.simplybook.asia",
+                  "https://user-api-v2.simplybook.us",
+                  "https://user-api-v2.simplybook.vip",
+                  "https://user-api-v2.simplybook.cc",
+                  "https://user-api-v2.simplybook.pro",
+                  "https://user-api-v2.enterpriseappointments.com",
+                  "https://user-api-v2.simplybook.webnode.page",
+                  "https://user-api-v2.servicebookings.net",
+                  "https://user-api-v2.booking.names.uk",
+                  "https://user-api-v2.booking.lcn.uk",
+                  "https://user-api-v2.booking.register365.ie"
+                ],
+                "type": "string"
+              },
+              "api_key": {
+                "type": "string",
+                "writeOnly": true
+              },
+              "company_login": {
+                "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]{0,63}$",
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "user_login": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "responses": {
+        "201": [
+          "application/json"
+        ],
+        "400": [
+          "application/json"
+        ],
+        "401": [
+          "application/json"
+        ],
+        "403": [
+          "application/json"
+        ],
+        "429": [
+          "application/json"
+        ]
+      },
+      "binaryResponse": false
+    },
+    {
       "operationId": "createAcuityOauthUrl",
       "method": "POST",
       "path": "/integrations/acuity/oauth-url",
@@ -2268,6 +2576,227 @@
           "application/json"
         ],
         "403": [
+          "application/json"
+        ],
+        "429": [
+          "application/json"
+        ],
+        "503": [
+          "application/json"
+        ]
+      },
+      "binaryResponse": false
+    },
+    {
+      "operationId": "createAppActionTool",
+      "method": "POST",
+      "path": "/tools/app-actions",
+      "group": "Tools",
+      "summary": "Create an app action tool",
+      "documentation": "https://docs.famulor.io/api-reference/tools/create-an-app-action-tool",
+      "cli": {
+        "command": "create-app-action-tool",
+        "hidden": false,
+        "parameters": [],
+        "bodyFields": [
+          {
+            "name": "connection_id",
+            "flag": "--connection-id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "action",
+            "flag": "--action",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "version",
+            "flag": "--body-version",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "flag": "--name",
+            "required": false,
+            "type": "string",
+            "nullable": true
+          },
+          {
+            "name": "use_when",
+            "flag": "--use-when",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "description_override",
+            "flag": "--description-override",
+            "required": false,
+            "type": "string",
+            "nullable": true
+          },
+          {
+            "name": "fields",
+            "flag": "--fields",
+            "required": false,
+            "type": "array",
+            "itemType": "object"
+          },
+          {
+            "name": "confirmation",
+            "flag": "--confirmation",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "ask_first",
+              "none"
+            ]
+          },
+          {
+            "name": "result_config",
+            "flag": "--result-config",
+            "required": false,
+            "type": "object",
+            "nullable": true
+          },
+          {
+            "name": "is_active",
+            "flag": "--is-active",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "assistant_id",
+            "flag": "--assistant-id",
+            "required": false,
+            "type": "string",
+            "nullable": true
+          }
+        ]
+      },
+      "sdkMethod": "client.api.createAppActionTool",
+      "parameters": [],
+      "requestBody": {
+        "required": true,
+        "content": {
+          "application/json": {
+            "required": [
+              "connection_id",
+              "action",
+              "use_when"
+            ],
+            "type": "object",
+            "properties": {
+              "action": {
+                "pattern": "^[A-Za-z0-9][A-Za-z0-9_.-]{0,199}$",
+                "type": "string"
+              },
+              "assistant_id": {
+                "format": "uuid",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "confirmation": {
+                "enum": [
+                  "ask_first",
+                  "none"
+                ],
+                "type": "string"
+              },
+              "connection_id": {
+                "format": "uuid",
+                "type": "string"
+              },
+              "description_override": {
+                "maxLength": 900,
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "fields": {
+                "maxItems": 300,
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/AppActionFieldSetting"
+                }
+              },
+              "is_active": {
+                "type": "boolean"
+              },
+              "name": {
+                "pattern": "^[a-zA-Z][a-zA-Z0-9_-]{0,63}$",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "result_config": {
+                "type": [
+                  "object",
+                  "null"
+                ],
+                "properties": {
+                  "max_chars": {
+                    "maximum": 3500,
+                    "minimum": 200,
+                    "type": "integer"
+                  },
+                  "mode": {
+                    "enum": [
+                      "auto",
+                      "selected"
+                    ],
+                    "type": "string"
+                  },
+                  "paths": {
+                    "maxItems": 20,
+                    "type": "array",
+                    "items": {
+                      "maxLength": 200,
+                      "minLength": 1,
+                      "type": "string"
+                    }
+                  }
+                },
+                "additionalProperties": false
+              },
+              "use_when": {
+                "maxLength": 1000,
+                "minLength": 10,
+                "type": "string"
+              },
+              "version": {
+                "maxLength": 200,
+                "minLength": 1,
+                "type": "string"
+              }
+            },
+            "additionalProperties": false
+          }
+        }
+      },
+      "responses": {
+        "201": [
+          "application/json"
+        ],
+        "400": [
+          "application/json"
+        ],
+        "401": [
+          "application/json"
+        ],
+        "403": [
+          "application/json"
+        ],
+        "404": [
+          "application/json"
+        ],
+        "409": [
           "application/json"
         ],
         "429": [
@@ -2447,7 +2976,8 @@
               "inworld",
               "rime",
               "xai",
-              "gradium"
+              "gradium",
+              "assemblyai"
             ]
           },
           {
@@ -4180,6 +4710,13 @@
             "type": "object"
           },
           {
+            "name": "public_holidays",
+            "flag": "--public-holidays",
+            "required": false,
+            "type": "object",
+            "nullable": true
+          },
+          {
             "name": "description",
             "flag": "--description",
             "required": false,
@@ -4331,6 +4868,89 @@
           "application/json"
         ],
         "409": [
+          "application/json"
+        ],
+        "429": [
+          "application/json"
+        ],
+        "503": [
+          "application/json"
+        ]
+      },
+      "binaryResponse": false
+    },
+    {
+      "operationId": "createCalcomOauthUrl",
+      "method": "POST",
+      "path": "/integrations/calcom/oauth-url",
+      "group": "Integrations",
+      "summary": "Start Cal.com OAuth",
+      "documentation": "https://docs.famulor.io/api-reference/integrations/start-calcom-oauth",
+      "cli": {
+        "command": "create-calcom-oauth-url",
+        "hidden": false,
+        "parameters": [],
+        "bodyFields": [
+          {
+            "name": "mode",
+            "flag": "--mode",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "personal",
+              "team",
+              "organization"
+            ]
+          },
+          {
+            "name": "connection_id",
+            "flag": "--connection-id",
+            "required": false,
+            "type": "string"
+          }
+        ]
+      },
+      "sdkMethod": "client.api.createCalcomOauthUrl",
+      "parameters": [],
+      "requestBody": {
+        "required": true,
+        "content": {
+          "application/json": {
+            "required": [
+              "mode"
+            ],
+            "type": "object",
+            "properties": {
+              "connection_id": {
+                "format": "uuid",
+                "type": "string"
+              },
+              "mode": {
+                "enum": [
+                  "personal",
+                  "team",
+                  "organization"
+                ],
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "responses": {
+        "200": [
+          "application/json"
+        ],
+        "400": [
+          "application/json"
+        ],
+        "401": [
+          "application/json"
+        ],
+        "403": [
+          "application/json"
+        ],
+        "404": [
           "application/json"
         ],
         "429": [
@@ -4673,6 +5293,74 @@
             "required": false,
             "type": "object",
             "nullable": true
+          },
+          {
+            "name": "retry_on_voicemail",
+            "flag": "--retry-on-voicemail",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "retry_until_goal",
+            "flag": "--retry-until-goal",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "goal_variable",
+            "flag": "--goal-variable",
+            "required": false,
+            "type": "string",
+            "nullable": true
+          },
+          {
+            "name": "mark_complete_when_no_leads",
+            "flag": "--mark-complete-when-no-leads",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "outbound_ringing_timeout_sec",
+            "flag": "--outbound-ringing-timeout-sec",
+            "required": false,
+            "type": "integer",
+            "nullable": true
+          },
+          {
+            "name": "sequence",
+            "flag": "--sequence",
+            "required": false,
+            "type": "object",
+            "nullable": true
+          },
+          {
+            "name": "number_pool",
+            "flag": "--number-pool",
+            "required": false,
+            "type": "object",
+            "nullable": true
+          },
+          {
+            "name": "contact_timezone_mode",
+            "flag": "--contact-timezone-mode",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "campaign",
+              "contact"
+            ]
+          },
+          {
+            "name": "holidays",
+            "flag": "--holidays",
+            "required": false,
+            "type": "object"
+          },
+          {
+            "name": "double_dial",
+            "flag": "--double-dial",
+            "required": false,
+            "type": "boolean"
           }
         ]
       },
@@ -4747,6 +5435,29 @@
           {
             "name": "auth_token",
             "flag": "--auth-token",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "twilio_voice_region",
+            "flag": "--twilio-voice-region",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "us1",
+              "ie1",
+              "au1"
+            ]
+          },
+          {
+            "name": "regional_auth_token",
+            "flag": "--regional-auth-token",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "source_connection_id",
+            "flag": "--source-connection-id",
             "required": false,
             "type": "string"
           },
@@ -5074,6 +5785,12 @@
             "flag": "--sort-order",
             "required": false,
             "type": "integer"
+          },
+          {
+            "name": "pinned",
+            "flag": "--pinned",
+            "required": false,
+            "type": "boolean"
           },
           {
             "name": "show_default_sections",
@@ -7835,6 +8552,12 @@
               "p_asserted_identity",
               "p_preferred_identity"
             ]
+          },
+          {
+            "name": "use_fixed_outbound_ip",
+            "flag": "--use-fixed-outbound-ip",
+            "required": false,
+            "type": "boolean"
           }
         ]
       },
@@ -11343,6 +12066,68 @@
       "binaryResponse": false
     },
     {
+      "operationId": "disconnectCalcomOauth",
+      "method": "DELETE",
+      "path": "/integrations/calcom/connections",
+      "group": "Integrations",
+      "summary": "Disconnect a Cal.com account",
+      "documentation": "https://docs.famulor.io/api-reference/integrations/disconnect-a-calcom-account",
+      "cli": {
+        "command": "disconnect-calcom-oauth",
+        "hidden": false,
+        "parameters": [
+          {
+            "name": "connection_id",
+            "in": "query",
+            "flag": "--connection-id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "bodyFields": []
+      },
+      "sdkMethod": "client.api.disconnectCalcomOauth",
+      "parameters": [
+        {
+          "name": "connection_id",
+          "in": "query",
+          "required": true,
+          "schema": {
+            "format": "uuid",
+            "type": "string"
+          }
+        }
+      ],
+      "requestBody": {
+        "required": false,
+        "content": {}
+      },
+      "responses": {
+        "200": [
+          "application/json"
+        ],
+        "400": [
+          "application/json"
+        ],
+        "401": [
+          "application/json"
+        ],
+        "403": [
+          "application/json"
+        ],
+        "404": [
+          "application/json"
+        ],
+        "429": [
+          "application/json"
+        ],
+        "503": [
+          "application/json"
+        ]
+      },
+      "binaryResponse": false
+    },
+    {
       "operationId": "disconnectShopifyInstallation",
       "method": "DELETE",
       "path": "/shopify/installations/{id}",
@@ -11871,6 +12656,86 @@
       "binaryResponse": false
     },
     {
+      "operationId": "duplicateCampaign",
+      "method": "POST",
+      "path": "/campaigns/{id}/duplicate",
+      "group": "Campaigns",
+      "summary": "Duplicate a campaign",
+      "documentation": "https://docs.famulor.io/api-reference/campaigns/duplicate-a-campaign",
+      "cli": {
+        "command": "duplicate-campaign",
+        "hidden": false,
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "flag": "id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "bodyFields": [
+          {
+            "name": "name",
+            "flag": "--name",
+            "required": false,
+            "type": "string"
+          }
+        ]
+      },
+      "sdkMethod": "client.api.duplicateCampaign",
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "format": "uuid",
+            "type": "string"
+          }
+        }
+      ],
+      "requestBody": {
+        "required": false,
+        "content": {
+          "application/json": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "maxLength": 128,
+                "minLength": 1,
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "responses": {
+        "201": [
+          "application/json"
+        ],
+        "400": [
+          "application/json"
+        ],
+        "401": [
+          "application/json"
+        ],
+        "403": [
+          "application/json"
+        ],
+        "404": [
+          "application/json"
+        ],
+        "429": [
+          "application/json"
+        ],
+        "503": [
+          "application/json"
+        ]
+      },
+      "binaryResponse": false
+    },
+    {
       "operationId": "endTranslationSession",
       "method": "POST",
       "path": "/translation-sessions/{id}/end",
@@ -12330,6 +13195,143 @@
       "parameters": [
         {
           "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "format": "uuid",
+            "type": "string"
+          }
+        }
+      ],
+      "requestBody": {
+        "required": false,
+        "content": {}
+      },
+      "responses": {
+        "200": [
+          "application/json"
+        ],
+        "401": [
+          "application/json"
+        ],
+        "403": [
+          "application/json"
+        ],
+        "404": [
+          "application/json"
+        ],
+        "429": [
+          "application/json"
+        ],
+        "503": [
+          "application/json"
+        ]
+      },
+      "binaryResponse": false
+    },
+    {
+      "operationId": "getAppAction",
+      "method": "GET",
+      "path": "/automations/connections/{id}/actions/{action}",
+      "group": "Tools",
+      "summary": "Get an app action",
+      "documentation": "https://docs.famulor.io/api-reference/tools/get-an-app-action",
+      "cli": {
+        "command": "get-app-action",
+        "hidden": false,
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "flag": "id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "action",
+            "in": "path",
+            "flag": "action",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "bodyFields": []
+      },
+      "sdkMethod": "client.api.getAppAction",
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        {
+          "name": "action",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_.-]{0,199}$",
+            "type": "string"
+          }
+        }
+      ],
+      "requestBody": {
+        "required": false,
+        "content": {}
+      },
+      "responses": {
+        "200": [
+          "application/json"
+        ],
+        "400": [
+          "application/json"
+        ],
+        "401": [
+          "application/json"
+        ],
+        "403": [
+          "application/json"
+        ],
+        "404": [
+          "application/json"
+        ],
+        "429": [
+          "application/json"
+        ],
+        "503": [
+          "application/json"
+        ]
+      },
+      "binaryResponse": false
+    },
+    {
+      "operationId": "getAppActionTool",
+      "method": "GET",
+      "path": "/tools/app-actions/{toolId}",
+      "group": "Tools",
+      "summary": "Get an app action tool",
+      "documentation": "https://docs.famulor.io/api-reference/tools/get-an-app-action-tool",
+      "cli": {
+        "command": "get-app-action-tool",
+        "hidden": false,
+        "parameters": [
+          {
+            "name": "toolId",
+            "in": "path",
+            "flag": "tool-id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "bodyFields": []
+      },
+      "sdkMethod": "client.api.getAppActionTool",
+      "parameters": [
+        {
+          "name": "toolId",
           "in": "path",
           "required": true,
           "schema": {
@@ -12906,6 +13908,44 @@
       },
       "responses": {
         "200": [
+          "application/json"
+        ],
+        "429": [
+          "application/json"
+        ],
+        "503": [
+          "application/json"
+        ]
+      },
+      "binaryResponse": false
+    },
+    {
+      "operationId": "getAutomaticCallSuppression",
+      "method": "GET",
+      "path": "/settings/automatic-call-suppression",
+      "group": "Settings",
+      "summary": "Get automatic blocking after calls",
+      "documentation": "https://docs.famulor.io/api-reference/settings/get-automatic-blocking-after-calls",
+      "cli": {
+        "command": "get-automatic-call-suppression",
+        "hidden": false,
+        "parameters": [],
+        "bodyFields": []
+      },
+      "sdkMethod": "client.api.getAutomaticCallSuppression",
+      "parameters": [],
+      "requestBody": {
+        "required": false,
+        "content": {}
+      },
+      "responses": {
+        "200": [
+          "application/json"
+        ],
+        "401": [
+          "application/json"
+        ],
+        "403": [
           "application/json"
         ],
         "429": [
@@ -13638,6 +14678,108 @@
       "binaryResponse": false
     },
     {
+      "operationId": "getBookingHolidayCatalog",
+      "method": "GET",
+      "path": "/booking-holidays",
+      "group": "Bookings",
+      "summary": "Get the booking holiday catalog",
+      "documentation": "https://docs.famulor.io/api-reference/bookings/get-the-booking-holiday-catalog",
+      "cli": {
+        "command": "get-booking-holiday-catalog",
+        "hidden": false,
+        "parameters": [
+          {
+            "name": "country_code",
+            "in": "query",
+            "flag": "--country-code",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "subdivision_code",
+            "in": "query",
+            "flag": "--subdivision-code",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "locale",
+            "in": "query",
+            "flag": "--locale",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "en",
+              "de",
+              "fr",
+              "es"
+            ]
+          }
+        ],
+        "bodyFields": []
+      },
+      "sdkMethod": "client.api.getBookingHolidayCatalog",
+      "parameters": [
+        {
+          "name": "country_code",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "pattern": "^[A-Z]{2}$",
+            "type": "string"
+          }
+        },
+        {
+          "name": "subdivision_code",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "maxLength": 64,
+            "type": "string"
+          }
+        },
+        {
+          "name": "locale",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "enum": [
+              "en",
+              "de",
+              "fr",
+              "es"
+            ],
+            "type": "string"
+          }
+        }
+      ],
+      "requestBody": {
+        "required": false,
+        "content": {}
+      },
+      "responses": {
+        "200": [
+          "application/json"
+        ],
+        "400": [
+          "application/json"
+        ],
+        "401": [
+          "application/json"
+        ],
+        "403": [
+          "application/json"
+        ],
+        "429": [
+          "application/json"
+        ],
+        "503": [
+          "application/json"
+        ]
+      },
+      "binaryResponse": false
+    },
+    {
       "operationId": "getCall",
       "method": "GET",
       "path": "/calls/{id}",
@@ -13991,6 +15133,117 @@
       "binaryResponse": false
     },
     {
+      "operationId": "getCampaignAnalytics",
+      "method": "GET",
+      "path": "/campaigns/{id}/analytics",
+      "group": "Campaigns",
+      "summary": "Get campaign analytics",
+      "documentation": "https://docs.famulor.io/api-reference/campaigns/get-campaign-analytics",
+      "cli": {
+        "command": "get-campaign-analytics",
+        "hidden": false,
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "flag": "id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "from",
+            "in": "query",
+            "flag": "--from",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "to",
+            "in": "query",
+            "flag": "--to",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "phone_number_id",
+            "in": "query",
+            "flag": "--phone-number-id",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "bodyFields": []
+      },
+      "sdkMethod": "client.api.getCampaignAnalytics",
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        {
+          "name": "from",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "to",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "phone_number_id",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "format": "uuid",
+            "type": "string"
+          }
+        }
+      ],
+      "requestBody": {
+        "required": false,
+        "content": {}
+      },
+      "responses": {
+        "200": [
+          "application/json"
+        ],
+        "400": [
+          "application/json"
+        ],
+        "401": [
+          "application/json"
+        ],
+        "403": [
+          "application/json"
+        ],
+        "404": [
+          "application/json"
+        ],
+        "429": [
+          "application/json"
+        ],
+        "503": [
+          "application/json"
+        ],
+        "504": [
+          "application/json"
+        ]
+      },
+      "binaryResponse": false
+    },
+    {
       "operationId": "getCampaignStats",
       "method": "GET",
       "path": "/campaigns/{id}/stats",
@@ -14301,6 +15554,44 @@
           "application/json"
         ],
         "404": [
+          "application/json"
+        ],
+        "429": [
+          "application/json"
+        ],
+        "503": [
+          "application/json"
+        ]
+      },
+      "binaryResponse": false
+    },
+    {
+      "operationId": "getCustomDomainLinkPreview",
+      "method": "GET",
+      "path": "/custom-domain/link-preview",
+      "group": "Settings",
+      "summary": "Get custom domain link preview",
+      "documentation": "https://docs.famulor.io/api-reference/settings/get-custom-domain-link-preview",
+      "cli": {
+        "command": "get-custom-domain-link-preview",
+        "hidden": false,
+        "parameters": [],
+        "bodyFields": []
+      },
+      "sdkMethod": "client.api.getCustomDomainLinkPreview",
+      "parameters": [],
+      "requestBody": {
+        "required": false,
+        "content": {}
+      },
+      "responses": {
+        "200": [
+          "application/json"
+        ],
+        "401": [
+          "application/json"
+        ],
+        "403": [
           "application/json"
         ],
         "429": [
@@ -14765,6 +16056,44 @@
           "application/json"
         ],
         "404": [
+          "application/json"
+        ],
+        "429": [
+          "application/json"
+        ],
+        "503": [
+          "application/json"
+        ]
+      },
+      "binaryResponse": false
+    },
+    {
+      "operationId": "getDncRegistrySettings",
+      "method": "GET",
+      "path": "/settings/dnc-registry",
+      "group": "Settings",
+      "summary": "Get federal and state DNC checks",
+      "documentation": "https://docs.famulor.io/api-reference/settings/get-federal-and-state-dnc-checks",
+      "cli": {
+        "command": "get-dnc-registry-settings",
+        "hidden": false,
+        "parameters": [],
+        "bodyFields": []
+      },
+      "sdkMethod": "client.api.getDncRegistrySettings",
+      "parameters": [],
+      "requestBody": {
+        "required": false,
+        "content": {}
+      },
+      "responses": {
+        "200": [
+          "application/json"
+        ],
+        "401": [
+          "application/json"
+        ],
+        "403": [
           "application/json"
         ],
         "429": [
@@ -19364,6 +20693,142 @@
       "binaryResponse": false
     },
     {
+      "operationId": "launchCampaign",
+      "method": "POST",
+      "path": "/campaigns/{id}/launch",
+      "group": "Campaigns",
+      "summary": "Launch a campaign",
+      "documentation": "https://docs.famulor.io/api-reference/campaigns/launch-a-campaign",
+      "cli": {
+        "command": "launch-campaign",
+        "hidden": false,
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "flag": "id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "bodyFields": [
+          {
+            "name": "compliance_attestation",
+            "flag": "--compliance-attestation",
+            "required": true,
+            "type": "boolean",
+            "enum": [
+              true
+            ]
+          },
+          {
+            "name": "start_at",
+            "flag": "--start-at",
+            "required": false,
+            "type": "string",
+            "nullable": true
+          },
+          {
+            "name": "sequence_hash",
+            "flag": "--sequence-hash",
+            "required": false,
+            "type": "string",
+            "nullable": true
+          },
+          {
+            "name": "locale",
+            "flag": "--locale",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "en",
+              "de",
+              "fr",
+              "es"
+            ]
+          }
+        ]
+      },
+      "sdkMethod": "client.api.launchCampaign",
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "format": "uuid",
+            "type": "string"
+          }
+        }
+      ],
+      "requestBody": {
+        "required": true,
+        "content": {
+          "application/json": {
+            "required": [
+              "compliance_attestation"
+            ],
+            "type": "object",
+            "properties": {
+              "compliance_attestation": {
+                "const": true,
+                "type": "boolean"
+              },
+              "locale": {
+                "enum": [
+                  "en",
+                  "de",
+                  "fr",
+                  "es"
+                ],
+                "type": "string"
+              },
+              "sequence_hash": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "start_at": {
+                "format": "date-time",
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            }
+          }
+        }
+      },
+      "responses": {
+        "200": [
+          "application/json"
+        ],
+        "400": [
+          "application/json"
+        ],
+        "401": [
+          "application/json"
+        ],
+        "403": [
+          "application/json"
+        ],
+        "404": [
+          "application/json"
+        ],
+        "409": [
+          "application/json"
+        ],
+        "429": [
+          "application/json"
+        ],
+        "503": [
+          "application/json"
+        ]
+      },
+      "binaryResponse": false
+    },
+    {
       "operationId": "linkLoopCallContact",
       "method": "PATCH",
       "path": "/loop/calls/{id}",
@@ -19729,6 +21194,117 @@
           "application/json"
         ],
         "403": [
+          "application/json"
+        ],
+        "429": [
+          "application/json"
+        ],
+        "503": [
+          "application/json"
+        ]
+      },
+      "binaryResponse": false
+    },
+    {
+      "operationId": "listAppActions",
+      "method": "GET",
+      "path": "/automations/connections/{id}/actions",
+      "group": "Tools",
+      "summary": "List app actions",
+      "documentation": "https://docs.famulor.io/api-reference/tools/list-app-actions",
+      "cli": {
+        "command": "list-app-actions",
+        "hidden": false,
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "flag": "id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "q",
+            "in": "query",
+            "flag": "--q",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "flag": "--cursor",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "flag": "--limit",
+            "required": false,
+            "type": "integer"
+          }
+        ],
+        "bodyFields": []
+      },
+      "sdkMethod": "client.api.listAppActions",
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        {
+          "name": "q",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "maxLength": 200,
+            "type": "string"
+          }
+        },
+        {
+          "name": "cursor",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "maxLength": 1000,
+            "type": "string"
+          }
+        },
+        {
+          "name": "limit",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "maximum": 100,
+            "minimum": 1,
+            "type": "integer"
+          }
+        }
+      ],
+      "requestBody": {
+        "required": false,
+        "content": {}
+      },
+      "responses": {
+        "200": [
+          "application/json"
+        ],
+        "400": [
+          "application/json"
+        ],
+        "401": [
+          "application/json"
+        ],
+        "403": [
+          "application/json"
+        ],
+        "404": [
           "application/json"
         ],
         "429": [
@@ -20924,14 +22500,7 @@
             "in": "query",
             "flag": "--style",
             "required": false,
-            "type": "string",
-            "enum": [
-              "all",
-              "realistic",
-              "animated_3d",
-              "illustrated",
-              "custom"
-            ]
+            "type": "string"
           }
         ],
         "bodyFields": []
@@ -20970,13 +22539,8 @@
           "in": "query",
           "required": false,
           "schema": {
-            "enum": [
-              "all",
-              "realistic",
-              "animated_3d",
-              "illustrated",
-              "custom"
-            ],
+            "maxLength": 50,
+            "minLength": 1,
             "type": "string"
           }
         }
@@ -21440,6 +23004,112 @@
           "application/json"
         ],
         "403": [
+          "application/json"
+        ],
+        "429": [
+          "application/json"
+        ],
+        "503": [
+          "application/json"
+        ]
+      },
+      "binaryResponse": false
+    },
+    {
+      "operationId": "listCalcomConnections",
+      "method": "GET",
+      "path": "/integrations/calcom/connections",
+      "group": "Integrations",
+      "summary": "List connected Cal.com accounts",
+      "documentation": "https://docs.famulor.io/api-reference/integrations/list-connected-calcom-accounts",
+      "cli": {
+        "command": "list-calcom-connections",
+        "hidden": false,
+        "parameters": [],
+        "bodyFields": []
+      },
+      "sdkMethod": "client.api.listCalcomConnections",
+      "parameters": [],
+      "requestBody": {
+        "required": false,
+        "content": {}
+      },
+      "responses": {
+        "200": [
+          "application/json"
+        ],
+        "400": [
+          "application/json"
+        ],
+        "401": [
+          "application/json"
+        ],
+        "403": [
+          "application/json"
+        ],
+        "404": [
+          "application/json"
+        ],
+        "429": [
+          "application/json"
+        ],
+        "503": [
+          "application/json"
+        ]
+      },
+      "binaryResponse": false
+    },
+    {
+      "operationId": "listCalcomEventTypes",
+      "method": "GET",
+      "path": "/integrations/calcom/event-types",
+      "group": "Integrations",
+      "summary": "List Cal.com event types",
+      "documentation": "https://docs.famulor.io/api-reference/integrations/list-calcom-event-types",
+      "cli": {
+        "command": "list-calcom-event-types",
+        "hidden": false,
+        "parameters": [
+          {
+            "name": "connection_id",
+            "in": "query",
+            "flag": "--connection-id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "bodyFields": []
+      },
+      "sdkMethod": "client.api.listCalcomEventTypes",
+      "parameters": [
+        {
+          "name": "connection_id",
+          "in": "query",
+          "required": true,
+          "schema": {
+            "format": "uuid",
+            "type": "string"
+          }
+        }
+      ],
+      "requestBody": {
+        "required": false,
+        "content": {}
+      },
+      "responses": {
+        "200": [
+          "application/json"
+        ],
+        "400": [
+          "application/json"
+        ],
+        "401": [
+          "application/json"
+        ],
+        "403": [
+          "application/json"
+        ],
+        "404": [
           "application/json"
         ],
         "429": [
@@ -22240,6 +23910,107 @@
           "application/json"
         ],
         "404": [
+          "application/json"
+        ],
+        "429": [
+          "application/json"
+        ],
+        "503": [
+          "application/json"
+        ]
+      },
+      "binaryResponse": false
+    },
+    {
+      "operationId": "listCampaignTemplates",
+      "method": "GET",
+      "path": "/campaign-templates",
+      "group": "Campaigns",
+      "summary": "List campaign templates",
+      "documentation": "https://docs.famulor.io/api-reference/campaigns/list-campaign-templates",
+      "cli": {
+        "command": "list-campaign-templates",
+        "hidden": false,
+        "parameters": [
+          {
+            "name": "language",
+            "in": "query",
+            "flag": "--language",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "en",
+              "de",
+              "fr",
+              "es"
+            ]
+          },
+          {
+            "name": "category",
+            "in": "query",
+            "flag": "--category",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "basics",
+              "sales",
+              "appointments",
+              "service",
+              "billing",
+              "events"
+            ]
+          }
+        ],
+        "bodyFields": []
+      },
+      "sdkMethod": "client.api.listCampaignTemplates",
+      "parameters": [
+        {
+          "name": "language",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "enum": [
+              "en",
+              "de",
+              "fr",
+              "es"
+            ],
+            "type": "string"
+          }
+        },
+        {
+          "name": "category",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "enum": [
+              "basics",
+              "sales",
+              "appointments",
+              "service",
+              "billing",
+              "events"
+            ],
+            "type": "string"
+          }
+        }
+      ],
+      "requestBody": {
+        "required": false,
+        "content": {}
+      },
+      "responses": {
+        "200": [
+          "application/json"
+        ],
+        "400": [
+          "application/json"
+        ],
+        "401": [
+          "application/json"
+        ],
+        "403": [
           "application/json"
         ],
         "429": [
@@ -27226,6 +28997,18 @@
             ]
           },
           {
+            "name": "direction",
+            "in": "query",
+            "flag": "--direction",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "outbound",
+              "inbound",
+              "both"
+            ]
+          },
+          {
             "name": "limit",
             "in": "query",
             "flag": "--limit",
@@ -27258,6 +29041,14 @@
           "required": false,
           "schema": {
             "$ref": "#/components/schemas/ConsentChannel"
+          }
+        },
+        {
+          "name": "direction",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "$ref": "#/components/schemas/SuppressionDirection"
           }
         },
         {
@@ -29493,6 +31284,68 @@
       "binaryResponse": false
     },
     {
+      "operationId": "pauseCampaign",
+      "method": "POST",
+      "path": "/campaigns/{id}/pause",
+      "group": "Campaigns",
+      "summary": "Pause a campaign",
+      "documentation": "https://docs.famulor.io/api-reference/campaigns/pause-a-campaign",
+      "cli": {
+        "command": "pause-campaign",
+        "hidden": false,
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "flag": "id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "bodyFields": []
+      },
+      "sdkMethod": "client.api.pauseCampaign",
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "format": "uuid",
+            "type": "string"
+          }
+        }
+      ],
+      "requestBody": {
+        "required": false,
+        "content": {}
+      },
+      "responses": {
+        "200": [
+          "application/json"
+        ],
+        "401": [
+          "application/json"
+        ],
+        "403": [
+          "application/json"
+        ],
+        "404": [
+          "application/json"
+        ],
+        "409": [
+          "application/json"
+        ],
+        "429": [
+          "application/json"
+        ],
+        "503": [
+          "application/json"
+        ]
+      },
+      "binaryResponse": false
+    },
+    {
       "operationId": "pauseRoutine",
       "method": "POST",
       "path": "/routines/{id}/pause",
@@ -29612,6 +31465,116 @@
       "binaryResponse": false
     },
     {
+      "operationId": "previewAssistantFlowCondition",
+      "method": "POST",
+      "path": "/assistants/{id}/flow/conditions/{nodeId}/preview",
+      "group": "Assistants",
+      "summary": "Preview a condition path",
+      "documentation": "https://docs.famulor.io/api-reference/assistants/preview-a-condition-path",
+      "cli": {
+        "command": "preview-assistant-flow-condition",
+        "hidden": false,
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "flag": "id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "nodeId",
+            "in": "path",
+            "flag": "node-id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "bodyFields": [
+          {
+            "name": "sample",
+            "flag": "--sample",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "variables",
+            "flag": "--variables",
+            "required": false,
+            "type": "object"
+          }
+        ]
+      },
+      "sdkMethod": "client.api.previewAssistantFlowCondition",
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        {
+          "name": "nodeId",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "requestBody": {
+        "required": false,
+        "content": {
+          "application/json": {
+            "type": "object",
+            "properties": {
+              "sample": {
+                "maxLength": 1200,
+                "type": "string"
+              },
+              "variables": {
+                "type": "object",
+                "additionalProperties": {
+                  "anyOf": [
+                    {
+                      "type": "string"
+                    },
+                    {
+                      "type": "number"
+                    },
+                    {
+                      "type": "boolean"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      },
+      "responses": {
+        "200": [
+          "application/json"
+        ],
+        "400": [],
+        "403": [],
+        "404": [],
+        "429": [
+          "application/json"
+        ],
+        "503": [
+          "application/json"
+        ]
+      },
+      "binaryResponse": false
+    },
+    {
       "operationId": "previewNaturalLanguageDashboard",
       "method": "POST",
       "path": "/dashboards/{id}/natural-language",
@@ -29687,6 +31650,90 @@
           "application/json"
         ],
         "429": [
+          "application/json"
+        ],
+        "503": [
+          "application/json"
+        ]
+      },
+      "binaryResponse": false
+    },
+    {
+      "operationId": "previewTwilioRegionSwitch",
+      "method": "GET",
+      "path": "/carrier-connections/{id}/numbers/{numberId}/region-switch",
+      "group": "Carrier Connections",
+      "summary": "Preview a Twilio region switch",
+      "documentation": "https://docs.famulor.io/api-reference/introduction",
+      "cli": {
+        "command": "preview-twilio-region-switch",
+        "hidden": false,
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "flag": "id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "numberId",
+            "in": "path",
+            "flag": "number-id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "bodyFields": []
+      },
+      "sdkMethod": "client.api.previewTwilioRegionSwitch",
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        {
+          "name": "numberId",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "format": "uuid",
+            "type": "string"
+          }
+        }
+      ],
+      "requestBody": {
+        "required": false,
+        "content": {}
+      },
+      "responses": {
+        "200": [
+          "application/json"
+        ],
+        "400": [
+          "application/json"
+        ],
+        "401": [
+          "application/json"
+        ],
+        "403": [
+          "application/json"
+        ],
+        "404": [
+          "application/json"
+        ],
+        "409": [
+          "application/json"
+        ],
+        "429": [
+          "application/json"
+        ],
+        "502": [
           "application/json"
         ],
         "503": [
@@ -30833,7 +32880,8 @@
               "inworld",
               "rime",
               "xai",
-              "gradium"
+              "gradium",
+              "assemblyai"
             ]
           },
           {
@@ -32424,6 +34472,208 @@
       },
       "responses": {
         "200": [
+          "application/json"
+        ],
+        "409": [
+          "application/json"
+        ],
+        "429": [
+          "application/json"
+        ],
+        "503": [
+          "application/json"
+        ]
+      },
+      "binaryResponse": false
+    },
+    {
+      "operationId": "restoreTwilioRegion",
+      "method": "DELETE",
+      "path": "/carrier-connections/{id}/numbers/{numberId}/region-switch",
+      "group": "Carrier Connections",
+      "summary": "Restore the previous route of a Twilio number",
+      "documentation": "https://docs.famulor.io/api-reference/introduction",
+      "cli": {
+        "command": "restore-twilio-region",
+        "hidden": false,
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "flag": "id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "numberId",
+            "in": "path",
+            "flag": "number-id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "switch_revision",
+            "in": "query",
+            "flag": "--switch-revision",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "bodyFields": []
+      },
+      "sdkMethod": "client.api.restoreTwilioRegion",
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        {
+          "name": "numberId",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        {
+          "name": "switch_revision",
+          "in": "query",
+          "required": true,
+          "schema": {
+            "format": "uuid",
+            "type": "string"
+          }
+        }
+      ],
+      "requestBody": {
+        "required": false,
+        "content": {}
+      },
+      "responses": {
+        "200": [
+          "application/json"
+        ],
+        "400": [
+          "application/json"
+        ],
+        "401": [
+          "application/json"
+        ],
+        "403": [
+          "application/json"
+        ],
+        "404": [
+          "application/json"
+        ],
+        "409": [
+          "application/json"
+        ],
+        "429": [
+          "application/json"
+        ],
+        "502": [
+          "application/json"
+        ],
+        "503": [
+          "application/json"
+        ]
+      },
+      "binaryResponse": false
+    },
+    {
+      "operationId": "resumeCampaign",
+      "method": "POST",
+      "path": "/campaigns/{id}/resume",
+      "group": "Campaigns",
+      "summary": "Resume a campaign",
+      "documentation": "https://docs.famulor.io/api-reference/campaigns/resume-a-campaign",
+      "cli": {
+        "command": "resume-campaign",
+        "hidden": false,
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "flag": "id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "bodyFields": [
+          {
+            "name": "compliance_attestation",
+            "flag": "--compliance-attestation",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "locale",
+            "flag": "--locale",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "en",
+              "de",
+              "fr",
+              "es"
+            ]
+          }
+        ]
+      },
+      "sdkMethod": "client.api.resumeCampaign",
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "format": "uuid",
+            "type": "string"
+          }
+        }
+      ],
+      "requestBody": {
+        "required": false,
+        "content": {
+          "application/json": {
+            "type": "object",
+            "properties": {
+              "compliance_attestation": {
+                "type": "boolean"
+              },
+              "locale": {
+                "enum": [
+                  "en",
+                  "de",
+                  "fr",
+                  "es"
+                ],
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "responses": {
+        "200": [
+          "application/json"
+        ],
+        "400": [
+          "application/json"
+        ],
+        "401": [
+          "application/json"
+        ],
+        "403": [
+          "application/json"
+        ],
+        "404": [
           "application/json"
         ],
         "409": [
@@ -35234,6 +37484,106 @@
       "binaryResponse": false
     },
     {
+      "operationId": "setSmsRcsSenderTestNumbers",
+      "method": "PUT",
+      "path": "/sms/rcs/senders/{id}/test-numbers",
+      "group": "SMS",
+      "summary": "Set company sender test numbers",
+      "documentation": "https://docs.famulor.io/api-reference/sms/set-company-sender-test-numbers",
+      "cli": {
+        "command": "set-sms-rcs-sender-test-numbers",
+        "hidden": false,
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "flag": "id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "bodyFields": [
+          {
+            "name": "test_numbers",
+            "flag": "--test-numbers",
+            "required": true,
+            "type": "array",
+            "itemType": "string"
+          },
+          {
+            "name": "expected_updated_at",
+            "flag": "--expected-updated-at",
+            "required": false,
+            "type": "string"
+          }
+        ]
+      },
+      "sdkMethod": "client.api.setSmsRcsSenderTestNumbers",
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "format": "uuid",
+            "type": "string"
+          }
+        }
+      ],
+      "requestBody": {
+        "required": true,
+        "content": {
+          "application/json": {
+            "required": [
+              "test_numbers"
+            ],
+            "type": "object",
+            "properties": {
+              "expected_updated_at": {
+                "format": "date-time",
+                "type": "string"
+              },
+              "test_numbers": {
+                "maxItems": 5,
+                "type": "array",
+                "items": {
+                  "maxLength": 32,
+                  "minLength": 1,
+                  "type": "string"
+                }
+              }
+            },
+            "additionalProperties": false
+          }
+        }
+      },
+      "responses": {
+        "200": [
+          "application/json"
+        ],
+        "400": [
+          "application/json"
+        ],
+        "401": [
+          "application/json"
+        ],
+        "403": [
+          "application/json"
+        ],
+        "404": [
+          "application/json"
+        ],
+        "409": [],
+        "429": [
+          "application/json"
+        ],
+        "503": [
+          "application/json"
+        ]
+      },
+      "binaryResponse": false
+    },
+    {
       "operationId": "shareAutomation",
       "method": "POST",
       "path": "/automations/{id}/share",
@@ -35461,7 +37811,26 @@
             "type": "string"
           }
         ],
-        "bodyFields": []
+        "bodyFields": [
+          {
+            "name": "compliance_attestation",
+            "flag": "--compliance-attestation",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "locale",
+            "flag": "--locale",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "en",
+              "de",
+              "fr",
+              "es"
+            ]
+          }
+        ]
       },
       "sdkMethod": "client.api.startCampaign",
       "parameters": [
@@ -35477,7 +37846,25 @@
       ],
       "requestBody": {
         "required": false,
-        "content": {}
+        "content": {
+          "application/json": {
+            "type": "object",
+            "properties": {
+              "compliance_attestation": {
+                "type": "boolean"
+              },
+              "locale": {
+                "enum": [
+                  "en",
+                  "de",
+                  "fr",
+                  "es"
+                ],
+                "type": "string"
+              }
+            }
+          }
+        }
       },
       "responses": {
         "200": [
@@ -36066,7 +38453,20 @@
               }
             },
             "allOf": [
-              {}
+              {
+                "if": {
+                  "properties": {
+                    "type": {
+                      "const": "local"
+                    }
+                  }
+                },
+                "then": {
+                  "required": [
+                    "prefix"
+                  ]
+                }
+              }
             ]
           }
         }
@@ -36313,6 +38713,140 @@
       "binaryResponse": false
     },
     {
+      "operationId": "switchTwilioRegion",
+      "method": "POST",
+      "path": "/carrier-connections/{id}/numbers/{numberId}/region-switch",
+      "group": "Carrier Connections",
+      "summary": "Switch the region of an imported Twilio number",
+      "documentation": "https://docs.famulor.io/api-reference/introduction",
+      "cli": {
+        "command": "switch-twilio-region",
+        "hidden": false,
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "flag": "id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "numberId",
+            "in": "path",
+            "flag": "number-id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "bodyFields": [
+          {
+            "name": "direction",
+            "flag": "--direction",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "outbound_only",
+              "bidirectional",
+              "bidirectional"
+            ]
+          },
+          {
+            "name": "trunk_token",
+            "flag": "--trunk-token",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "sip_username",
+            "flag": "--sip-username",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "sip_password",
+            "flag": "--sip-password",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "mode",
+            "flag": "--mode",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "existing",
+              "managed"
+            ]
+          },
+          {
+            "name": "managed_token",
+            "flag": "--managed-token",
+            "required": false,
+            "type": "string"
+          }
+        ]
+      },
+      "sdkMethod": "client.api.switchTwilioRegion",
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        {
+          "name": "numberId",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "format": "uuid",
+            "type": "string"
+          }
+        }
+      ],
+      "requestBody": {
+        "required": true,
+        "content": {
+          "application/json": {
+            "$ref": "#/components/schemas/TwilioRegionSwitchInput"
+          }
+        }
+      },
+      "responses": {
+        "200": [
+          "application/json"
+        ],
+        "400": [
+          "application/json"
+        ],
+        "401": [
+          "application/json"
+        ],
+        "403": [
+          "application/json"
+        ],
+        "404": [
+          "application/json"
+        ],
+        "409": [
+          "application/json"
+        ],
+        "429": [
+          "application/json"
+        ],
+        "502": [
+          "application/json"
+        ],
+        "503": [
+          "application/json"
+        ]
+      },
+      "binaryResponse": false
+    },
+    {
       "operationId": "synchronizeShopifyWidgetPicker",
       "method": "POST",
       "path": "/shopify/installations/{id}/widgets",
@@ -36364,6 +38898,112 @@
         ],
         "404": [],
         "429": [
+          "application/json"
+        ]
+      },
+      "binaryResponse": false
+    },
+    {
+      "operationId": "testAppActionTool",
+      "method": "POST",
+      "path": "/tools/app-actions/{toolId}/test",
+      "group": "Tools",
+      "summary": "Test an app action tool",
+      "documentation": "https://docs.famulor.io/api-reference/tools/test-an-app-action-tool",
+      "cli": {
+        "command": "test-app-action-tool",
+        "hidden": false,
+        "parameters": [
+          {
+            "name": "toolId",
+            "in": "path",
+            "flag": "tool-id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "bodyFields": [
+          {
+            "name": "values",
+            "flag": "--values",
+            "required": false,
+            "type": "object"
+          },
+          {
+            "name": "mode",
+            "flag": "--mode",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "dry_run",
+              "live"
+            ]
+          },
+          {
+            "name": "confirm_write",
+            "flag": "--confirm-write",
+            "required": false,
+            "type": "boolean"
+          }
+        ]
+      },
+      "sdkMethod": "client.api.testAppActionTool",
+      "parameters": [
+        {
+          "name": "toolId",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "format": "uuid",
+            "type": "string"
+          }
+        }
+      ],
+      "requestBody": {
+        "required": false,
+        "content": {
+          "application/json": {
+            "type": "object",
+            "properties": {
+              "confirm_write": {
+                "type": "boolean"
+              },
+              "mode": {
+                "enum": [
+                  "dry_run",
+                  "live"
+                ],
+                "type": "string"
+              },
+              "values": {
+                "type": "object",
+                "additionalProperties": true
+              }
+            },
+            "additionalProperties": false
+          }
+        }
+      },
+      "responses": {
+        "200": [
+          "application/json"
+        ],
+        "400": [
+          "application/json"
+        ],
+        "401": [
+          "application/json"
+        ],
+        "403": [
+          "application/json"
+        ],
+        "404": [
+          "application/json"
+        ],
+        "429": [
+          "application/json"
+        ],
+        "503": [
           "application/json"
         ]
       },
@@ -36519,6 +39159,9 @@
           "application/json"
         ],
         "404": [
+          "application/json"
+        ],
+        "409": [
           "application/json"
         ],
         "429": [
@@ -36987,6 +39630,202 @@
       "binaryResponse": false
     },
     {
+      "operationId": "updateAppActionTool",
+      "method": "PATCH",
+      "path": "/tools/app-actions/{toolId}",
+      "group": "Tools",
+      "summary": "Update an app action tool",
+      "documentation": "https://docs.famulor.io/api-reference/tools/update-an-app-action-tool",
+      "cli": {
+        "command": "update-app-action-tool",
+        "hidden": false,
+        "parameters": [
+          {
+            "name": "toolId",
+            "in": "path",
+            "flag": "tool-id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "bodyFields": [
+          {
+            "name": "connection_id",
+            "flag": "--connection-id",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "flag": "--name",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "use_when",
+            "flag": "--use-when",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "description_override",
+            "flag": "--description-override",
+            "required": false,
+            "type": "string",
+            "nullable": true
+          },
+          {
+            "name": "fields",
+            "flag": "--fields",
+            "required": false,
+            "type": "array",
+            "itemType": "object"
+          },
+          {
+            "name": "confirmation",
+            "flag": "--confirmation",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "ask_first",
+              "none"
+            ]
+          },
+          {
+            "name": "result_config",
+            "flag": "--result-config",
+            "required": false,
+            "type": "object",
+            "nullable": true
+          },
+          {
+            "name": "is_active",
+            "flag": "--is-active",
+            "required": false,
+            "type": "boolean"
+          }
+        ]
+      },
+      "sdkMethod": "client.api.updateAppActionTool",
+      "parameters": [
+        {
+          "name": "toolId",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "format": "uuid",
+            "type": "string"
+          }
+        }
+      ],
+      "requestBody": {
+        "required": true,
+        "content": {
+          "application/json": {
+            "minProperties": 1,
+            "type": "object",
+            "properties": {
+              "confirmation": {
+                "enum": [
+                  "ask_first",
+                  "none"
+                ],
+                "type": "string"
+              },
+              "connection_id": {
+                "format": "uuid",
+                "type": "string"
+              },
+              "description_override": {
+                "maxLength": 900,
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "fields": {
+                "maxItems": 300,
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/AppActionFieldSetting"
+                }
+              },
+              "is_active": {
+                "type": "boolean"
+              },
+              "name": {
+                "pattern": "^[a-zA-Z][a-zA-Z0-9_-]{0,63}$",
+                "type": "string"
+              },
+              "result_config": {
+                "type": [
+                  "object",
+                  "null"
+                ],
+                "properties": {
+                  "max_chars": {
+                    "maximum": 3500,
+                    "minimum": 200,
+                    "type": "integer"
+                  },
+                  "mode": {
+                    "enum": [
+                      "auto",
+                      "selected"
+                    ],
+                    "type": "string"
+                  },
+                  "paths": {
+                    "maxItems": 20,
+                    "type": "array",
+                    "items": {
+                      "maxLength": 200,
+                      "minLength": 1,
+                      "type": "string"
+                    }
+                  }
+                },
+                "additionalProperties": false
+              },
+              "use_when": {
+                "maxLength": 1000,
+                "minLength": 10,
+                "type": "string"
+              }
+            },
+            "additionalProperties": false
+          }
+        }
+      },
+      "responses": {
+        "200": [
+          "application/json"
+        ],
+        "400": [
+          "application/json"
+        ],
+        "401": [
+          "application/json"
+        ],
+        "403": [
+          "application/json"
+        ],
+        "404": [
+          "application/json"
+        ],
+        "409": [
+          "application/json"
+        ],
+        "429": [
+          "application/json"
+        ],
+        "503": [
+          "application/json"
+        ]
+      },
+      "binaryResponse": false
+    },
+    {
       "operationId": "updateAssistant",
       "method": "PATCH",
       "path": "/assistants/{id}",
@@ -37162,7 +40001,8 @@
               "inworld",
               "rime",
               "xai",
-              "gradium"
+              "gradium",
+              "assemblyai"
             ]
           },
           {
@@ -38254,6 +41094,66 @@
       "binaryResponse": false
     },
     {
+      "operationId": "updateAutomaticCallSuppression",
+      "method": "PATCH",
+      "path": "/settings/automatic-call-suppression",
+      "group": "Settings",
+      "summary": "Update automatic blocking after calls",
+      "documentation": "https://docs.famulor.io/api-reference/settings/update-automatic-blocking-after-calls",
+      "cli": {
+        "command": "update-automatic-call-suppression",
+        "hidden": false,
+        "parameters": [],
+        "bodyFields": [
+          {
+            "name": "automatic_call_suppression",
+            "flag": "--automatic-call-suppression",
+            "required": true,
+            "type": "boolean"
+          }
+        ]
+      },
+      "sdkMethod": "client.api.updateAutomaticCallSuppression",
+      "parameters": [],
+      "requestBody": {
+        "required": true,
+        "content": {
+          "application/json": {
+            "required": [
+              "automatic_call_suppression"
+            ],
+            "type": "object",
+            "properties": {
+              "automatic_call_suppression": {
+                "type": "boolean"
+              }
+            }
+          }
+        }
+      },
+      "responses": {
+        "200": [
+          "application/json"
+        ],
+        "400": [
+          "application/json"
+        ],
+        "401": [
+          "application/json"
+        ],
+        "403": [
+          "application/json"
+        ],
+        "429": [
+          "application/json"
+        ],
+        "503": [
+          "application/json"
+        ]
+      },
+      "binaryResponse": false
+    },
+    {
       "operationId": "updateAutomation",
       "method": "PATCH",
       "path": "/automations/{id}",
@@ -38569,32 +41469,39 @@
           {
             "name": "name",
             "flag": "--name",
-            "required": true,
+            "required": false,
             "type": "string"
           },
           {
             "name": "slug",
             "flag": "--slug",
-            "required": true,
+            "required": false,
             "type": "string"
           },
           {
             "name": "duration_min",
             "flag": "--duration-min",
-            "required": true,
+            "required": false,
             "type": "integer"
           },
           {
             "name": "timezone",
             "flag": "--timezone",
-            "required": true,
+            "required": false,
             "type": "string"
           },
           {
             "name": "availability",
             "flag": "--availability",
-            "required": true,
+            "required": false,
             "type": "object"
+          },
+          {
+            "name": "public_holidays",
+            "flag": "--public-holidays",
+            "required": false,
+            "type": "object",
+            "nullable": true
           },
           {
             "name": "description",
@@ -38740,7 +41647,7 @@
         "required": true,
         "content": {
           "application/json": {
-            "$ref": "#/components/schemas/BookingEventTypeInput"
+            "$ref": "#/components/schemas/BookingEventTypeUpdateInput"
           }
         }
       },
@@ -38960,6 +41867,74 @@
             "required": false,
             "type": "object",
             "nullable": true
+          },
+          {
+            "name": "retry_on_voicemail",
+            "flag": "--retry-on-voicemail",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "retry_until_goal",
+            "flag": "--retry-until-goal",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "goal_variable",
+            "flag": "--goal-variable",
+            "required": false,
+            "type": "string",
+            "nullable": true
+          },
+          {
+            "name": "mark_complete_when_no_leads",
+            "flag": "--mark-complete-when-no-leads",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "outbound_ringing_timeout_sec",
+            "flag": "--outbound-ringing-timeout-sec",
+            "required": false,
+            "type": "integer",
+            "nullable": true
+          },
+          {
+            "name": "sequence",
+            "flag": "--sequence",
+            "required": false,
+            "type": "object",
+            "nullable": true
+          },
+          {
+            "name": "number_pool",
+            "flag": "--number-pool",
+            "required": false,
+            "type": "object",
+            "nullable": true
+          },
+          {
+            "name": "contact_timezone_mode",
+            "flag": "--contact-timezone-mode",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "campaign",
+              "contact"
+            ]
+          },
+          {
+            "name": "holidays",
+            "flag": "--holidays",
+            "required": false,
+            "type": "object"
+          },
+          {
+            "name": "double_dial",
+            "flag": "--double-dial",
+            "required": false,
+            "type": "boolean"
           }
         ]
       },
@@ -38997,6 +41972,9 @@
           "application/json"
         ],
         "404": [
+          "application/json"
+        ],
+        "409": [
           "application/json"
         ],
         "429": [
@@ -39499,6 +42477,66 @@
       "binaryResponse": false
     },
     {
+      "operationId": "updateCustomDomainLinkPreview",
+      "method": "PATCH",
+      "path": "/custom-domain/link-preview",
+      "group": "Settings",
+      "summary": "Update custom domain link preview",
+      "documentation": "https://docs.famulor.io/api-reference/settings/update-custom-domain-link-preview",
+      "cli": {
+        "command": "update-custom-domain-link-preview",
+        "hidden": false,
+        "parameters": [],
+        "bodyFields": [
+          {
+            "name": "link_preview_title",
+            "flag": "--link-preview-title",
+            "required": false,
+            "type": "string",
+            "nullable": true
+          },
+          {
+            "name": "link_preview_description",
+            "flag": "--link-preview-description",
+            "required": false,
+            "type": "string",
+            "nullable": true
+          }
+        ]
+      },
+      "sdkMethod": "client.api.updateCustomDomainLinkPreview",
+      "parameters": [],
+      "requestBody": {
+        "required": true,
+        "content": {
+          "application/json": {
+            "$ref": "#/components/schemas/CustomDomainLinkPreviewUpdate"
+          }
+        }
+      },
+      "responses": {
+        "200": [
+          "application/json"
+        ],
+        "400": [
+          "application/json"
+        ],
+        "401": [
+          "application/json"
+        ],
+        "403": [
+          "application/json"
+        ],
+        "429": [
+          "application/json"
+        ],
+        "503": [
+          "application/json"
+        ]
+      },
+      "binaryResponse": false
+    },
+    {
       "operationId": "updateCustomerMemory",
       "method": "PATCH",
       "path": "/contacts/{id}/memory",
@@ -39753,6 +42791,12 @@
             "flag": "--sort-order",
             "required": false,
             "type": "integer"
+          },
+          {
+            "name": "pinned",
+            "flag": "--pinned",
+            "required": false,
+            "type": "boolean"
           },
           {
             "name": "show_default_sections",
@@ -40080,6 +43124,89 @@
           "application/json"
         ],
         "404": [
+          "application/json"
+        ],
+        "429": [
+          "application/json"
+        ],
+        "503": [
+          "application/json"
+        ]
+      },
+      "binaryResponse": false
+    },
+    {
+      "operationId": "updateDncRegistrySettings",
+      "method": "PATCH",
+      "path": "/settings/dnc-registry",
+      "group": "Settings",
+      "summary": "Update federal and state DNC checks",
+      "documentation": "https://docs.famulor.io/api-reference/settings/update-federal-and-state-dnc-checks",
+      "cli": {
+        "command": "update-dnc-registry-settings",
+        "hidden": false,
+        "parameters": [],
+        "bodyFields": [
+          {
+            "name": "enabled",
+            "flag": "--enabled",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "org_id",
+            "flag": "--org-id",
+            "required": false,
+            "type": "string",
+            "nullable": true
+          },
+          {
+            "name": "san",
+            "flag": "--san",
+            "required": false,
+            "type": "string",
+            "nullable": true
+          }
+        ]
+      },
+      "sdkMethod": "client.api.updateDncRegistrySettings",
+      "parameters": [],
+      "requestBody": {
+        "required": true,
+        "content": {
+          "application/json": {
+            "type": "object",
+            "properties": {
+              "enabled": {
+                "type": "boolean"
+              },
+              "org_id": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "san": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            }
+          }
+        }
+      },
+      "responses": {
+        "200": [
+          "application/json"
+        ],
+        "400": [
+          "application/json"
+        ],
+        "401": [
+          "application/json"
+        ],
+        "403": [
           "application/json"
         ],
         "429": [
@@ -42984,6 +46111,12 @@
               "p_asserted_identity",
               "p_preferred_identity"
             ]
+          },
+          {
+            "name": "use_fixed_outbound_ip",
+            "flag": "--use-fixed-outbound-ip",
+            "required": false,
+            "type": "boolean"
           }
         ]
       },
@@ -43020,6 +46153,9 @@
                   "auth_username"
                 ],
                 "type": "string"
+              },
+              "use_fixed_outbound_ip": {
+                "type": "boolean"
               }
             },
             "additionalProperties": false
@@ -43146,6 +46282,110 @@
           "application/json"
         ],
         "409": [],
+        "429": [
+          "application/json"
+        ],
+        "503": [
+          "application/json"
+        ]
+      },
+      "binaryResponse": false
+    },
+    {
+      "operationId": "updateSuppressionEntry",
+      "method": "PATCH",
+      "path": "/suppression-list/{id}",
+      "group": "Suppression",
+      "summary": "Change a suppression entry",
+      "documentation": "https://docs.famulor.io/api-reference/suppression/change-a-suppression-entry",
+      "cli": {
+        "command": "update-suppression-entry",
+        "hidden": false,
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "flag": "id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "bodyFields": [
+          {
+            "name": "direction",
+            "flag": "--direction",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "outbound",
+              "inbound",
+              "both"
+            ]
+          },
+          {
+            "name": "reason",
+            "flag": "--reason",
+            "required": false,
+            "type": "string",
+            "nullable": true
+          }
+        ]
+      },
+      "sdkMethod": "client.api.updateSuppressionEntry",
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "format": "uuid",
+            "type": "string"
+          }
+        }
+      ],
+      "requestBody": {
+        "required": true,
+        "content": {
+          "application/json": {
+            "minProperties": 1,
+            "type": "object",
+            "properties": {
+              "direction": {
+                "$ref": "#/components/schemas/SuppressionDirection"
+              },
+              "reason": {
+                "maxLength": 500,
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            }
+          }
+        }
+      },
+      "responses": {
+        "200": [
+          "application/json"
+        ],
+        "400": [
+          "application/json"
+        ],
+        "401": [
+          "application/json"
+        ],
+        "403": [
+          "application/json"
+        ],
+        "404": [
+          "application/json"
+        ],
+        "409": [
+          "application/json"
+        ],
+        "422": [
+          "application/json"
+        ],
         "429": [
           "application/json"
         ],
@@ -43419,6 +46659,13 @@
             "required": false,
             "type": "string",
             "nullable": true
+          },
+          {
+            "name": "read_receipts_webhook_url",
+            "flag": "--read-receipts-webhook-url",
+            "required": false,
+            "type": "string",
+            "nullable": true
           }
         ]
       },
@@ -43461,6 +46708,12 @@
               "keep_conversations_unread": {
                 "type": "boolean"
               },
+              "read_receipts_webhook_url": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
               "response_delay_sec": {
                 "maximum": 30,
                 "minimum": 0,
@@ -43472,7 +46725,9 @@
         }
       },
       "responses": {
-        "200": [],
+        "200": [
+          "application/json"
+        ],
         "429": [
           "application/json"
         ],
@@ -44687,8 +47942,12 @@
         }
       },
       "responses": {
-        "200": [],
-        "201": [],
+        "200": [
+          "application/json"
+        ],
+        "201": [
+          "application/json"
+        ],
         "409": [
           "application/json"
         ],
@@ -44849,6 +48108,91 @@
           }
         }
       }
+    },
+    "#/components/schemas/AppActionFieldMode": {
+      "enum": [
+        "ai",
+        "fixed",
+        "variable",
+        "off"
+      ],
+      "type": "string"
+    },
+    "#/components/schemas/AppActionFieldSetting": {
+      "type": "object",
+      "properties": {
+        "allowed_modes": {
+          "readOnly": true
+        },
+        "cell_type": {
+          "readOnly": true
+        },
+        "columns": {
+          "readOnly": true
+        },
+        "default_value": {
+          "readOnly": true
+        },
+        "description": {
+          "maxLength": 600,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "enum": {
+          "readOnly": true
+        },
+        "example": {
+          "readOnly": true
+        },
+        "format": {
+          "readOnly": true
+        },
+        "items": {
+          "readOnly": true
+        },
+        "key": {
+          "maxLength": 200,
+          "type": "string"
+        },
+        "label": {
+          "maxLength": 200,
+          "type": "string"
+        },
+        "mode": {
+          "$ref": "#/components/schemas/AppActionFieldMode"
+        },
+        "param": {
+          "maxLength": 64,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "path": {
+          "maxLength": 1000,
+          "type": "string"
+        },
+        "provider_description": {
+          "readOnly": true
+        },
+        "required": {
+          "type": "boolean"
+        },
+        "type": {
+          "readOnly": true
+        },
+        "value": {},
+        "variable": {
+          "maxLength": 100,
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "additionalProperties": false
     },
     "#/components/schemas/AssignLeadsInput": {
       "type": "object",
@@ -45522,7 +48866,8 @@
             "inworld",
             "rime",
             "xai",
-            "gradium"
+            "gradium",
+            "assemblyai"
           ],
           "type": "string"
         },
@@ -45915,6 +49260,9 @@
         "phone_required": {
           "type": "boolean"
         },
+        "public_holidays": {
+          "$ref": "#/components/schemas/BookingPublicHolidayPolicy"
+        },
         "reminder_hours": {
           "type": [
             "integer",
@@ -45938,6 +49286,237 @@
         },
         "timezone": {
           "type": "string"
+        }
+      }
+    },
+    "#/components/schemas/BookingEventTypeInput/properties/availability": {
+      "type": "object"
+    },
+    "#/components/schemas/BookingEventTypeInput/properties/booking_fields": {
+      "maxItems": 30,
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/BookingField"
+      }
+    },
+    "#/components/schemas/BookingEventTypeInput/properties/buffer_after_min": {
+      "type": "integer"
+    },
+    "#/components/schemas/BookingEventTypeInput/properties/buffer_before_min": {
+      "type": "integer"
+    },
+    "#/components/schemas/BookingEventTypeInput/properties/confirmation_email_body": {
+      "maxLength": 10000,
+      "nullable": true,
+      "type": "string"
+    },
+    "#/components/schemas/BookingEventTypeInput/properties/confirmation_email_subject": {
+      "maxLength": 200,
+      "nullable": true,
+      "type": "string"
+    },
+    "#/components/schemas/BookingEventTypeInput/properties/description": {
+      "maxLength": 2000,
+      "type": "string"
+    },
+    "#/components/schemas/BookingEventTypeInput/properties/duration_min": {
+      "maximum": 480,
+      "minimum": 5,
+      "type": "integer"
+    },
+    "#/components/schemas/BookingEventTypeInput/properties/email_locale": {
+      "enum": [
+        "en",
+        "de",
+        "fr",
+        "es",
+        null
+      ],
+      "nullable": true,
+      "type": "string"
+    },
+    "#/components/schemas/BookingEventTypeInput/properties/email_required": {
+      "type": "boolean"
+    },
+    "#/components/schemas/BookingEventTypeInput/properties/email_templates": {
+      "nullable": true,
+      "type": "object",
+      "properties": {
+        "cancellation": {
+          "$ref": "#/components/schemas/BookingEmailTemplate"
+        },
+        "host_cancellation": {
+          "$ref": "#/components/schemas/BookingEmailTemplate"
+        },
+        "host_confirmation": {
+          "$ref": "#/components/schemas/BookingEmailTemplate"
+        },
+        "host_reschedule": {
+          "$ref": "#/components/schemas/BookingEmailTemplate"
+        },
+        "reminder": {
+          "$ref": "#/components/schemas/BookingEmailTemplate"
+        },
+        "reschedule": {
+          "$ref": "#/components/schemas/BookingEmailTemplate"
+        }
+      },
+      "additionalProperties": false
+    },
+    "#/components/schemas/BookingEventTypeInput/properties/guest_emails_enabled": {
+      "type": "boolean"
+    },
+    "#/components/schemas/BookingEventTypeInput/properties/hour_cycle": {
+      "enum": [
+        "12h",
+        "24h"
+      ],
+      "type": "string"
+    },
+    "#/components/schemas/BookingEventTypeInput/properties/is_active": {
+      "type": "boolean"
+    },
+    "#/components/schemas/BookingEventTypeInput/properties/max_days_ahead": {
+      "type": "integer"
+    },
+    "#/components/schemas/BookingEventTypeInput/properties/min_notice_min": {
+      "type": "integer"
+    },
+    "#/components/schemas/BookingEventTypeInput/properties/name": {
+      "maxLength": 128,
+      "type": "string"
+    },
+    "#/components/schemas/BookingEventTypeInput/properties/phone_required": {
+      "type": "boolean"
+    },
+    "#/components/schemas/BookingEventTypeInput/properties/public_holidays": {
+      "required": [
+        "country_code"
+      ],
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "country_code": {
+          "pattern": "^[A-Z]{2}$",
+          "type": "string"
+        },
+        "overrides": {
+          "maxProperties": 300,
+          "type": "object",
+          "additionalProperties": {
+            "type": "boolean"
+          }
+        },
+        "subdivision_code": {
+          "maxLength": 64,
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "#/components/schemas/BookingEventTypeInput/properties/reminder_hours": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "#/components/schemas/BookingEventTypeInput/properties/sender_email_address_id": {
+      "format": "uuid",
+      "nullable": true,
+      "type": "string"
+    },
+    "#/components/schemas/BookingEventTypeInput/properties/slot_increment_min": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "#/components/schemas/BookingEventTypeInput/properties/slug": {
+      "pattern": "^[a-z0-9-]{3,64}$",
+      "type": "string"
+    },
+    "#/components/schemas/BookingEventTypeInput/properties/timezone": {
+      "type": "string"
+    },
+    "#/components/schemas/BookingEventTypeUpdateInput": {
+      "type": "object",
+      "properties": {
+        "availability": {
+          "$ref": "#/components/schemas/BookingEventTypeInput/properties/availability"
+        },
+        "booking_fields": {
+          "$ref": "#/components/schemas/BookingEventTypeInput/properties/booking_fields"
+        },
+        "buffer_after_min": {
+          "$ref": "#/components/schemas/BookingEventTypeInput/properties/buffer_after_min"
+        },
+        "buffer_before_min": {
+          "$ref": "#/components/schemas/BookingEventTypeInput/properties/buffer_before_min"
+        },
+        "confirmation_email_body": {
+          "$ref": "#/components/schemas/BookingEventTypeInput/properties/confirmation_email_body"
+        },
+        "confirmation_email_subject": {
+          "$ref": "#/components/schemas/BookingEventTypeInput/properties/confirmation_email_subject"
+        },
+        "description": {
+          "$ref": "#/components/schemas/BookingEventTypeInput/properties/description"
+        },
+        "duration_min": {
+          "$ref": "#/components/schemas/BookingEventTypeInput/properties/duration_min"
+        },
+        "email_locale": {
+          "$ref": "#/components/schemas/BookingEventTypeInput/properties/email_locale"
+        },
+        "email_required": {
+          "$ref": "#/components/schemas/BookingEventTypeInput/properties/email_required"
+        },
+        "email_templates": {
+          "$ref": "#/components/schemas/BookingEventTypeInput/properties/email_templates"
+        },
+        "guest_emails_enabled": {
+          "$ref": "#/components/schemas/BookingEventTypeInput/properties/guest_emails_enabled"
+        },
+        "hour_cycle": {
+          "$ref": "#/components/schemas/BookingEventTypeInput/properties/hour_cycle"
+        },
+        "is_active": {
+          "$ref": "#/components/schemas/BookingEventTypeInput/properties/is_active"
+        },
+        "max_days_ahead": {
+          "$ref": "#/components/schemas/BookingEventTypeInput/properties/max_days_ahead"
+        },
+        "min_notice_min": {
+          "$ref": "#/components/schemas/BookingEventTypeInput/properties/min_notice_min"
+        },
+        "name": {
+          "$ref": "#/components/schemas/BookingEventTypeInput/properties/name"
+        },
+        "phone_required": {
+          "$ref": "#/components/schemas/BookingEventTypeInput/properties/phone_required"
+        },
+        "public_holidays": {
+          "$ref": "#/components/schemas/BookingEventTypeInput/properties/public_holidays"
+        },
+        "reminder_hours": {
+          "$ref": "#/components/schemas/BookingEventTypeInput/properties/reminder_hours"
+        },
+        "sender_email_address_id": {
+          "$ref": "#/components/schemas/BookingEventTypeInput/properties/sender_email_address_id"
+        },
+        "slot_increment_min": {
+          "$ref": "#/components/schemas/BookingEventTypeInput/properties/slot_increment_min"
+        },
+        "slug": {
+          "$ref": "#/components/schemas/BookingEventTypeInput/properties/slug"
+        },
+        "timezone": {
+          "$ref": "#/components/schemas/BookingEventTypeInput/properties/timezone"
         }
       }
     },
@@ -45998,6 +49577,36 @@
           "type": "string"
         }
       }
+    },
+    "#/components/schemas/BookingPublicHolidayPolicy": {
+      "required": [
+        "country_code"
+      ],
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "country_code": {
+          "pattern": "^[A-Z]{2}$",
+          "type": "string"
+        },
+        "overrides": {
+          "maxProperties": 300,
+          "type": "object",
+          "additionalProperties": {
+            "type": "boolean"
+          }
+        },
+        "subdivision_code": {
+          "maxLength": 64,
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "additionalProperties": false
     },
     "#/components/schemas/BrowserUseOAuthLogin": {
       "required": [
@@ -46393,6 +50002,16 @@
           "minimum": 1,
           "type": "integer"
         },
+        "contact_timezone_mode": {
+          "enum": [
+            "campaign",
+            "contact"
+          ],
+          "type": "string"
+        },
+        "double_dial": {
+          "type": "boolean"
+        },
         "external_audience": {
           "anyOf": [
             {
@@ -46407,11 +50026,45 @@
           "type": "object",
           "additionalProperties": true
         },
+        "goal_variable": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "holidays": {
+          "allOf": [
+            {
+              "$ref": "#/components/schemas/CampaignHolidays"
+            }
+          ]
+        },
         "ivr_navigation": {
+          "type": "boolean"
+        },
+        "mark_complete_when_no_leads": {
           "type": "boolean"
         },
         "name": {
           "type": "string"
+        },
+        "number_pool": {
+          "anyOf": [
+            {
+              "$ref": "#/components/schemas/CampaignNumberPool"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "outbound_ringing_timeout_sec": {
+          "maximum": 80,
+          "minimum": 15,
+          "type": [
+            "integer",
+            "null"
+          ]
         },
         "retry_delay_minutes": {
           "minimum": 1,
@@ -46421,11 +50074,27 @@
           "minimum": 0,
           "type": "integer"
         },
+        "retry_on_voicemail": {
+          "type": "boolean"
+        },
+        "retry_until_goal": {
+          "type": "boolean"
+        },
         "scheduled_start_at": {
           "format": "date-time",
           "type": [
             "string",
             "null"
+          ]
+        },
+        "sequence": {
+          "anyOf": [
+            {
+              "$ref": "#/components/schemas/CampaignSequence"
+            },
+            {
+              "type": "null"
+            }
           ]
         },
         "timezone": {
@@ -46526,6 +50195,727 @@
         }
       }
     },
+    "#/components/schemas/CampaignHolidays": {
+      "required": [
+        "public",
+        "custom_dates"
+      ],
+      "type": "object",
+      "properties": {
+        "custom_dates": {
+          "maxItems": 100,
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "format": "date",
+            "pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+            "type": "string"
+          }
+        },
+        "public": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false
+    },
+    "#/components/schemas/CampaignNumberPool": {
+      "required": [
+        "mode",
+        "phone_number_ids"
+      ],
+      "type": "object",
+      "properties": {
+        "default_phone_number_id": {
+          "format": "uuid",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "mode": {
+          "enum": [
+            "local_presence",
+            "round_robin"
+          ],
+          "type": "string"
+        },
+        "phone_number_ids": {
+          "maxItems": 500,
+          "minItems": 1,
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "format": "uuid",
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "#/components/schemas/CampaignSequence": {
+      "required": [
+        "version",
+        "start_node_id",
+        "nodes"
+      ],
+      "type": "object",
+      "properties": {
+        "global_outcomes": {
+          "maxItems": 10,
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/CampaignSequenceGlobalOutcome"
+          }
+        },
+        "nodes": {
+          "maxItems": 10,
+          "minItems": 1,
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/CampaignSequenceStep"
+          }
+        },
+        "start_node_id": {
+          "pattern": "^[a-z0-9][a-z0-9_-]{0,39}$",
+          "type": "string"
+        },
+        "version": {
+          "const": 1,
+          "type": "integer"
+        }
+      },
+      "additionalProperties": false
+    },
+    "#/components/schemas/CampaignSequenceAttempt": {
+      "required": [
+        "delay_minutes"
+      ],
+      "type": "object",
+      "properties": {
+        "delay_minutes": {
+          "maximum": 43200,
+          "minimum": 0,
+          "type": "integer"
+        },
+        "voicemail": {
+          "anyOf": [
+            {
+              "$ref": "#/components/schemas/CampaignSequenceVoicemail"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "#/components/schemas/CampaignSequenceCondition": {
+      "oneOf": [
+        {
+          "$ref": "#/components/schemas/CampaignSequencePromptCondition"
+        },
+        {
+          "$ref": "#/components/schemas/CampaignSequenceRulesCondition"
+        }
+      ]
+    },
+    "#/components/schemas/CampaignSequenceDestination": {
+      "oneOf": [
+        {
+          "$ref": "#/components/schemas/CampaignSequenceNodeDestination"
+        },
+        {
+          "$ref": "#/components/schemas/CampaignSequenceRetryDestination"
+        },
+        {
+          "$ref": "#/components/schemas/CampaignSequenceEndDestination"
+        }
+      ]
+    },
+    "#/components/schemas/CampaignSequenceEmailConfig": {
+      "required": [
+        "subject",
+        "message"
+      ],
+      "type": "object",
+      "properties": {
+        "message": {
+          "maxLength": 10000,
+          "minLength": 1,
+          "type": "string"
+        },
+        "subject": {
+          "maxLength": 200,
+          "minLength": 1,
+          "type": "string"
+        },
+        "variable_mapping": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "#/components/schemas/CampaignSequenceEndDestination": {
+      "required": [
+        "type",
+        "successful"
+      ],
+      "type": "object",
+      "properties": {
+        "successful": {
+          "type": "boolean"
+        },
+        "type": {
+          "const": "end",
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "#/components/schemas/CampaignSequenceGlobalOutcome": {
+      "required": [
+        "id",
+        "label",
+        "condition",
+        "destination"
+      ],
+      "type": "object",
+      "properties": {
+        "condition": {
+          "$ref": "#/components/schemas/CampaignSequenceCondition"
+        },
+        "destination": {
+          "$ref": "#/components/schemas/CampaignSequenceEndDestination"
+        },
+        "id": {
+          "pattern": "^[a-z0-9][a-z0-9_-]{0,39}$",
+          "type": "string"
+        },
+        "label": {
+          "maxLength": 60,
+          "minLength": 1,
+          "type": "string"
+        },
+        "save_to_field": {
+          "anyOf": [
+            {
+              "required": [
+                "key",
+                "value"
+              ],
+              "type": "object",
+              "properties": {
+                "key": {
+                  "pattern": "^[a-z][a-z0-9_]{0,63}$",
+                  "type": "string"
+                },
+                "value": {
+                  "type": [
+                    "string",
+                    "number",
+                    "boolean"
+                  ]
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "#/components/schemas/CampaignSequenceMessage": {
+      "required": [
+        "config",
+        "wait_minutes",
+        "next",
+        "failed"
+      ],
+      "type": "object",
+      "properties": {
+        "config": {
+          "oneOf": [
+            {
+              "$ref": "#/components/schemas/CampaignSequenceSmsConfig"
+            },
+            {
+              "$ref": "#/components/schemas/CampaignSequenceSmsCompanySenderConfig"
+            },
+            {
+              "$ref": "#/components/schemas/CampaignSequenceWhatsAppConfig"
+            },
+            {
+              "$ref": "#/components/schemas/CampaignSequenceEmailConfig"
+            }
+          ]
+        },
+        "failed": {
+          "$ref": "#/components/schemas/CampaignSequenceRouteDestination"
+        },
+        "next": {
+          "$ref": "#/components/schemas/CampaignSequenceRouteDestination"
+        },
+        "replied": {
+          "anyOf": [
+            {
+              "$ref": "#/components/schemas/CampaignSequenceRouteDestination"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "wait_minutes": {
+          "maximum": 43200,
+          "minimum": 0,
+          "type": "integer"
+        }
+      },
+      "additionalProperties": false
+    },
+    "#/components/schemas/CampaignSequenceMessageNode": {
+      "required": [
+        "id",
+        "name",
+        "channel",
+        "message"
+      ],
+      "type": "object",
+      "properties": {
+        "assistant_id": {
+          "format": "uuid",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "channel": {
+          "enum": [
+            "sms",
+            "whatsapp_template",
+            "email"
+          ],
+          "type": "string"
+        },
+        "id": {
+          "pattern": "^[a-z0-9][a-z0-9_-]{0,39}$",
+          "type": "string"
+        },
+        "message": {
+          "$ref": "#/components/schemas/CampaignSequenceMessage"
+        },
+        "name": {
+          "maxLength": 60,
+          "minLength": 1,
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "#/components/schemas/CampaignSequenceNode": {
+      "required": [
+        "id",
+        "name",
+        "attempts",
+        "no_response",
+        "other"
+      ],
+      "type": "object",
+      "properties": {
+        "assistant_id": {
+          "format": "uuid",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "attempts": {
+          "maxItems": 10,
+          "minItems": 1,
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/CampaignSequenceAttempt"
+          }
+        },
+        "channel": {
+          "const": "phone_call",
+          "type": "string"
+        },
+        "id": {
+          "pattern": "^[a-z0-9][a-z0-9_-]{0,39}$",
+          "type": "string"
+        },
+        "name": {
+          "maxLength": 60,
+          "minLength": 1,
+          "type": "string"
+        },
+        "no_response": {
+          "required": [
+            "destination"
+          ],
+          "type": "object",
+          "properties": {
+            "destination": {
+              "oneOf": [
+                {
+                  "$ref": "#/components/schemas/CampaignSequenceNodeDestination"
+                },
+                {
+                  "$ref": "#/components/schemas/CampaignSequenceEndDestination"
+                }
+              ]
+            }
+          },
+          "additionalProperties": false
+        },
+        "other": {
+          "required": [
+            "destination"
+          ],
+          "type": "object",
+          "properties": {
+            "destination": {
+              "$ref": "#/components/schemas/CampaignSequenceDestination"
+            }
+          },
+          "additionalProperties": false
+        },
+        "outcomes": {
+          "maxItems": 10,
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/CampaignSequenceOutcome"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "#/components/schemas/CampaignSequenceNodeDestination": {
+      "required": [
+        "type",
+        "node_id"
+      ],
+      "type": "object",
+      "properties": {
+        "node_id": {
+          "pattern": "^[a-z0-9][a-z0-9_-]{0,39}$",
+          "type": "string"
+        },
+        "type": {
+          "const": "node",
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "#/components/schemas/CampaignSequenceOutcome": {
+      "required": [
+        "id",
+        "label",
+        "condition",
+        "destination"
+      ],
+      "type": "object",
+      "properties": {
+        "condition": {
+          "$ref": "#/components/schemas/CampaignSequenceCondition"
+        },
+        "delay_minutes": {
+          "maximum": 43200,
+          "minimum": 0,
+          "type": "integer"
+        },
+        "destination": {
+          "$ref": "#/components/schemas/CampaignSequenceDestination"
+        },
+        "id": {
+          "pattern": "^[a-z0-9][a-z0-9_-]{0,39}$",
+          "type": "string"
+        },
+        "label": {
+          "maxLength": 60,
+          "minLength": 1,
+          "type": "string"
+        },
+        "save_to_field": {
+          "anyOf": [
+            {
+              "required": [
+                "key",
+                "value"
+              ],
+              "type": "object",
+              "properties": {
+                "key": {
+                  "pattern": "^[a-z][a-z0-9_]{0,63}$",
+                  "type": "string"
+                },
+                "value": {
+                  "type": [
+                    "string",
+                    "number",
+                    "boolean"
+                  ]
+                }
+              },
+              "additionalProperties": false
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "#/components/schemas/CampaignSequencePromptCondition": {
+      "required": [
+        "type",
+        "description"
+      ],
+      "type": "object",
+      "properties": {
+        "description": {
+          "maxLength": 500,
+          "minLength": 1,
+          "type": "string"
+        },
+        "type": {
+          "const": "prompt",
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "#/components/schemas/CampaignSequenceRetryDestination": {
+      "required": [
+        "type"
+      ],
+      "type": "object",
+      "properties": {
+        "type": {
+          "const": "retry",
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "#/components/schemas/CampaignSequenceRouteDestination": {
+      "oneOf": [
+        {
+          "$ref": "#/components/schemas/CampaignSequenceNodeDestination"
+        },
+        {
+          "$ref": "#/components/schemas/CampaignSequenceEndDestination"
+        }
+      ]
+    },
+    "#/components/schemas/CampaignSequenceRule": {
+      "required": [
+        "variable",
+        "operator"
+      ],
+      "type": "object",
+      "properties": {
+        "operator": {
+          "enum": [
+            "eq",
+            "neq",
+            "gt",
+            "gte",
+            "lt",
+            "lte",
+            "contains",
+            "not_contains",
+            "exists",
+            "not_exists"
+          ],
+          "type": "string"
+        },
+        "value": {
+          "maxLength": 200,
+          "type": [
+            "string",
+            "number",
+            "boolean"
+          ]
+        },
+        "variable": {
+          "maxLength": 80,
+          "minLength": 1,
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "#/components/schemas/CampaignSequenceRulesCondition": {
+      "required": [
+        "type",
+        "match",
+        "rules"
+      ],
+      "type": "object",
+      "properties": {
+        "match": {
+          "enum": [
+            "all",
+            "any"
+          ],
+          "type": "string"
+        },
+        "rules": {
+          "maxItems": 10,
+          "minItems": 1,
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/CampaignSequenceRule"
+          }
+        },
+        "type": {
+          "const": "rules",
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "#/components/schemas/CampaignSequenceSmsCompanySenderConfig": {
+      "required": [
+        "rcs_sender_id",
+        "message"
+      ],
+      "type": "object",
+      "properties": {
+        "from_number_id": {
+          "anyOf": [
+            {
+              "type": "null"
+            },
+            {
+              "pattern": "^\\s*$",
+              "type": "string"
+            }
+          ]
+        },
+        "message": {
+          "maxLength": 1600,
+          "minLength": 1,
+          "type": "string"
+        },
+        "rcs_sender_id": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "variable_mapping": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "#/components/schemas/CampaignSequenceSmsConfig": {
+      "required": [
+        "from_number_id",
+        "message"
+      ],
+      "type": "object",
+      "properties": {
+        "from_number_id": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "message": {
+          "maxLength": 1600,
+          "minLength": 1,
+          "type": "string"
+        },
+        "rcs_sender_id": {
+          "anyOf": [
+            {
+              "type": "null"
+            },
+            {
+              "pattern": "^\\s*$",
+              "type": "string"
+            }
+          ]
+        },
+        "variable_mapping": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "#/components/schemas/CampaignSequenceStep": {
+      "oneOf": [
+        {
+          "$ref": "#/components/schemas/CampaignSequenceNode"
+        },
+        {
+          "$ref": "#/components/schemas/CampaignSequenceMessageNode"
+        }
+      ]
+    },
+    "#/components/schemas/CampaignSequenceVoicemail": {
+      "required": [
+        "action"
+      ],
+      "type": "object",
+      "properties": {
+        "action": {
+          "enum": [
+            "hangup",
+            "drop_message"
+          ],
+          "type": "string"
+        },
+        "message": {
+          "maxLength": 1000,
+          "minLength": 1,
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "#/components/schemas/CampaignSequenceWhatsAppConfig": {
+      "required": [
+        "connector_id",
+        "template_id"
+      ],
+      "type": "object",
+      "properties": {
+        "connector_id": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "template_id": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "variable_mapping": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
     "#/components/schemas/CampaignUpdate": {
       "type": "object",
       "properties": {
@@ -46554,6 +50944,16 @@
           "minimum": 1,
           "type": "integer"
         },
+        "contact_timezone_mode": {
+          "enum": [
+            "campaign",
+            "contact"
+          ],
+          "type": "string"
+        },
+        "double_dial": {
+          "type": "boolean"
+        },
         "external_audience": {
           "anyOf": [
             {
@@ -46564,11 +50964,45 @@
             }
           ]
         },
+        "goal_variable": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "holidays": {
+          "allOf": [
+            {
+              "$ref": "#/components/schemas/CampaignHolidays"
+            }
+          ]
+        },
         "ivr_navigation": {
+          "type": "boolean"
+        },
+        "mark_complete_when_no_leads": {
           "type": "boolean"
         },
         "name": {
           "type": "string"
+        },
+        "number_pool": {
+          "anyOf": [
+            {
+              "$ref": "#/components/schemas/CampaignNumberPool"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "outbound_ringing_timeout_sec": {
+          "maximum": 80,
+          "minimum": 15,
+          "type": [
+            "integer",
+            "null"
+          ]
         },
         "retry_delay_minutes": {
           "minimum": 1,
@@ -46577,6 +51011,22 @@
         "retry_max": {
           "minimum": 0,
           "type": "integer"
+        },
+        "retry_on_voicemail": {
+          "type": "boolean"
+        },
+        "retry_until_goal": {
+          "type": "boolean"
+        },
+        "sequence": {
+          "anyOf": [
+            {
+              "$ref": "#/components/schemas/CampaignSequence"
+            },
+            {
+              "type": "null"
+            }
+          ]
         },
         "timezone": {
           "type": "string"
@@ -46632,8 +51082,34 @@
           "minLength": 1,
           "type": "string"
         },
+        "regional_auth_token": {
+          "type": "string",
+          "writeOnly": true
+        },
         "sip_region": {
-          "$ref": "#/components/schemas/SipRegion"
+          "enum": [
+            "global",
+            "eu",
+            "us",
+            "uk",
+            "india",
+            "japan",
+            "aus",
+            "sa"
+          ],
+          "type": "string"
+        },
+        "source_connection_id": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "twilio_voice_region": {
+          "enum": [
+            "us1",
+            "ie1",
+            "au1"
+          ],
+          "type": "string"
         }
       }
     },
@@ -47131,6 +51607,26 @@
         }
       }
     },
+    "#/components/schemas/CustomDomainLinkPreviewUpdate": {
+      "minProperties": 1,
+      "type": "object",
+      "properties": {
+        "link_preview_description": {
+          "maxLength": 200,
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "link_preview_title": {
+          "maxLength": 70,
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
     "#/components/schemas/CustomPaymentActionInput": {
       "required": [
         "action"
@@ -47313,6 +51809,9 @@
           "maxLength": 120,
           "minLength": 1,
           "type": "string"
+        },
+        "pinned": {
+          "type": "boolean"
         },
         "show_default_sections": {
           "type": "boolean"
@@ -48815,7 +53314,22 @@
           "type": "string"
         }
       },
-      "additionalProperties": false
+      "additionalProperties": false,
+      "if": {
+        "required": [
+          "shortage_policy"
+        ],
+        "properties": {
+          "shortage_policy": {
+            "const": "auto_topup"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "auto_topup_consent_token"
+        ]
+      }
     },
     "#/components/schemas/MarketingSettingsInput": {
       "type": "object",
@@ -50615,6 +55129,9 @@
             "extension"
           ],
           "type": "string"
+        },
+        "use_fixed_outbound_ip": {
+          "type": "boolean"
         }
       }
     },
@@ -51350,6 +55867,14 @@
       },
       "additionalProperties": false
     },
+    "#/components/schemas/SuppressionDirection": {
+      "enum": [
+        "outbound",
+        "inbound",
+        "both"
+      ],
+      "type": "string"
+    },
     "#/components/schemas/TransferHours": {
       "type": "object",
       "additionalProperties": {
@@ -51499,6 +56024,76 @@
         }
       },
       "additionalProperties": false
+    },
+    "#/components/schemas/TwilioRegionSwitchInput": {
+      "oneOf": [
+        {
+          "required": [
+            "direction",
+            "trunk_token"
+          ],
+          "type": "object",
+          "properties": {
+            "direction": {
+              "enum": [
+                "outbound_only",
+                "bidirectional"
+              ],
+              "type": "string"
+            },
+            "mode": {
+              "enum": [
+                "existing"
+              ],
+              "type": "string"
+            },
+            "sip_password": {
+              "maxLength": 256,
+              "minLength": 1,
+              "type": "string",
+              "writeOnly": true
+            },
+            "sip_username": {
+              "maxLength": 128,
+              "minLength": 1,
+              "type": "string",
+              "writeOnly": true
+            },
+            "trunk_token": {
+              "maxLength": 4096,
+              "minLength": 1,
+              "type": "string"
+            }
+          }
+        },
+        {
+          "required": [
+            "mode",
+            "direction",
+            "managed_token"
+          ],
+          "type": "object",
+          "properties": {
+            "direction": {
+              "enum": [
+                "bidirectional"
+              ],
+              "type": "string"
+            },
+            "managed_token": {
+              "maxLength": 4096,
+              "minLength": 1,
+              "type": "string"
+            },
+            "mode": {
+              "enum": [
+                "managed"
+              ],
+              "type": "string"
+            }
+          }
+        }
+      ]
     },
     "#/components/schemas/UserToolInput": {
       "type": "object",
@@ -51801,6 +56396,12 @@
             "halftone"
           ],
           "type": "string"
+        },
+        "voice_minimal_layout": {
+          "type": "boolean"
+        },
+        "voice_start_on_open": {
+          "type": "boolean"
         }
       }
     },

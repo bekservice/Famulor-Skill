@@ -58,6 +58,10 @@ Use [API and SDK](../skills/famulor-skill/references/api-and-sdk.md) and the [co
 
 Use [campaign tools](../skills/famulor-skill/references/toolsets/campaigns.md). Preparing recipients is distinct from authorizing a campaign start. State target campaign, recipients, timing and intended action when requesting launch.
 
+> Set up an appointment reminder campaign from a template, in German, with our Berlin number as the SMS sender. Show me the steps before saving.
+
+Use the [campaign guide](../skills/famulor-skill/references/campaigns.md). The agent lists the templates in German, shows the matching one, fills only senders that exist in the workspace and saves a draft. Launching needs your own compliance confirmation for that campaign.
+
 ## Automate a recurring workflow
 
 > Design a weekly summary of failed support calls, including its schedule, destination, access scope and expected costs. Keep it as a proposal until we have reviewed those details.
