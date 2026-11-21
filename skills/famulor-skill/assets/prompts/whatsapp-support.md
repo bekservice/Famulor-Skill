@@ -9,6 +9,12 @@ An adaptable starting point for inbound customer support. Replace bracketed setu
 - Decide which escalation action really exists: a configured case-creation tool, an authorized callback, or contact instructions. Prompt text alone cannot pause AI or transfer a chat to a person.
 - Check consent, the service window, and template sendability before any outbound test. An inbound-support prompt does not authorize an outreach campaign.
 
+## Verify outgoing delivery
+
+- Open History for the conversation or Runs for a WhatsApp template step. Look for a delivery receipt before reporting that a message reached the recipient.
+- Read conversation messages with `get_messaging_history_item` or a template step with `get_automation_run`. When present, `whatsapp_delivery` contains the latest reported status, its time and an available failure code. A completed send step confirms the request. If no receipt is available, describe delivery as unknown.
+- The equivalent CLI reads are `famulor get-messaging-history-item <id>` and `famulor get-automation-run <id> <run-id>`.
+
 ## Shared system prompt
 
 ```text
@@ -80,3 +86,9 @@ Customer: “My order arrived damaged.” Then: “The reference is A-1042.”
 Expected: combine the messages if the configured response delay allows it; use the actual lookup and verification policy; explain the returned next step. Do not announce a refund, replacement, human takeover, or outbound message unless the corresponding action succeeded.
 
 Also test an unknown reference, a failed lookup, an image without a usable description, a human takeover, and an expired service window. See [messaging and channels](../../references/messaging-and-channels.md).
+
+## Example quick-reply guidance
+
+If the assistant’s **Quick replies** setting is on, use **When to use them (optional)** to give it a narrow instruction. For example, write “Offer Pick up and Delivery when the customer can choose either option for their order.”
+
+In an open service window, check that the two choices appear as buttons when both are available. Select one on the latest offer and verify that its label becomes an ordinary customer message in History. Enter a typed answer in a fresh turn to verify the same handling. [WhatsApp quick replies](../../references/messaging-and-channels.md#whatsapp-quick-replies)

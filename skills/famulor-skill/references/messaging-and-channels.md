@@ -120,7 +120,23 @@ Inspect the live conversation's service-window state. Free-form replies require 
 
 Template drafts, approval, and delivery are separate states. Use actual sender/template/language choices from the workspace. Resolve every parameter binding and inspect any media or dynamic-value requirements before sending. Creating a template is not submitting it for review; submitting it is not approval; approval is not proof that every supported template variant is sendable in every workflow.
 
+Sender, name and language identify one WhatsApp template. If creating a custom draft returns HTTP 409 ("A template with this name and language already exists for this sender."), list that sender's templates (`list_whatsapp_templates` with `connector_id`, or `GET /whatsapp/templates?connector_id=…`) and inspect the existing one. Do not retry the same creation, replace its content, or send a message to test it. Edit the existing template only if the user asked for an edit; ask for a different name if they want a separate draft.
+
 Before a send or campaign start, verify the authorized recipient set, purpose, content, consent/suppression, sender readiness, template status, and limits. Do not rewrite a marketing message as a service reply to bypass the channel's rules.
+
+### Message delivery status
+
+For a Cloud or Coexistence sender, `POST /api/v1/whatsapp/templates` with `action=send` returns the WhatsApp message ID in `data.message_id`. Match it to `message_id` in the signed `whatsapp.message_status` webhook. Famulor forwards each status as WhatsApp reports it for Cloud API messages, such as `sent`, `delivered`, `read` or `failed`; a failure includes `errors`. Verify the `X-Signature-256` HMAC with the sender's signing secret. Without a status event or a History receipt, report delivery as unknown. [Delivery receipts in History](../assets/prompts/whatsapp-support.md#verify-outgoing-delivery)
+
+Use `test_whatsapp_read_receipts_webhook` in MCP or `action=test_read_receipts_webhook` on `POST /api/v1/whatsapp/connectors/{id}/profile` to check the configured receiver. The signed test sample sets `test: true`, `status: "delivered"` and `message_id: "wamid.test"`. Read the receiver's HTTP code in `status` from the tool or `data.status` from REST. [WhatsApp status webhook reference](https://docs.famulor.io/channels/whatsapp#read-receipts-webhook)
+
+### WhatsApp quick replies
+
+For a Cloud or Coexistence sender, turn on **Quick replies** under the assigned assistant’s **Settings → Conversation → Interactive responses**. It starts off. The website widget and Test Chat share the same setting. Use **When to use them (optional)** to describe when a few known choices would help, such as **Pick up** and **Delivery** for an order.
+
+During an open 24-hour service window, the assistant can offer two or three native WhatsApp buttons. Use distinct labels of up to 20 characters and a message body of up to 1,024 characters. The assistant can present choices as text when they exceed the button limits. Use text for open questions, private information, and confirmations with real consequences.
+
+Famulor accepts a selection when the offer is still the latest message in the open conversation. Treat the label as the next customer message and apply the same policy, verification, and tool permissions as for a typed answer. Ask for a typed confirmation before committing an app action that requires confirmation. Check both a tap on the latest offer and a typed reply in the intended WhatsApp channel with an authorized test recipient. A tap on an older offer is ignored: it adds no customer message and starts no reply. [Configure WhatsApp quick replies](https://docs.famulor.io/channels/whatsapp#quick-replies-in-conversations)
 
 ### Human takeover and Coexistence
 
@@ -142,7 +158,7 @@ Website chat uploads and asynchronous messaging attachments have different capab
 
 A voice test does not validate the web chat experience. Test the actual widget on an allowed website, with a fresh session, the intended language, pre-chat values, links, tools, attachments, and the final History record. Opening the launcher alone is not a conversation-started event. Web chat uses conversation events; do not attach a phone-only completed-call automation and assume it covers text chat.
 
-Quick replies are optional clickable answers in live website chat and the dashboard Test Chat. They stay off until switched on under Settings → Conversation → Live chat → Interactive responses. They do not appear on phone calls, WhatsApp, Messenger, Slack, or email. A click sends that button's text as the visitor's next message; it is not a separate command. The assistant offers them only when the visitor is choosing among a few short options, and it keeps answering in normal text as well.
+Quick replies are optional clickable answers. With **Settings → Conversation → Interactive responses → Quick replies** on, the website widget and Test Chat can show two to five, and WhatsApp Cloud and Coexistence conversations get two or three native buttons ([WhatsApp quick replies](#whatsapp-quick-replies)). They stay off until enabled and do not appear on phone calls, SMS, Messenger, Slack, email or other messaging channels. A click sends the label as the visitor's next message; it is not a separate command. Visitors can always type instead.
 
 Use the [web chat support template](../assets/prompts/webchat-support.md).
 

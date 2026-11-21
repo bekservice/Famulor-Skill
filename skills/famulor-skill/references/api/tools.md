@@ -1,6 +1,6 @@
 # Tools API operations
 
-Reviewed 2026-11-15. 25 public operations. [All areas](index.md) · [Execution guide](../api-and-sdk.md)
+Reviewed 2026-11-20. 26 public operations. [All areas](index.md) · [Execution guide](../api-and-sdk.md)
 
 Paths are relative to `https://app.famulor.io/api/v1`. Each operation ID is also the typed SDK method `client.api.<operationId>`. Look up its exact request contract with the bundled `find-operation.py`; CLI help reflects the installed version.
 
@@ -9,6 +9,7 @@ Hidden CLI operations require an interactive/browser flow or `famulor api` where
 | Operation ID / SDK method suffix | HTTP endpoint | CLI command | Purpose |
 | --- | --- | --- | --- |
 | `archiveTool` | `DELETE /tools/{id}` | `famulor archive-tool` | [Archive an unused tool](https://docs.famulor.io/api-reference/tools/archive-an-unused-tool) |
+| `connectIntegration` | `POST /tools/integrations/{provider}` | `famulor connect-integration` | [Connect an integration](https://docs.famulor.io/api-reference/tools/connect-an-integration) |
 | `connectMagicline` | `POST /tools/magicline` | `famulor connect-magicline` | [Connect Magicline Open API](https://docs.famulor.io/api-reference/tools/connect-magicline-open-api) |
 | `connectMagiclineConnect` | `POST /tools/magicline-connect` | `famulor connect-magicline-connect` | [Connect Magicline Connect API](https://docs.famulor.io/api-reference/tools/connect-magicline-connect-api) |
 | `connectSimplybook` | `POST /tools/simplybook` | `famulor connect-simplybook` | [Connect SimplyBook.me](https://docs.famulor.io/api-reference/tools/connect-simplybookme) |

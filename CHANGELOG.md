@@ -1,9 +1,45 @@
 # Changelog
 
-## 2.8.2 — 2026-11-15
+## 2.8.10 — 2026-11-21
 
-- Document fixed rules, conversation-based paths, mandatory rules and default paths in Flow Builder.
-- Add the saved-condition preview to the public REST, CLI, SDK and MCP catalogs.
+- Move the repository to the Famulor-SI GitHub organization. Install commands, plugin manifests and links now use `Famulor-SI/Famulor-Skill`; old `bekservice/Famulor-Skill` links redirect.
+- Tell agents to check the effective Calls retention period first. With 0 days, the transcript and recording of a completed call may no longer be in History when a later task runs.
+
+## 2.8.9 — 2026-11-20
+
+- Guide agents through checking WhatsApp delivery receipts in conversation History and automation run details.
+
+## 2.8.8 — 2026-11-20
+
+- Guide agents through previewing a regional move for an existing Twilio number, confirming both call directions and restoring its previous route. Include the managed trunk option in the public API, CLI, SDK and MCP catalogs.
+
+## 2.8.7 — 2026-11-19
+
+- Document preview, switch and restore for existing Twilio numbers, including outbound-only changes and verifying the target for incoming calls.
+
+## 2.8.6 — 2026-11-19
+
+- Document how to set recurring public holidays for a native booking event type and verify the resulting slots before offering an appointment.
+- Refresh the bundled REST, CLI, SDK and MCP catalogs for holiday discovery and event-type settings.
+- Document the title and description for a white-label custom domain link preview. Verify the saved result with the settings API or MCP before sharing a link.
+
+## 2.8.5 — 2026-11-18
+
+- Document how to create a connection for each Twilio voice region with one Auth Token in the dashboard, and when API clients can use US1 credentials for SMS.
+
+## 2.8.4 — 2026-11-18
+
+- Document Twilio voice regions for one-click number import and reuse of a connected Twilio account.
+- Refresh the carrier connection request fields and command options in the bundled public contract.
+
+## 2.8.3 — 2026-11-17
+
+- Explain how to select a voice for Pipeline or Half-Cascade spoken output, including checking the assistant's spoken languages and listening to a sample.
+
+## 2.8.2 — 2026-11-16
+
+- Document the workspace setting for automatic call blocking, including its admin write permissions and how it differs from an existing block.
+- Refresh the public REST, CLI, SDK and MCP catalogs from the same reviewed contract.
 
 ## 2.8.1 — 2026-11-15
 
@@ -114,4 +150,4 @@
 
 ## 2.1.6
 
-Official Famulor mark and the 439-tool MCP catalog. Earlier release details are available in [GitHub Releases](https://github.com/bekservice/Famulor-Skill/releases).
+Official Famulor mark and the 439-tool MCP catalog. Earlier release details are available in [GitHub Releases](https://github.com/Famulor-SI/Famulor-Skill/releases).

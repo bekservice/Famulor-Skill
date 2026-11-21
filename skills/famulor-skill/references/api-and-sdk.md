@@ -136,6 +136,7 @@ Use returned error codes and recovery guidance: reconnect on authentication fail
 | WhatsApp, email or social channels | [Channel guide](messaging-and-channels.md), [Messaging API](api/messaging.md) | Connector state and conversation details/delivery state |
 | Add website voice/chat | [Widgets API](api/widgets.md), [Channel guide](messaging-and-channels.md) | Real widget conversation and history |
 | Start authorized outreach | [Campaign guide](campaigns.md), [Campaigns](api/campaigns.md), [Calls](api/calls.md), [Suppression](api/suppression.md) | Human-confirmed attestation, target list, run status and settled analytics |
+| Configure automatic blocking after calls | [Settings](api/settings.md), [Suppression](api/suppression.md) | Use the workspace setting to skip post-call detection. Existing and manual blocks still apply. |
 | Add knowledge | [Knowledge Bases](api/knowledge-bases.md) | Index readiness and a source-grounded answer |
 | Review conversations | [History](api/history.md), [Calls](api/calls.md), [QA](api/qa.md) | Complete channel-specific detail, not only a preview |
 | Automate a workflow | [Automations](api/automations.md), [Missions](api/milian-missions.md), [Webhooks](api/webhook-subscriptions.md) | Reviewed scope, run status and resulting resources |
@@ -235,6 +236,32 @@ famulor get-sms-rcs-sender SENDER_UUID
 
 The selection is a write-only input; sender details are the read authority. False releases the current default and may select another linked connection. Optional send response fields identify known transport and SMS fallback use. Plain-text fallback must retain the original message; separate text alternatives belong to rich/media content only.
 
+## White-label link previews
+
+Use the custom domain's link preview settings to control the title and description shown when someone shares a workspace link. The title also appears on the browser tab. Work in the correct workspace with a workspace owner or admin credential and white-label access.
+
+Read the current settings with `get_custom_domain_link_preview` or `GET /api/v1/custom-domain/link-preview`. Update the requested fields with `update_custom_domain_link_preview` or `PATCH /api/v1/custom-domain/link-preview`.
+
+```bash
+famulor get-custom-domain-link-preview
+famulor update-custom-domain-link-preview --link-preview-title "Acme Scheduling"
+```
+
+```typescript
+const preview = await client.api.getCustomDomainLinkPreview();
+console.log(preview.data?.effective_title);
+
+await client.api.updateCustomDomainLinkPreview({
+  body: { link_preview_title: "Acme Scheduling" },
+});
+```
+
+Send `null` to reset a field. The title falls back to the workspace app name and the description is cleared. Check the effective title, effective description and verified domain in the response before sharing a link. Messaging apps may continue to show a cached preview. [Configure white-label branding](https://docs.famulor.io/admin/whitelabel-setup)
+
 ## Permanently delete bookings
 
 Resolve the requested native booking IDs in the active workspace. Confirm the exact selection before deleting. Call `delete_bookings` or `POST /api/v1/bookings/delete` with `booking_ids` (1–200 UUIDs). Only ended or terminal bookings are eligible. Cancel an upcoming confirmed appointment first. Report `deleted_ids` and `skipped_ids` separately. Copies in connected calendars, email and other systems require separate handling.
+
+## Permanently delete Audience contacts
+
+For permanent Audience contact deletion, list the matching contacts and ask the user to confirm the exact workspace and IDs. Use `deleteAudienceContacts` with up to 100 explicit IDs and `confirmed: true` only after that confirmation. A user-owned workspace owner or admin credential with `leads:write` is required. Report `active_ids` separately because contacts with active campaign attempts remain.
