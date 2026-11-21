@@ -23,6 +23,7 @@ Turn the user's business outcome into a channel-appropriate assistant or a verif
 | WhatsApp, SMS with optional RCS, website text chat, social messaging or email | [Messaging and channels](references/messaging-and-channels.md) |
 | Tests, simulations, regression cases or call-quality review | [Testing and evaluation](references/testing-and-evaluation.md) |
 | REST endpoint, CLI command, TypeScript method or integration code | [API and SDK](references/api-and-sdk.md) and [operation index](references/api/index.md) |
+| A ready-made Milian Mission from the template gallery | [Mission templates](references/api-and-sdk.md#milian-mission-templates) |
 | A connector or automation template listed for every Famulor workspace, or a missing app | [Famulor Marketplace contributions](references/api-and-sdk.md#contribute-a-connector-or-automation-template) |
 | Workspace data or actions | The smallest matching MCP toolset below |
 
@@ -53,7 +54,7 @@ https://app.famulor.io/mcp?toolsets=assistants,calls
 | `telephony` | Numbers, own carriers, routing and team calling | 74 | [Telephony](references/toolsets/telephony.md) |
 | `knowledge` | Documents, FAQs, websites and connected knowledge sources | 28 | [Knowledge](references/toolsets/knowledge.md) |
 | `dashboards` | Analytics and dashboard widgets | 19 | [Dashboards](references/toolsets/dashboards.md) |
-| `automations` | Workflows, connections, CRM sync, Missions and run history | 67 | [Automations](references/toolsets/automations.md) |
+| `automations` | Workflows, connections, CRM sync, Missions and run history | 68 | [Automations](references/toolsets/automations.md) |
 | `billing` | Balance, usage, invoices and billing recovery | 23 | [Billing](references/toolsets/billing.md) |
 | `settings` | Workspaces, preferences, retention, domains and credentials | 47 | [Settings](references/toolsets/settings.md) |
 | `platform` | Authorized reseller customer management | 19 | [Reseller management](references/toolsets/platform.md) |
@@ -61,7 +62,7 @@ https://app.famulor.io/mcp?toolsets=assistants,calls
 | `tasks` | Durable exports, crawls, simulations and preparation | 4 | [Tasks](references/toolsets/tasks.md) |
 | `milian` | Workspace questions and voice sessions using additional credits | 2 | [Milian](references/toolsets/milian.md) |
 
-The dated snapshot contains **550 tools** across 14 groups. `list_mcp_toolsets` reports groups visible to a custom connection. The public `assistant-history` profile intentionally provides only 11 read tools. Installing a skill cannot expand that connection's permissions. Model-catalog visibility may require AI Safety & Control; use available defaults rather than trying to bypass a denial.
+The dated snapshot contains **551 tools** across 14 groups. `list_mcp_toolsets` reports groups visible to a custom connection. The public `assistant-history` profile intentionally provides only 11 read tools. Installing a skill cannot expand that connection's permissions. Model-catalog visibility may require AI Safety & Control; use available defaults rather than trying to bypass a denial.
 
 ### Twilio regional number import
 

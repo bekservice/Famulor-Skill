@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "reviewedAt": "2026-11-20",
+  "reviewedAt": "2026-11-21",
   "source": "Famulor public OpenAPI, CLI command catalog and TypeScript SDK operation descriptors",
-  "openapiSha256": "1516cbe13d3c21fa80f749c2d3d073c732d6e8d5377a274cb7be5ae8dad8a5d5",
+  "openapiSha256": "2394803b1ffc4b41a02cebf40787204bc2d55854a5b87f58528586ea13aa2ae3",
   "baseUrl": "https://app.famulor.io/api/v1",
   "notice": "Dated navigation and request-shape snapshot, not a runtime validator. Check the live public schema and installed client before execution. Descriptions, examples, default values and response properties are intentionally omitted.",
   "operations": [
@@ -26982,6 +26982,103 @@
       "binaryResponse": false
     },
     {
+      "operationId": "listMissionTemplates",
+      "method": "GET",
+      "path": "/mission-templates",
+      "group": "Milian Missions",
+      "summary": "List mission templates",
+      "documentation": "https://docs.famulor.io/api-reference/milian-missions/list-mission-templates",
+      "cli": {
+        "command": "list-mission-templates",
+        "hidden": false,
+        "parameters": [
+          {
+            "name": "language",
+            "in": "query",
+            "flag": "--language",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "en",
+              "de",
+              "fr",
+              "es"
+            ]
+          },
+          {
+            "name": "category",
+            "in": "query",
+            "flag": "--category",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "improve",
+              "monitor",
+              "reports",
+              "customers"
+            ]
+          }
+        ],
+        "bodyFields": []
+      },
+      "sdkMethod": "client.api.listMissionTemplates",
+      "parameters": [
+        {
+          "name": "language",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "enum": [
+              "en",
+              "de",
+              "fr",
+              "es"
+            ],
+            "type": "string"
+          }
+        },
+        {
+          "name": "category",
+          "in": "query",
+          "required": false,
+          "schema": {
+            "enum": [
+              "improve",
+              "monitor",
+              "reports",
+              "customers"
+            ],
+            "type": "string"
+          }
+        }
+      ],
+      "requestBody": {
+        "required": false,
+        "content": {}
+      },
+      "responses": {
+        "200": [
+          "application/json"
+        ],
+        "400": [
+          "application/json"
+        ],
+        "401": [
+          "application/json"
+        ],
+        "403": [
+          "application/json"
+        ],
+        "429": [
+          "application/json"
+        ],
+        "503": [
+          "application/json"
+        ]
+      },
+      "binaryResponse": false
+    },
+    {
       "operationId": "listModels",
       "method": "GET",
       "path": "/models",
@@ -49608,6 +49705,233 @@
       },
       "additionalProperties": false
     },
+    "#/components/schemas/BrowserUseFlow": {
+      "required": [
+        "name",
+        "steps"
+      ],
+      "type": "object",
+      "properties": {
+        "fallback": {
+          "enum": [
+            "agent",
+            "ai_step",
+            "stop"
+          ],
+          "type": "string"
+        },
+        "inputs": {
+          "maxItems": 20,
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "readOnly": true,
+            "required": [
+              "key",
+              "label"
+            ],
+            "type": "object",
+            "properties": {
+              "description": {
+                "type": "string"
+              },
+              "key": {
+                "pattern": "^[a-z][a-z0-9_]{0,39}$",
+                "type": "string"
+              },
+              "label": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "name": {
+          "maxLength": 100,
+          "minLength": 1,
+          "type": "string"
+        },
+        "outputs": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "readOnly": true,
+            "required": [
+              "key",
+              "label"
+            ],
+            "type": "object",
+            "properties": {
+              "key": {
+                "pattern": "^[a-z][a-z0-9_]{0,39}$",
+                "type": "string"
+              },
+              "label": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "steps": {
+          "maxItems": 50,
+          "minItems": 1,
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/BrowserUseFlowStep"
+          }
+        },
+        "version": {
+          "enum": [
+            1
+          ],
+          "type": "integer"
+        }
+      },
+      "additionalProperties": false
+    },
+    "#/components/schemas/BrowserUseFlowStep": {
+      "required": [
+        "action",
+        "name",
+        "target"
+      ],
+      "type": "object",
+      "properties": {
+        "action": {
+          "enum": [
+            "click",
+            "type",
+            "select",
+            "read",
+            "open_frame"
+          ],
+          "type": "string"
+        },
+        "expect": {
+          "required": [
+            "type"
+          ],
+          "type": "object",
+          "properties": {
+            "input": {
+              "maxLength": 60,
+              "type": "string"
+            },
+            "text": {
+              "maxLength": 200,
+              "type": "string"
+            },
+            "type": {
+              "enum": [
+                "not_empty",
+                "contains",
+                "equals_input"
+              ],
+              "type": "string"
+            }
+          }
+        },
+        "instruction": {
+          "maxLength": 500,
+          "type": "string"
+        },
+        "item": {
+          "required": [
+            "role"
+          ],
+          "type": "object",
+          "properties": {
+            "name": {
+              "maxLength": 200,
+              "type": "string"
+            },
+            "role": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        },
+        "kind": {
+          "enum": [
+            "fixed",
+            "input",
+            "choose",
+            "read"
+          ],
+          "type": "string"
+        },
+        "name": {
+          "maxLength": 100,
+          "minLength": 1,
+          "type": "string"
+        },
+        "optional": {
+          "type": "boolean"
+        },
+        "output": {
+          "maxLength": 60,
+          "type": "string"
+        },
+        "submit": {
+          "type": "boolean"
+        },
+        "target": {
+          "$ref": "#/components/schemas/BrowserUseFlowTarget"
+        },
+        "text": {
+          "maxLength": 1000,
+          "minLength": 1,
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "#/components/schemas/BrowserUseFlowTarget": {
+      "required": [
+        "role",
+        "name",
+        "tag"
+      ],
+      "type": "object",
+      "properties": {
+        "anchor": {
+          "maxLength": 200,
+          "type": "string"
+        },
+        "css": {
+          "maxLength": 300,
+          "type": "string"
+        },
+        "id": {
+          "maxLength": 200,
+          "type": "string"
+        },
+        "label": {
+          "maxLength": 200,
+          "type": "string"
+        },
+        "name": {
+          "maxLength": 200,
+          "type": "string"
+        },
+        "placeholder": {
+          "maxLength": 200,
+          "type": "string"
+        },
+        "role": {
+          "maxLength": 31,
+          "type": "string"
+        },
+        "tag": {
+          "maxLength": 41,
+          "type": "string"
+        },
+        "test_id": {
+          "maxLength": 200,
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
     "#/components/schemas/BrowserUseOAuthLogin": {
       "required": [
         "method",
@@ -49788,6 +50112,16 @@
           ],
           "type": "string"
         },
+        "flow": {
+          "oneOf": [
+            {
+              "$ref": "#/components/schemas/BrowserUseFlow"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
         "login": {
           "oneOf": [
             {
@@ -49817,6 +50151,13 @@
           "maximum": 32,
           "minimum": 1,
           "type": "integer"
+        },
+        "mode": {
+          "enum": [
+            "instructions",
+            "flow"
+          ],
+          "type": "string"
         },
         "post_answer_dtmf": {
           "maxLength": 32,

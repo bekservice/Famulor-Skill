@@ -2,6 +2,7 @@
 
 ## 2.8.12 — 2026-11-21
 
+- Create a Milian Mission from the template gallery: list templates through MCP `list_mission_templates`, `GET /mission-templates`, CLI or SDK, ask for each input, fill in the placeholders and create the mission with `create_routine`. Templates that run on events (Beta) are set up in the app. The bundled catalogs now include 551 MCP tools and 547 API operations.
 - Point app vendors and developers to the public [Famulor Marketplace](https://github.com/Famulor-SI/famulor-marketplace): submit a connector (MCP server or API tool) or an automation template by pull request, or request a missing app. The Famulor team reviews each entry and adds merged entries to the app with the next release.
 
 ## 2.8.11 — 2026-11-21

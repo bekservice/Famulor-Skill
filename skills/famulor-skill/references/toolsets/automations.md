@@ -2,7 +2,7 @@
 
 Automations, connections, CRM sync, routines, and runs. Connect only this group with `https://app.famulor.io/mcp?toolsets=automations`.
 
-This 2026-11-20 snapshot covers all 67 tools assigned to `automations` in the canonical 550-tool registry. The live MCP `tools/list` response is authoritative for arguments, current availability, annotations, and plan or role gating. Never invent fields from this catalog.
+This 2026-11-21 snapshot covers all 68 tools assigned to `automations` in the canonical 551-tool registry. The live MCP `tools/list` response is authoritative for arguments, current availability, annotations, and plan or role gating. Never invent fields from this catalog.
 
 Toolsets limit discovery context; they do not grant access. OAuth/API scopes and workspace roles are enforced separately. The Effect column reflects MCP risk annotations: `Delete/destructive` also covers overwrites or changes that can remove data or safeguards.
 
@@ -54,6 +54,7 @@ Toolsets limit discovery context; they do not grant access. OAuth/API scopes and
 | `list_calendly_connections` | Read-only | `integrations:read or assistants:read` | Immediate | List Calendly accounts connected to this workspace through OAuth. Tokens and secrets are never returned. |
 | `list_campaign_audience_connections` | Read-only | `campaigns:read` | Immediate | Discover eligible beta Shopify/Klaviyo audience connections in this workspace. Does not import customer profiles. |
 | `list_crm_syncs` | Read-only | `automations:read or calls:read` | Immediate | List CRM sync configurations and their current status. Provider credentials are never returned. |
+| `list_mission_templates` | Read-only | `routines:read` | Immediate | List the ready-made Milian Missions of the template gallery (assistant improves itself, knowledge gaps, automation watch, weekly report, appointment reminder and more), featured first. Each item has id, category, name, description, featured, beta, schedule, event, capabilities, inputs, read_check and prompt in the requested language. To use one, ask for each of its inputs, replace every {placeholder} in prompt with the answer, then call create_routine with name, the filled prompt and the schedule fields. Templates with beta true run on a platform event (schedule is null): they need Workspace Beta Features and are set up as a Mission Studio draft, which create_routine cannot create. read_check automation_failures means the mission attaches the chosen automations and skips its AI run when none of them failed. |
 | `list_routine_runs` | Read-only | `routines:read` | Immediate | List recent runs of one mission, most recent first — status, trigger, credits charged, and timing. |
 | `list_routine_versions` | Read-only | `routines:read` | Immediate | List drafts and immutable published versions of one Milian Mission, newest first. |
 | `list_routines` | Read-only | `routines:read` | Immediate | List this workspace's Milian Missions: schedule, enabled state, next run, and the last run's status. |
