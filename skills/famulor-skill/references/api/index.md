@@ -1,6 +1,6 @@
 # Public API operation index
 
-Reviewed 2026-11-20: **546 operations across 40 areas**. Every operation is cross-checked against the generated CLI catalog and TypeScript SDK descriptors.
+Reviewed 2026-11-21: **547 operations across 40 areas**. Every operation is cross-checked against the generated CLI catalog and TypeScript SDK descriptors.
 
 Use this index to find the right endpoint. Open only the relevant area; use [API, CLI and SDK guidance](../api-and-sdk.md) for authentication, execution and verification. Public reseller operations remain subject to the authenticated workspace's entitlement and permissions.
 
@@ -39,7 +39,7 @@ The full API uses `https://app.famulor.io/api/v1` plus the relative paths shown 
 | Messaging | 36 | [Messaging](messaging.md) |
 | Migrations | 2 | [Migrations](migrations.md) |
 | Milian | 2 | [Milian](milian.md) |
-| Milian Missions | 14 | [Milian Missions](milian-missions.md) |
+| Milian Missions | 15 | [Milian Missions](milian-missions.md) |
 | Phone Numbers | 16 | [Phone Numbers](phone-numbers.md) |
 | QA | 3 | [QA](qa.md) |
 | SIP Trunks | 5 | [SIP Trunks](sip-trunks.md) |

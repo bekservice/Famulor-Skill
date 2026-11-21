@@ -178,6 +178,24 @@ famulor get-campaign-analytics CAMPAIGN_UUID --from 2026-11-01 --to 2026-11-30
 
 The TypeScript lines are illustrative: check the installed SDK's request and response types, and read back each campaign before claiming it saved or launched. `launch_required`, `attestation_required` and `sequence_changed` are recovery signals, not reasons to retry with a confirmation the user never gave.
 
+## Milian Mission templates
+
+The app's template gallery is also available as a read-only list. Each template includes a `prompt` with `{placeholders}`, an `inputs` list containing the question for each placeholder (`id` is the placeholder name without braces), and either `schedule` fields or a platform `event`. In the app, the gallery appears under **Recommendations** on the empty Missions page and under **New mission → From a template**. Choosing a template opens Milian, which asks for the missing details.
+
+To create a mission from a template through the API:
+
+1. List the templates with MCP `list_mission_templates` (`automations` group), REST `GET /mission-templates`, CLI `famulor list-mission-templates` or `client.api.listMissionTemplates()`. All require `routines:read`; `language` (`en`, `de`, `fr`, `es`) and `category` (`improve`, `monitor`, `reports`, `customers`) are optional. Let the user choose a template.
+2. Ask each question in `inputs`. Do not guess the answers. Use names that actually exist in the workspace, such as the assistant, automation, number or recipient.
+3. Replace every `{id}` in `prompt` and check that no braces remain. Show the filled prompt, the schedule and `capabilities` (`read`, `write`, `communicate`, `call`), because the mission runs unattended. Get confirmation.
+4. Create the mission with MCP `create_routine` or `createRoutine`. Send `name`, the filled `prompt` and the template's `schedule_type`, `schedule_time` and `schedule_weekday`. Times use wall-clock time; set `timezone` to the user's IANA time zone, because it defaults to `UTC`. Read the mission back.
+
+```bash
+famulor list-mission-templates --language de --category monitor
+famulor create-routine --name "Watch automations" --prompt @filled-prompt.txt --schedule-type hourly --timezone Europe/Berlin
+```
+
+A template with `beta: true` has `schedule: null` and runs on a platform event (`call.completed` or `lead.created`). It requires **Beta Features** under **Settings → Workspace** and is saved as a Mission Studio draft, which a workspace owner or admin publishes. `createRoutine` cannot create it, so the user must set it up in the app with **New mission → From a template** or ask Milian. `read_check: "automation_failures"` means the mission should skip its AI run when none of the attached automations failed. `createRoutine` creates only the scheduled mission. To add this condition, publish a version with `readCheck` as described in the next section.
+
 ## Milian Mission failure alerts
 
 A manual or scheduled Mission can explicitly publish a no-failures condition in its complete specification: `readCheck: {kind: "automation_failures", lookbackMinutes: 60}`. It needs Read and one to six owned automation references, a lookback of 1–1440 minutes and at least one tool call per reference plus two control calls. Use the existing draft/version/publish workflow; the published version is the approval boundary. Do not silently add this to another Mission.

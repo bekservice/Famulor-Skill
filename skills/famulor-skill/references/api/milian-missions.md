@@ -1,6 +1,6 @@
 # Milian Missions API operations
 
-Reviewed 2026-11-20. 14 public operations. [All areas](index.md) · [Execution guide](../api-and-sdk.md)
+Reviewed 2026-11-21. 15 public operations. [All areas](index.md) · [Execution guide](../api-and-sdk.md)
 
 Paths are relative to `https://app.famulor.io/api/v1`. Each operation ID is also the typed SDK method `client.api.<operationId>`. Look up its exact request contract with the bundled `find-operation.py`; CLI help reflects the installed version.
 
@@ -13,6 +13,7 @@ Hidden CLI operations require an interactive/browser flow or `famulor api` where
 | `deleteRoutine` | `DELETE /routines/{id}` | `famulor delete-routine` | [Delete a mission](https://docs.famulor.io/api-reference/milian-missions/delete-a-mission) |
 | `getRoutine` | `GET /routines/{id}` | `famulor get-routine` | [Get a mission](https://docs.famulor.io/api-reference/milian-missions/get-a-mission) |
 | `getRoutineWebhook` | `GET /routines/{id}/webhook` | `famulor get-routine-webhook` | [Get mission webhook setup](https://docs.famulor.io/api-reference/introduction) |
+| `listMissionTemplates` | `GET /mission-templates` | `famulor list-mission-templates` | [List mission templates](https://docs.famulor.io/api-reference/milian-missions/list-mission-templates) |
 | `listRoutineRuns` | `GET /routines/{id}/runs` | `famulor list-routine-runs` | [List mission runs](https://docs.famulor.io/api-reference/milian-missions/list-mission-runs) |
 | `listRoutineVersions` | `GET /routines/{id}/versions` | `famulor list-routine-versions` | [List mission versions](https://docs.famulor.io/api-reference/introduction) |
 | `listRoutines` | `GET /routines` | `famulor list-routines` | [List missions](https://docs.famulor.io/api-reference/milian-missions/list-missions) |
