@@ -86,3 +86,9 @@ Customer: “My order arrived damaged.” Then: “The reference is A-1042.”
 Expected: combine the messages if the configured response delay allows it; use the actual lookup and verification policy; explain the returned next step. Do not announce a refund, replacement, human takeover, or outbound message unless the corresponding action succeeded.
 
 Also test an unknown reference, a failed lookup, an image without a usable description, a human takeover, and an expired service window. See [messaging and channels](../../references/messaging-and-channels.md).
+
+## Example quick-reply guidance
+
+If the assistant’s **Quick replies** setting is on, use **When to use them (optional)** to give it a narrow instruction. For example, write “Offer Pick up and Delivery when the customer can choose either option for their order.”
+
+In an open service window, check that the two choices appear as buttons when both are available. Select one on the latest offer and verify that its label becomes an ordinary customer message in History. Enter a typed answer in a fresh turn to verify the same handling. [WhatsApp quick replies](../../references/messaging-and-channels.md#whatsapp-quick-replies)
