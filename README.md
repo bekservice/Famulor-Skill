@@ -7,7 +7,7 @@
 <a href="https://github.com/Famulor-SI/Famulor-Skill/releases"><img alt="Latest release" src="https://img.shields.io/github/v/release/Famulor-SI/Famulor-Skill?color=087e98" /></a>
 <a href="https://github.com/Famulor-SI/Famulor-Skill/actions/workflows/validate.yml"><img alt="Validate" src="https://github.com/Famulor-SI/Famulor-Skill/actions/workflows/validate.yml/badge.svg" /></a>
 <a href="LICENSE"><img alt="MIT license" src="https://img.shields.io/badge/license-MIT-087e98" /></a>
-<a href="https://skills.sh/bekservice/Famulor-Skill"><img alt="skills.sh" src="https://skills.sh/b/bekservice/Famulor-Skill" /></a>
+<a href="https://skills.sh/famulor-si/famulor-skill"><img alt="skills.sh" src="https://skills.sh/b/famulor-si/famulor-skill" /></a>
 </p>
 
 [Famulor](https://www.famulor.io) builds AI assistants for phone calls, websites and messaging. This open-source skill teaches your AI client how to design their prompts, configure their tools, test their behavior and work with your Famulor workspace.
