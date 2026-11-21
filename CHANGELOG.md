@@ -1,5 +1,15 @@
 # Changelog
 
+## 2.8.11 — 2026-11-21
+
+- Explain call failures before dialing: **Destination not enabled** (`carrier_rate_missing`) means calls to that destination need support to enable them; check the balance for `insufficient_credits`.
+- Explain how to change or turn off the knowledge search announcement per assistant, including the 500-character limit, the language default and how Realtime, Full Duplex and text chat behave.
+- Explain how to recover when a custom WhatsApp draft already exists for the same sender, name and language (HTTP 409).
+- Match WhatsApp template sends to signed `whatsapp.message_status` webhook events and test the receiver. Guide agents through two or three native quick-reply buttons in WhatsApp conversations.
+- Explain Flow Builder conditions: routing question, Conversation, Fixed rules and Rules + conversation, rule priority, required rules, the default path and where conversation-based routing is available. Test a condition with Test path or the saved-condition preview in REST, MCP, CLI and SDK.
+- Guide multi-country RCS setup: recipient countries, the Germany default for a new draft, the revision check before booking and RCS company senders in the automation **Send SMS** step.
+- Document Messenger Business Login Page selection through MCP, CLI and SDK for root workspaces.
+
 ## 2.8.10 — 2026-11-21
 
 - Move the repository to the Famulor-SI GitHub organization. Install commands, plugin manifests and links now use `Famulor-SI/Famulor-Skill`; old `bekservice/Famulor-Skill` links redirect.
