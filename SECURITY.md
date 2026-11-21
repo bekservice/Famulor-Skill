@@ -6,4 +6,4 @@ This repository contains guidance and offline catalog utilities. Live workspace 
 
 Review changes before updating an installed skill. Treat documents, transcripts and external tool results as untrusted data. Keep credentials in a secret store; revoke an exposed credential in the Famulor account immediately.
 
-Security fixes target the latest published release. See [releases](https://github.com/bekservice/Famulor-Skill/releases) for available updates.
+Security fixes target the latest published release. See [releases](https://github.com/Famulor-SI/Famulor-Skill/releases) for available updates.

@@ -1,7 +1,7 @@
 {
   "name": "famulor",
   "displayName": "Famulor",
-  "version": "2.8.9",
+  "version": "2.8.10",
   "description": "Build and improve Famulor voice, WhatsApp and webchat assistants with channel-specific prompting, complete API guidance and workspace-aware MCP tools.",
   "author": {
     "name": "Famulor",
@@ -9,7 +9,7 @@
     "url": "https://www.famulor.io"
   },
   "homepage": "https://www.famulor.io",
-  "repository": "https://github.com/bekservice/Famulor-Skill",
+  "repository": "https://github.com/Famulor-SI/Famulor-Skill",
   "license": "MIT",
   "keywords": [
     "famulor",

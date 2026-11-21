@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.8.10 — 2026-11-21
+
+- Move the repository to the Famulor-SI GitHub organization. Install commands, plugin manifests and links now use `Famulor-SI/Famulor-Skill`; old `bekservice/Famulor-Skill` links redirect.
+- Tell agents to check the effective Calls retention period first. With 0 days, the transcript and recording of a completed call may no longer be in History when a later task runs.
+
 ## 2.8.9 — 2026-11-20
 
 - Guide agents through checking WhatsApp delivery receipts in conversation History and automation run details.
@@ -145,4 +150,4 @@
 
 ## 2.1.6
 
-Official Famulor mark and the 439-tool MCP catalog. Earlier release details are available in [GitHub Releases](https://github.com/bekservice/Famulor-Skill/releases).
+Official Famulor mark and the 439-tool MCP catalog. Earlier release details are available in [GitHub Releases](https://github.com/Famulor-SI/Famulor-Skill/releases).

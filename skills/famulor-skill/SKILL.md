@@ -4,8 +4,8 @@ description: Design, configure, test and improve Famulor voice, WhatsApp, webcha
 license: MIT
 metadata:
   author: Famulor
-  version: "2.8.9"
-  homepage: https://github.com/bekservice/Famulor-Skill
+  version: "2.8.10"
+  homepage: https://github.com/Famulor-SI/Famulor-Skill
 ---
 
 # Famulor

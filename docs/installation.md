@@ -7,7 +7,7 @@ For workspace actions you need a Famulor account, a plan that includes Connect A
 ## Quick start for coding agents
 
 ```bash
-npx skills add bekservice/Famulor-Skill --skill famulor-skill
+npx skills add Famulor-SI/Famulor-Skill --skill famulor-skill
 ```
 
 Choose your client in the installer. It installs into the current project by default; add `-g` for a global installation. Review the files before installing third-party skills. The installer has its own [Node.js requirements](https://github.com/vercel-labs/skills).
@@ -25,14 +25,14 @@ Choose the correct workspace and approve only the groups needed. To keep discove
 Install the full plugin from this repository's marketplace:
 
 ```text
-/plugin marketplace add bekservice/Famulor-Skill
+/plugin marketplace add Famulor-SI/Famulor-Skill
 /plugin install famulor@famulor
 ```
 
 Select the desired installation scope, then open `/mcp` and authenticate Famulor. The plugin bundles the skill and remote server configuration. For local inspection:
 
 ```bash
-git clone https://github.com/bekservice/Famulor-Skill.git
+git clone https://github.com/Famulor-SI/Famulor-Skill.git
 claude --plugin-dir ./Famulor-Skill
 ```
 
@@ -46,7 +46,7 @@ claude mcp add --transport http famulor https://app.famulor.io/mcp
 
 ## Claude web and desktop
 
-1. Download **`famulor-skill.zip`** from the [latest release](https://github.com/bekservice/Famulor-Skill/releases/latest). Upload the skill ZIP, not the whole repository ZIP.
+1. Download **`famulor-skill.zip`** from the [latest release](https://github.com/Famulor-SI/Famulor-Skill/releases/latest). Upload the skill ZIP, not the whole repository ZIP.
 2. Open **Customize → Skills → + → Create skill → Upload a skill** and select it.
 3. Enable the skill. Code execution and skill access must be permitted by your account or organization.
 4. Add Famulor in **Customize → Connectors** and complete OAuth. For full workspace tools, add a custom connector using the MCP URL above.
@@ -76,7 +76,7 @@ For prompt drafting without account access, provide the relevant template and bu
 ## Codex
 
 ```bash
-npx skills add bekservice/Famulor-Skill --skill famulor-skill
+npx skills add Famulor-SI/Famulor-Skill --skill famulor-skill
 codex mcp add famulor --url https://app.famulor.io/mcp
 codex mcp login famulor
 codex mcp get famulor
@@ -107,7 +107,7 @@ Cursor completes Famulor's OAuth sign-in natively; choose the workspace and tool
 ## Gemini CLI
 
 ```bash
-gemini extensions install https://github.com/bekservice/Famulor-Skill
+gemini extensions install https://github.com/Famulor-SI/Famulor-Skill
 ```
 
 Review the requested extension capabilities. It bundles the skill, context and MCP configuration. In Gemini CLI, run `/mcp auth famulor` if authentication is requested, then use `/extensions list` to verify installation.
